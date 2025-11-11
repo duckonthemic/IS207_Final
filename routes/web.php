@@ -2,11 +2,11 @@
 
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
-use App\Http\Controllers\CheckoutController;
-use App\Http\Controllers\OrderController;
+// use App\Http\Controllers\CheckoutController;
+// use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
-use App\Http\Controllers\Admin\OrderController as AdminOrderController;
-use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+// use App\Http\Controllers\Admin\OrderController as AdminOrderController;
+// use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,11 +29,11 @@ Route::prefix('products')
     ->name('products.')
     ->group(function () {
         Route::get('/', [ProductController::class, 'index'])->name('index');
-        Route::get('/search', [ProductController::class, 'search'])->name('search');
         Route::get('/{product:slug}', [ProductController::class, 'show'])->name('show');
     });
 
-// Các route yêu cầu đăng nhập
+// Các route yêu cầu đăng nhập (Uncomment after installing Breeze)
+/*
 Route::middleware(['auth', 'verified'])->group(function () {
     // Giỏ hàng
     Route::prefix('cart')
@@ -63,14 +63,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::post('/{order}/cancel', [OrderController::class, 'cancel'])->name('cancel');
         });
 });
+*/
 
-// Khu vực Admin
+// Khu vực Admin (Uncomment after installing Breeze)
+/*
 Route::prefix('admin')
     ->name('admin.')
     ->middleware(['auth', 'verified', 'admin'])
     ->group(function () {
         // Dashboard
-        Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
+        Route::view('/', 'admin.dashboard')->name('dashboard');
 
         // Sản phẩm
         Route::resource('products', AdminProductController::class);
@@ -78,7 +80,7 @@ Route::prefix('admin')
         // Đơn hàng
         Route::resource('orders', AdminOrderController::class, ['only' => ['index', 'show', 'update']]);
     });
+*/
 
-// Breeze auth routes
-require __DIR__.'/auth.php';
-
+// Breeze auth routes (uncomment after installing Laravel Breeze)
+// require __DIR__.'/auth.php';

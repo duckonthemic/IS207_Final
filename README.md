@@ -22,6 +22,34 @@
 
 ---
 
+## 🏗️ Kiến Trúc Hệ Thống
+
+### Backend (Server-Side) - PHP/Laravel
+- **Ngôn ngữ**: PHP 8.1+
+- **Framework**: Laravel 10 (MVC Pattern)
+- **Database**: MySQL 8.0+
+- **Server**: PHP Built-in Server hoặc Apache/Nginx
+- **Chức năng**: Xử lý business logic, authentication, database queries, API endpoints
+
+**Quan trọng**: Backend chạy hoàn toàn trên PHP. Laravel là framework PHP thuần túy, KHÔNG sử dụng Node.js/Python/.NET/Java làm backend server.
+
+### Frontend (Client-Side) - HTML/CSS/JavaScript
+- **Template Engine**: Blade (Laravel's templating)
+- **CSS Framework**: Tailwind CSS 3.3+
+- **JavaScript**: Alpine.js (lightweight, ~15KB)
+- **Build Tool**: Vite 4.3+ (optional - có thể dùng CDN)
+- **Chức năng**: Render HTML, styling, interactivity, animations
+
+### Build Tools (Development Only) ⚙️
+- **npm/Node.js**: Chỉ dùng để compile CSS/JS (giống SASS compiler)
+- **Vite**: Bundle và optimize assets
+- **Vai trò**: Công cụ build, KHÔNG phải backend server
+- **Production**: Chỉ cần PHP + MySQL (không cần Node.js runtime)
+
+**Lưu ý**: npm/Node.js chỉ dùng khi development để chạy `npm run dev` hoặc `npm run build`. Sau khi build xong, production chỉ cần PHP server.
+
+---
+
 ## 🚀 Quick Start (Laragon)
 
 ```powershell
@@ -142,49 +170,79 @@ products (catalog)
 
 ---
 
-## � Cấu Trúc Thư Mục
+## 📂 Cấu Trúc Thư Mục
 
 ```
 IS207_Final/
-├── app/
+├── app/                           [BACKEND - PHP]
 │   ├── Http/
-│   │   ├── Controllers/           (7 controllers)
-│   │   ├── Middleware/
-│   │   └── Requests/
-│   └── Models/                    (15 models)
+│   │   ├── Controllers/           (7 controllers - xử lý business logic)
+│   │   │   ├── ProductController.php
+│   │   │   ├── CartController.php
+│   │   │   ├── CheckoutController.php
+│   │   │   └── Admin/
+│   │   ├── Middleware/            (authentication, authorization)
+│   │   └── Requests/              (form validation rules)
+│   └── Models/                    (15 models - database entities)
+│       ├── Product.php
+│       ├── Category.php
+│       ├── Order.php
+│       └── User.php
 │
-├── database/
-│   ├── migrations/                (20+ migrations)
-│   ├── seeders/
-│   └── factories/
+├── database/                      [BACKEND - MySQL]
+│   ├── migrations/                (20+ migrations - database schema)
+│   ├── seeders/                   (sample data generators)
+│   └── factories/                 (test data factories)
 │
-├── resources/
-│   └── views/                     (15 templates)
-│       ├── layouts/
-│       ├── partials/
-│       ├── products/
-│       ├── cart/
-│       ├── checkout/
-│       ├── orders/
-│       └── admin/
+├── resources/                     [FRONTEND - HTML/CSS/JS]
+│   ├── views/                     (15 Blade templates - HTML rendering)
+│   │   ├── layouts/               (master templates)
+│   │   ├── partials/              (reusable components)
+│   │   ├── products/              (product pages)
+│   │   ├── cart/                  (shopping cart UI)
+│   │   ├── checkout/              (checkout flow)
+│   │   ├── orders/                (order history)
+│   │   └── admin/                 (admin dashboard)
+│   ├── css/                       (Tailwind CSS styles)
+│   └── js/                        (Alpine.js interactivity)
 │
-├── routes/
-│   └── web.php
+├── routes/                        [BACKEND - PHP]
+│   └── web.php                    (định nghĩa URL endpoints)
 │
-├── tests/
-│   ├── Unit/Models/               (22 tests)
-│   └── Feature/                   (32 tests)
+├── tests/                         [BACKEND - PHPUnit]
+│   ├── Unit/Models/               (22 tests - model logic)
+│   └── Feature/                   (32 tests - integration tests)
 │
-├── public/                        (static assets)
-├── config/
-├── bootstrap/
+├── public/                        [FRONTEND - Static Assets]
+│   ├── css/                       (compiled CSS)
+│   ├── js/                        (compiled JavaScript)
+│   └── images/                    (product images)
 │
-├── composer.json
-├── package.json
-├── phpunit.xml
-├── .env.example
-└── artisan
+├── config/                        [BACKEND - PHP]
+├── bootstrap/                     [BACKEND - PHP]
+│
+├── composer.json                  [PHP Dependencies]
+├── package.json                   [Build Tools Only - npm/Vite]
+├── phpunit.xml                    [Testing Config]
+├── .env.example                   [Environment Variables]
+└── artisan                        [Laravel CLI Tool]
 ```
+
+### Phân Loại Chi Tiết
+
+| Thư mục/File | Loại | Công nghệ | Vai trò |
+|--------------|------|-----------|---------|
+| `app/` | Backend | PHP/Laravel | Business logic, controllers, models |
+| `database/` | Backend | MySQL/PHP | Database schema, migrations, seeds |
+| `resources/views/` | Frontend | Blade (HTML) | Templates để render HTML |
+| `resources/css/` | Frontend | Tailwind CSS | Styling và UI design |
+| `resources/js/` | Frontend | Alpine.js | JavaScript interactivity |
+| `routes/` | Backend | PHP/Laravel | URL routing và endpoints |
+| `tests/` | Backend | PHPUnit (PHP) | Unit & feature testing |
+| `public/` | Frontend | Static files | Compiled assets, images |
+| `config/` | Backend | PHP | Laravel configuration |
+| `composer.json` | Backend | PHP Composer | PHP package dependencies |
+| `package.json` | Build Tool | npm | CSS/JS build dependencies (NOT backend) |
 
 ---
 
@@ -531,18 +589,32 @@ MIT License - Open source for learning and commercial use
 
 ## 🛠️ Công nghệ sử dụng
 
+### Backend Technologies (Server-Side) 🔧
 | Công nghệ | Phiên bản | Mục đích |
 |-----------|----------|---------|
-| **Laravel** | 10.49.1 | Backend framework |
-| **PHP** | 8.3.26 | Server-side language |
-| **MySQL** | 5.7+ | Database |
-| **Tailwind CSS** | 3.3.0 | CSS framework |
-| **Blade** | (Laravel) | Template engine |
-| **Vite** | 4.3.9 | Build tool |
-| **Alpine.js** | 3.12.0 | Lightweight JS |
-| **Axios** | 1.4.0 | HTTP client |
-| **Composer** | 2.8.4 | PHP package manager |
-| **NPM** | 11.3.0 | Node package manager |
+| **PHP** | 8.3.26 | Ngôn ngữ backend, xử lý server logic |
+| **Laravel** | 10.49.1 | PHP framework (MVC), routing, ORM |
+| **MySQL** | 5.7+ | Relational database |
+| **Composer** | 2.8.4 | PHP dependency manager |
+
+### Frontend Technologies (Client-Side) 🎨
+| Công nghệ | Phiên bản | Mục đích |
+|-----------|----------|---------|
+| **Blade** | (Laravel) | Template engine (generates HTML) |
+| **Tailwind CSS** | 3.3.0 | CSS framework (CDN) |
+| **Alpine.js** | 3.12.0 | Lightweight JavaScript framework |
+| **Axios** | 1.4.0 | HTTP client (optional) |
+
+### Build Tools (Development Only) ⚙️
+| Công nghệ | Phiên bản | Mục đích |
+|-----------|----------|---------|
+| **npm** | 11.3.0 | Package manager cho build tools |
+| **Vite** | 4.3.9 | Asset bundler (CSS/JS compilation) |
+
+**⚠️ Lưu ý quan trọng:**
+- **npm/Node.js**: Chỉ dùng để build CSS/JS trong development (`npm run dev` hoặc `npm run build`)
+- **Production**: Không cần Node.js - chỉ cần PHP + MySQL + compiled assets (trong `public/`)
+- npm KHÔNG phải backend server - chỉ là công cụ build (giống SASS, Webpack)
 
 ---
 

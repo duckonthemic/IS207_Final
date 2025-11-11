@@ -6,7 +6,30 @@
     <meta name="description" content="Tech Parts - Cửa hàng linh kiện máy tính chuyên nghiệp">
     <title>@yield('title', 'Tech Parts - Linh kiện máy tính')</title>
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    {{-- Tailwind CSS CDN --}}
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    {{-- Custom Tailwind Config --}}
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'cyber': {
+                            'dark': '#0a0e27',
+                            'darker': '#060920',
+                            'accent': '#00ffff',
+                            'purple': '#9b59b6',
+                            'text': '#e0e6ed',
+                            'success': '#00ff88',
+                            'error': '#ff1744',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
