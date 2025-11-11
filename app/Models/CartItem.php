@@ -1,0 +1,41 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
+class CartItem extends Model
+{
+    use HasFactory;
+
+    protected $fillable = [
+        'cart_id',
+        'product_id',
+        'price',
+        'qty',
+    ];
+
+    protected $casts = [
+        'price' => 'decimal:2',
+        'qty' => 'integer',
+    ];
+
+    // Relationships
+    public function cart(): BelongsTo
+    {
+        return $this->belongsTo(Cart::class);
+    }
+
+    public function product(): BelongsTo
+    {
+        return $this->belongsTo(Product::class);
+    }
+
+    // Methods
+    public function getSubtotalAttribute()
+    {
+        return $this->price * $this->qty;
+    }
+}

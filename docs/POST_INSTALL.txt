@@ -1,0 +1,7 @@
+1) Thêm middleware 'admin' vào app/Http/Kernel.php như README.md.
+2) Cài Breeze và migrate DB:
+   composer require laravel/breeze --dev
+   php artisan breeze:install blade
+   npm install && npm run dev
+   php artisan migrate --seed
+3) Đăng nhập admin: admin@pcparts.local / password
