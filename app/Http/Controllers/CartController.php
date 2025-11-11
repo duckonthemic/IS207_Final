@@ -2,94 +2,138 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
+use App\Models\CartItem;
 use App\Models\Product;
-use Illuminate\Contracts\View\View;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class CartController extends Controller
 {
-    public function index(Request $request): View
+    /**
+     * Display the shopping cart
+     */
+    public function index(): View
     {
-        $cart = $request->session()->get('cart.items', []);
+        $cart = auth()->user()->getOrCreateActiveCart();
+        $cart->load('items.product');
 
-        $total = collect($cart)->reduce(function ($carry, $item) {
-            return $carry + ($item['price'] * $item['quantity']);
-        }, 0.0);
-
-        return view('cart.index', [
-            'items' => $cart,
-            'total' => $total,
-        ]);
+        return view('cart.index', compact('cart'));
     }
 
-    public function add(Request $request): RedirectResponse
+    /**
+     * Add product to cart (AJAX or form)
+     */
+    public function add(Request $request): mixed
     {
-        $validated = $request->validate([
-            'product_id' => ['required', 'exists:products,id'],
-            'quantity'   => ['nullable', 'integer', 'min:1'],
+        $request->validate([
+            'product_id' => 'required|exists:products,id',
+            'qty' => 'required|integer|min:1|max:100',
         ]);
 
-        $product = Product::findOrFail($validated['product_id']);
-        $qty = (int) ($validated['quantity'] ?? 1);
+        $product = Product::find($request->product_id);
+        if (!$product || $product->status !== 1) {
+            return $this->errorResponse('Sản phẩm không tồn tại', 404);
+        }
 
-        $cart = $request->session()->get('cart.items', []);
-        $key = (string) $product->id;
+        $cart = auth()->user()->getOrCreateActiveCart();
+        $qty = $request->integer('qty', 1);
 
-        if (isset($cart[$key])) {
-            $cart[$key]['quantity'] += $qty;
+        // Check if product already in cart
+        $cartItem = $cart->items()->where('product_id', $product->id)->first();
+
+        if ($cartItem) {
+            $newQty = $cartItem->qty + $qty;
+            $cartItem->update(['qty' => $newQty]);
         } else {
-            $cart[$key] = [
+            $cart->items()->create([
                 'product_id' => $product->id,
-                'name'       => $product->name,
-                'price'      => (float) $product->price,
-                'quantity'   => $qty,
-                'image'      => $product->image,
-                'slug'       => $product->slug,
-            ];
+                'price' => $product->getDisplayPrice(),
+                'qty' => $qty,
+            ]);
         }
 
-        $request->session()->put('cart.items', $cart);
+        if ($request->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Đã thêm vào giỏ hàng',
+                'cart_total' => $cart->getTotal(),
+                'item_count' => $cart->getItemCount(),
+            ]);
+        }
 
-        return back()->with('success', 'Đã thêm vào giỏ hàng.');
+        return redirect()->route('cart.index')->with('success', 'Đã thêm vào giỏ hàng');
     }
 
-    public function update(Request $request): RedirectResponse
+    /**
+     * Update cart item quantity
+     */
+    public function update(Request $request): mixed
     {
-        $validated = $request->validate([
-            'product_id' => ['required', 'exists:products,id'],
-            'quantity'   => ['required', 'integer', 'min:0'],
+        $request->validate([
+            'cart_item_id' => 'required|exists:cart_items,id',
+            'qty' => 'required|integer|min:1|max:100',
         ]);
 
-        $cart = $request->session()->get('cart.items', []);
-        $key = (string) $validated['product_id'];
-
-        if (isset($cart[$key])) {
-            if ((int) $validated['quantity'] === 0) {
-                unset($cart[$key]);
-            } else {
-                $cart[$key]['quantity'] = (int) $validated['quantity'];
-            }
-            $request->session()->put('cart.items', $cart);
+        $cartItem = CartItem::find($request->cart_item_id);
+        if ($cartItem->cart->user_id !== auth()->id()) {
+            return $this->errorResponse('Unauthorized', 403);
         }
 
-        return back()->with('success', 'Đã cập nhật giỏ hàng.');
+        $cartItem->update(['qty' => $request->integer('qty')]);
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'subtotal' => $cartItem->subtotal,
+            ]);
+        }
+
+        return back()->with('success', 'Cập nhật thành công');
     }
 
-    public function remove(Request $request): RedirectResponse
+    /**
+     * Remove product from cart
+     */
+    public function remove(Request $request): mixed
     {
-        $validated = $request->validate([
-            'product_id' => ['required', 'exists:products,id'],
+        $request->validate([
+            'cart_item_id' => 'required|exists:cart_items,id',
         ]);
 
-        $cart = $request->session()->get('cart.items', []);
-        $key = (string) $validated['product_id'];
-
-        if (isset($cart[$key])) {
-            unset($cart[$key]);
-            $request->session()->put('cart.items', $cart);
+        $cartItem = CartItem::find($request->cart_item_id);
+        if ($cartItem->cart->user_id !== auth()->id()) {
+            return $this->errorResponse('Unauthorized', 403);
         }
 
-        return back()->with('success', 'Đã xoá sản phẩm khỏi giỏ.');
+        $cartItem->delete();
+
+        if ($request->expectsJson()) {
+            return response()->json(['success' => true]);
+        }
+
+        return back()->with('success', 'Đã xóa khỏi giỏ hàng');
+    }
+
+    /**
+     * Clear entire cart
+     */
+    public function clear(Request $request): RedirectResponse
+    {
+        $cart = auth()->user()->getActiveCart();
+        if ($cart) {
+            $cart->items()->delete();
+        }
+
+        return back()->with('success', 'Đã xóa giỏ hàng');
+    }
+
+    private function errorResponse($message, $status = 400)
+    {
+        if (request()->expectsJson()) {
+            return response()->json(['error' => $message], $status);
+        }
+        return back()->withErrors(['error' => $message]);
     }
 }

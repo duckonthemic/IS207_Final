@@ -10,14 +10,18 @@ class AdminUserSeeder extends Seeder
 {
     public function run(): void
     {
-        User::updateOrCreate(
-            ['email' => 'admin@pcparts.local'],
+        // Admin user
+        User::firstOrCreate(
+            ['email' => 'admin@techparts.vn'],
             [
                 'name' => 'Administrator',
-                'password' => Hash::make('password'),
+                'password' => Hash::make('admin123456'),
                 'role' => 'admin',
                 'email_verified_at' => now(),
             ]
         );
+
+        // Test users
+        User::factory(10)->create();
     }
 }

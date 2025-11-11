@@ -2,7 +2,11 @@
 
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
+use App\Http\Controllers\Admin\OrderController as AdminOrderController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,30 +25,60 @@ Route::view('/contact', 'contact')->name('contact');
 Route::view('/blog', 'blog.index')->name('blog.index');
 
 // Sản phẩm (user-facing)
-Route::get('/products', [ProductController::class, 'index'])->name('products.index');
-Route::get('/products/{product:slug}', [ProductController::class, 'show'])->name('products.show');
+Route::prefix('products')
+    ->name('products.')
+    ->group(function () {
+        Route::get('/', [ProductController::class, 'index'])->name('index');
+        Route::get('/search', [ProductController::class, 'search'])->name('search');
+        Route::get('/{product:slug}', [ProductController::class, 'show'])->name('show');
+    });
 
 // Các route yêu cầu đăng nhập
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     // Giỏ hàng
-    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-    Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
-    Route::patch('/cart/update', [CartController::class, 'update'])->name('cart.update');
-    Route::delete('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
+    Route::prefix('cart')
+        ->name('cart.')
+        ->group(function () {
+            Route::get('/', [CartController::class, 'index'])->name('index');
+            Route::post('/add', [CartController::class, 'add'])->name('add');
+            Route::patch('/update', [CartController::class, 'update'])->name('update');
+            Route::delete('/remove', [CartController::class, 'remove'])->name('remove');
+            Route::post('/clear', [CartController::class, 'clear'])->name('clear');
+        });
 
-    // (tùy chọn) Checkout giả lập, hồ sơ, lịch sử đơn hàng
-    // Route::get('/checkout', ...)->name('checkout.index');
+    // Checkout
+    Route::prefix('checkout')
+        ->name('checkout.')
+        ->group(function () {
+            Route::get('/', [CheckoutController::class, 'show'])->name('show');
+            Route::post('/', [CheckoutController::class, 'store'])->name('store');
+        });
+
+    // Đơn hàng
+    Route::prefix('orders')
+        ->name('orders.')
+        ->group(function () {
+            Route::get('/', [OrderController::class, 'index'])->name('index');
+            Route::get('/{order}', [OrderController::class, 'show'])->name('show');
+            Route::post('/{order}/cancel', [OrderController::class, 'cancel'])->name('cancel');
+        });
 });
 
 // Khu vực Admin
 Route::prefix('admin')
     ->name('admin.')
-    ->middleware(['auth', 'admin'])
+    ->middleware(['auth', 'verified', 'admin'])
     ->group(function () {
-        Route::view('/', 'admin.dashboard')->name('dashboard');
+        // Dashboard
+        Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
 
-        // Resource CRUD cho sản phẩm (Admin)
+        // Sản phẩm
         Route::resource('products', AdminProductController::class);
+
+        // Đơn hàng
+        Route::resource('orders', AdminOrderController::class, ['only' => ['index', 'show', 'update']]);
     });
 
-// Breeze routes (nếu dùng): require __DIR__.'/auth.php';
+// Breeze auth routes
+require __DIR__.'/auth.php';
+
