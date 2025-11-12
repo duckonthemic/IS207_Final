@@ -13,7 +13,7 @@
 3. **Lương Tuấn Vỹ** (Backend + Database)
 4. **Nguyễn Duy Phương** (Frontend)
 5. **Trần Thanh Huy** (Frontend + Testing)
-6. **Nguyễn Tuấn Minh** (Frontend + Admin)
+6. **TrầnTrần Tuấn Minh** (Frontend + Admin)
 
 ---
 
@@ -125,7 +125,7 @@ TUẦN 3 (25/11 - 01/12):    Testing, tối ưu hóa, bug fix
 
 ---
 
-#### 6️⃣ **Nguyễn Tuấn Minh**
+#### 6️⃣ **Trần Tuấn Minh**
 **Vai trò**: Frontend - Views (Admin Dashboard)
 
 | Task | Mô tả | Ưu tiên | Deadline | Status |
