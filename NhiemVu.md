@@ -13,7 +13,7 @@
 3. **Lương Tuấn Vỹ** (Backend + Database)
 4. **Nguyễn Duy Phương** (Frontend)
 5. **Trần Thanh Huy** (Frontend + Testing)
-6. **TrầnTrần Tuấn Minh** (Frontend + Admin)
+6. **Trần Tuấn Minh** (Frontend + Admin)
 
 ---
 
