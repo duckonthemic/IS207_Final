@@ -355,19 +355,6 @@ DB_PASSWORD=
 
 ---
 
-## 👥 THÀNH VIÊN NHÓM
-
-1. Nguyễn Huy Hoàng - 23521456
-2. Lê Hoàng Phúc - 23520392
-3. Trần Thiện Hùng - 23521520
-4. Nguyễn Hoàng Duy - 23520343
-5. Trần Thanh Bình - 23520138
-6. Nguyễn Văn Thiện - 23521412
-
-**Giảng viên hướng dẫn**: TS. Nguyễn Thị Thanh Trúc
-
----
-
 ## 🎯 MỤC TIÊU DỰ ÁN
 
 Xây dựng hệ thống bán linh kiện máy tính trực tuyến với các chức năng:
@@ -407,6 +394,5 @@ Xây dựng hệ thống bán linh kiện máy tính trực tuyến với các c
 
 ---
 
-**Tài liệu này được tạo tự động vào ngày 14/11/2025**  
 **Repository**: https://github.com/duckonthemic/IS207_Final  
 **Branch**: main

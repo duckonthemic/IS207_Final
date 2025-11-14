@@ -19,10 +19,10 @@
 
 - **Tên môn học:** Phát triển ứng dụng Web
 - **Mã môn học:** IS207
-- **Mã lớp:** IS207.P11
-- **Năm học:** HK1 (2025 - 2026)
-- **Giảng viên:** ThS. Huỳnh Tuấn Anh
-- **Email:** anhht@uit.edu.vn
+- **Mã lớp:** 
+- **Năm học:** 
+- **Giảng viên:** 
+- **Email:** 
 
 ---
 
