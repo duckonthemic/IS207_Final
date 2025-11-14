@@ -70,7 +70,7 @@
 | 3 | 23520xxx | Lương Tuấn Vỹ | [@username](https://github.com/username) | 23520xxx@gm.uit.edu.vn |
 | 4 | 23520xxx | Nguyễn Duy Phương | [@username](https://github.com/username) | 23520xxx@gm.uit.edu.vn |
 | 5 | 23520xxx | Trần Thanh Huy | [@username](https://github.com/username) | 23520xxx@gm.uit.edu.vn |
-| 6 | 23520xxx | Nguyễn Tuấn Minh | [@username](https://github.com/username) | 23520xxx@gm.uit.edu.vn |
+| 6 | 23520xxx | Trần Tuấn Minh | [@username](https://github.com/username) | 23520xxx@gm.uit.edu.vn |
 
 ---
 
