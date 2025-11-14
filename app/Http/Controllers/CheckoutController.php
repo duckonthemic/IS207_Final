@@ -4,115 +4,187 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\OrderItem;
-use App\Models\OrderAddress;
-use App\Models\Promotion;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class CheckoutController extends Controller
 {
     /**
-     * Show checkout form
+     * Redirect to first checkout step
      */
-    public function show(): View
+    public function index()
     {
-        $user = auth()->user();
-        $cart = $user->getActiveCart();
-
+        $cart = Auth::user()->getActiveCart();
+        
         if (!$cart || $cart->items->isEmpty()) {
             return redirect()->route('cart.index')->with('error', 'Giỏ hàng trống');
         }
 
-        $cart->load('items.product');
-        $addresses = $user->addresses()->get();
-        $defaultAddress = $user->getDefaultAddress();
-
-        return view('checkout.show', compact('cart', 'addresses', 'defaultAddress'));
+        return redirect()->route('checkout.shipping');
     }
 
     /**
-     * Process checkout and create order
+     * Shipping address selection
      */
-    public function store(Request $request)
+    public function shipping()
     {
-        $request->validate([
-            'address_id' => 'required|exists:user_addresses,id|belongs_to_user',
-            'promotion_code' => 'nullable|exists:promotions,code',
-            'payment_method' => 'required|in:cod,bank_transfer,credit_card',
-        ]);
-
-        $user = auth()->user();
-        $cart = $user->getActiveCart();
-
+        $cart = Auth::user()->getActiveCart();
+        
         if (!$cart || $cart->items->isEmpty()) {
             return redirect()->route('cart.index')->with('error', 'Giỏ hàng trống');
         }
 
         $cart->load('items.product');
-        $address = $user->addresses()->findOrFail($request->address_id);
+        $addresses = Auth::user()->addresses()->get();
+        $defaultAddress = $addresses->where('is_default', true)->first();
 
-        // Calculate total
-        $total = $cart->items->sum(function ($item) {
-            return $item->price * $item->qty;
-        });
+        return view('checkout.shipping', compact('cart', 'addresses', 'defaultAddress'));
+    }
 
-        // Apply promotion if provided
-        $discount = 0;
-        $promotion = null;
+    /**
+     * Store shipping address and proceed to payment
+     */
+    public function storeShipping(Request $request)
+    {
+        $request->validate([
+            'address_id' => 'required|exists:user_addresses,id',
+        ]);
 
-        if ($request->filled('promotion_code')) {
-            $promotion = Promotion::where('code', $request->promotion_code)->first();
+        // Verify address belongs to user
+        $address = Auth::user()->addresses()->findOrFail($request->address_id);
 
-            if ($promotion && $promotion->canUse($total)) {
-                $discount = $promotion->calculateDiscount($total);
+        // Store in session
+        session(['checkout.address_id' => $address->id]);
+
+        return redirect()->route('checkout.payment');
+    }
+
+    /**
+     * Payment method selection
+     */
+    public function payment()
+    {
+        if (!session('checkout.address_id')) {
+            return redirect()->route('checkout.shipping')->with('error', 'Vui lòng chọn địa chỉ giao hàng');
+        }
+
+        $cart = Auth::user()->getActiveCart();
+        $cart->load('items.product');
+        $address = Auth::user()->addresses()->findOrFail(session('checkout.address_id'));
+
+        return view('checkout.payment', compact('cart', 'address'));
+    }
+
+    /**
+     * Store payment method and proceed to review
+     */
+    public function storePayment(Request $request)
+    {
+        $request->validate([
+            'payment_method' => 'required|in:cod,bank_transfer',
+        ]);
+
+        session(['checkout.payment_method' => $request->payment_method]);
+
+        return redirect()->route('checkout.review');
+    }
+
+    /**
+     * Review order before placing
+     */
+    public function review()
+    {
+        if (!session('checkout.address_id') || !session('checkout.payment_method')) {
+            return redirect()->route('checkout.shipping')->with('error', 'Vui lòng hoàn thành các bước trước');
+        }
+
+        $cart = Auth::user()->getActiveCart();
+        $cart->load('items.product');
+        $address = Auth::user()->addresses()->findOrFail(session('checkout.address_id'));
+        $paymentMethod = session('checkout.payment_method');
+        
+        // Calculate totals
+        $subtotal = $cart->getTotal();
+        $shippingFee = 30000; // Fixed shipping fee
+        $total = $subtotal + $shippingFee;
+
+        return view('checkout.review', compact('cart', 'address', 'paymentMethod', 'subtotal', 'shippingFee', 'total'));
+    }
+
+    /**
+     * Place the order
+     */
+    public function placeOrder(Request $request)
+    {
+        if (!session('checkout.address_id') || !session('checkout.payment_method')) {
+            return redirect()->route('checkout.shipping')->with('error', 'Vui lòng hoàn thành các bước trước');
+        }
+
+        $cart = Auth::user()->getActiveCart();
+        
+        if (!$cart || $cart->items->isEmpty()) {
+            return redirect()->route('cart.index')->with('error', 'Giỏ hàng trống');
+        }
+
+        $cart->load('items.product');
+
+        // Verify stock for all items
+        foreach ($cart->items as $item) {
+            if ($item->product->stock < $item->qty) {
+                return back()->with('error', "Sản phẩm {$item->product->name} không đủ hàng trong kho");
             }
         }
 
-        $total = $total - $discount;
-
-        // Create order
-        $order = Order::create([
-            'user_id' => $user->id,
-            'order_code' => $this->generateOrderCode(),
-            'payment_status' => 'pending',
-            'status' => 'pending',
-            'total' => $total,
-            'placed_at' => now(),
-        ]);
-
-        // Create order items
-        foreach ($cart->items as $item) {
-            OrderItem::create([
-                'order_id' => $order->id,
-                'product_id' => $item->product_id,
-                'price' => $item->price,
-                'qty' => $item->qty,
+        DB::beginTransaction();
+        
+        try {
+            $address = Auth::user()->addresses()->findOrFail(session('checkout.address_id'));
+            $shippingFee = 30000;
+            $subtotal = $cart->getTotal();
+            
+            // Create order
+            $order = Order::create([
+                'user_id' => Auth::id(),
+                'order_code' => $this->generateOrderCode(),
+                'status' => 'pending',
+                'payment_method' => session('checkout.payment_method'),
+                'payment_status' => 'pending',
+                'total' => $subtotal + $shippingFee,
+                'placed_at' => now(),
+                'shipping_name' => $address->fullname,
+                'shipping_phone' => $address->phone,
+                'shipping_address' => $address->address . ', ' . $address->ward . ', ' . $address->district,
+                'shipping_city' => $address->city,
             ]);
+
+            // Create order items and update stock
+            foreach ($cart->items as $item) {
+                OrderItem::create([
+                    'order_id' => $order->id,
+                    'product_id' => $item->product_id,
+                    'price' => $item->price,
+                    'qty' => $item->qty,
+                ]);
+
+                // Reduce product stock
+                $item->product->decrement('stock', $item->qty);
+            }
+
+            // Mark cart as ordered
+            $cart->update(['status' => 'ordered']);
+
+            // Clear session
+            session()->forget(['checkout.address_id', 'checkout.payment_method']);
+
+            DB::commit();
+
+            return redirect()->route('orders.show', $order)->with('success', 'Đặt hàng thành công! Mã đơn hàng: ' . $order->order_code);
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->with('error', 'Có lỗi xảy ra. Vui lòng thử lại.');
         }
-
-        // Create order address
-        OrderAddress::create([
-            'order_id' => $order->id,
-            'fullname' => $address->fullname,
-            'phone' => $address->phone,
-            'address' => $address->address,
-            'city' => $address->city,
-            'postal_code' => $address->postal_code,
-        ]);
-
-        // Apply promotion
-        if ($promotion) {
-            $order->promotions()->attach($promotion->id, ['discount_value' => $discount]);
-            $promotion->increment('usage_count');
-        }
-
-        // Mark cart as ordered
-        $cart->update(['status' => 'ordered']);
-
-        // TODO: Process payment based on payment_method
-
-        return redirect()->route('orders.show', $order->id)
-            ->with('success', 'Đơn hàng đã được tạo thành công');
     }
 
     private function generateOrderCode(): string

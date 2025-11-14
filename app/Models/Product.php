@@ -14,6 +14,8 @@ class Product extends Model
 
     protected $fillable = [
         'category_id',
+        'brand_id',
+        'component_type_id',
         'name',
         'slug',
         'description',
@@ -24,6 +26,9 @@ class Product extends Model
         'brand',
         'specifications',
         'image',
+        'warranty_months',
+        'is_featured',
+        'is_active',
     ];
 
     protected $casts = [
@@ -31,12 +36,25 @@ class Product extends Model
         'sale_price' => 'decimal:2',
         'stock' => 'integer',
         'specifications' => 'array',
+        'is_featured' => 'boolean',
+        'is_active' => 'boolean',
+        'warranty_months' => 'integer',
     ];
 
     // Relationships
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function brand(): BelongsTo
+    {
+        return $this->belongsTo(Brand::class);
+    }
+
+    public function componentType(): BelongsTo
+    {
+        return $this->belongsTo(ComponentType::class);
     }
 
     public function images(): HasMany
@@ -54,6 +72,16 @@ class Product extends Model
         return $this->hasMany(CartItem::class);
     }
 
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(ProductReview::class);
+    }
+
+    public function approvedReviews(): HasMany
+    {
+        return $this->reviews()->where('status', 'approved');
+    }
+
     // Scopes
     public function scopeByCategory($query, $categoryId)
     {
@@ -69,6 +97,24 @@ class Product extends Model
     public function getDisplayPriceAttribute()
     {
         return $this->sale_price ?? $this->price;
+    }
+
+    public function getAverageRatingAttribute()
+    {
+        return $this->approvedReviews()->avg('rating') ?? 0;
+    }
+
+    public function getReviewsCountAttribute()
+    {
+        return $this->approvedReviews()->count();
+    }
+
+    public function getDiscountPercentAttribute()
+    {
+        if ($this->sale_price && $this->price > $this->sale_price) {
+            return round((($this->price - $this->sale_price) / $this->price) * 100);
+        }
+        return 0;
     }
 
     public function getRouteKeyName(): string

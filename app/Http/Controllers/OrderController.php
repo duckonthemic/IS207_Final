@@ -12,10 +12,19 @@ class OrderController extends Controller
      */
     public function index(): View
     {
-        $orders = auth()->user()->orders()
-            ->with('items.product', 'address')
-            ->latest('placed_at')
-            ->paginate(10);
+        $query = auth()->user()->orders()->with('items.product');
+
+        // Filter by status
+        if (request('status') && request('status') !== 'all') {
+            $query->where('status', request('status'));
+        }
+
+        // Search by order code
+        if (request('search')) {
+            $query->where('order_code', 'like', '%' . request('search') . '%');
+        }
+
+        $orders = $query->latest('placed_at')->paginate(10)->withQueryString();
 
         return view('orders.index', compact('orders'));
     }
@@ -30,9 +39,49 @@ class OrderController extends Controller
             abort(403);
         }
 
-        $order->load('items.product', 'address', 'promotions');
+        $order->load('items.product');
 
         return view('orders.show', compact('order'));
+    }
+
+    /**
+     * Reorder - add all order items to cart
+     */
+    public function reorder(Order $order)
+    {
+        if ($order->user_id !== auth()->id()) {
+            abort(403);
+        }
+
+        $cart = auth()->user()->getActiveCart();
+        $addedCount = 0;
+
+        foreach ($order->items as $item) {
+            // Check if product still exists and has stock
+            if ($item->product && $item->product->status === 'active' && $item->product->stock > 0) {
+                $existingItem = $cart->items()->where('product_id', $item->product_id)->first();
+                
+                if ($existingItem) {
+                    // Update quantity if item already in cart
+                    $newQty = min($existingItem->qty + $item->qty, $item->product->stock);
+                    $existingItem->update(['qty' => $newQty]);
+                } else {
+                    // Add new item to cart
+                    $cart->items()->create([
+                        'product_id' => $item->product_id,
+                        'price' => $item->product->getDisplayPrice(),
+                        'qty' => min($item->qty, $item->product->stock),
+                    ]);
+                }
+                $addedCount++;
+            }
+        }
+
+        if ($addedCount > 0) {
+            return redirect()->route('cart.index')->with('success', "Đã thêm {$addedCount} sản phẩm vào giỏ hàng");
+        } else {
+            return back()->with('error', 'Không có sản phẩm nào khả dụng để đặt lại');
+        }
     }
 
     /**

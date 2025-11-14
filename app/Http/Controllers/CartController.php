@@ -25,20 +25,18 @@ class CartController extends Controller
     /**
      * Add product to cart (AJAX or form)
      */
-    public function add(Request $request): mixed
+    public function add(Request $request, Product $product): mixed
     {
         $request->validate([
-            'product_id' => 'required|exists:products,id',
-            'qty' => 'required|integer|min:1|max:100',
+            'quantity' => 'required|integer|min:1|max:100',
         ]);
 
-        $product = Product::find($request->product_id);
         if (!$product || $product->status !== 1) {
             return $this->errorResponse('Sản phẩm không tồn tại', 404);
         }
 
         $cart = auth()->user()->getOrCreateActiveCart();
-        $qty = $request->integer('qty', 1);
+        $qty = $request->integer('quantity', 1);
 
         // Check if product already in cart
         $cartItem = $cart->items()->where('product_id', $product->id)->first();
@@ -69,23 +67,31 @@ class CartController extends Controller
     /**
      * Update cart item quantity
      */
-    public function update(Request $request): mixed
+    public function update(Request $request, CartItem $cartItem): mixed
     {
         $request->validate([
-            'cart_item_id' => 'required|exists:cart_items,id',
             'qty' => 'required|integer|min:1|max:100',
         ]);
 
-        $cartItem = CartItem::find($request->cart_item_id);
         if ($cartItem->cart->user_id !== auth()->id()) {
             return $this->errorResponse('Unauthorized', 403);
         }
 
+        // Check product stock
+        if ($request->integer('qty') > $cartItem->product->stock) {
+            return $this->errorResponse('Số lượng vượt quá tồn kho (còn ' . $cartItem->product->stock . ')', 400);
+        }
+
         $cartItem->update(['qty' => $request->integer('qty')]);
+        
+        $cart = auth()->user()->getActiveCart();
 
         if ($request->expectsJson()) {
             return response()->json([
                 'success' => true,
+                'message' => 'Đã cập nhật giỏ hàng',
+                'cart_total' => $cart->getTotal(),
+                'item_count' => $cart->getItemCount(),
                 'subtotal' => $cartItem->subtotal,
             ]);
         }
@@ -96,21 +102,23 @@ class CartController extends Controller
     /**
      * Remove product from cart
      */
-    public function remove(Request $request): mixed
+    public function destroy(Request $request, CartItem $cartItem): mixed
     {
-        $request->validate([
-            'cart_item_id' => 'required|exists:cart_items,id',
-        ]);
-
-        $cartItem = CartItem::find($request->cart_item_id);
         if ($cartItem->cart->user_id !== auth()->id()) {
             return $this->errorResponse('Unauthorized', 403);
         }
 
         $cartItem->delete();
+        
+        $cart = auth()->user()->getActiveCart();
 
         if ($request->expectsJson()) {
-            return response()->json(['success' => true]);
+            return response()->json([
+                'success' => true,
+                'message' => 'Đã xóa khỏi giỏ hàng',
+                'cart_total' => $cart ? $cart->getTotal() : 0,
+                'item_count' => $cart ? $cart->getItemCount() : 0,
+            ]);
         }
 
         return back()->with('success', 'Đã xóa khỏi giỏ hàng');
@@ -119,11 +127,18 @@ class CartController extends Controller
     /**
      * Clear entire cart
      */
-    public function clear(Request $request): RedirectResponse
+    public function clear(Request $request): mixed
     {
         $cart = auth()->user()->getActiveCart();
         if ($cart) {
             $cart->items()->delete();
+        }
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Đã xóa toàn bộ giỏ hàng',
+            ]);
         }
 
         return back()->with('success', 'Đã xóa giỏ hàng');

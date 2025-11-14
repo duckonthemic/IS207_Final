@@ -10,7 +10,7 @@
         "laravel/tinker": "^2.8"
     },
     "require-dev": {
-        "laravel/breeze": "^1.0",
+        "laravel/breeze": "^1.29",
         "fakerphp/faker": "^1.9.1",
         "laravel/pint": "^1.0",
         "laravel/sail": "^1.18",

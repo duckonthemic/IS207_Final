@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\User;
 use Illuminate\View\View;
+use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
@@ -15,38 +17,62 @@ class DashboardController extends Controller
      */
     public function index(): View
     {
-        // Key Performance Indicators
-        $stats = [
-            'total_orders' => Order::count(),
-            'total_revenue' => Order::where('payment_status', 'paid')->sum('total'),
-            'pending_orders' => Order::where('status', 'pending')->count(),
-            'total_products' => Product::count(),
-            'total_customers' => \App\Models\User::where('role', 'user')->count(),
-        ];
+        // Total stats
+        $totalOrders = Order::count();
+        $totalRevenue = Order::whereIn('status', ['completed', 'shipping', 'processing'])->sum('grand_total');
+        $totalUsers = User::where('role', 'user')->count();
+        $totalProducts = Product::count();
+
+        // Today stats
+        $pendingOrders = Order::where('status', 'pending')->count();
+        $revenueToday = Order::whereDate('created_at', today())
+            ->whereIn('status', ['completed', 'shipping', 'processing'])
+            ->sum('grand_total');
+        $newUsersToday = User::whereDate('created_at', today())->count();
+        
+        // Low stock products (stock <= 10)
+        $lowStockCount = Product::where('stock', '<=', 10)->where('stock', '>', 0)->count();
+        $lowStockProducts = Product::with('images')
+            ->where('stock', '<=', 10)
+            ->where('stock', '>', 0)
+            ->orderBy('stock')
+            ->limit(5)
+            ->get();
 
         // Recent orders
-        $recent_orders = Order::with('user')
-            ->latest('placed_at')
-            ->limit(10)
+        $recentOrders = Order::with('user')
+            ->latest()
+            ->limit(8)
             ->get();
 
-        // Sales data (last 30 days)
-        $sales_data = Order::where('payment_status', 'paid')
-            ->where('placed_at', '>=', now()->subDays(30))
-            ->selectRaw('DATE(placed_at) as date, SUM(total) as revenue, COUNT(*) as orders')
-            ->groupBy('date')
-            ->orderBy('date', 'desc')
-            ->get();
+        // Revenue chart data (last 7 days)
+        $chartLabels = [];
+        $chartData = [];
+        
+        for ($i = 6; $i >= 0; $i--) {
+            $date = Carbon::today()->subDays($i);
+            $chartLabels[] = $date->format('d/m');
+            
+            $revenue = Order::whereDate('created_at', $date)
+                ->whereIn('status', ['completed', 'shipping', 'processing'])
+                ->sum('grand_total');
+            
+            $chartData[] = $revenue;
+        }
 
-        // Top products
-        $top_products = Product::withCount(['orderItems as total_sold' => function ($query) {
-            $query->join('orders', 'order_items.order_id', '=', 'orders.id')
-                  ->where('orders.payment_status', 'paid');
-        }])
-        ->orderByDesc('total_sold')
-        ->limit(10)
-        ->get();
-
-        return view('admin.dashboard', compact('stats', 'recent_orders', 'sales_data', 'top_products'));
+        return view('admin.dashboard', compact(
+            'totalOrders',
+            'totalRevenue',
+            'totalUsers',
+            'totalProducts',
+            'pendingOrders',
+            'revenueToday',
+            'newUsersToday',
+            'lowStockCount',
+            'lowStockProducts',
+            'recentOrders',
+            'chartLabels',
+            'chartData'
+        ));
     }
 }
