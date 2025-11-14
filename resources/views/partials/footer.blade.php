@@ -4,7 +4,7 @@
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
             {{-- About --}}
             <div>
-                <h3 class="font-bold text-cyber-accent mb-4">Tech Parts</h3>
+                <h3 class="font-bold text-cyber-accent mb-4">UITech</h3>
                 <p class="text-cyber-muted text-sm">Cửa hàng linh kiện máy tính hàng đầu với chất lượng và giá cạnh tranh.</p>
             </div>
 
@@ -13,9 +13,6 @@
                 <h4 class="font-bold text-cyber-text mb-4">Danh mục</h4>
                 <ul class="space-y-2 text-sm">
                     <li><a href="{{ route('products.index') }}" class="text-cyber-muted hover:text-cyber-accent transition-colors">Sản phẩm</a></li>
-                    <li><a href="{{ route('about') }}" class="text-cyber-muted hover:text-cyber-accent transition-colors">Về chúng tôi</a></li>
-                    <li><a href="{{ route('contact') }}" class="text-cyber-muted hover:text-cyber-accent transition-colors">Liên hệ</a></li>
-                    <li><a href="{{ route('blog.index') }}" class="text-cyber-muted hover:text-cyber-accent transition-colors">Blog</a></li>
                 </ul>
             </div>
 
@@ -43,7 +40,7 @@
 
         <div class="border-t border-cyber-border pt-8">
             <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-                <p class="text-cyber-muted text-sm">© {{ date('Y') }} Tech Parts. Bản quyền được bảo lưu.</p>
+                <p class="text-cyber-muted text-sm">© {{ date('Y') }} UITech. Bản quyền được bảo lưu.</p>
                 <div class="flex gap-4">
                     <a href="#" class="text-cyber-muted hover:text-cyber-accent transition-colors">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M8.29 20v-7.34H5.67v-2.7h2.62V7.47c0-2.61 1.59-4.04 3.92-4.04 1.12 0 2.07.084 2.35.122v2.73h-1.61c-1.26 0-1.51.6-1.51 1.48v1.94h3.02l-.39 2.7h-2.63V20"></path></svg>

@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Tech Parts - Cửa hàng linh kiện máy tính chuyên nghiệp">
-    <title>@yield('title', 'Tech Parts - Linh kiện máy tính')</title>
+    <meta name="description" content="UITech - Cửa hàng linh kiện máy tính chuyên nghiệp">
+    <title>@yield('title', 'UITech - Linh kiện máy tính')</title>
 
     {{-- Tailwind CSS CDN --}}
     <script src="https://cdn.tailwindcss.com"></script>
@@ -19,12 +19,20 @@
                         'cyber': {
                             'dark': '#0a0e27',
                             'darker': '#060920',
+                            'card': '#0f1535',
+                            'border': '#1a2a4a',
                             'accent': '#00ffff',
+                            'glow': '#00ff00',
                             'purple': '#9b59b6',
                             'text': '#e0e6ed',
+                            'muted': '#7a8a9a',
                             'success': '#00ff88',
                             'error': '#ff1744',
                         }
+                    },
+                    boxShadow: {
+                        'glow-cyan': '0 0 20px rgba(0, 255, 255, 0.5)',
+                        'glow-green': '0 0 20px rgba(0, 255, 136, 0.5)',
                     }
                 }
             }

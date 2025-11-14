@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $product->name . ' - Tech Parts')
+@section('title', $product->name . ' - UITech')
 
 @section('content')
 <div class="container mx-auto px-4 py-8">
@@ -63,47 +63,6 @@
                 <h3 class="font-bold text-cyber-text mb-3">Mô tả sản phẩm</h3>
                 <p class="text-cyber-muted leading-relaxed">{{ $product->description }}</p>
             </div>
-
-            {{-- Specs --}}
-            @if($product->specs->isNotEmpty())
-                <div class="mb-8">
-                    <h3 class="font-bold text-cyber-text mb-3">Thông số kỹ thuật</h3>
-                    <table class="w-full text-sm">
-                        @foreach($product->specs as $spec)
-                            <tr class="border-b border-cyber-border">
-                                <td class="py-2 text-cyber-muted w-1/3">{{ $spec->spec_key }}</td>
-                                <td class="py-2 text-cyber-text">{{ $spec->spec_value }}</td>
-                            </tr>
-                        @endforeach
-                    </table>
-                </div>
-            @endif
-
-            {{-- Add to Cart --}}
-            <form action="{{ route('cart.add') }}" method="POST" class="space-y-4">
-                @csrf
-                <input type="hidden" name="product_id" value="{{ $product->id }}">
-                
-                <div>
-                    <label class="block text-cyber-text font-semibold mb-2">Số lượng</label>
-                    <div class="flex items-center gap-4">
-                        <div class="inline-flex items-center gap-2 border border-cyber-border rounded">
-                            <button type="button" onclick="document.getElementById('qty').value = Math.max(1, parseInt(document.getElementById('qty').value) - 1)" class="px-3 py-2">-</button>
-                            <input type="number" id="qty" name="qty" value="1" min="1" max="100" class="w-16 text-center bg-transparent outline-none">
-                            <button type="button" onclick="document.getElementById('qty').value = parseInt(document.getElementById('qty').value) + 1" class="px-3 py-2">+</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-2 gap-4">
-                    <button type="submit" class="px-6 py-3 bg-cyber-accent text-cyber-darker rounded-lg font-bold hover:shadow-glow-cyan transition-all">
-                        Thêm vào giỏ
-                    </button>
-                    <button type="button" class="px-6 py-3 border border-cyber-accent text-cyber-accent rounded-lg font-bold hover:bg-cyber-accent/10">
-                        Yêu thích
-                    </button>
-                </div>
-            </form>
 
             {{-- Share --}}
             <div class="mt-8 pt-8 border-t border-cyber-border">

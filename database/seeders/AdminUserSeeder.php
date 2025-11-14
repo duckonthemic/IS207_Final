@@ -21,7 +21,15 @@ class AdminUserSeeder extends Seeder
             ]
         );
 
-        // Test users
-        User::factory(10)->create();
+        // Test user
+        User::firstOrCreate(
+            ['email' => 'user@techparts.vn'],
+            [
+                'name' => 'Test User',
+                'password' => Hash::make('user123456'),
+                'role' => 'user',
+                'email_verified_at' => now(),
+            ]
+        );
     }
 }

@@ -4,60 +4,121 @@ namespace Database\Seeders;
 
 use App\Models\Product;
 use App\Models\Category;
-use App\Models\Manufacturer;
-use App\Models\Branch;
-use App\Models\Inventory;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class ProductSeeder extends Seeder
 {
     public function run(): void
     {
-        // Create 50 products
-        Product::factory(50)
-            ->sequence(function ($seq) {
-                $categories = Category::pluck('id')->toArray();
-                $manufacturers = Manufacturer::pluck('id')->toArray();
+        $categories = Category::all();
+        
+        if ($categories->isEmpty()) {
+            $this->command->warn('No categories found. Run CategorySeeder first.');
+            return;
+        }
 
-                return [
-                    'category_id' => $categories[array_rand($categories)],
-                    'manufacturer_id' => $manufacturers[array_rand($manufacturers)],
-                ];
-            })
-            ->create()
-            ->each(function (Product $product) {
-                // Add inventory for each branch
-                $branches = Branch::all();
-                foreach ($branches as $branch) {
-                    Inventory::create([
-                        'product_id' => $product->id,
-                        'branch_id' => $branch->id,
-                        'qty' => rand(10, 100),
-                    ]);
-                }
+        $brands = ['Intel', 'AMD', 'NVIDIA', 'Corsair', 'Kingston', 'Samsung', 'Western Digital', 'Seagate'];
+        
+        // Sample products
+        $products = [
+            [
+                'name' => 'Intel Core i9-13900K',
+                'category' => 'CPU',
+                'price' => 15000000,
+                'brand' => 'Intel',
+                'specifications' => [
+                    'cores' => 24,
+                    'threads' => 32,
+                    'base_clock' => '3.0 GHz',
+                    'boost_clock' => '5.8 GHz',
+                    'tdp' => '125W',
+                ]
+            ],
+            [
+                'name' => 'AMD Ryzen 9 7950X',
+                'category' => 'CPU',
+                'price' => 14000000,
+                'brand' => 'AMD',
+                'specifications' => [
+                    'cores' => 16,
+                    'threads' => 32,
+                    'base_clock' => '4.5 GHz',
+                    'boost_clock' => '5.7 GHz',
+                    'tdp' => '170W',
+                ]
+            ],
+            [
+                'name' => 'NVIDIA RTX 4090',
+                'category' => 'GPU',
+                'price' => 45000000,
+                'brand' => 'NVIDIA',
+                'specifications' => [
+                    'memory' => '24GB GDDR6X',
+                    'cuda_cores' => 16384,
+                    'boost_clock' => '2.52 GHz',
+                    'tdp' => '450W',
+                ]
+            ],
+            [
+                'name' => 'AMD RX 7900 XTX',
+                'category' => 'GPU',
+                'price' => 25000000,
+                'brand' => 'AMD',
+                'specifications' => [
+                    'memory' => '24GB GDDR6',
+                    'compute_units' => 96,
+                    'boost_clock' => '2.5 GHz',
+                    'tdp' => '355W',
+                ]
+            ],
+            [
+                'name' => 'Corsair Vengeance DDR5 32GB',
+                'category' => 'RAM',
+                'price' => 5000000,
+                'brand' => 'Corsair',
+                'specifications' => [
+                    'capacity' => '32GB (2x16GB)',
+                    'type' => 'DDR5',
+                    'speed' => '6000MHz',
+                    'latency' => 'CL36',
+                ]
+            ],
+            [
+                'name' => 'Samsung 980 PRO 1TB',
+                'category' => 'SSD',
+                'price' => 3500000,
+                'brand' => 'Samsung',
+                'specifications' => [
+                    'capacity' => '1TB',
+                    'interface' => 'NVMe PCIe 4.0',
+                    'read_speed' => '7000 MB/s',
+                    'write_speed' => '5000 MB/s',
+                ]
+            ],
+        ];
 
-                // Add product images
-                if (rand(0, 1)) {
-                    $product->images()->create([
-                        'url' => 'https://via.placeholder.com/400?text=' . urlencode($product->name),
-                        'is_primary' => true,
-                        'sort_order' => 0,
-                    ]);
-                }
+        foreach ($products as $productData) {
+            $category = $categories->firstWhere('name', $productData['category']);
+            
+            if (!$category) {
+                $category = $categories->random();
+            }
 
-                // Add specs
-                $specs = [
-                    'color' => ['Đen', 'Trắng', 'Bạc', 'Xanh'][rand(0, 3)],
-                    'warranty' => [12, 24, 36][rand(0, 2)] . ' tháng',
-                    'origin' => ['Trung Quốc', 'Đài Loan', 'Hàn Quốc', 'Nhật Bản'][rand(0, 3)],
-                ];
+            Product::create([
+                'category_id' => $category->id,
+                'name' => $productData['name'],
+                'slug' => Str::slug($productData['name']),
+                'description' => 'Sản phẩm chất lượng cao, chính hãng',
+                'price' => $productData['price'],
+                'sku' => strtoupper(Str::random(8)),
+                'stock' => rand(10, 50),
+                'brand' => $productData['brand'],
+                'specifications' => $productData['specifications'],
+                'image' => 'https://via.placeholder.com/400?text=' . urlencode($productData['name']),
+            ]);
+        }
 
-                foreach ($specs as $key => $value) {
-                    $product->specs()->create([
-                        'spec_key' => $key,
-                        'spec_value' => $value,
-                    ]);
-                }
-            });
+        $this->command->info('Created ' . count($products) . ' sample products.');
     }
 }

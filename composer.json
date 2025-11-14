@@ -1,7 +1,7 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "name": "duckonthemic/uitech",
+    "description": "UITech - E-Commerce platform for PC parts (IS207 Project)",
+    "keywords": ["laravel", "ecommerce", "pc-parts", "is207"],
     "license": "MIT",
     "type": "project",
     "require": {

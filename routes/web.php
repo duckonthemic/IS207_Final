@@ -20,9 +20,6 @@ use Illuminate\Support\Facades\Route;
 
 // Trang công khai
 Route::view('/', 'welcome')->name('home');
-Route::view('/about', 'about')->name('about');
-Route::view('/contact', 'contact')->name('contact');
-Route::view('/blog', 'blog.index')->name('blog.index');
 
 // Sản phẩm (user-facing)
 Route::prefix('products')

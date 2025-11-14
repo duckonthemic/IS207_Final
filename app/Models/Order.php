@@ -16,9 +16,15 @@ class Order extends Model
         'user_id',
         'order_code',
         'payment_status',
+        'payment_method',
         'status',
         'total',
         'placed_at',
+        // Gộp từ OrderAddress
+        'shipping_name',
+        'shipping_address',
+        'shipping_city',
+        'shipping_phone',
     ];
 
     protected $casts = [
@@ -37,18 +43,6 @@ class Order extends Model
     public function items(): HasMany
     {
         return $this->hasMany(OrderItem::class);
-    }
-
-    public function address(): HasMany
-    {
-        return $this->hasMany(OrderAddress::class);
-    }
-
-    public function promotions(): BelongsToMany
-    {
-        return $this->belongsToMany(Promotion::class, 'order_promotions')
-            ->withPivot('discount_value')
-            ->withTimestamps();
     }
 
     // Scopes

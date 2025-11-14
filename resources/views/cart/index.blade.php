@@ -2,7 +2,7 @@
 @section('content')
 @extends('layouts.app')
 
-@section('title', 'Giỏ hàng - Tech Parts')
+@section('title', 'Giỏ hàng - UITech')
 
 @section('content')
 <div class="container mx-auto px-4 py-8">
