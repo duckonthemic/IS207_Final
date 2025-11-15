@@ -90,6 +90,7 @@
 
 ## 👥 THÀNH VIÊN NHÓM
 
+<<<<<<< HEAD
 | STT | MSSV | Họ và Tên | Vai trò | GitHub | Email |
 |-----|------|-----------|---------|--------|-------|
 | 1 | 23520xxx | **Hoàng Bảo Long** | Team Leader, Backend Dev | [@duckonthemic](https://github.com/duckonthemic) | 23520xxx@gm.uit.edu.vn |
@@ -98,6 +99,16 @@
 | 4 | 23520xxx | **Nguyễn Duy Phương** | Database Designer | [@username](https://github.com/username) | 23520xxx@gm.uit.edu.vn |
 | 5 | 23520xxx | **Trần Thanh Huy** | UI/UX Designer | [@username](https://github.com/username) | 23520xxx@gm.uit.edu.vn |
 | 6 | 23520xxx | **Nguyễn Tuấn Minh** | Tester & QA | [@username](https://github.com/username) | 23520xxx@gm.uit.edu.vn |
+=======
+| STT | MSSV | Họ và Tên | GitHub | Email |
+|-----|------|-----------|--------|-------|
+| 1 | 23520xxx | Hoàng Bảo Long | [@duckonthemic](https://github.com/duckonthemic) | 23520xxx@gm.uit.edu.vn |
+| 2 | 23520xxx | Ngụy Công Vũ Trung | [@username](https://github.com/username) | 23520xxx@gm.uit.edu.vn |
+| 3 | 23520xxx | Lương Tuấn Vỹ | [@username](https://github.com/username) | 23520xxx@gm.uit.edu.vn |
+| 4 | 23520xxx | Nguyễn Duy Phương | [@username](https://github.com/username) | 23520xxx@gm.uit.edu.vn |
+| 5 | 23520xxx | Trần Thanh Huy | [@username](https://github.com/username) | 23520xxx@gm.uit.edu.vn |
+| 6 | 23520xxx | Trần Tuấn Minh | [@username](https://github.com/username) | 23520xxx@gm.uit.edu.vn |
+>>>>>>> a73fa3b37460c62c8d45b31ee633d68b36cddd0d
 
 ---
 
