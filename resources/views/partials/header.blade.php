@@ -107,7 +107,7 @@
                             <div class="col-span-3 bg-gray-50 border-r border-gray-200">
                                 <div class="py-2">
                                     {{-- CPU --}}
-                                    <a href="{{ route('products.index', ['category' => 'cpu-processor']) }}" 
+                                    <a href="{{ route('products.index', ['category' => 'cpu']) }}" 
                                        @mouseenter="subMenu = 'cpu'"
                                        class="flex items-center justify-between px-4 py-3 hover:bg-white hover:text-black transition cursor-pointer"
                                        :class="subMenu === 'cpu' ? 'bg-white text-black font-semibold' : ''">
@@ -118,7 +118,7 @@
                                     </a>
 
                                     {{-- VGA --}}
-                                    <a href="{{ route('products.index', ['category' => 'vga-card-man-hinh']) }}"
+                                    <a href="{{ route('products.index', ['category' => 'vga']) }}"
                                        @mouseenter="subMenu = 'vga'"
                                        class="flex items-center justify-between px-4 py-3 hover:bg-white hover:text-black transition cursor-pointer"
                                        :class="subMenu === 'vga' ? 'bg-white text-black font-semibold' : ''">
@@ -129,66 +129,66 @@
                                     </a>
 
                                     {{-- RAM --}}
-                                    <a href="{{ route('products.index', ['category' => 'ram-bo-nho']) }}"
+                                    <a href="{{ route('products.index', ['category' => 'ram']) }}"
                                        @mouseenter="subMenu = 'ram'"
                                        class="flex items-center justify-between px-4 py-3 hover:bg-white hover:text-black transition cursor-pointer"
                                        :class="subMenu === 'ram' ? 'bg-white text-black font-semibold' : ''">
-                                        <span>RAM - Bộ nhớ</span>
+                                        <span>RAM - Bộ nhớ trong</span>
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                                         </svg>
                                     </a>
 
                                     {{-- Mainboard --}}
-                                    <a href="{{ route('products.index', ['category' => 'mainboard-mainboard']) }}"
+                                    <a href="{{ route('products.index', ['category' => 'mainboard']) }}"
                                        @mouseenter="subMenu = 'mainboard'"
                                        class="flex items-center justify-between px-4 py-3 hover:bg-white hover:text-black transition cursor-pointer"
                                        :class="subMenu === 'mainboard' ? 'bg-white text-black font-semibold' : ''">
-                                        <span>Mainboard</span>
+                                        <span>Mainboard - Bo mạch chủ</span>
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                                         </svg>
                                     </a>
 
                                     {{-- SSD --}}
-                                    <a href="{{ route('products.index', ['category' => 'ssd-o-cung']) }}"
+                                    <a href="{{ route('products.index', ['category' => 'ssd']) }}"
                                        @mouseenter="subMenu = 'ssd'"
                                        class="flex items-center justify-between px-4 py-3 hover:bg-white hover:text-black transition cursor-pointer"
                                        :class="subMenu === 'ssd' ? 'bg-white text-black font-semibold' : ''">
-                                        <span>SSD - Ổ cứng</span>
+                                        <span>SSD - Ổ cứng SSD</span>
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                                         </svg>
                                     </a>
 
                                     {{-- Monitor --}}
-                                    <a href="{{ route('products.index', ['category' => 'monitor-man-hinh']) }}"
+                                    <a href="{{ route('products.index', ['category' => 'monitor']) }}"
                                        @mouseenter="subMenu = 'monitor'"
                                        class="flex items-center justify-between px-4 py-3 hover:bg-white hover:text-black transition cursor-pointer"
                                        :class="subMenu === 'monitor' ? 'bg-white text-black font-semibold' : ''">
-                                        <span>Màn hình</span>
+                                        <span>Monitor - Màn hình</span>
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                                         </svg>
                                     </a>
 
                                     {{-- PSU --}}
-                                    <a href="{{ route('products.index', ['category' => 'psu-nguon']) }}"
+                                    <a href="{{ route('products.index', ['category' => 'psu']) }}"
                                        @mouseenter="subMenu = 'psu'"
                                        class="flex items-center justify-between px-4 py-3 hover:bg-white hover:text-black transition cursor-pointer"
                                        :class="subMenu === 'psu' ? 'bg-white text-black font-semibold' : ''">
-                                        <span>PSU - Nguồn</span>
+                                        <span>PSU - Nguồn máy tính</span>
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                                         </svg>
                                     </a>
 
                                     {{-- Case --}}
-                                    <a href="{{ route('products.index', ['category' => 'case-vo-may']) }}"
+                                    <a href="{{ route('products.index', ['category' => 'case']) }}"
                                        @mouseenter="subMenu = 'case'"
                                        class="flex items-center justify-between px-4 py-3 hover:bg-white hover:text-black transition cursor-pointer"
                                        :class="subMenu === 'case' ? 'bg-white text-black font-semibold' : ''">
-                                        <span>Case - Vỏ máy</span>
+                                        <span>Case - Vỏ máy tính</span>
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                                         </svg>
@@ -214,28 +214,28 @@
                                     <div>
                                         <h4 class="font-bold text-sm mb-3 pb-2 border-b border-gray-200">HÃNG SẢN XUẤT</h4>
                                         <ul class="space-y-2 text-sm">
-                                            <li><a href="{{ route('products.index', ['category' => 'cpu-processor', 'brand' => ['Intel']]) }}" class="hover:text-black hover:underline">Intel</a></li>
-                                            <li><a href="{{ route('products.index', ['category' => 'cpu-processor', 'brand' => ['AMD']]) }}" class="hover:text-black hover:underline">AMD</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'cpu', 'brand' => ['Intel']]) }}" class="hover:text-black hover:underline">Intel</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'cpu', 'brand' => ['AMD']]) }}" class="hover:text-black hover:underline">AMD</a></li>
                                         </ul>
                                     </div>
                                     <div>
                                         <h4 class="font-bold text-sm mb-3 pb-2 border-b border-gray-200">SOCKET</h4>
                                         <ul class="space-y-2 text-sm">
-                                            <li><a href="{{ route('products.index', ['category' => 'cpu-processor', 'socket' => ['LGA1700']]) }}" class="hover:text-black hover:underline">LGA 1700 (Intel Gen 12-14)</a></li>
-                                            <li><a href="{{ route('products.index', ['category' => 'cpu-processor', 'socket' => ['AM5']]) }}" class="hover:text-black hover:underline">AM5 (Ryzen 7000)</a></li>
-                                            <li><a href="{{ route('products.index', ['category' => 'cpu-processor', 'socket' => ['AM4']]) }}" class="hover:text-black hover:underline">AM4 (Ryzen 5000)</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'cpu', 'socket' => ['LGA1700']]) }}" class="hover:text-black hover:underline">LGA 1700 (Intel Gen 12-14)</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'cpu', 'socket' => ['AM5']]) }}" class="hover:text-black hover:underline">AM5 (Ryzen 7000)</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'cpu', 'socket' => ['AM4']]) }}" class="hover:text-black hover:underline">AM4 (Ryzen 5000)</a></li>
                                         </ul>
                                     </div>
                                     <div>
                                         <h4 class="font-bold text-sm mb-3 pb-2 border-b border-gray-200">DÒNG CORE</h4>
                                         <ul class="space-y-2 text-sm">
-                                            <li><a href="{{ route('products.index', ['category' => 'cpu-processor']) }}" class="hover:text-black hover:underline">Intel Core i9</a></li>
-                                            <li><a href="{{ route('products.index', ['category' => 'cpu-processor']) }}" class="hover:text-black hover:underline">Intel Core i7</a></li>
-                                            <li><a href="{{ route('products.index', ['category' => 'cpu-processor']) }}" class="hover:text-black hover:underline">Intel Core i5</a></li>
-                                            <li><a href="{{ route('products.index', ['category' => 'cpu-processor']) }}" class="hover:text-black hover:underline">Intel Core i3</a></li>
-                                            <li><a href="{{ route('products.index', ['category' => 'cpu-processor']) }}" class="hover:text-black hover:underline">AMD Ryzen 9</a></li>
-                                            <li><a href="{{ route('products.index', ['category' => 'cpu-processor']) }}" class="hover:text-black hover:underline">AMD Ryzen 7</a></li>
-                                            <li><a href="{{ route('products.index', ['category' => 'cpu-processor']) }}" class="hover:text-black hover:underline">AMD Ryzen 5</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'cpu']) }}" class="hover:text-black hover:underline">Intel Core i9</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'cpu']) }}" class="hover:text-black hover:underline">Intel Core i7</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'cpu']) }}" class="hover:text-black hover:underline">Intel Core i5</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'cpu']) }}" class="hover:text-black hover:underline">Intel Core i3</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'cpu']) }}" class="hover:text-black hover:underline">AMD Ryzen 9</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'cpu']) }}" class="hover:text-black hover:underline">AMD Ryzen 7</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'cpu']) }}" class="hover:text-black hover:underline">AMD Ryzen 5</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -245,30 +245,29 @@
                                     <div>
                                         <h4 class="font-bold text-sm mb-3 pb-2 border-b border-gray-200">HÃNG SẢN XUẤT</h4>
                                         <ul class="space-y-2 text-sm">
-                                            <li><a href="{{ route('products.index', ['category' => 'vga-card-man-hinh', 'brand' => ['ASUS']]) }}" class="hover:text-black hover:underline">ASUS</a></li>
-                                            <li><a href="{{ route('products.index', ['category' => 'vga-card-man-hinh', 'brand' => ['MSI']]) }}" class="hover:text-black hover:underline">MSI</a></li>
-                                            <li><a href="{{ route('products.index', ['category' => 'vga-card-man-hinh', 'brand' => ['Gigabyte']]) }}" class="hover:text-black hover:underline">Gigabyte</a></li>
-                                            <li><a href="{{ route('products.index', ['category' => 'vga-card-man-hinh', 'brand' => ['ASUS']]) }}" class="hover:text-black hover:underline">ASUS</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'vga-asus']) }}" class="hover:text-black hover:underline">ASUS</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'vga-msi']) }}" class="hover:text-black hover:underline">MSI</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'vga-gigabyte']) }}" class="hover:text-black hover:underline">GIGABYTE</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'vga-asrock']) }}" class="hover:text-black hover:underline">ASROCK</a></li>
                                         </ul>
                                     </div>
                                     <div>
-                                        <h4 class="font-bold text-sm mb-3 pb-2 border-b border-gray-200">SERIES GPU</h4>
+                                        <h4 class="font-bold text-sm mb-3 pb-2 border-b border-gray-200">SERIES NVIDIA</h4>
                                         <ul class="space-y-2 text-sm">
-                                            <li><a href="{{ route('products.index', ['category' => 'vga-card-man-hinh', 'series' => ['RTX 5090']]) }}" class="hover:text-black hover:underline">NVIDIA RTX 5090</a></li>
-                                            <li><a href="{{ route('products.index', ['category' => 'vga-card-man-hinh', 'series' => ['RTX 5080']]) }}" class="hover:text-black hover:underline">NVIDIA RTX 5080</a></li>
-                                            <li><a href="{{ route('products.index', ['category' => 'vga-card-man-hinh', 'series' => ['RTX 5070']]) }}" class="hover:text-black hover:underline">NVIDIA RTX 5070</a></li>
-                                            <li><a href="{{ route('products.index', ['category' => 'vga-card-man-hinh', 'series' => ['RTX 5060']]) }}" class="hover:text-black hover:underline">NVIDIA RTX 5060</a></li>
-                                            <li><a href="{{ route('products.index', ['category' => 'vga-card-man-hinh']) }}" class="hover:text-black hover:underline">AMD Radeon RX 7000</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'vga', 'chip' => 'RTX 50']) }}" class="hover:text-black hover:underline">RTX 50 Series</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'vga', 'chip' => 'RTX 40']) }}" class="hover:text-black hover:underline">RTX 40 Series</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'vga', 'chip' => 'RTX 30']) }}" class="hover:text-black hover:underline">RTX 30 Series</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'vga', 'chip' => 'GTX 16']) }}" class="hover:text-black hover:underline">GTX 16 Series</a></li>
                                         </ul>
                                     </div>
                                     <div>
-                                        <h4 class="font-bold text-sm mb-3 pb-2 border-b border-gray-200">VRAM</h4>
+                                        <h4 class="font-bold text-sm mb-3 pb-2 border-b border-gray-200">SERIES AMD</h4>
                                         <ul class="space-y-2 text-sm">
-                                            <li><a href="{{ route('products.index', ['category' => 'vga-card-man-hinh', 'vram' => ['24GB']]) }}" class="hover:text-black hover:underline">24GB</a></li>
-                                            <li><a href="{{ route('products.index', ['category' => 'vga-card-man-hinh', 'vram' => ['16GB']]) }}" class="hover:text-black hover:underline">16GB</a></li>
-                                            <li><a href="{{ route('products.index', ['category' => 'vga-card-man-hinh', 'vram' => ['12GB']]) }}" class="hover:text-black hover:underline">12GB</a></li>
-                                            <li><a href="{{ route('products.index', ['category' => 'vga-card-man-hinh', 'vram' => ['8GB']]) }}" class="hover:text-black hover:underline">8GB</a></li>
-                                            <li><a href="{{ route('products.index', ['category' => 'vga-card-man-hinh', 'vram' => ['6GB']]) }}" class="hover:text-black hover:underline">6GB</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'vga', 'chip' => 'RX 7900']) }}" class="hover:text-black hover:underline">RX 7900 Series</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'vga', 'chip' => 'RX 7800']) }}" class="hover:text-black hover:underline">RX 7800 Series</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'vga', 'chip' => 'RX 7700']) }}" class="hover:text-black hover:underline">RX 7700 Series</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'vga', 'chip' => 'RX 7600']) }}" class="hover:text-black hover:underline">RX 7600 Series</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'vga', 'chip' => 'RX 6000']) }}" class="hover:text-black hover:underline">RX 6000 Series</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -278,26 +277,26 @@
                                     <div>
                                         <h4 class="font-bold text-sm mb-3 pb-2 border-b border-gray-200">KIỂU BỘ NHỚ</h4>
                                         <ul class="space-y-2 text-sm">
-                                            <li><a href="{{ route('products.index', ['category' => 'ram-bo-nho', 'type' => ['DDR5']]) }}" class="hover:text-black hover:underline">DDR5</a></li>
-                                            <li><a href="{{ route('products.index', ['category' => 'ram-bo-nho', 'type' => ['DDR4']]) }}" class="hover:text-black hover:underline">DDR4</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'ram', 'type' => ['DDR5']]) }}" class="hover:text-black hover:underline">DDR5</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'ram', 'type' => ['DDR4']]) }}" class="hover:text-black hover:underline">DDR4</a></li>
                                         </ul>
                                     </div>
                                     <div>
                                         <h4 class="font-bold text-sm mb-3 pb-2 border-b border-gray-200">DUNG LƯỢNG</h4>
                                         <ul class="space-y-2 text-sm">
-                                            <li><a href="{{ route('products.index', ['category' => 'ram-bo-nho', 'capacity' => ['64GB']]) }}" class="hover:text-black hover:underline">64GB (32GB x2)</a></li>
-                                            <li><a href="{{ route('products.index', ['category' => 'ram-bo-nho', 'capacity' => ['32GB']]) }}" class="hover:text-black hover:underline">32GB (16GB x2)</a></li>
-                                            <li><a href="{{ route('products.index', ['category' => 'ram-bo-nho', 'capacity' => ['16GB']]) }}" class="hover:text-black hover:underline">16GB (8GB x2)</a></li>
-                                            <li><a href="{{ route('products.index', ['category' => 'ram-bo-nho', 'capacity' => ['8GB']]) }}" class="hover:text-black hover:underline">8GB</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'ram', 'capacity' => ['64GB']]) }}" class="hover:text-black hover:underline">64GB (32GB x2)</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'ram', 'capacity' => ['32GB']]) }}" class="hover:text-black hover:underline">32GB (16GB x2)</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'ram', 'capacity' => ['16GB']]) }}" class="hover:text-black hover:underline">16GB (8GB x2)</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'ram', 'capacity' => ['8GB']]) }}" class="hover:text-black hover:underline">8GB</a></li>
                                         </ul>
                                     </div>
                                     <div>
                                         <h4 class="font-bold text-sm mb-3 pb-2 border-b border-gray-200">HÃNG</h4>
                                         <ul class="space-y-2 text-sm">
-                                            <li><a href="{{ route('products.index', ['category' => 'ram-bo-nho']) }}" class="hover:text-black hover:underline">Corsair</a></li>
-                                            <li><a href="{{ route('products.index', ['category' => 'ram-bo-nho']) }}" class="hover:text-black hover:underline">G.Skill</a></li>
-                                            <li><a href="{{ route('products.index', ['category' => 'ram-bo-nho']) }}" class="hover:text-black hover:underline">Kingston</a></li>
-                                            <li><a href="{{ route('products.index', ['category' => 'ram-bo-nho']) }}" class="hover:text-black hover:underline">TeamGroup</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'ram']) }}" class="hover:text-black hover:underline">Corsair</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'ram']) }}" class="hover:text-black hover:underline">G.Skill</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'ram']) }}" class="hover:text-black hover:underline">Kingston</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'ram']) }}" class="hover:text-black hover:underline">TeamGroup</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -307,26 +306,86 @@
                                     <div>
                                         <h4 class="font-bold text-sm mb-3 pb-2 border-b border-gray-200">KÍCH THƯỚC</h4>
                                         <ul class="space-y-2 text-sm">
-                                            <li><a href="{{ route('products.index', ['category' => 'monitor-man-hinh', 'size' => ['24\"']]) }}" class="hover:text-black hover:underline">24 inch</a></li>
-                                            <li><a href="{{ route('products.index', ['category' => 'monitor-man-hinh', 'size' => ['27\"']]) }}" class="hover:text-black hover:underline">27 inch</a></li>
-                                            <li><a href="{{ route('products.index', ['category' => 'monitor-man-hinh', 'size' => ['32\"']]) }}" class="hover:text-black hover:underline">32 inch</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'monitor', 'size' => ['24\"']]) }}" class="hover:text-black hover:underline">24 inch</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'monitor', 'size' => ['27\"']]) }}" class="hover:text-black hover:underline">27 inch</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'monitor', 'size' => ['32\"']]) }}" class="hover:text-black hover:underline">32 inch</a></li>
                                         </ul>
                                     </div>
                                     <div>
                                         <h4 class="font-bold text-sm mb-3 pb-2 border-b border-gray-200">ĐỘ PHÂN GIẢI</h4>
                                         <ul class="space-y-2 text-sm">
-                                            <li><a href="{{ route('products.index', ['category' => 'monitor-man-hinh', 'resolution' => ['Full HD']]) }}" class="hover:text-black hover:underline">Full HD (1920x1080)</a></li>
-                                            <li><a href="{{ route('products.index', ['category' => 'monitor-man-hinh', 'resolution' => ['2K']]) }}" class="hover:text-black hover:underline">2K (2560x1440)</a></li>
-                                            <li><a href="{{ route('products.index', ['category' => 'monitor-man-hinh', 'resolution' => ['4K']]) }}" class="hover:text-black hover:underline">4K (3840x2160)</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'monitor', 'resolution' => ['Full HD']]) }}" class="hover:text-black hover:underline">Full HD (1920x1080)</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'monitor', 'resolution' => ['2K']]) }}" class="hover:text-black hover:underline">2K (2560x1440)</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'monitor', 'resolution' => ['4K']]) }}" class="hover:text-black hover:underline">4K (3840x2160)</a></li>
                                         </ul>
                                     </div>
                                     <div>
                                         <h4 class="font-bold text-sm mb-3 pb-2 border-b border-gray-200">TẦN SỐ QUÉT</h4>
                                         <ul class="space-y-2 text-sm">
-                                            <li><a href="{{ route('products.index', ['category' => 'monitor-man-hinh', 'refresh' => ['60Hz']]) }}" class="hover:text-black hover:underline">60Hz</a></li>
-                                            <li><a href="{{ route('products.index', ['category' => 'monitor-man-hinh', 'refresh' => ['144Hz']]) }}" class="hover:text-black hover:underline">144Hz</a></li>
-                                            <li><a href="{{ route('products.index', ['category' => 'monitor-man-hinh', 'refresh' => ['165Hz']]) }}" class="hover:text-black hover:underline">165Hz</a></li>
-                                            <li><a href="{{ route('products.index', ['category' => 'monitor-man-hinh', 'refresh' => ['240Hz']]) }}" class="hover:text-black hover:underline">240Hz</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'monitor', 'refresh' => ['60Hz']]) }}" class="hover:text-black hover:underline">60Hz</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'monitor', 'refresh' => ['144Hz']]) }}" class="hover:text-black hover:underline">144Hz</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'monitor', 'refresh' => ['165Hz']]) }}" class="hover:text-black hover:underline">165Hz</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'monitor', 'refresh' => ['240Hz']]) }}" class="hover:text-black hover:underline">240Hz</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                {{-- Mainboard Filters --}}
+                                <div x-show="subMenu === 'mainboard'" x-transition class="grid grid-cols-3 gap-6">
+                                    <div>
+                                        <h4 class="font-bold text-sm mb-3 pb-2 border-b border-gray-200">HÃNG SẢN XUẤT</h4>
+                                        <ul class="space-y-2 text-sm">
+                                            <li><a href="{{ route('products.index', ['category' => 'mainboard', 'brand' => ['ASUS']]) }}" class="hover:text-black hover:underline">ASUS</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'mainboard', 'brand' => ['MSI']]) }}" class="hover:text-black hover:underline">MSI</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'mainboard', 'brand' => ['Gigabyte']]) }}" class="hover:text-black hover:underline">GIGABYTE</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'mainboard', 'brand' => ['ASRock']]) }}" class="hover:text-black hover:underline">ASROCK</a></li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-sm mb-3 pb-2 border-b border-gray-200">SOCKET</h4>
+                                        <ul class="space-y-2 text-sm">
+                                            <li><a href="{{ route('products.index', ['category' => 'mainboard', 'mb_cpu_socket' => ['LGA1700']]) }}" class="hover:text-black hover:underline">LGA 1700 (Intel)</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'mainboard', 'mb_cpu_socket' => ['AM5']]) }}" class="hover:text-black hover:underline">AM5 (AMD)</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'mainboard', 'mb_cpu_socket' => ['AM4']]) }}" class="hover:text-black hover:underline">AM4 (AMD)</a></li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-sm mb-3 pb-2 border-b border-gray-200">CHIPSET</h4>
+                                        <ul class="space-y-2 text-sm">
+                                            <li><a href="{{ route('products.index', ['category' => 'mainboard', 'mb_chipset' => ['Z790']]) }}" class="hover:text-black hover:underline">Z790</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'mainboard', 'mb_chipset' => ['B760']]) }}" class="hover:text-black hover:underline">B760</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'mainboard', 'mb_chipset' => ['X670E']]) }}" class="hover:text-black hover:underline">X670E</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'mainboard', 'mb_chipset' => ['B650']]) }}" class="hover:text-black hover:underline">B650</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                {{-- SSD Filters --}}
+                                <div x-show="subMenu === 'ssd'" x-transition class="grid grid-cols-3 gap-6">
+                                    <div>
+                                        <h4 class="font-bold text-sm mb-3 pb-2 border-b border-gray-200">HÃNG SẢN XUẤT</h4>
+                                        <ul class="space-y-2 text-sm">
+                                            <li><a href="{{ route('products.index', ['category' => 'ssd', 'brand' => ['Samsung']]) }}" class="hover:text-black hover:underline">Samsung</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'ssd', 'brand' => ['Kingston']]) }}" class="hover:text-black hover:underline">Kingston</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'ssd', 'brand' => ['WD']]) }}" class="hover:text-black hover:underline">WD</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'ssd', 'brand' => ['Crucial']]) }}" class="hover:text-black hover:underline">Crucial</a></li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-sm mb-3 pb-2 border-b border-gray-200">DUNG LƯỢNG</h4>
+                                        <ul class="space-y-2 text-sm">
+                                            <li><a href="{{ route('products.index', ['category' => 'ssd', 'ssd_capacity_gb' => ['2000']]) }}" class="hover:text-black hover:underline">2TB</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'ssd', 'ssd_capacity_gb' => ['1000']]) }}" class="hover:text-black hover:underline">1TB</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'ssd', 'ssd_capacity_gb' => ['500']]) }}" class="hover:text-black hover:underline">500GB</a></li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-sm mb-3 pb-2 border-b border-gray-200">GIAO TIẾP</h4>
+                                        <ul class="space-y-2 text-sm">
+                                            <li><a href="{{ route('products.index', ['category' => 'ssd', 'ssd_interface' => ['PCIe 5.0']]) }}" class="hover:text-black hover:underline">NVMe PCIe 5.0</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'ssd', 'ssd_interface' => ['PCIe 4.0']]) }}" class="hover:text-black hover:underline">NVMe PCIe 4.0</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'ssd', 'ssd_interface' => ['PCIe 3.0']]) }}" class="hover:text-black hover:underline">NVMe PCIe 3.0</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'ssd', 'ssd_interface' => ['SATA']]) }}" class="hover:text-black hover:underline">SATA 3</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -339,14 +398,12 @@
                                     <p>Di chuột vào danh mục để xem bộ lọc chi tiết</p>
                                 </div>
 
-                                {{-- Other categories (SSD, Mainboard, PSU, Case, Cooling) --}}
-                                <div x-show="subMenu === 'ssd' || subMenu === 'mainboard' || subMenu === 'psu' || subMenu === 'case' || subMenu === 'cooling'" x-transition class="text-center py-12">
+                                {{-- Other categories (PSU, Case, Cooling) --}}
+                                <div x-show="subMenu === 'psu' || subMenu === 'case' || subMenu === 'cooling'" x-transition class="text-center py-12">
                                     <p class="text-gray-600 mb-4">Đang phát triển bộ lọc cho danh mục này</p>
-                                    <a :href="subMenu === 'ssd' ? '{{ route('products.index', ['category' => 'ssd-o-cung']) }}' :
-                                              subMenu === 'mainboard' ? '{{ route('products.index', ['category' => 'mainboard-mainboard']) }}' :
-                                              subMenu === 'psu' ? '{{ route('products.index', ['category' => 'psu-nguon']) }}' :
-                                              subMenu === 'case' ? '{{ route('products.index', ['category' => 'case-vo-may']) }}' :
-                                              '{{ route('products.index', ['category' => 'fan-cooler-quat-tan-nhiet']) }}'"
+                                    <a :href="subMenu === 'psu' ? '{{ route('products.index', ['category' => 'psu']) }}' :
+                                              subMenu === 'case' ? '{{ route('products.index', ['category' => 'case']) }}' :
+                                              '{{ route('products.index') }}'"
                                        class="inline-block bg-black text-white px-6 py-2 rounded hover:bg-gray-800">
                                         Xem tất cả sản phẩm
                                     </a>

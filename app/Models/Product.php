@@ -82,6 +82,11 @@ class Product extends Model
         return $this->reviews()->where('status', 'approved');
     }
 
+    public function specs(): HasMany
+    {
+        return $this->hasMany(ProductSpec::class);
+    }
+
     // Scopes
     public function scopeByCategory($query, $categoryId)
     {

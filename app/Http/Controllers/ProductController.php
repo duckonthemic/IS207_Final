@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\SpecDefinition;
+use App\Models\ComponentType;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -23,21 +26,28 @@ class ProductController extends Controller
             $searchTerm = $request->string('q') ?: $request->string('search');
             $query->where(function ($q) use ($searchTerm) {
                 $q->where('name', 'like', "%{$searchTerm}%")
-                  ->orWhere('description', 'like', "%{$searchTerm}%")
-                  ->orWhere('brand', 'like', "%{$searchTerm}%");
+                  ->orWhere('description', 'like', "%{$searchTerm}%");
             });
         }
 
-        // Filter by category (supports both ID and slug)
+        // Filter by category (supports both ID and slug) - including subcategories
+        $currentCategory = null;
+        $categoryIds = [];
         if ($request->filled('category')) {
-            $category = Category::where('slug', $request->string('category'))
+            $currentCategory = Category::where('slug', $request->string('category'))
                 ->orWhere('id', $request->input('category'))
                 ->first();
-            if ($category) {
-                $query->where('category_id', $category->id);
+            if ($currentCategory) {
+                // Get category and all its children IDs
+                $categoryIds = $this->getCategoryAndChildrenIds($currentCategory);
+                $query->whereIn('category_id', $categoryIds);
             }
         } elseif ($request->filled('category_id')) {
-            $query->where('category_id', $request->integer('category_id'));
+            $currentCategory = Category::find($request->integer('category_id'));
+            if ($currentCategory) {
+                $categoryIds = $this->getCategoryAndChildrenIds($currentCategory);
+                $query->whereIn('category_id', $categoryIds);
+            }
         }
 
         // Price range filter
@@ -45,7 +55,6 @@ class ProductController extends Controller
             [$min, $max] = explode('-', $request->string('price_range'));
             $query->whereBetween('price', [(float)$min, (float)$max]);
         } elseif ($request->filled('min_price') || $request->filled('max_price')) {
-            // Individual min/max price filters
             if ($request->filled('min_price')) {
                 $query->where('price', '>=', (float) $request->input('min_price'));
             }
@@ -54,105 +63,8 @@ class ProductController extends Controller
             }
         }
 
-        // Brand filter (for VGA, CPU, Monitor, etc.)
-        if ($request->filled('brand')) {
-            $brands = $request->input('brand');
-            $query->where(function($q) use ($brands) {
-                foreach ((array)$brands as $brand) {
-                    $q->orWhere('name', 'like', "%{$brand}%")
-                      ->orWhere('brand', 'like', "%{$brand}%")
-                      ->orWhere('specifications', 'like', "%{$brand}%");
-                }
-            });
-        }
-
-        // Socket filter (for CPU)
-        if ($request->filled('socket')) {
-            $sockets = $request->input('socket');
-            $query->where(function($q) use ($sockets) {
-                foreach ((array)$sockets as $socket) {
-                    $q->orWhere('name', 'like', "%{$socket}%")
-                      ->orWhere('specifications', 'like', "%{$socket}%");
-                }
-            });
-        }
-
-        // Series filter (for VGA)
-        if ($request->filled('series')) {
-            $series = $request->input('series');
-            $query->where(function($q) use ($series) {
-                foreach ((array)$series as $serie) {
-                    $q->orWhere('name', 'like', "%{$serie}%")
-                      ->orWhere('specifications', 'like', "%{$serie}%");
-                }
-            });
-        }
-
-        // VRAM filter (for VGA)
-        if ($request->filled('vram')) {
-            $vrams = $request->input('vram');
-            $query->where(function($q) use ($vrams) {
-                foreach ((array)$vrams as $vram) {
-                    $q->orWhere('name', 'like', "%{$vram}%")
-                      ->orWhere('specifications', 'like', "%{$vram}%");
-                }
-            });
-        }
-
-        // Size filter (for Monitor)
-        if ($request->filled('size')) {
-            $sizes = $request->input('size');
-            $query->where(function($q) use ($sizes) {
-                foreach ((array)$sizes as $size) {
-                    $q->orWhere('name', 'like', "%{$size}%")
-                      ->orWhere('specifications', 'like', "%{$size}%");
-                }
-            });
-        }
-
-        // Resolution filter (for Monitor)
-        if ($request->filled('resolution')) {
-            $resolutions = $request->input('resolution');
-            $query->where(function($q) use ($resolutions) {
-                foreach ((array)$resolutions as $resolution) {
-                    $q->orWhere('name', 'like', "%{$resolution}%")
-                      ->orWhere('specifications', 'like', "%{$resolution}%");
-                }
-            });
-        }
-
-        // Refresh rate filter (for Monitor)
-        if ($request->filled('refresh')) {
-            $refreshRates = $request->input('refresh');
-            $query->where(function($q) use ($refreshRates) {
-                foreach ((array)$refreshRates as $refresh) {
-                    $q->orWhere('name', 'like', "%{$refresh}%")
-                      ->orWhere('specifications', 'like', "%{$refresh}%");
-                }
-            });
-        }
-
-        // RAM type filter (DDR4/DDR5)
-        if ($request->filled('type')) {
-            $types = $request->input('type');
-            $query->where(function($q) use ($types) {
-                foreach ((array)$types as $type) {
-                    $q->orWhere('name', 'like', "%{$type}%")
-                      ->orWhere('specifications', 'like', "%{$type}%");
-                }
-            });
-        }
-
-        // Capacity filter (for RAM, SSD)
-        if ($request->filled('capacity')) {
-            $capacities = $request->input('capacity');
-            $query->where(function($q) use ($capacities) {
-                foreach ((array)$capacities as $capacity) {
-                    $q->orWhere('name', 'like', "%{$capacity}%")
-                      ->orWhere('specifications', 'like', "%{$capacity}%");
-                }
-            });
-        }
+        // Spec-based filtering using product_specs table
+        $this->applySpecFilters($query, $request);
 
         // Sorting
         $sort = $request->input('sort', 'latest');
@@ -173,9 +85,173 @@ class ProductController extends Controller
         }
 
         $products = $query->paginate($perPage)->withQueryString();
-        $categories = Category::orderBy('name')->get();
+        $categories = Category::root()->with('children')->orderBy('name')->get();
 
-        return view('products.index', compact('products', 'categories'));
+        // Get available filter options based on current category
+        $filterOptions = $this->getFilterOptions($currentCategory, $categoryIds);
+        
+        // Get subcategories if viewing a parent category
+        $subcategories = [];
+        if ($currentCategory) {
+            $subcategories = $this->getSubcategoriesWithCounts($currentCategory, $request);
+        }
+
+        return view('products.index', compact('products', 'categories', 'filterOptions', 'currentCategory', 'subcategories'));
+    }
+
+    /**
+     * Get category and all its children IDs recursively
+     */
+    private function getCategoryAndChildrenIds($category): array
+    {
+        $ids = [$category->id];
+        
+        foreach ($category->children as $child) {
+            $ids = array_merge($ids, $this->getCategoryAndChildrenIds($child));
+        }
+        
+        return $ids;
+    }
+
+    /**
+     * Get subcategories with product counts
+     */
+    private function getSubcategoriesWithCounts($category, Request $request): array
+    {
+        $subcategories = [];
+        
+        foreach ($category->children as $child) {
+            // Clone the base query for counting
+            $countQuery = Product::query();
+            
+            // Apply same filters as main query
+            $categoryIds = $this->getCategoryAndChildrenIds($child);
+            $countQuery->whereIn('category_id', $categoryIds);
+            
+            // Apply spec filters
+            $this->applySpecFilters($countQuery, $request);
+            
+            $count = $countQuery->count();
+            
+            if ($count > 0) {
+                $subcategories[] = [
+                    'id' => $child->id,
+                    'name' => $child->name,
+                    'slug' => $child->slug,
+                    'count' => $count,
+                ];
+            }
+        }
+        
+        return $subcategories;
+    }
+
+    /**
+     * Apply specification-based filters to the query
+     */
+    private function applySpecFilters($query, Request $request): void
+    {
+        // Get all filter parameters from request (excluding system params)
+        $excludeParams = ['category', 'category_id', 'q', 'search', 'price_range', 'min_price', 'max_price', 'sort', 'page', 'per_page'];
+        $filterParams = array_diff_key($request->all(), array_flip($excludeParams));
+
+        foreach ($filterParams as $filterParam => $values) {
+            if (!empty($values)) {
+                $values = (array) $values;
+                
+                // Special handling for 'brand' filter - search in product name
+                if ($filterParam === 'brand') {
+                    $query->where(function($nameQuery) use ($values) {
+                        foreach ($values as $value) {
+                            $nameQuery->orWhere('name', 'like', "%{$value}%");
+                        }
+                    });
+                } else {
+                    // For other filters, use spec-based filtering
+                    $query->whereHas('specs', function ($q) use ($filterParam, $values) {
+                        $q->whereHas('specDefinition', function ($sq) use ($filterParam) {
+                            // Match exact spec code
+                            $sq->where('code', $filterParam);
+                        })->where(function ($valueQuery) use ($values) {
+                            foreach ($values as $value) {
+                                $valueQuery->orWhere('value', 'like', "%{$value}%");
+                            }
+                        });
+                    });
+                }
+            }
+        }
+    }
+
+    /**
+     * Get available filter options based on current category with product counts
+     */
+    private function getFilterOptions($currentCategory, $categoryIds = []): array
+    {
+        $options = [];
+
+        if (!$currentCategory || empty($categoryIds)) {
+            return $options;
+        }
+
+        // Get component type from products in this category
+        $componentTypeId = Product::whereIn('category_id', $categoryIds)
+            ->whereNotNull('component_type_id')
+            ->value('component_type_id');
+
+        if (!$componentTypeId) {
+            return $options;
+        }
+
+        // Get filterable spec definitions for this component type
+        $specDefinitions = SpecDefinition::where('component_type_id', $componentTypeId)
+            ->where('is_filterable', true)
+            ->orderBy('sort_order')
+            ->get();
+
+        // Get unique values for each filterable spec with product counts
+        foreach ($specDefinitions as $specDef) {
+            $valuesWithCounts = DB::table('product_specs')
+                ->join('products', 'product_specs.product_id', '=', 'products.id')
+                ->whereIn('products.category_id', $categoryIds)
+                ->where('product_specs.spec_definition_id', $specDef->id)
+                ->whereNotNull('product_specs.value')
+                ->where('product_specs.value', '!=', '')
+                ->select('product_specs.value', DB::raw('COUNT(DISTINCT products.id) as count'))
+                ->groupBy('product_specs.value')
+                ->orderBy('product_specs.value')
+                ->get()
+                ->map(function ($item) {
+                    return [
+                        'value' => trim($item->value),
+                        'count' => $item->count,
+                    ];
+                })
+                ->filter(function ($item) {
+                    // Filter out unwanted values
+                    $value = strtolower($item['value']);
+                    $blacklist = ['desktop', 'undefined', 'null', 'n/a', ''];
+                    return !empty($item['value']) && $item['count'] > 0 && !in_array($value, $blacklist);
+                })
+                ->unique('value') // Remove duplicates
+                ->values()
+                ->toArray();
+
+            if (!empty($valuesWithCounts)) {
+                // Extract the base code without component prefix for form field name
+                $baseCode = preg_replace('/^[a-z]+_/', '', $specDef->code);
+                
+                $options[$baseCode] = [
+                    'name' => $specDef->name,
+                    'code' => $baseCode,
+                    'unit' => $specDef->unit,
+                    'values' => $valuesWithCounts,
+                    'spec_code' => $specDef->code,
+                ];
+            }
+        }
+
+        return $options;
     }
 
     /**
@@ -183,7 +259,14 @@ class ProductController extends Controller
      */
     public function show(Product $product): View
     {
-        $product->load(['category', 'images', 'approvedReviews.user']);
+        $product->load([
+            'category', 
+            'images', 
+            'approvedReviews.user',
+            'specs.specDefinition' => function($query) {
+                $query->orderBy('sort_order');
+            }
+        ]);
 
         // Get related products (same category)
         $relatedProducts = Product::where('category_id', $product->category_id)

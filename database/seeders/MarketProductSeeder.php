@@ -69,7 +69,7 @@ class MarketProductSeeder extends Seeder
                     ProductImage::create([
                         'product_id' => $product->id,
                         'url' => $item['image'],
-                        'alt_text' => $item['name'],
+                        'is_primary' => true,
                     ]);
                 }
 

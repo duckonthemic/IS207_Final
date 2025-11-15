@@ -12,7 +12,10 @@ class DatabaseSeeder extends Seeder
         $this->call([
             AdminUserSeeder::class,
             CategorySeeder::class,
-            MarketProductSeeder::class,
+            ComponentTypeSeeder::class,
+            SpecDefinitionSeeder::class,
+            HardwareProductSeeder::class,
+            ProductSpecSeeder::class,
         ]);
     }
 }

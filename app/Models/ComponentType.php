@@ -33,6 +33,11 @@ class ComponentType extends Model
         return $this->hasMany(BuildConfigItem::class);
     }
 
+    public function specDefinitions(): HasMany
+    {
+        return $this->hasMany(SpecDefinition::class);
+    }
+
     // Scopes
     public function scopeRequired($query)
     {

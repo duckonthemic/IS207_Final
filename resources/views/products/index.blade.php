@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', isset($category) ? $category->name : 'Danh Mục Sản Phẩm')
+@section('title', isset($currentCategory) ? $currentCategory->name : 'Danh Mục Sản Phẩm')
 
 @section('content')
 <div class="bg-gray-50 min-h-screen">
@@ -12,16 +12,18 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
             </svg>
             <span class="text-gray-900 font-medium">
-                {{ isset($category) ? $category->name : 'Danh Mục Sản Phẩm' }}
+                {{ isset($currentCategory) ? $currentCategory->name : 'Danh Mục Sản Phẩm' }}
             </span>
         </nav>
 
         {{-- Page Title --}}
         <div class="mb-6">
             <h1 class="text-2xl font-bold text-gray-900 mb-2">
-                {{ isset($category) ? $category->name : 'Danh Mục Sản Phẩm' }}
+                {{ isset($currentCategory) ? $currentCategory->name : 'Danh Mục Sản Phẩm' }}
             </h1>
-            <p class="text-gray-600">{{ $products->total() }} sản phẩm</p>
+            <p class="text-gray-600" data-product-count>
+                Tìm thấy <span class="font-semibold">{{ $products->total() }}</span> sản phẩm
+            </p>
         </div>
 
         <div class="grid grid-cols-12 gap-6">
@@ -51,19 +53,19 @@
                             
                             // Group categories by main type
                             $mainCategories = [
-                                'CPU' => ['cpu-processor'],
-                                'VGA' => ['vga-card-man-hinh'],
-                                'RAM' => ['ram-bo-nho'],
-                                'SSD' => ['ssd-o-cung'],
-                                'Mainboard' => ['mainboard-mainboard'],
-                                'Case' => ['case-vo-may'],
-                                'PSU' => ['psu-nguon'],
-                                'Cooler' => ['fan-cooler-quat-tan-nhiet'],
-                                'Monitor' => ['monitor-man-hinh'],
+                                'CPU' => ['cpu'],
+                                'VGA' => ['vga'],
+                                'RAM' => ['ram'],
+                                'SSD' => ['ssd'],
+                                'Mainboard' => ['mainboard'],
+                                'HDD' => ['hdd'],
+                                'Case' => ['case'],
+                                'PSU' => ['psu'],
+                                'Monitor' => ['monitor'],
                             ];
                         @endphp
 
-                        {{-- Main Categories (No duplicates) --}}
+                        {{-- Main Categories --}}
                         <div class="mb-6">
                             <h3 class="font-semibold text-gray-900 mb-3">Danh Mục</h3>
                             <div class="space-y-2">
@@ -86,245 +88,125 @@
                             </div>
                         </div>
 
-                        {{-- Dynamic Filters Based on Category --}}
-                        @if($currentCategory && in_array($currentCategory->slug, ['cpu-processor']))
-                            {{-- CPU Filters --}}
-                            <div class="mb-6">
-                                <h3 class="font-semibold text-gray-900 mb-3">Hãng sản xuất</h3>
-                                <div class="space-y-2">
-                                    <label class="flex items-center hover:bg-gray-50 p-2 rounded cursor-pointer">
-                                        <input type="checkbox" name="brand[]" value="Intel" class="w-4 h-4 text-blue-600">
-                                        <span class="ml-2 text-sm">Intel</span>
-                                    </label>
-                                    <label class="flex items-center hover:bg-gray-50 p-2 rounded cursor-pointer">
-                                        <input type="checkbox" name="brand[]" value="AMD" class="w-4 h-4 text-blue-600">
-                                        <span class="ml-2 text-sm">AMD</span>
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="mb-6">
-                                <h3 class="font-semibold text-gray-900 mb-3">Socket</h3>
-                                <div class="space-y-2">
-                                    <label class="flex items-center hover:bg-gray-50 p-2 rounded cursor-pointer">
-                                        <input type="checkbox" name="socket[]" value="LGA1700" class="w-4 h-4 text-blue-600">
-                                        <span class="ml-2 text-sm">LGA 1700</span>
-                                    </label>
-                                    <label class="flex items-center hover:bg-gray-50 p-2 rounded cursor-pointer">
-                                        <input type="checkbox" name="socket[]" value="AM5" class="w-4 h-4 text-blue-600">
-                                        <span class="ml-2 text-sm">AM5</span>
-                                    </label>
-                                    <label class="flex items-center hover:bg-gray-50 p-2 rounded cursor-pointer">
-                                        <input type="checkbox" name="socket[]" value="AM4" class="w-4 h-4 text-blue-600">
-                                        <span class="ml-2 text-sm">AM4</span>
-                                    </label>
-                                </div>
-                            </div>
-                        @elseif($currentCategory && in_array($currentCategory->slug, ['vga-card-man-hinh']))
-                            {{-- VGA Filters --}}
-                            <div class="mb-6">
-                                <h3 class="font-semibold text-gray-900 mb-3">Hãng sản xuất</h3>
-                                <div class="space-y-2">
-                                    <label class="flex items-center hover:bg-gray-50 p-2 rounded cursor-pointer">
-                                        <input type="checkbox" name="brand[]" value="ASUS" class="w-4 h-4 text-blue-600">
-                                        <span class="ml-2 text-sm">ASUS</span>
-                                    </label>
-                                    <label class="flex items-center hover:bg-gray-50 p-2 rounded cursor-pointer">
-                                        <input type="checkbox" name="brand[]" value="MSI" class="w-4 h-4 text-blue-600">
-                                        <span class="ml-2 text-sm">MSI</span>
-                                    </label>
-                                    <label class="flex items-center hover:bg-gray-50 p-2 rounded cursor-pointer">
-                                        <input type="checkbox" name="brand[]" value="Gigabyte" class="w-4 h-4 text-blue-600">
-                                        <span class="ml-2 text-sm">Gigabyte</span>
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="mb-6">
-                                <h3 class="font-semibold text-gray-900 mb-3">Series GPU</h3>
-                                <div class="space-y-2">
-                                    <label class="flex items-center hover:bg-gray-50 p-2 rounded cursor-pointer">
-                                        <input type="checkbox" name="series[]" value="RTX 5090" class="w-4 h-4 text-blue-600">
-                                        <span class="ml-2 text-sm">RTX 5090</span>
-                                    </label>
-                                    <label class="flex items-center hover:bg-gray-50 p-2 rounded cursor-pointer">
-                                        <input type="checkbox" name="series[]" value="RTX 5080" class="w-4 h-4 text-blue-600">
-                                        <span class="ml-2 text-sm">RTX 5080</span>
-                                    </label>
-                                    <label class="flex items-center hover:bg-gray-50 p-2 rounded cursor-pointer">
-                                        <input type="checkbox" name="series[]" value="RTX 5070" class="w-4 h-4 text-blue-600">
-                                        <span class="ml-2 text-sm">RTX 5070</span>
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="mb-6">
-                                <h3 class="font-semibold text-gray-900 mb-3">Dung lượng VRAM</h3>
-                                <div class="space-y-2">
-                                    <label class="flex items-center hover:bg-gray-50 p-2 rounded cursor-pointer">
-                                        <input type="checkbox" name="vram[]" value="8GB" class="w-4 h-4 text-blue-600">
-                                        <span class="ml-2 text-sm">8GB</span>
-                                    </label>
-                                    <label class="flex items-center hover:bg-gray-50 p-2 rounded cursor-pointer">
-                                        <input type="checkbox" name="vram[]" value="12GB" class="w-4 h-4 text-blue-600">
-                                        <span class="ml-2 text-sm">12GB</span>
-                                    </label>
-                                    <label class="flex items-center hover:bg-gray-50 p-2 rounded cursor-pointer">
-                                        <input type="checkbox" name="vram[]" value="16GB" class="w-4 h-4 text-blue-600">
-                                        <span class="ml-2 text-sm">16GB</span>
-                                    </label>
-                                    <label class="flex items-center hover:bg-gray-50 p-2 rounded cursor-pointer">
-                                        <input type="checkbox" name="vram[]" value="24GB" class="w-4 h-4 text-blue-600">
-                                        <span class="ml-2 text-sm">24GB</span>
-                                    </label>
-                                </div>
-                            </div>
-                        @elseif($currentCategory && in_array($currentCategory->slug, ['monitor-man-hinh']))
-                            {{-- Monitor Filters --}}
-                            <div class="mb-6">
-                                <h3 class="font-semibold text-gray-900 mb-3">Hãng sản xuất</h3>
-                                <div class="space-y-2">
-                                    <label class="flex items-center hover:bg-gray-50 p-2 rounded cursor-pointer">
-                                        <input type="checkbox" name="brand[]" value="LG" class="w-4 h-4 text-blue-600">
-                                        <span class="ml-2 text-sm">LG</span>
-                                    </label>
-                                    <label class="flex items-center hover:bg-gray-50 p-2 rounded cursor-pointer">
-                                        <input type="checkbox" name="brand[]" value="Samsung" class="w-4 h-4 text-blue-600">
-                                        <span class="ml-2 text-sm">Samsung</span>
-                                    </label>
-                                    <label class="flex items-center hover:bg-gray-50 p-2 rounded cursor-pointer">
-                                        <input type="checkbox" name="brand[]" value="ASUS" class="w-4 h-4 text-blue-600">
-                                        <span class="ml-2 text-sm">ASUS</span>
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="mb-6">
-                                <h3 class="font-semibold text-gray-900 mb-3">Kích thước</h3>
-                                <div class="space-y-2">
-                                    <label class="flex items-center hover:bg-gray-50 p-2 rounded cursor-pointer">
-                                        <input type="checkbox" name="size[]" value='24"' class="w-4 h-4 text-blue-600">
-                                        <span class="ml-2 text-sm">24"</span>
-                                    </label>
-                                    <label class="flex items-center hover:bg-gray-50 p-2 rounded cursor-pointer">
-                                        <input type="checkbox" name="size[]" value='27"' class="w-4 h-4 text-blue-600">
-                                        <span class="ml-2 text-sm">27"</span>
-                                    </label>
-                                    <label class="flex items-center hover:bg-gray-50 p-2 rounded cursor-pointer">
-                                        <input type="checkbox" name="size[]" value='32"' class="w-4 h-4 text-blue-600">
-                                        <span class="ml-2 text-sm">32"</span>
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="mb-6">
-                                <h3 class="font-semibold text-gray-900 mb-3">Độ phân giải</h3>
-                                <div class="space-y-2">
-                                    <label class="flex items-center hover:bg-gray-50 p-2 rounded cursor-pointer">
-                                        <input type="checkbox" name="resolution[]" value="Full HD" class="w-4 h-4 text-blue-600">
-                                        <span class="ml-2 text-sm">Full HD 1080p</span>
-                                    </label>
-                                    <label class="flex items-center hover:bg-gray-50 p-2 rounded cursor-pointer">
-                                        <input type="checkbox" name="resolution[]" value="2K" class="w-4 h-4 text-blue-600">
-                                        <span class="ml-2 text-sm">2K 1440p</span>
-                                    </label>
-                                    <label class="flex items-center hover:bg-gray-50 p-2 rounded cursor-pointer">
-                                        <input type="checkbox" name="resolution[]" value="4K" class="w-4 h-4 text-blue-600">
-                                        <span class="ml-2 text-sm">4K UHD</span>
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="mb-6">
-                                <h3 class="font-semibold text-gray-900 mb-3">Tần số quét</h3>
-                                <div class="space-y-2">
-                                    <label class="flex items-center hover:bg-gray-50 p-2 rounded cursor-pointer">
-                                        <input type="checkbox" name="refresh[]" value="60Hz" class="w-4 h-4 text-blue-600">
-                                        <span class="ml-2 text-sm">60Hz</span>
-                                    </label>
-                                    <label class="flex items-center hover:bg-gray-50 p-2 rounded cursor-pointer">
-                                        <input type="checkbox" name="refresh[]" value="144Hz" class="w-4 h-4 text-blue-600">
-                                        <span class="ml-2 text-sm">144Hz</span>
-                                    </label>
-                                    <label class="flex items-center hover:bg-gray-50 p-2 rounded cursor-pointer">
-                                        <input type="checkbox" name="refresh[]" value="240Hz" class="w-4 h-4 text-blue-600">
-                                        <span class="ml-2 text-sm">240Hz</span>
-                                    </label>
-                                </div>
-                            </div>
-                        @elseif($currentCategory && in_array($currentCategory->slug, ['ram-bo-nho']))
-                            {{-- RAM Filters --}}
-                            <div class="mb-6">
-                                <h3 class="font-semibold text-gray-900 mb-3">Kiểu bộ nhớ</h3>
-                                <div class="space-y-2">
-                                    <label class="flex items-center hover:bg-gray-50 p-2 rounded cursor-pointer">
-                                        <input type="checkbox" name="type[]" value="DDR4" class="w-4 h-4 text-blue-600">
-                                        <span class="ml-2 text-sm">DDR4</span>
-                                    </label>
-                                    <label class="flex items-center hover:bg-gray-50 p-2 rounded cursor-pointer">
-                                        <input type="checkbox" name="type[]" value="DDR5" class="w-4 h-4 text-blue-600">
-                                        <span class="ml-2 text-sm">DDR5</span>
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="mb-6">
-                                <h3 class="font-semibold text-gray-900 mb-3">Dung lượng</h3>
-                                <div class="space-y-2">
-                                    <label class="flex items-center hover:bg-gray-50 p-2 rounded cursor-pointer">
-                                        <input type="checkbox" name="capacity[]" value="8GB" class="w-4 h-4 text-blue-600">
-                                        <span class="ml-2 text-sm">8GB</span>
-                                    </label>
-                                    <label class="flex items-center hover:bg-gray-50 p-2 rounded cursor-pointer">
-                                        <input type="checkbox" name="capacity[]" value="16GB" class="w-4 h-4 text-blue-600">
-                                        <span class="ml-2 text-sm">16GB</span>
-                                    </label>
-                                    <label class="flex items-center hover:bg-gray-50 p-2 rounded cursor-pointer">
-                                        <input type="checkbox" name="capacity[]" value="32GB" class="w-4 h-4 text-blue-600">
-                                        <span class="ml-2 text-sm">32GB</span>
-                                    </label>
+                        {{-- Subcategories (Danh mục con) --}}
+                        @if(!empty($subcategories) && count($subcategories) > 0)
+                            <div class="mb-6 pb-6 border-b border-gray-200">
+                                <h3 class="font-semibold text-gray-900 mb-3">Danh mục con</h3>
+                                <div class="space-y-1">
+                                    @foreach($subcategories as $sub)
+                                        <a href="{{ route('products.index', array_merge(request()->except('category'), ['category' => $sub['slug']])) }}" 
+                                           class="flex items-center justify-between px-2 py-1.5 rounded hover:bg-gray-50 {{ request('category') == $sub['slug'] ? 'bg-gray-100 font-medium' : '' }}">
+                                            <span class="text-sm text-gray-700 flex items-center">
+                                                <svg class="w-3 h-3 mr-1 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                                </svg>
+                                                {{ $sub['name'] }}
+                                            </span>
+                                            <span class="text-xs text-gray-500 font-medium">{{ $sub['count'] }}</span>
+                                        </a>
+                                    @endforeach
                                 </div>
                             </div>
                         @endif
 
+                        {{-- Dynamic Filters Based on Spec Definitions with Product Counts --}}
+                        @if(!empty($filterOptions) && count($filterOptions) > 0)
+                            @foreach($filterOptions as $code => $option)
+                                <div class="mb-6 pb-6 border-b border-gray-200">
+                                    <h3 class="font-semibold text-gray-900 mb-3">
+                                        {{ $option['name'] }}
+                                        @if($option['unit'])
+                                            <span class="text-xs text-gray-500 font-normal">({{ $option['unit'] }})</span>
+                                        @endif
+                                    </h3>
+                                    <div class="space-y-1 max-h-60 overflow-y-auto">
+                                        @foreach($option['values'] as $item)
+                                            @if(!empty(trim($item['value'])))
+                                                <label class="flex items-center justify-between px-2 py-1.5 rounded hover:bg-gray-50 cursor-pointer">
+                                                    <div class="flex items-center flex-1">
+                                                        <input type="checkbox" 
+                                                               name="{{ $code }}[]" 
+                                                               value="{{ $item['value'] }}"
+                                                               {{ in_array($item['value'], (array)request($code, [])) ? 'checked' : '' }}
+                                                               class="w-4 h-4 text-blue-600">
+                                                        <span class="ml-2 text-sm text-gray-700">{{ $item['value'] }}</span>
+                                                    </div>
+                                                    <span class="text-xs text-gray-500 font-medium ml-2">{{ $item['count'] }}</span>
+                                                </label>
+                                            @endif
+                                        @endforeach
+                                    </div>
+                                </div>
+                            @endforeach
+                        @endif
+
                         {{-- Price Range (Common for all) --}}
-                        <div class="mb-6">
+                        <div class="mb-6 pb-6 border-b border-gray-200">
                             <h3 class="font-semibold text-gray-900 mb-3">Khoảng Giá (VNĐ)</h3>
-                            <div class="space-y-2">
-                                <label class="flex items-center hover:bg-gray-50 p-2 rounded cursor-pointer">
+                            
+                            {{-- Price inputs --}}
+                            <div class="grid grid-cols-2 gap-2 mb-3">
+                                <div>
+                                    <label class="text-xs text-gray-600 mb-1 block">Từ</label>
+                                    <input type="number" 
+                                           name="min_price" 
+                                           value="{{ request('min_price') }}"
+                                           placeholder="0"
+                                           class="w-full px-2 py-1.5 text-sm border border-gray-300 rounded focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
+                                </div>
+                                <div>
+                                    <label class="text-xs text-gray-600 mb-1 block">Đến</label>
+                                    <input type="number" 
+                                           name="max_price" 
+                                           value="{{ request('max_price') }}"
+                                           placeholder="100,000,000"
+                                           class="w-full px-2 py-1.5 text-sm border border-gray-300 rounded focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
+                                </div>
+                            </div>
+
+                            {{-- Quick price range options --}}
+                            <div class="space-y-1">
+                                <label class="flex items-center px-2 py-1.5 rounded hover:bg-gray-50 cursor-pointer">
                                     <input type="radio" name="price_range" value="" 
-                                        {{ !request('price_range') ? 'checked' : '' }}
-                                        onchange="this.form.submit()"
+                                        {{ !request('price_range') && !request('min_price') && !request('max_price') ? 'checked' : '' }}
+                                        onchange="document.querySelector('input[name=min_price]').value=''; document.querySelector('input[name=max_price]').value=''; this.form.submit();"
                                         class="w-4 h-4 text-blue-600">
-                                    <span class="ml-2 text-sm">Tất cả</span>
+                                    <span class="ml-2 text-sm text-gray-700">Tất cả</span>
                                 </label>
-                                <label class="flex items-center hover:bg-gray-50 p-2 rounded cursor-pointer">
+                                <label class="flex items-center px-2 py-1.5 rounded hover:bg-gray-50 cursor-pointer">
                                     <input type="radio" name="price_range" value="0-3000000" 
                                         {{ request('price_range') == '0-3000000' ? 'checked' : '' }}
                                         onchange="this.form.submit()"
                                         class="w-4 h-4 text-blue-600">
-                                    <span class="ml-2 text-sm">Dưới 3 triệu</span>
+                                    <span class="ml-2 text-sm text-gray-700">Dưới 3 triệu</span>
                                 </label>
-                                <label class="flex items-center hover:bg-gray-50 p-2 rounded cursor-pointer">
+                                <label class="flex items-center px-2 py-1.5 rounded hover:bg-gray-50 cursor-pointer">
                                     <input type="radio" name="price_range" value="3000000-8000000" 
                                         {{ request('price_range') == '3000000-8000000' ? 'checked' : '' }}
                                         onchange="this.form.submit()"
                                         class="w-4 h-4 text-blue-600">
-                                    <span class="ml-2 text-sm">3 triệu - 8 triệu</span>
+                                    <span class="ml-2 text-sm text-gray-700">3 - 8 triệu</span>
                                 </label>
-                                <label class="flex items-center hover:bg-gray-50 p-2 rounded cursor-pointer">
+                                <label class="flex items-center px-2 py-1.5 rounded hover:bg-gray-50 cursor-pointer">
                                     <input type="radio" name="price_range" value="8000000-20000000" 
                                         {{ request('price_range') == '8000000-20000000' ? 'checked' : '' }}
                                         onchange="this.form.submit()"
                                         class="w-4 h-4 text-blue-600">
-                                    <span class="ml-2 text-sm">8 triệu - 20 triệu</span>
+                                    <span class="ml-2 text-sm text-gray-700">8 - 20 triệu</span>
                                 </label>
-                                <label class="flex items-center hover:bg-gray-50 p-2 rounded cursor-pointer">
-                                    <input type="radio" name="price_range" value="20000000-999999999" 
-                                        {{ request('price_range') == '20000000-999999999' ? 'checked' : '' }}
+                                <label class="flex items-center px-2 py-1.5 rounded hover:bg-gray-50 cursor-pointer">
+                                    <input type="radio" name="price_range" value="20000000-50000000" 
+                                        {{ request('price_range') == '20000000-50000000' ? 'checked' : '' }}
                                         onchange="this.form.submit()"
                                         class="w-4 h-4 text-blue-600">
-                                    <span class="ml-2 text-sm">Trên 20 triệu</span>
+                                    <span class="ml-2 text-sm text-gray-700">20 - 50 triệu</span>
+                                </label>
+                                <label class="flex items-center px-2 py-1.5 rounded hover:bg-gray-50 cursor-pointer">
+                                    <input type="radio" name="price_range" value="50000000-999999999" 
+                                        {{ request('price_range') == '50000000-999999999' ? 'checked' : '' }}
+                                        onchange="this.form.submit()"
+                                        class="w-4 h-4 text-blue-600">
+                                    <span class="ml-2 text-sm text-gray-700">Trên 50 triệu</span>
                                 </label>
                             </div>
                         </div>
@@ -349,15 +231,15 @@
                 <div class="bg-white rounded-lg shadow-sm p-4 mb-6 flex items-center justify-between">
                     <span class="text-gray-700 font-medium">Sắp xếp theo:</span>
                     <div class="flex gap-2">
-                        <a href="{{ route('products.index', array_merge(request()->except('sort'), ['sort' => 'latest'])) }}" 
+                        <a href="{{ route('products.index', array_merge(request()->except('sort'), ['sort' => 'latest'])) }}"
                            class="px-4 py-2 rounded-lg {{ request('sort', 'latest') == 'latest' ? 'bg-black text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200' }}">
                             Mới nhất
                         </a>
-                        <a href="{{ route('products.index', array_merge(request()->except('sort'), ['sort' => 'price_asc'])) }}" 
+                        <a href="{{ route('products.index', array_merge(request()->except('sort'), ['sort' => 'price_asc'])) }}"
                            class="px-4 py-2 rounded-lg {{ request('sort') == 'price_asc' ? 'bg-black text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200' }}">
                             Giá tăng dần
                         </a>
-                        <a href="{{ route('products.index', array_merge(request()->except('sort'), ['sort' => 'price_desc'])) }}" 
+                        <a href="{{ route('products.index', array_merge(request()->except('sort'), ['sort' => 'price_desc'])) }}"
                            class="px-4 py-2 rounded-lg {{ request('sort') == 'price_desc' ? 'bg-black text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200' }}">
                             Giá giảm dần
                         </a>
@@ -365,6 +247,7 @@
                 </div>
 
                 {{-- Product Grid --}}
+                <div data-product-grid>
                 @if($products->count() > 0)
                     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                         @foreach($products as $product)
@@ -490,10 +373,12 @@
                     </div>
 
                     {{-- Pagination --}}
-                    <div class="mt-8">
+                    <div class="mt-8" data-pagination>
                         {{ $products->links() }}
                     </div>
+                </div>
                 @else
+                <div>
                     <div class="bg-white rounded-lg shadow-sm p-12 text-center">
                         <svg class="w-24 h-24 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path>
@@ -504,6 +389,7 @@
                             Xem tất cả sản phẩm
                         </a>
                     </div>
+                </div>
                 @endif
             </main>
         </div>

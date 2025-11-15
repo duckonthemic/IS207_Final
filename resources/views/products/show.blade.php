@@ -148,10 +148,12 @@
                         </form>
 
                         {{-- Build PC Button --}}
-                        <button class="w-full mt-4 border-2 border-purple-600 text-purple-600 hover:bg-purple-50 font-bold py-2 rounded-lg transition flex items-center justify-center gap-2">
-                            <span>🛠️</span>
-                            Build PC với sản phẩm này
-                        </button>
+                        <a href="{{ route('build-pc') }}" class="w-full mt-4 border-2 border-black text-black hover:bg-gray-100 font-bold py-3 rounded-lg transition flex items-center justify-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
+                            </svg>
+                            <span>🔧 Build PC với sản phẩm này</span>
+                        </a>
                     @else
                         <div class="bg-red-100 text-red-800 p-4 rounded text-center">
                             Hết hàng
@@ -162,30 +164,43 @@
                 {{-- Seller Info --}}
                 <div class="bg-white rounded-lg p-6 border border-gray-200">
                     <div class="flex items-center gap-3 mb-4">
-                        <div class="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center text-white font-bold">
+                        <div class="w-14 h-14 bg-black rounded-lg flex items-center justify-center text-white font-bold text-xl">
                             U
                         </div>
                         <div>
-                            <div class="font-semibold text-gray-900">UITech Store</div>
-                            <div class="text-sm text-gray-500">Gửi 1 dình kèm</div>
+                            <div class="font-bold text-gray-900 text-lg">UITech Store</div>
+                            <div class="text-sm text-gray-500 flex items-center gap-1">
+                                <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="text-green-600 font-medium">Đối tác chính thức</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="space-y-2 text-sm">
-                        <div class="flex justify-between text-gray-700">
+                    <div class="space-y-3 text-sm">
+                        <div class="flex items-start gap-2 text-gray-700">
+                            <svg class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
                             <span>Hỗ trợ trả góp 0%</span>
-                            <span class="text-green-600">✓</span>
                         </div>
-                        <div class="flex justify-between text-gray-700">
+                        <div class="flex items-start gap-2 text-gray-700">
+                            <svg class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
                             <span>Hoàn tiền 200% nếu có hàng giả</span>
-                            <span class="text-green-600">✓</span>
                         </div>
-                        <div class="flex justify-between text-gray-700">
+                        <div class="flex items-start gap-2 text-gray-700">
+                            <svg class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
                             <span>Giao hàng miễn phí toàn quốc</span>
-                            <span class="text-green-600">✓</span>
                         </div>
-                        <div class="flex justify-between text-gray-700">
+                        <div class="flex items-start gap-2 text-gray-700">
+                            <svg class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
                             <span>Hỗ trợ kĩ thuật online 24/7</span>
-                            <span class="text-green-600">✓</span>
                         </div>
                     </div>
                 </div>
@@ -196,76 +211,74 @@
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-12">
             {{-- Specs Section --}}
             <div class="lg:col-span-2">
-                <div class="bg-white rounded-lg p-6 border border-gray-200 mb-8">
-                    <h2 class="text-xl font-bold text-gray-900 mb-6 border-b pb-3">THÔNG SỐ KỸ THUẬT</h2>
+                <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                    <div class="bg-gray-900 px-6 py-4">
+                        <h2 class="text-lg font-bold text-white">THÔNG SỐ KỸ THUẬT</h2>
+                    </div>
                     
-                    @php
-                        // Parse specs from description or attributes
-                        $specs = [];
-                        
-                        // Try to parse description text for specs
-                        if ($product->description) {
-                            $desc = $product->description;
-                            
-                            // Common patterns for PC components
-                            if (preg_match('/(\d+)\s*(cores?|nhân)/i', $desc, $m)) {
-                                $specs['Số nhân'] = $m[1] . ' cores';
-                            }
-                            if (preg_match('/(\d+)\s*(threads?|luồng)/i', $desc, $m)) {
-                                $specs['Số luồng'] = $m[1] . ' threads';
-                            }
-                            if (preg_match('/(\d+\.?\d*)\s*GHz/i', $desc, $m)) {
-                                $specs['Xung nhịp'] = $m[1] . ' GHz';
-                            }
-                            if (preg_match('/(\d+)\s*GB\s*(DDR\d+|GDDR\d+)?/i', $desc, $m)) {
-                                $specs['Bộ nhớ'] = $m[1] . ' GB' . (isset($m[2]) ? ' ' . $m[2] : '');
-                            }
-                            if (preg_match('/(\d+)\s*MB\s*Cache/i', $desc, $m)) {
-                                $specs['Cache'] = $m[1] . ' MB';
-                            }
-                            if (preg_match('/PCIe?\s*(\d+\.?\d*)/i', $desc, $m)) {
-                                $specs['Chuẩn kết nối'] = 'PCIe ' . $m[1];
-                            }
-                            if (preg_match('/(\d+)W\s*TDP/i', $desc, $m)) {
-                                $specs['TDP'] = $m[1] . 'W';
-                            }
-                            if (preg_match('/Socket\s*([A-Z0-9]+)/i', $desc, $m)) {
-                                $specs['Socket'] = $m[1];
-                            }
-                        }
-                        
-                        // Add category and brand
-                        $specs['Danh mục'] = $product->category->name;
-                        if ($product->brand_id) {
-                            $specs['Thương hiệu'] = 'Brand #' . $product->brand_id;
-                        }
-                        
-                        // If no specs found, show generic info
-                        if (count($specs) <= 2) {
-                            $specs = [
-                                'Danh mục' => $product->category->name,
-                                'SKU' => $product->sku,
-                                'Tình trạng' => $product->is_active ? 'Còn hàng' : 'Hết hàng',
-                                'Tồn kho' => $product->stock . ' sản phẩm',
-                                'Giá gốc' => number_format($product->price) . '₫',
-                            ];
-                            if ($product->sale_price) {
-                                $specs['Giá khuyến mãi'] = number_format($product->sale_price) . '₫';
-                            }
-                        }
-                    @endphp
-                    
-                    @if(count($specs) > 0)
-                        <div class="grid grid-cols-2 gap-4">
-                            @foreach($specs as $label => $value)
-                                <div class="border-b pb-3">
-                                    <div class="text-sm text-gray-600">{{ $label }}</div>
-                                    <div class="font-semibold text-gray-900">{{ $value }}</div>
+                    @if($product->specs->count() > 0)
+                        <div class="divide-y divide-gray-200">
+                            @foreach($product->specs as $spec)
+                                <div class="grid grid-cols-2 px-6 py-3 hover:bg-gray-50 transition-colors">
+                                    <div class="text-sm font-medium text-gray-700">
+                                        {{ $spec->specDefinition->name }}
+                                    </div>
+                                    <div class="text-sm text-gray-900">
+                                        @if($spec->specDefinition->code == 'gpu_output' || $spec->specDefinition->code == 'gpu_accessories')
+                                            <div class="whitespace-pre-line">{{ $spec->value }}</div>
+                                        @else
+                                            {{ $spec->value }}{{ $spec->specDefinition->unit ? ' ' . $spec->specDefinition->unit : '' }}
+                                        @endif
+                                    </div>
                                 </div>
                             @endforeach
                         </div>
+                        
+                        {{-- Additional Product Info --}}
+                        <div class="bg-gray-50 px-6 py-4 border-t border-gray-200">
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                                <div>
+                                    <span class="text-gray-600 block mb-1">Danh mục</span>
+                                    <span class="font-medium text-gray-900">{{ $product->category->name }}</span>
+                                </div>
+                                <div>
+                                    <span class="text-gray-600 block mb-1">SKU</span>
+                                    <span class="font-mono font-medium text-gray-900">{{ $product->sku }}</span>
+                                </div>
+                                <div>
+                                    <span class="text-gray-600 block mb-1">Tình trạng</span>
+                                    <span class="font-medium {{ $product->stock > 0 ? 'text-green-600' : 'text-red-600' }}">
+                                        {{ $product->stock > 0 ? 'Còn hàng' : 'Hết hàng' }}
+                                    </span>
+                                </div>
+                                <div>
+                                    <span class="text-gray-600 block mb-1">Tồn kho</span>
+                                    <span class="font-medium text-gray-900">{{ $product->stock }} sản phẩm</span>
+                                </div>
+                            </div>
+                        </div>
                     @else
-                        <p class="text-gray-500 text-center py-4">Thông số kỹ thuật đang được cập nhật</p>
+                        {{-- Fallback: Show basic specs if no product_specs --}}
+                        <div class="divide-y divide-gray-200">
+                            <div class="grid grid-cols-2 px-6 py-3 hover:bg-gray-50">
+                                <div class="text-sm font-medium text-gray-700">Danh mục</div>
+                                <div class="text-sm text-gray-900">{{ $product->category->name }}</div>
+                            </div>
+                            <div class="grid grid-cols-2 px-6 py-3 hover:bg-gray-50">
+                                <div class="text-sm font-medium text-gray-700">SKU</div>
+                                <div class="text-sm text-gray-900 font-mono">{{ $product->sku }}</div>
+                            </div>
+                            <div class="grid grid-cols-2 px-6 py-3 hover:bg-gray-50">
+                                <div class="text-sm font-medium text-gray-700">Tình trạng</div>
+                                <div class="text-sm font-medium {{ $product->stock > 0 ? 'text-green-600' : 'text-red-600' }}">
+                                    {{ $product->stock > 0 ? 'Còn hàng' : 'Hết hàng' }}
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 px-6 py-3 hover:bg-gray-50">
+                                <div class="text-sm font-medium text-gray-700">Tồn kho</div>
+                                <div class="text-sm text-gray-900">{{ $product->stock }} sản phẩm</div>
+                            </div>
+                        </div>
                     @endif
                 </div>
 

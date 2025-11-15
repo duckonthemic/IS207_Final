@@ -77,6 +77,10 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     
     // Products
     Route::resource('products', \App\Http\Controllers\Admin\ProductController::class);
+    Route::get('/products/specs/by-component-type', [\App\Http\Controllers\Admin\ProductController::class, 'getSpecDefinitions'])->name('products.specs.by-component-type');
+    
+    // Spec Definitions
+    Route::resource('spec-definitions', \App\Http\Controllers\Admin\SpecDefinitionController::class);
     
     // Orders
     Route::get('/orders', [\App\Http\Controllers\Admin\OrderController::class, 'index'])->name('orders.index');

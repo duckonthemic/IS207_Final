@@ -176,26 +176,7 @@ class PcGamingController extends Controller
      */
     public function buildPc()
     {
-        $categories = Category::whereIn('name', [
-            'CPU - Processor',
-            'VGA - Card màn hình', 
-            'RAM - Bộ nhớ',
-            'SSD - Ổ cứng',
-            'Mainboard - Mainboard',
-            'PSU - Nguồn',
-            'Case - Vỏ máy',
-            'Fan & Cooler - Quạt tản nhiệt'
-        ])->get();
-
-        $products = [];
-        foreach ($categories as $category) {
-            $products[$category->slug] = Product::where('category_id', $category->id)
-                ->where('is_active', true)
-                ->orderBy('price')
-                ->get();
-        }
-
-        return view('pc-gaming.build', compact('categories', 'products'));
+        return view('build-pc');
     }
 
     /**
