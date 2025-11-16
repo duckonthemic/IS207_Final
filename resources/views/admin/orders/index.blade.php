@@ -15,13 +15,13 @@
                 <!-- Search -->
                 <div>
                     <label class="block text-cyber-accent text-sm font-medium mb-2">Search</label>
-                    <input type="text" name="search" value="{{ request('search') }}" placeholder="Search by order code or customer..." class="w-full bg-cyber-dark border border-cyber-accent border-opacity-30 text-white placeholder-cyber-muted rounded-lg px-4 py-2 focus:border-cyber-accent focus:outline-none transition">
+                    <input type="text" name="search" value="{{ request('search') }}" placeholder="Search by order code or customer..." class="w-full bg-cyber-dark border border-cyber-accent border-opacity-30 text-cyber-accent placeholder-cyber-muted rounded-lg px-4 py-2 focus:border-cyber-accent focus:outline-none transition">
                 </div>
 
                 <!-- Order Status Filter -->
                 <div>
                     <label class="block text-cyber-accent text-sm font-medium mb-2">Order Status</label>
-                    <select name="status" class="w-full bg-cyber-dark border border-cyber-accent border-opacity-30 text-white rounded-lg px-4 py-2 focus:border-cyber-accent focus:outline-none transition">
+                    <select name="status" class="w-full bg-cyber-dark border border-cyber-accent border-opacity-30 text-cyber-accent rounded-lg px-4 py-2 focus:border-cyber-accent focus:outline-none transition">
                         <option value="">All Status</option>
                         <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Pending</option>
                         <option value="processing" {{ request('status') == 'processing' ? 'selected' : '' }}>Processing</option>
@@ -34,7 +34,7 @@
                 <!-- Payment Status Filter -->
                 <div>
                     <label class="block text-cyber-accent text-sm font-medium mb-2">Payment Status</label>
-                    <select name="payment_status" class="w-full bg-cyber-dark border border-cyber-accent border-opacity-30 text-white rounded-lg px-4 py-2 focus:border-cyber-accent focus:outline-none transition">
+                    <select name="payment_status" class="w-full bg-cyber-dark border border-cyber-accent border-opacity-30 text-cyber-accent rounded-lg px-4 py-2 focus:border-cyber-accent focus:outline-none transition">
                         <option value="">All Payment Status</option>
                         <option value="pending" {{ request('payment_status') == 'pending' ? 'selected' : '' }}>Pending</option>
                         <option value="paid" {{ request('payment_status') == 'paid' ? 'selected' : '' }}>Paid</option>
@@ -79,12 +79,12 @@
                         </td>
                         <td class="px-6 py-4">
                             <div>
-                                <p class="text-white font-medium">{{ $order->user->name }}</p>
+                                <p class="text-cyber-accent font-medium">{{ $order->user->name }}</p>
                                 <p class="text-cyber-muted text-sm">{{ $order->user->email }}</p>
                             </div>
                         </td>
                         <td class="px-6 py-4 text-right">
-                            <span class="text-white font-semibold">{{ number_format($order->total_amount, 0, ',', '.') }} VNĐ</span>
+                            <span class="text-cyber-accent font-semibold">{{ number_format($order->total_amount, 0, ',', '.') }} VNĐ</span>
                         </td>
                         <td class="px-6 py-4 text-center">
                             @php

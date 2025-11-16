@@ -23,13 +23,13 @@
                 <!-- Search -->
                 <div>
                     <label class="block text-cyber-accent text-sm font-medium mb-2">Search</label>
-                    <input type="text" name="search" value="{{ request('search') }}" placeholder="Search by name or SKU..." class="w-full bg-cyber-dark border border-cyber-accent border-opacity-30 text-white placeholder-cyber-muted rounded-lg px-4 py-2 focus:border-cyber-accent focus:outline-none transition">
+                    <input type="text" name="search" value="{{ request('search') }}" placeholder="Search by name or SKU..." class="w-full bg-cyber-dark border border-cyber-accent border-opacity-30 text-cyber-accent placeholder-cyber-muted rounded-lg px-4 py-2 focus:border-cyber-accent focus:outline-none transition">
                 </div>
 
                 <!-- Category Filter -->
                 <div>
                     <label class="block text-cyber-accent text-sm font-medium mb-2">Category</label>
-                    <select name="category" class="w-full bg-cyber-dark border border-cyber-accent border-opacity-30 text-white rounded-lg px-4 py-2 focus:border-cyber-accent focus:outline-none transition">
+                    <select name="category" class="w-full bg-cyber-dark border border-cyber-accent border-opacity-30 text-cyber-accent rounded-lg px-4 py-2 focus:border-cyber-accent focus:outline-none transition">
                         <option value="">All Categories</option>
                         @foreach ($categories as $category)
                         <option value="{{ $category->id }}" {{ request('category') == $category->id ? 'selected' : '' }}>
@@ -42,7 +42,7 @@
                 <!-- Status Filter -->
                 <div>
                     <label class="block text-cyber-accent text-sm font-medium mb-2">Status</label>
-                    <select name="status" class="w-full bg-cyber-dark border border-cyber-accent border-opacity-30 text-white rounded-lg px-4 py-2 focus:border-cyber-accent focus:outline-none transition">
+                    <select name="status" class="w-full bg-cyber-dark border border-cyber-accent border-opacity-30 text-cyber-accent rounded-lg px-4 py-2 focus:border-cyber-accent focus:outline-none transition">
                         <option value="">All Status</option>
                         <option value="active" {{ request('status') == 'active' ? 'selected' : '' }}>Active</option>
                         <option value="inactive" {{ request('status') == 'inactive' ? 'selected' : '' }}>Inactive</option>
@@ -90,7 +90,7 @@
                                     @endif
                                 </div>
                                 <div>
-                                    <p class="text-white font-medium">{{ $product->name }}</p>
+                                    <p class="text-cyber-accent font-medium">{{ $product->name }}</p>
                                     <p class="text-cyber-muted text-sm">{{ Str::limit($product->description, 50) }}</p>
                                 </div>
                             </div>
@@ -98,14 +98,11 @@
                         <td class="px-6 py-4">
                             <span class="inline-block bg-cyber-accent bg-opacity-10 text-cyber-accent px-3 py-1 rounded text-sm font-mono">{{ $product->sku }}</span>
                         </td>
-                        <td class="px-6 py-4 text-white">{{ $product->category->name }}</td>
-                        <td class="px-6 py-4 text-right text-white font-semibold">{{ number_format($product->price, 0, ',', '.') }} VNĐ</td>
+                        <td class="px-6 py-4 text-cyber-accent">{{ $product->category->name }}</td>
+                        <td class="px-6 py-4 text-right text-cyber-accent font-semibold">{{ number_format($product->price, 0, ',', '.') }} VNĐ</td>
                         <td class="px-6 py-4 text-center">
-                            @php
-                                $totalStock = $product->inventory->sum('quantity');
-                            @endphp
-                            <span class="inline-block {{ $totalStock > 0 ? 'bg-green-900 text-green-200' : 'bg-red-900 text-cyber-error' }} px-3 py-1 rounded text-sm font-medium">
-                                {{ $totalStock }}
+                            <span class="inline-block {{ $product->stock > 0 ? 'bg-green-900 text-green-200' : 'bg-red-900 text-cyber-error' }} px-3 py-1 rounded text-sm font-medium">
+                                {{ $product->stock }}
                             </span>
                         </td>
                         <td class="px-6 py-4 text-center">

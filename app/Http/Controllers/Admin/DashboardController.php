@@ -19,7 +19,7 @@ class DashboardController extends Controller
     {
         // Total stats
         $totalOrders = Order::count();
-        $totalRevenue = Order::whereIn('status', ['completed', 'shipping', 'processing'])->sum('grand_total');
+        $totalRevenue = Order::whereIn('status', ['completed', 'shipping', 'processing'])->sum('total');
         $totalUsers = User::where('role', 'user')->count();
         $totalProducts = Product::count();
 
@@ -27,7 +27,7 @@ class DashboardController extends Controller
         $pendingOrders = Order::where('status', 'pending')->count();
         $revenueToday = Order::whereDate('created_at', today())
             ->whereIn('status', ['completed', 'shipping', 'processing'])
-            ->sum('grand_total');
+            ->sum('total');
         $newUsersToday = User::whereDate('created_at', today())->count();
         
         // Low stock products (stock <= 10)
@@ -55,7 +55,7 @@ class DashboardController extends Controller
             
             $revenue = Order::whereDate('created_at', $date)
                 ->whereIn('status', ['completed', 'shipping', 'processing'])
-                ->sum('grand_total');
+                ->sum('total');
             
             $chartData[] = $revenue;
         }

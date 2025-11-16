@@ -35,7 +35,9 @@ class ProductController extends Controller
 
         $products = $query->latest('id')->paginate($perPage);
 
-        return view('admin.products.index', compact('products'));
+        $categories = Category::orderBy('name')->get();
+
+        return view('admin.products.index', compact('products', 'categories'));
     }
 
     /**

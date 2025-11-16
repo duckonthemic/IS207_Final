@@ -14,6 +14,10 @@
             <a href="{{ route('admin.dashboard') }}" class="block px-3 py-2 rounded hover:bg-gray-100">Dashboard</a>
             <a href="{{ route('admin.products.index') }}" class="block px-3 py-2 rounded hover:bg-gray-100">Sản phẩm</a>
             {{-- Thêm: Orders, Users, Stats --}}
+            <a href="{{ route('admin.orders.index') }}" class="block px-3 py-2 rounded hover:bg-gray-100">Đơn hàng</a>
+            <a href=" " class="block px-3 py-2 rounded hover:bg-gray-100">Người dùng</a>
+            <a href=" " class="block px-3 py-2 rounded hover:bg-gray-100">Thống kê</a>
+            <a href="/logout" class="block px-3 py-2 rounded hover:bg-gray-100">Đăng xuất</a>
         </nav>
     </aside>
 
