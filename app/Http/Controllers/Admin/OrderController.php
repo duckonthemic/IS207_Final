@@ -15,15 +15,29 @@ class OrderController extends Controller
     public function index(Request $request): View
     {
         $perPage = $request->input('per_page', 20);
+        $search = $request->input('search');
         $status = $request->input('status');
         $payment_status = $request->input('payment_status');
 
         $query = Order::with('user', 'items');
 
+        // Search by order code or customer name/email
+        if ($search) {
+            $query->where(function ($q) use ($search) {
+                $q->where('order_code', 'like', "%{$search}%")
+                  ->orWhereHas('user', function ($userQuery) use ($search) {
+                      $userQuery->where('name', 'like', "%{$search}%")
+                                ->orWhere('email', 'like', "%{$search}%");
+                  });
+            });
+        }
+
+        // Filter by order status
         if ($status) {
             $query->where('status', $status);
         }
 
+        // Filter by payment status
         if ($payment_status) {
             $query->where('payment_status', $payment_status);
         }
@@ -38,7 +52,7 @@ class OrderController extends Controller
      */
     public function show(Order $order): View
     {
-        $order->load('user', 'items.product', 'address', 'promotions');
+        $order->load('user', 'items.product');
 
         return view('admin.orders.show', compact('order'));
     }

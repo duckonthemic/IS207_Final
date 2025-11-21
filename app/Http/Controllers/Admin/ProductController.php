@@ -23,9 +23,12 @@ class ProductController extends Controller
     {
         $perPage = $request->input('per_page', 20);
         $search = $request->input('search');
+        $categoryId = $request->input('category');
+        $status = $request->input('status');
 
         $query = Product::with('category');
 
+        // Filter by search
         if ($search) {
             $query->where(function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
@@ -33,8 +36,20 @@ class ProductController extends Controller
             });
         }
 
-        $products = $query->latest('id')->paginate($perPage);
+        // Filter by category
+        if ($categoryId) {
+            $query->where('category_id', $categoryId);
+        }
 
+        // Filter by status
+        if ($status === 'active') {
+            $query->where('is_active', true);
+        } elseif ($status === 'inactive') {
+            $query->where('is_active', false);
+        }
+
+        $products = $query->latest('id')->paginate($perPage);
+        
         $categories = Category::orderBy('name')->get();
 
         return view('admin.products.index', compact('products', 'categories'));

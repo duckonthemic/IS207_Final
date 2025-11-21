@@ -36,7 +36,7 @@
                         </svg>
                         @auth
                             @php
-                                $itemCount = auth()->user()->cartItems()->sum('quantity');
+                                $itemCount = auth()->user()->carts()->active()->with('items')->get()->sum(function($cart) { return $cart->items()->sum('qty'); });
                             @endphp
                             @if($itemCount > 0)
                                 <span class="absolute -top-2 -right-2 bg-black text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
