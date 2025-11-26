@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin — UITech</title>
+    <title>Admin  UITech</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="min-h-screen bg-gray-100">
@@ -15,8 +15,7 @@
             <a href="{{ route('admin.products.index') }}" class="block px-3 py-2 rounded hover:bg-gray-100">Sản phẩm</a>
             {{-- Thêm: Orders, Users, Stats --}}
             <a href="{{ route('admin.orders.index') }}" class="block px-3 py-2 rounded hover:bg-gray-100">Đơn hàng</a>
-            <a href=" " class="block px-3 py-2 rounded hover:bg-gray-100">Người dùng</a>
-            <a href=" " class="block px-3 py-2 rounded hover:bg-gray-100">Thống kê</a>
+            <a href="{{ route('admin.users.index') }}" class="block px-3 py-2 rounded hover:bg-gray-100">Người dùng</a>
             <a href="/logout" class="block px-3 py-2 rounded hover:bg-gray-100">Đăng xuất</a>
         </nav>
     </aside>

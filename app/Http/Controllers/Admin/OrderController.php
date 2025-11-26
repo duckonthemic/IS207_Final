@@ -71,4 +71,23 @@ class OrderController extends Controller
 
         return back()->with('success', 'Trạng thái đơn hàng đã được cập nhật');
     }
+
+    /**
+     * Update order status (separate method for route)
+     */
+    
+    public function updateStatus(Request $request, Order $order)
+    {
+        $validated = $request->validate([
+            'status' => 'required|in:pending,paid,picking,shipped,delivered,cancelled,refunded',
+            'payment_status' => 'required|in:pending,paid,failed,refunded',
+        ]);
+
+        $order->update([
+            'status' => $validated['status'],
+            'payment_status' => $validated['payment_status'],
+        ]);
+
+        return redirect()->route('admin.orders.show', $order)->with('success', 'Trạng thái đơn hàng đã được cập nhật');
+    }
 }

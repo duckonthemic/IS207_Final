@@ -87,6 +87,10 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('/orders/{order}', [\App\Http\Controllers\Admin\OrderController::class, 'show'])->name('orders.show');
     Route::post('/orders/{order}/status', [\App\Http\Controllers\Admin\OrderController::class, 'updateStatus'])->name('orders.update-status');
 
+    // Users management
+    Route::resource('users', \App\Http\Controllers\Admin\UserController::class)->only(['index','show','edit','update','destroy']);
+    Route::post('/users/{user}/verify', [\App\Http\Controllers\Admin\UserController::class, 'markVerified'])->name('users.verify');
+
     
 });
 
