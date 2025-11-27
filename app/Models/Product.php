@@ -104,6 +104,11 @@ class Product extends Model
         return $this->sale_price ?? $this->price;
     }
 
+    public function getDisplayPrice()
+    {
+        return $this->sale_price ?? $this->price;
+    }
+
     public function getAverageRatingAttribute()
     {
         return $this->approvedReviews()->avg('rating') ?? 0;

@@ -48,10 +48,10 @@ class ReviewController extends Controller
             'order_id' => $validated['order_id'] ?? null,
             'rating' => $validated['rating'],
             'comment' => $validated['comment'],
-            'status' => 'approved', // Auto-approve for now
+            'status' => 'pending', // Wait for admin approval
         ]);
 
-        return back()->with('success', 'Cảm ơn bạn đã đánh giá sản phẩm!');
+        return back()->with('success', 'Cảm ơn bạn đã đánh giá! Đánh giá của bạn sẽ được hiển thị sau khi được duyệt.');
     }
 
     public function update(Request $request, ProductReview $review)

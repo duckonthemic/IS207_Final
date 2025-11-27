@@ -1,0 +1,5323 @@
+{
+  "CPU": [
+    {
+      "brand": "Intel",
+      "model": "Core i5-14400F",
+      "release_year": 2025,
+      "price_usd": 264.0,
+      "specs": {
+        "segment": "Desktop",
+        "generation": "14th Gen",
+        "codename": "Raptor Lake Refresh",
+        "socket": "LGA1700",
+        "cores": 10,
+        "threads": 16,
+        "p_core_base_ghz": 2.5,
+        "p_core_boost_ghz": 4.7,
+        "e_core_base_ghz": 1.8,
+        "e_core_boost_ghz": 3.8,
+        "turbo_boost_max_ghz": 4.7,
+        "l2_cache_mb": 9.5,
+        "l3_cache_mb": 20,
+        "max_memory_gb": 192,
+        "memory_types": "DDR4 3200, DDR5 5600",
+        "memory_channels": 2,
+        "integrated_graphics": "Intel UHD 730",
+        "igpu_base_clock_mhz": 300,
+        "igpu_max_clock_mhz": 1450,
+        "pcie_lanes": "Up to 1x16+4",
+        "base_power_w": 65,
+        "max_turbo_power_w": 148
+      }
+    },
+    {
+      "brand": "Intel",
+      "model": "Core i5-14600K",
+      "release_year": 2025,
+      "price_usd": 264.0,
+      "specs": {
+        "segment": "Desktop",
+        "generation": "14th Gen",
+        "codename": "Raptor Lake Refresh",
+        "socket": "LGA1700",
+        "cores": 14,
+        "threads": 20,
+        "p_core_base_ghz": 3.5,
+        "p_core_boost_ghz": 5.3,
+        "e_core_base_ghz": 2.6,
+        "e_core_boost_ghz": 4.0,
+        "turbo_boost_max_ghz": 5.3,
+        "l2_cache_mb": 14,
+        "l3_cache_mb": 24,
+        "max_memory_gb": 192,
+        "memory_types": "DDR4 3200, DDR5 5600",
+        "memory_channels": 2,
+        "integrated_graphics": "Intel UHD 770",
+        "igpu_base_clock_mhz": 300,
+        "igpu_max_clock_mhz": 1550,
+        "pcie_lanes": "Up to 1x16+4",
+        "base_power_w": 125,
+        "max_turbo_power_w": 181
+      }
+    },
+    {
+      "brand": "Intel",
+      "model": "Core i7-14700K",
+      "release_year": 2025,
+      "price_usd": 264.0,
+      "specs": {
+        "segment": "Desktop",
+        "generation": "14th Gen",
+        "codename": "Raptor Lake Refresh",
+        "socket": "LGA1700",
+        "cores": 20,
+        "threads": 28,
+        "p_core_base_ghz": 3.4,
+        "p_core_boost_ghz": 5.6,
+        "e_core_base_ghz": 2.5,
+        "e_core_boost_ghz": 4.3,
+        "turbo_boost_max_ghz": 5.7,
+        "l2_cache_mb": 28,
+        "l3_cache_mb": 33,
+        "max_memory_gb": 192,
+        "memory_types": "DDR4 3200, DDR5 5600",
+        "memory_channels": 2,
+        "integrated_graphics": "Intel UHD 770",
+        "igpu_base_clock_mhz": 300,
+        "igpu_max_clock_mhz": 1650,
+        "pcie_lanes": "Up to 1x16+4",
+        "base_power_w": 125,
+        "max_turbo_power_w": 253
+      }
+    },
+    {
+      "brand": "Intel",
+      "model": "Core i9-14900K",
+      "release_year": 2025,
+      "price_usd": 264.0,
+      "specs": {
+        "segment": "Desktop",
+        "generation": "14th Gen",
+        "codename": "Raptor Lake Refresh",
+        "socket": "LGA1700",
+        "cores": 24,
+        "threads": 32,
+        "p_core_base_ghz": 3.2,
+        "p_core_boost_ghz": 5.6,
+        "e_core_base_ghz": 2.4,
+        "e_core_boost_ghz": 4.4,
+        "turbo_boost_max_ghz": 5.8,
+        "l2_cache_mb": 32,
+        "l3_cache_mb": 36,
+        "max_memory_gb": 192,
+        "memory_types": "DDR4 3200, DDR5 5600",
+        "memory_channels": 2,
+        "integrated_graphics": "Intel UHD 770",
+        "igpu_base_clock_mhz": 300,
+        "igpu_max_clock_mhz": 1650,
+        "pcie_lanes": "Up to 1x16+4, 2x8+4",
+        "base_power_w": 125,
+        "max_turbo_power_w": 253
+      }
+    },
+    {
+      "brand": "Intel",
+      "model": "Core i7-14700F",
+      "release_year": 2025,
+      "price_usd": 264.0,
+      "specs": {
+        "segment": "Desktop",
+        "generation": "14th Gen",
+        "codename": "Raptor Lake Refresh",
+        "socket": "LGA1700",
+        "cores": 20,
+        "threads": 28,
+        "p_core_base_ghz": 2.1,
+        "p_core_boost_ghz": 5.4,
+        "e_core_base_ghz": 1.6,
+        "e_core_boost_ghz": 4.1,
+        "turbo_boost_max_ghz": 5.4,
+        "l2_cache_mb": 28,
+        "l3_cache_mb": 33,
+        "max_memory_gb": 192,
+        "memory_types": "DDR4 3200, DDR5 5600",
+        "memory_channels": 2,
+        "integrated_graphics": null,
+        "igpu_base_clock_mhz": null,
+        "igpu_max_clock_mhz": null,
+        "pcie_lanes": "Up to 1x16+4",
+        "base_power_w": 65,
+        "max_turbo_power_w": 219
+      }
+    },
+    {
+      "brand": "Intel",
+      "model": "Core i5-14500",
+      "release_year": 2025,
+      "price_usd": 263.0,
+      "specs": {
+        "segment": "Desktop",
+        "generation": "14th Gen",
+        "codename": "Raptor Lake Refresh",
+        "socket": "LGA1700",
+        "cores": 14,
+        "threads": 20,
+        "p_core_base_ghz": 2.6,
+        "p_core_boost_ghz": 5.0,
+        "e_core_base_ghz": 1.8,
+        "e_core_boost_ghz": 3.8,
+        "turbo_boost_max_ghz": 5.0,
+        "l2_cache_mb": 11.5,
+        "l3_cache_mb": 24,
+        "max_memory_gb": 192,
+        "memory_types": "DDR4 3200, DDR5 5600",
+        "memory_channels": 2,
+        "integrated_graphics": "Intel UHD 770",
+        "igpu_base_clock_mhz": 300,
+        "igpu_max_clock_mhz": 1450,
+        "pcie_lanes": "Up to 1x16+4",
+        "base_power_w": 65,
+        "max_turbo_power_w": 154
+      }
+    },
+    {
+      "brand": "AMD",
+      "model": "Ryzen 5 7600",
+      "release_year": 2024,
+      "price_usd": 262.0,
+      "specs": {
+        "segment": "Desktop",
+        "generation": "Ryzen 7000",
+        "codename": "Raphael",
+        "socket": "AM5",
+        "cores": 6,
+        "threads": 12,
+        "p_core_base_ghz": 3.8,
+        "p_core_boost_ghz": 5.1,
+        "e_core_base_ghz": null,
+        "e_core_boost_ghz": null,
+        "turbo_boost_max_ghz": 5.1,
+        "l2_cache_mb": 6,
+        "l3_cache_mb": 32,
+        "max_memory_gb": 192,
+        "memory_types": "DDR5 5200+",
+        "memory_channels": 2,
+        "integrated_graphics": "Radeon Graphics",
+        "igpu_base_clock_mhz": 400,
+        "igpu_max_clock_mhz": 2200,
+        "pcie_lanes": "Up to 1x16+4",
+        "base_power_w": 65,
+        "max_turbo_power_w": 88
+      }
+    },
+    {
+      "brand": "AMD",
+      "model": "Ryzen 5 7600X",
+      "release_year": 2024,
+      "price_usd": 263.0,
+      "specs": {
+        "segment": "Desktop",
+        "generation": "Ryzen 7000",
+        "codename": "Raphael",
+        "socket": "AM5",
+        "cores": 6,
+        "threads": 12,
+        "p_core_base_ghz": 4.7,
+        "p_core_boost_ghz": 5.3,
+        "e_core_base_ghz": null,
+        "e_core_boost_ghz": null,
+        "turbo_boost_max_ghz": 5.3,
+        "l2_cache_mb": 6,
+        "l3_cache_mb": 32,
+        "max_memory_gb": 192,
+        "memory_types": "DDR5 5200+",
+        "memory_channels": 2,
+        "integrated_graphics": "Radeon Graphics",
+        "igpu_base_clock_mhz": 400,
+        "igpu_max_clock_mhz": 2200,
+        "pcie_lanes": "Up to 1x16+4",
+        "base_power_w": 105,
+        "max_turbo_power_w": 142
+      }
+    },
+    {
+      "brand": "AMD",
+      "model": "Ryzen 7 7700",
+      "release_year": 2024,
+      "price_usd": 262.0,
+      "specs": {
+        "segment": "Desktop",
+        "generation": "Ryzen 7000",
+        "codename": "Raphael",
+        "socket": "AM5",
+        "cores": 8,
+        "threads": 16,
+        "p_core_base_ghz": 3.8,
+        "p_core_boost_ghz": 5.3,
+        "e_core_base_ghz": null,
+        "e_core_boost_ghz": null,
+        "turbo_boost_max_ghz": 5.3,
+        "l2_cache_mb": 8,
+        "l3_cache_mb": 32,
+        "max_memory_gb": 192,
+        "memory_types": "DDR5 5200+",
+        "memory_channels": 2,
+        "integrated_graphics": "Radeon Graphics",
+        "igpu_base_clock_mhz": 400,
+        "igpu_max_clock_mhz": 2200,
+        "pcie_lanes": "Up to 1x16+4",
+        "base_power_w": 65,
+        "max_turbo_power_w": 88
+      }
+    },
+    {
+      "brand": "AMD",
+      "model": "Ryzen 7 7700X",
+      "release_year": 2024,
+      "price_usd": 263.0,
+      "specs": {
+        "segment": "Desktop",
+        "generation": "Ryzen 7000",
+        "codename": "Raphael",
+        "socket": "AM5",
+        "cores": 8,
+        "threads": 16,
+        "p_core_base_ghz": 4.5,
+        "p_core_boost_ghz": 5.4,
+        "e_core_base_ghz": null,
+        "e_core_boost_ghz": null,
+        "turbo_boost_max_ghz": 5.4,
+        "l2_cache_mb": 8,
+        "l3_cache_mb": 32,
+        "max_memory_gb": 192,
+        "memory_types": "DDR5 5200+",
+        "memory_channels": 2,
+        "integrated_graphics": "Radeon Graphics",
+        "igpu_base_clock_mhz": 400,
+        "igpu_max_clock_mhz": 2200,
+        "pcie_lanes": "Up to 1x16+4",
+        "base_power_w": 105,
+        "max_turbo_power_w": 142
+      }
+    },
+    {
+      "brand": "AMD",
+      "model": "Ryzen 9 7900X",
+      "release_year": 2024,
+      "price_usd": 263.0,
+      "specs": {
+        "segment": "Desktop",
+        "generation": "Ryzen 7000",
+        "codename": "Raphael",
+        "socket": "AM5",
+        "cores": 12,
+        "threads": 24,
+        "p_core_base_ghz": 4.7,
+        "p_core_boost_ghz": 5.6,
+        "e_core_base_ghz": null,
+        "e_core_boost_ghz": null,
+        "turbo_boost_max_ghz": 5.6,
+        "l2_cache_mb": 18.0,
+        "l3_cache_mb": 36,
+        "max_memory_gb": 192,
+        "memory_types": "DDR5 5200+",
+        "memory_channels": 2,
+        "integrated_graphics": "Radeon Graphics",
+        "igpu_base_clock_mhz": 300,
+        "igpu_max_clock_mhz": 1600,
+        "pcie_lanes": "Up to 1x16+4",
+        "base_power_w": 120,
+        "max_turbo_power_w": 180
+      }
+    },
+    {
+      "brand": "AMD",
+      "model": "Ryzen 9 7950X3D",
+      "release_year": 2024,
+      "price_usd": 265.0,
+      "specs": {
+        "segment": "Desktop",
+        "generation": "Ryzen 7000",
+        "codename": "Raphael",
+        "socket": "AM5",
+        "cores": 16,
+        "threads": 32,
+        "p_core_base_ghz": 4.2,
+        "p_core_boost_ghz": 5.7,
+        "e_core_base_ghz": null,
+        "e_core_boost_ghz": null,
+        "turbo_boost_max_ghz": 5.7,
+        "l2_cache_mb": 24.0,
+        "l3_cache_mb": 48,
+        "max_memory_gb": 192,
+        "memory_types": "DDR5 5200+",
+        "memory_channels": 2,
+        "integrated_graphics": "Radeon Graphics",
+        "igpu_base_clock_mhz": 300,
+        "igpu_max_clock_mhz": 1600,
+        "pcie_lanes": "Up to 1x16+4",
+        "base_power_w": 120,
+        "max_turbo_power_w": 180
+      }
+    },
+    {
+      "brand": "AMD",
+      "model": "Ryzen 7 7800X3D",
+      "release_year": 2024,
+      "price_usd": 265.0,
+      "specs": {
+        "segment": "Desktop",
+        "generation": "Ryzen 7000",
+        "codename": "Raphael",
+        "socket": "AM5",
+        "cores": 8,
+        "threads": 16,
+        "p_core_base_ghz": 4.2,
+        "p_core_boost_ghz": 5.0,
+        "e_core_base_ghz": null,
+        "e_core_boost_ghz": null,
+        "turbo_boost_max_ghz": 5.0,
+        "l2_cache_mb": 12.0,
+        "l3_cache_mb": 24,
+        "max_memory_gb": 192,
+        "memory_types": "DDR5 5200+",
+        "memory_channels": 2,
+        "integrated_graphics": "Radeon Graphics",
+        "igpu_base_clock_mhz": 300,
+        "igpu_max_clock_mhz": 1600,
+        "pcie_lanes": "Up to 1x16+4",
+        "base_power_w": 120,
+        "max_turbo_power_w": 180
+      }
+    },
+    {
+      "brand": "Intel",
+      "model": "Core i5-13600K",
+      "release_year": 2024,
+      "price_usd": 264.0,
+      "specs": {
+        "segment": "Desktop",
+        "generation": "13th/14th Gen",
+        "codename": "Raptor Lake",
+        "socket": "LGA1700",
+        "cores": 14,
+        "threads": 20,
+        "p_core_base_ghz": 3.5,
+        "p_core_boost_ghz": 5.1,
+        "e_core_base_ghz": null,
+        "e_core_boost_ghz": null,
+        "turbo_boost_max_ghz": 5.1,
+        "l2_cache_mb": 21.0,
+        "l3_cache_mb": 42,
+        "max_memory_gb": 192,
+        "memory_types": "DDR4 3200, DDR5 5600",
+        "memory_channels": 2,
+        "integrated_graphics": "Intel UHD Graphics",
+        "igpu_base_clock_mhz": 300,
+        "igpu_max_clock_mhz": 1600,
+        "pcie_lanes": "Up to 1x16+4",
+        "base_power_w": 125,
+        "max_turbo_power_w": 187
+      }
+    },
+    {
+      "brand": "Intel",
+      "model": "Core i7-13700K",
+      "release_year": 2024,
+      "price_usd": 264.0,
+      "specs": {
+        "segment": "Desktop",
+        "generation": "13th/14th Gen",
+        "codename": "Raptor Lake",
+        "socket": "LGA1700",
+        "cores": 16,
+        "threads": 24,
+        "p_core_base_ghz": 3.4,
+        "p_core_boost_ghz": 5.4,
+        "e_core_base_ghz": null,
+        "e_core_boost_ghz": null,
+        "turbo_boost_max_ghz": 5.4,
+        "l2_cache_mb": 24.0,
+        "l3_cache_mb": 48,
+        "max_memory_gb": 192,
+        "memory_types": "DDR4 3200, DDR5 5600",
+        "memory_channels": 2,
+        "integrated_graphics": "Intel UHD Graphics",
+        "igpu_base_clock_mhz": 300,
+        "igpu_max_clock_mhz": 1600,
+        "pcie_lanes": "Up to 1x16+4",
+        "base_power_w": 125,
+        "max_turbo_power_w": 187
+      }
+    },
+    {
+      "brand": "Intel",
+      "model": "Core i9-13900K",
+      "release_year": 2024,
+      "price_usd": 264.0,
+      "specs": {
+        "segment": "Desktop",
+        "generation": "13th/14th Gen",
+        "codename": "Raptor Lake",
+        "socket": "LGA1700",
+        "cores": 24,
+        "threads": 32,
+        "p_core_base_ghz": 3.0,
+        "p_core_boost_ghz": 5.8,
+        "e_core_base_ghz": null,
+        "e_core_boost_ghz": null,
+        "turbo_boost_max_ghz": 5.8,
+        "l2_cache_mb": 36.0,
+        "l3_cache_mb": 72,
+        "max_memory_gb": 192,
+        "memory_types": "DDR4 3200, DDR5 5600",
+        "memory_channels": 2,
+        "integrated_graphics": "Intel UHD Graphics",
+        "igpu_base_clock_mhz": 300,
+        "igpu_max_clock_mhz": 1600,
+        "pcie_lanes": "Up to 1x16+4",
+        "base_power_w": 125,
+        "max_turbo_power_w": 187
+      }
+    },
+    {
+      "brand": "Intel",
+      "model": "Core i3-14100",
+      "release_year": 2025,
+      "price_usd": 263.0,
+      "specs": {
+        "segment": "Desktop",
+        "generation": "13th/14th Gen",
+        "codename": "Raptor Lake",
+        "socket": "LGA1700",
+        "cores": 4,
+        "threads": 8,
+        "p_core_base_ghz": 3.5,
+        "p_core_boost_ghz": 4.7,
+        "e_core_base_ghz": null,
+        "e_core_boost_ghz": null,
+        "turbo_boost_max_ghz": 4.7,
+        "l2_cache_mb": 6.0,
+        "l3_cache_mb": 12,
+        "max_memory_gb": 192,
+        "memory_types": "DDR4 3200, DDR5 5600",
+        "memory_channels": 2,
+        "integrated_graphics": "Intel UHD Graphics",
+        "igpu_base_clock_mhz": 300,
+        "igpu_max_clock_mhz": 1600,
+        "pcie_lanes": "Up to 1x16+4",
+        "base_power_w": 65,
+        "max_turbo_power_w": 97
+      }
+    },
+    {
+      "brand": "AMD",
+      "model": "Ryzen 5 8600G",
+      "release_year": 2025,
+      "price_usd": 263.0,
+      "specs": {
+        "segment": "Desktop",
+        "generation": "Ryzen 7000",
+        "codename": "Raphael",
+        "socket": "AM5",
+        "cores": 6,
+        "threads": 12,
+        "p_core_base_ghz": 4.3,
+        "p_core_boost_ghz": 5.0,
+        "e_core_base_ghz": null,
+        "e_core_boost_ghz": null,
+        "turbo_boost_max_ghz": 5.0,
+        "l2_cache_mb": 9.0,
+        "l3_cache_mb": 18,
+        "max_memory_gb": 192,
+        "memory_types": "DDR5 5200+",
+        "memory_channels": 2,
+        "integrated_graphics": "Radeon Graphics",
+        "igpu_base_clock_mhz": 300,
+        "igpu_max_clock_mhz": 1600,
+        "pcie_lanes": "Up to 1x16+4",
+        "base_power_w": 65,
+        "max_turbo_power_w": 97
+      }
+    },
+    {
+      "brand": "AMD",
+      "model": "Ryzen 7 8700G",
+      "release_year": 2025,
+      "price_usd": 263.0,
+      "specs": {
+        "segment": "Desktop",
+        "generation": "Ryzen 7000",
+        "codename": "Raphael",
+        "socket": "AM5",
+        "cores": 8,
+        "threads": 16,
+        "p_core_base_ghz": 4.2,
+        "p_core_boost_ghz": 5.1,
+        "e_core_base_ghz": null,
+        "e_core_boost_ghz": null,
+        "turbo_boost_max_ghz": 5.1,
+        "l2_cache_mb": 12.0,
+        "l3_cache_mb": 24,
+        "max_memory_gb": 192,
+        "memory_types": "DDR5 5200+",
+        "memory_channels": 2,
+        "integrated_graphics": "Radeon Graphics",
+        "igpu_base_clock_mhz": 300,
+        "igpu_max_clock_mhz": 1600,
+        "pcie_lanes": "Up to 1x16+4",
+        "base_power_w": 65,
+        "max_turbo_power_w": 97
+      }
+    },
+    {
+      "brand": "Intel",
+      "model": "Core i9-14900F",
+      "release_year": 2025,
+      "price_usd": 264.0,
+      "specs": {
+        "segment": "Desktop",
+        "generation": "13th/14th Gen",
+        "codename": "Raptor Lake",
+        "socket": "LGA1700",
+        "cores": 24,
+        "threads": 32,
+        "p_core_base_ghz": 2.0,
+        "p_core_boost_ghz": 5.8,
+        "e_core_base_ghz": null,
+        "e_core_boost_ghz": null,
+        "turbo_boost_max_ghz": 5.8,
+        "l2_cache_mb": 36.0,
+        "l3_cache_mb": 72,
+        "max_memory_gb": 192,
+        "memory_types": "DDR4 3200, DDR5 5600",
+        "memory_channels": 2,
+        "integrated_graphics": "Intel UHD Graphics",
+        "igpu_base_clock_mhz": 300,
+        "igpu_max_clock_mhz": 1600,
+        "pcie_lanes": "Up to 1x16+4",
+        "base_power_w": 125,
+        "max_turbo_power_w": 187
+      }
+    },
+    {
+      "brand": "Intel",
+      "model": "Core i9-13900KS",
+      "release_year": 2023,
+      "price_usd": 699,
+      "specs": {
+        "segment": "Enthusiast",
+        "generation": "13th Gen",
+        "codename": "Raptor Lake",
+        "socket": "LGA1700",
+        "cores": 24,
+        "threads": 32,
+        "p_core_base_ghz": 3.2,
+        "p_core_boost_ghz": 6.0,
+        "e_core_base_ghz": 2.4,
+        "e_core_boost_ghz": 4.3,
+        "turbo_boost_max_ghz": 6.0,
+        "l2_cache_mb": 32,
+        "l3_cache_mb": 36,
+        "max_memory_gb": 192,
+        "memory_types": "DDR4 3200, DDR5 5600",
+        "memory_channels": 2,
+        "integrated_graphics": "Intel UHD 770",
+        "igpu_base_clock_mhz": 300,
+        "igpu_max_clock_mhz": 1650,
+        "pcie_lanes": "Up to 1x16+4",
+        "base_power_w": 150,
+        "max_turbo_power_w": 253
+      }
+    },
+    {
+      "brand": "Intel",
+      "model": "Core i7-13700F",
+      "release_year": 2023,
+      "price_usd": 319,
+      "specs": {
+        "segment": "Performance",
+        "generation": "13th Gen",
+        "codename": "Raptor Lake",
+        "socket": "LGA1700",
+        "cores": 16,
+        "threads": 24,
+        "p_core_base_ghz": 2.1,
+        "p_core_boost_ghz": 5.2,
+        "e_core_base_ghz": 1.5,
+        "e_core_boost_ghz": 4.1,
+        "turbo_boost_max_ghz": 5.2,
+        "l2_cache_mb": 24,
+        "l3_cache_mb": 30,
+        "max_memory_gb": 192,
+        "memory_types": "DDR4 3200, DDR5 5600",
+        "memory_channels": 2,
+        "integrated_graphics": null,
+        "igpu_base_clock_mhz": null,
+        "igpu_max_clock_mhz": null,
+        "pcie_lanes": "Up to 1x16+4",
+        "base_power_w": 65,
+        "max_turbo_power_w": 219
+      }
+    },
+    {
+      "brand": "Intel",
+      "model": "Core i5-13400",
+      "release_year": 2023,
+      "price_usd": 196,
+      "specs": {
+        "segment": "Mainstream",
+        "generation": "13th Gen",
+        "codename": "Raptor Lake",
+        "socket": "LGA1700",
+        "cores": 10,
+        "threads": 16,
+        "p_core_base_ghz": 2.5,
+        "p_core_boost_ghz": 4.6,
+        "e_core_base_ghz": 1.8,
+        "e_core_boost_ghz": 3.3,
+        "turbo_boost_max_ghz": 4.6,
+        "l2_cache_mb": 9.5,
+        "l3_cache_mb": 20,
+        "max_memory_gb": 192,
+        "memory_types": "DDR4 3200, DDR5 5600",
+        "memory_channels": 2,
+        "integrated_graphics": "Intel UHD 730",
+        "igpu_base_clock_mhz": 300,
+        "igpu_max_clock_mhz": 1500,
+        "pcie_lanes": "Up to 1x16+4",
+        "base_power_w": 65,
+        "max_turbo_power_w": 154
+      }
+    },
+    {
+      "brand": "AMD",
+      "model": "Ryzen 9 5950X",
+      "release_year": 2020,
+      "price_usd": 549,
+      "specs": {
+        "segment": "Enthusiast",
+        "generation": "Zen 3",
+        "codename": "Vermeer",
+        "socket": "AM4",
+        "cores": 16,
+        "threads": 32,
+        "p_core_base_ghz": 3.4,
+        "p_core_boost_ghz": 4.9,
+        "e_core_base_ghz": null,
+        "e_core_boost_ghz": null,
+        "turbo_boost_max_ghz": 4.9,
+        "l2_cache_mb": 8,
+        "l3_cache_mb": 64,
+        "max_memory_gb": 128,
+        "memory_types": "DDR4 3200",
+        "memory_channels": 2,
+        "integrated_graphics": null,
+        "igpu_base_clock_mhz": null,
+        "igpu_max_clock_mhz": null,
+        "pcie_lanes": "24 lanes",
+        "base_power_w": 105,
+        "max_turbo_power_w": 142
+      }
+    },
+    {
+      "brand": "AMD",
+      "model": "Ryzen 7 5800X3D",
+      "release_year": 2022,
+      "price_usd": 329,
+      "specs": {
+        "segment": "Gaming",
+        "generation": "Zen 3",
+        "codename": "Vermeer-X",
+        "socket": "AM4",
+        "cores": 8,
+        "threads": 16,
+        "p_core_base_ghz": 3.4,
+        "p_core_boost_ghz": 4.5,
+        "e_core_base_ghz": null,
+        "e_core_boost_ghz": null,
+        "turbo_boost_max_ghz": 4.5,
+        "l2_cache_mb": 4,
+        "l3_cache_mb": 96,
+        "max_memory_gb": 128,
+        "memory_types": "DDR4 3200",
+        "memory_channels": 2,
+        "integrated_graphics": null,
+        "igpu_base_clock_mhz": null,
+        "igpu_max_clock_mhz": null,
+        "pcie_lanes": "24 lanes",
+        "base_power_w": 105,
+        "max_turbo_power_w": 142
+      }
+    },
+    {
+      "brand": "AMD",
+      "model": "Ryzen 5 5600",
+      "release_year": 2022,
+      "price_usd": 139,
+      "specs": {
+        "segment": "Mainstream",
+        "generation": "Zen 3",
+        "codename": "Vermeer",
+        "socket": "AM4",
+        "cores": 6,
+        "threads": 12,
+        "p_core_base_ghz": 3.5,
+        "p_core_boost_ghz": 4.4,
+        "e_core_base_ghz": null,
+        "e_core_boost_ghz": null,
+        "turbo_boost_max_ghz": 4.4,
+        "l2_cache_mb": 3,
+        "l3_cache_mb": 32,
+        "max_memory_gb": 128,
+        "memory_types": "DDR4 3200",
+        "memory_channels": 2,
+        "integrated_graphics": null,
+        "igpu_base_clock_mhz": null,
+        "igpu_max_clock_mhz": null,
+        "pcie_lanes": "24 lanes",
+        "base_power_w": 65,
+        "max_turbo_power_w": 88
+      }
+    },
+    {
+      "brand": "Intel",
+      "model": "Core i9-13900KS",
+      "release_year": 2023,
+      "price_usd": 699,
+      "specs": {
+        "segment": "Enthusiast",
+        "generation": "13th Gen",
+        "codename": "Raptor Lake",
+        "socket": "LGA1700",
+        "cores": 24,
+        "threads": 32,
+        "p_core_base_ghz": 3.2,
+        "p_core_boost_ghz": 6.0,
+        "e_core_base_ghz": 2.4,
+        "e_core_boost_ghz": 4.3,
+        "turbo_boost_max_ghz": 6.0,
+        "l2_cache_mb": 32,
+        "l3_cache_mb": 36,
+        "max_memory_gb": 192,
+        "memory_types": "DDR4 3200, DDR5 5600",
+        "memory_channels": 2,
+        "integrated_graphics": "Intel UHD 770",
+        "igpu_base_clock_mhz": 300,
+        "igpu_max_clock_mhz": 1650,
+        "pcie_lanes": "Up to 1x16+4",
+        "base_power_w": 150,
+        "max_turbo_power_w": 253
+      }
+    },
+    {
+      "brand": "Intel",
+      "model": "Core i7-13700F",
+      "release_year": 2023,
+      "price_usd": 319,
+      "specs": {
+        "segment": "Performance",
+        "generation": "13th Gen",
+        "codename": "Raptor Lake",
+        "socket": "LGA1700",
+        "cores": 16,
+        "threads": 24,
+        "p_core_base_ghz": 2.1,
+        "p_core_boost_ghz": 5.2,
+        "e_core_base_ghz": 1.5,
+        "e_core_boost_ghz": 4.1,
+        "turbo_boost_max_ghz": 5.2,
+        "l2_cache_mb": 24,
+        "l3_cache_mb": 30,
+        "max_memory_gb": 192,
+        "memory_types": "DDR4 3200, DDR5 5600",
+        "memory_channels": 2,
+        "integrated_graphics": null,
+        "igpu_base_clock_mhz": null,
+        "igpu_max_clock_mhz": null,
+        "pcie_lanes": "Up to 1x16+4",
+        "base_power_w": 65,
+        "max_turbo_power_w": 219
+      }
+    },
+    {
+      "brand": "Intel",
+      "model": "Core i5-13400",
+      "release_year": 2023,
+      "price_usd": 196,
+      "specs": {
+        "segment": "Mainstream",
+        "generation": "13th Gen",
+        "codename": "Raptor Lake",
+        "socket": "LGA1700",
+        "cores": 10,
+        "threads": 16,
+        "p_core_base_ghz": 2.5,
+        "p_core_boost_ghz": 4.6,
+        "e_core_base_ghz": 1.8,
+        "e_core_boost_ghz": 3.3,
+        "turbo_boost_max_ghz": 4.6,
+        "l2_cache_mb": 9.5,
+        "l3_cache_mb": 20,
+        "max_memory_gb": 192,
+        "memory_types": "DDR4 3200, DDR5 5600",
+        "memory_channels": 2,
+        "integrated_graphics": "Intel UHD 730",
+        "igpu_base_clock_mhz": 300,
+        "igpu_max_clock_mhz": 1500,
+        "pcie_lanes": "Up to 1x16+4",
+        "base_power_w": 65,
+        "max_turbo_power_w": 154
+      }
+    },
+    {
+      "brand": "AMD",
+      "model": "Ryzen 9 5950X",
+      "release_year": 2020,
+      "price_usd": 549,
+      "specs": {
+        "segment": "Enthusiast",
+        "generation": "Zen 3",
+        "codename": "Vermeer",
+        "socket": "AM4",
+        "cores": 16,
+        "threads": 32,
+        "p_core_base_ghz": 3.4,
+        "p_core_boost_ghz": 4.9,
+        "e_core_base_ghz": null,
+        "e_core_boost_ghz": null,
+        "turbo_boost_max_ghz": 4.9,
+        "l2_cache_mb": 8,
+        "l3_cache_mb": 64,
+        "max_memory_gb": 128,
+        "memory_types": "DDR4 3200",
+        "memory_channels": 2,
+        "integrated_graphics": null,
+        "igpu_base_clock_mhz": null,
+        "igpu_max_clock_mhz": null,
+        "pcie_lanes": "24 lanes",
+        "base_power_w": 105,
+        "max_turbo_power_w": 142
+      }
+    },
+    {
+      "brand": "AMD",
+      "model": "Ryzen 7 5800X3D",
+      "release_year": 2022,
+      "price_usd": 329,
+      "specs": {
+        "segment": "Gaming",
+        "generation": "Zen 3",
+        "codename": "Vermeer-X",
+        "socket": "AM4",
+        "cores": 8,
+        "threads": 16,
+        "p_core_base_ghz": 3.4,
+        "p_core_boost_ghz": 4.5,
+        "e_core_base_ghz": null,
+        "e_core_boost_ghz": null,
+        "turbo_boost_max_ghz": 4.5,
+        "l2_cache_mb": 4,
+        "l3_cache_mb": 96,
+        "max_memory_gb": 128,
+        "memory_types": "DDR4 3200",
+        "memory_channels": 2,
+        "integrated_graphics": null,
+        "igpu_base_clock_mhz": null,
+        "igpu_max_clock_mhz": null,
+        "pcie_lanes": "24 lanes",
+        "base_power_w": 105,
+        "max_turbo_power_w": 142
+      }
+    },
+    {
+      "brand": "AMD",
+      "model": "Ryzen 5 5600",
+      "release_year": 2022,
+      "price_usd": 139,
+      "specs": {
+        "segment": "Mainstream",
+        "generation": "Zen 3",
+        "codename": "Vermeer",
+        "socket": "AM4",
+        "cores": 6,
+        "threads": 12,
+        "p_core_base_ghz": 3.5,
+        "p_core_boost_ghz": 4.4,
+        "e_core_base_ghz": null,
+        "e_core_boost_ghz": null,
+        "turbo_boost_max_ghz": 4.4,
+        "l2_cache_mb": 3,
+        "l3_cache_mb": 32,
+        "max_memory_gb": 128,
+        "memory_types": "DDR4 3200",
+        "memory_channels": 2,
+        "integrated_graphics": null,
+        "igpu_base_clock_mhz": null,
+        "igpu_max_clock_mhz": null,
+        "pcie_lanes": "24 lanes",
+        "base_power_w": 65,
+        "max_turbo_power_w": 88
+      }
+    },
+    {
+      "brand": "Intel",
+      "model": "Core i9-12900K",
+      "release_year": 2021,
+      "price_usd": 589,
+      "specs": {
+        "segment": "Enthusiast",
+        "generation": "12th Gen",
+        "codename": "Alder Lake",
+        "socket": "LGA1700",
+        "cores": 16,
+        "threads": 24,
+        "p_core_base_ghz": 3.2,
+        "p_core_boost_ghz": 5.2,
+        "base_power_w": 125
+      }
+    },
+    {
+      "brand": "Intel",
+      "model": "Core i7-12700K",
+      "release_year": 2021,
+      "price_usd": 409,
+      "specs": {
+        "segment": "Performance",
+        "generation": "12th Gen",
+        "codename": "Alder Lake",
+        "socket": "LGA1700",
+        "cores": 12,
+        "threads": 20,
+        "p_core_base_ghz": 3.6,
+        "p_core_boost_ghz": 5.0,
+        "base_power_w": 125
+      }
+    },
+    {
+      "brand": "Intel",
+      "model": "Core i5-12600K",
+      "release_year": 2021,
+      "price_usd": 289,
+      "specs": {
+        "segment": "Mainstream",
+        "generation": "12th Gen",
+        "codename": "Alder Lake",
+        "socket": "LGA1700",
+        "cores": 10,
+        "threads": 16,
+        "p_core_base_ghz": 3.7,
+        "p_core_boost_ghz": 4.9,
+        "base_power_w": 125
+      }
+    },
+    {
+      "brand": "Intel",
+      "model": "Core i3-12100F",
+      "release_year": 2022,
+      "price_usd": 97,
+      "specs": {
+        "segment": "Budget",
+        "generation": "12th Gen",
+        "codename": "Alder Lake",
+        "socket": "LGA1700",
+        "cores": 4,
+        "threads": 8,
+        "p_core_base_ghz": 3.3,
+        "p_core_boost_ghz": 4.3,
+        "base_power_w": 58
+      }
+    },
+    {
+      "brand": "AMD",
+      "model": "Ryzen 9 5900X",
+      "release_year": 2020,
+      "price_usd": 399,
+      "specs": {
+        "segment": "Performance",
+        "generation": "Zen 3",
+        "codename": "Vermeer",
+        "socket": "AM4",
+        "cores": 12,
+        "threads": 24,
+        "p_core_base_ghz": 3.7,
+        "p_core_boost_ghz": 4.8,
+        "base_power_w": 105
+      }
+    },
+    {
+      "brand": "AMD",
+      "model": "Ryzen 7 5700X",
+      "release_year": 2022,
+      "price_usd": 229,
+      "specs": {
+        "segment": "Mainstream",
+        "generation": "Zen 3",
+        "codename": "Vermeer",
+        "socket": "AM4",
+        "cores": 8,
+        "threads": 16,
+        "p_core_base_ghz": 3.4,
+        "p_core_boost_ghz": 4.6,
+        "base_power_w": 65
+      }
+    },
+    {
+      "brand": "AMD",
+      "model": "Ryzen 5 5500",
+      "release_year": 2022,
+      "price_usd": 109,
+      "specs": {
+        "segment": "Budget",
+        "generation": "Zen 3",
+        "codename": "Cezanne",
+        "socket": "AM4",
+        "cores": 6,
+        "threads": 12,
+        "p_core_base_ghz": 3.6,
+        "p_core_boost_ghz": 4.2,
+        "base_power_w": 65
+      }
+    },
+    {
+      "brand": "AMD",
+      "model": "Ryzen 9 7950X3D",
+      "release_year": 2023,
+      "price_usd": 599,
+      "specs": {
+        "segment": "Gaming",
+        "generation": "Zen 4",
+        "codename": "Raphael-X",
+        "socket": "AM5",
+        "cores": 16,
+        "threads": 32,
+        "p_core_base_ghz": 4.2,
+        "p_core_boost_ghz": 5.7,
+        "base_power_w": 120
+      }
+    },
+    {
+      "brand": "AMD",
+      "model": "Ryzen 7 7800X3D",
+      "release_year": 2023,
+      "price_usd": 449,
+      "specs": {
+        "segment": "Gaming",
+        "generation": "Zen 4",
+        "codename": "Raphael-X",
+        "socket": "AM5",
+        "cores": 8,
+        "threads": 16,
+        "p_core_base_ghz": 4.2,
+        "p_core_boost_ghz": 5.0,
+        "base_power_w": 120
+      }
+    },
+    {
+      "brand": "Intel",
+      "model": "Core i5-14600K",
+      "release_year": 2023,
+      "price_usd": 319,
+      "specs": {
+        "segment": "Performance",
+        "generation": "14th Gen",
+        "codename": "Raptor Lake Refresh",
+        "socket": "LGA1700",
+        "cores": 14,
+        "threads": 20,
+        "p_core_base_ghz": 3.5,
+        "p_core_boost_ghz": 5.3,
+        "base_power_w": 125
+      }
+    }
+  ],
+  "GPU": [
+    {
+      "brand": "NVIDIA",
+      "model": "GeForce RTX 4060",
+      "release_year": 2024,
+      "price_usd": 428.0,
+      "specs": {
+        "gpu_chip": "AD107",
+        "core_clock_mhz": 1830,
+        "cuda_cores": 3072,
+        "memory_size_gb": 8,
+        "memory_type": "GDDR6",
+        "memory_clock_gbps": 17,
+        "memory_bus_bit": 128,
+        "card_bus": "PCI-E 4.0",
+        "digital_max_resolution": "7680x4320",
+        "multi_view_outputs": 4,
+        "card_length_mm": 240,
+        "card_width_mm": 112,
+        "card_height_mm": 40,
+        "pcb_form_factor": "ATX",
+        "directx_support": "DirectX 12 Ultimate",
+        "opengl_support": "OpenGL 4.6",
+        "recommended_psu_w": 550,
+        "power_connectors": "1x 8-pin",
+        "output_ports": "3x DisplayPort 1.4a, 1x HDMI 2.1a"
+      }
+    },
+    {
+      "brand": "NVIDIA",
+      "model": "GeForce RTX 4070 SUPER",
+      "release_year": 2025,
+      "price_usd": 476.0,
+      "specs": {
+        "gpu_chip": "AD104",
+        "core_clock_mhz": 1980,
+        "cuda_cores": 7168,
+        "memory_size_gb": 12,
+        "memory_type": "GDDR6X",
+        "memory_clock_gbps": 21,
+        "memory_bus_bit": 192,
+        "card_bus": "PCI-E 4.0",
+        "digital_max_resolution": "7680x4320",
+        "multi_view_outputs": 4,
+        "card_length_mm": 242,
+        "card_width_mm": 112,
+        "card_height_mm": 42,
+        "pcb_form_factor": "ATX",
+        "directx_support": "DirectX 12 Ultimate",
+        "opengl_support": "OpenGL 4.6",
+        "recommended_psu_w": 650,
+        "power_connectors": "1x 16-pin",
+        "output_ports": "3x DisplayPort 1.4a, 1x HDMI 2.1a"
+      }
+    },
+    {
+      "brand": "NVIDIA",
+      "model": "GeForce RTX 4080 SUPER",
+      "release_year": 2025,
+      "price_usd": 476.0,
+      "specs": {
+        "gpu_chip": "AD103",
+        "core_clock_mhz": 2295,
+        "cuda_cores": 10240,
+        "memory_size_gb": 16,
+        "memory_type": "GDDR6X",
+        "memory_clock_gbps": 23,
+        "memory_bus_bit": 256,
+        "card_bus": "PCI-E 4.0",
+        "digital_max_resolution": "7680x4320",
+        "multi_view_outputs": 4,
+        "card_length_mm": 304,
+        "card_width_mm": 137,
+        "card_height_mm": 50,
+        "pcb_form_factor": "ATX",
+        "directx_support": "DirectX 12 Ultimate",
+        "opengl_support": "OpenGL 4.6",
+        "recommended_psu_w": 750,
+        "power_connectors": "1x 16-pin",
+        "output_ports": "3x DisplayPort 1.4a, 1x HDMI 2.1a"
+      }
+    },
+    {
+      "brand": "NVIDIA",
+      "model": "GeForce RTX 4090",
+      "release_year": 2024,
+      "price_usd": 428.0,
+      "specs": {
+        "gpu_chip": "AD102",
+        "core_clock_mhz": 2235,
+        "cuda_cores": 16384,
+        "memory_size_gb": 24,
+        "memory_type": "GDDR6X",
+        "memory_clock_gbps": 21,
+        "memory_bus_bit": 384,
+        "card_bus": "PCI-E 4.0",
+        "digital_max_resolution": "7680x4320",
+        "multi_view_outputs": 4,
+        "card_length_mm": 304,
+        "card_width_mm": 137,
+        "card_height_mm": 61,
+        "pcb_form_factor": "ATX",
+        "directx_support": "DirectX 12 Ultimate",
+        "opengl_support": "OpenGL 4.6",
+        "recommended_psu_w": 850,
+        "power_connectors": "1x 16-pin",
+        "output_ports": "3x DisplayPort 1.4a, 1x HDMI 2.1a"
+      }
+    },
+    {
+      "brand": "AMD",
+      "model": "Radeon RX 7600 XT",
+      "release_year": 2024,
+      "price_usd": 436.0,
+      "specs": {
+        "gpu_chip": "Navi 33",
+        "core_clock_mhz": 1900,
+        "cuda_cores": 2048,
+        "memory_size_gb": 16,
+        "memory_type": "GDDR6",
+        "memory_clock_gbps": 18,
+        "memory_bus_bit": 128,
+        "card_bus": "PCI-E 4.0",
+        "digital_max_resolution": "7680x4320",
+        "multi_view_outputs": 4,
+        "card_length_mm": 250,
+        "card_width_mm": 120,
+        "card_height_mm": 42,
+        "pcb_form_factor": "ATX",
+        "directx_support": "DirectX 12 Ultimate",
+        "opengl_support": "OpenGL 4.6",
+        "recommended_psu_w": 600,
+        "power_connectors": "1x 8-pin",
+        "output_ports": "3x DisplayPort 2.1, 1x HDMI 2.1"
+      }
+    },
+    {
+      "brand": "AMD",
+      "model": "Radeon RX 7800 XT",
+      "release_year": 2024,
+      "price_usd": 436.0,
+      "specs": {
+        "gpu_chip": "Navi 32",
+        "core_clock_mhz": 2124,
+        "cuda_cores": 3840,
+        "memory_size_gb": 16,
+        "memory_type": "GDDR6",
+        "memory_clock_gbps": 19.5,
+        "memory_bus_bit": 256,
+        "card_bus": "PCI-E 4.0",
+        "digital_max_resolution": "7680x4320",
+        "multi_view_outputs": 4,
+        "card_length_mm": 270,
+        "card_width_mm": 130,
+        "card_height_mm": 45,
+        "pcb_form_factor": "ATX",
+        "directx_support": "DirectX 12 Ultimate",
+        "opengl_support": "OpenGL 4.6",
+        "recommended_psu_w": 700,
+        "power_connectors": "2x 8-pin",
+        "output_ports": "3x DisplayPort 2.1, 1x HDMI 2.1"
+      }
+    },
+    {
+      "brand": "AMD",
+      "model": "Radeon RX 7900 XT",
+      "release_year": 2024,
+      "price_usd": 436.0,
+      "specs": {
+        "gpu_chip": "Navi 31",
+        "core_clock_mhz": 2000,
+        "cuda_cores": 5376,
+        "memory_size_gb": 20,
+        "memory_type": "GDDR6",
+        "memory_clock_gbps": 20,
+        "memory_bus_bit": 320,
+        "card_bus": "PCI-E 4.0",
+        "digital_max_resolution": "7680x4320",
+        "multi_view_outputs": 4,
+        "card_length_mm": 276,
+        "card_width_mm": 135,
+        "card_height_mm": 51,
+        "pcb_form_factor": "ATX",
+        "directx_support": "DirectX 12 Ultimate",
+        "opengl_support": "OpenGL 4.6",
+        "recommended_psu_w": 750,
+        "power_connectors": "2x 8-pin",
+        "output_ports": "3x DisplayPort 2.1, 1x HDMI 2.1"
+      }
+    },
+    {
+      "brand": "AMD",
+      "model": "Radeon RX 7900 XTX",
+      "release_year": 2024,
+      "price_usd": 444.0,
+      "specs": {
+        "gpu_chip": "Navi 31",
+        "core_clock_mhz": 2300,
+        "cuda_cores": 6144,
+        "memory_size_gb": 24,
+        "memory_type": "GDDR6",
+        "memory_clock_gbps": 20,
+        "memory_bus_bit": 384,
+        "card_bus": "PCI-E 4.0",
+        "digital_max_resolution": "7680x4320",
+        "multi_view_outputs": 4,
+        "card_length_mm": 287,
+        "card_width_mm": 135,
+        "card_height_mm": 51,
+        "pcb_form_factor": "ATX",
+        "directx_support": "DirectX 12 Ultimate",
+        "opengl_support": "OpenGL 4.6",
+        "recommended_psu_w": 800,
+        "power_connectors": "2x 8-pin",
+        "output_ports": "3x DisplayPort 2.1, 1x HDMI 2.1"
+      }
+    },
+    {
+      "brand": "NVIDIA",
+      "model": "GeForce RTX 4060 Ti 8GB",
+      "release_year": 2024,
+      "price_usd": 484.0,
+      "specs": {
+        "gpu_chip": "8GB",
+        "core_clock_mhz": 1915,
+        "cuda_cores": 3920,
+        "memory_size_gb": 8,
+        "memory_type": "GDDR6",
+        "memory_clock_gbps": 20,
+        "memory_bus_bit": 128,
+        "card_bus": "PCI-E 4.0",
+        "digital_max_resolution": "7680x4320",
+        "multi_view_outputs": 4,
+        "card_length_mm": 295,
+        "card_width_mm": 120,
+        "card_height_mm": 42,
+        "pcb_form_factor": "ATX",
+        "directx_support": "DirectX 12 Ultimate",
+        "opengl_support": "OpenGL 4.6",
+        "recommended_psu_w": 850,
+        "power_connectors": "1x 16-pin",
+        "output_ports": "3x DisplayPort, 1x HDMI"
+      }
+    },
+    {
+      "brand": "NVIDIA",
+      "model": "GeForce RTX 4060 Ti 16GB",
+      "release_year": 2024,
+      "price_usd": 492.0,
+      "specs": {
+        "gpu_chip": "16GB",
+        "core_clock_mhz": 1920,
+        "cuda_cores": 3960,
+        "memory_size_gb": 8,
+        "memory_type": "GDDR6",
+        "memory_clock_gbps": 21,
+        "memory_bus_bit": 128,
+        "card_bus": "PCI-E 4.0",
+        "digital_max_resolution": "7680x4320",
+        "multi_view_outputs": 4,
+        "card_length_mm": 250,
+        "card_width_mm": 120,
+        "card_height_mm": 42,
+        "pcb_form_factor": "ATX",
+        "directx_support": "DirectX 12 Ultimate",
+        "opengl_support": "OpenGL 4.6",
+        "recommended_psu_w": 550,
+        "power_connectors": "1x 16-pin",
+        "output_ports": "3x DisplayPort, 1x HDMI"
+      }
+    },
+    {
+      "brand": "NVIDIA",
+      "model": "GeForce RTX 4070",
+      "release_year": 2024,
+      "price_usd": 428.0,
+      "specs": {
+        "gpu_chip": "4070",
+        "core_clock_mhz": 1880,
+        "cuda_cores": 3640,
+        "memory_size_gb": 16,
+        "memory_type": "GDDR6X",
+        "memory_clock_gbps": 18,
+        "memory_bus_bit": 256,
+        "card_bus": "PCI-E 4.0",
+        "digital_max_resolution": "7680x4320",
+        "multi_view_outputs": 4,
+        "card_length_mm": 250,
+        "card_width_mm": 120,
+        "card_height_mm": 42,
+        "pcb_form_factor": "ATX",
+        "directx_support": "DirectX 12 Ultimate",
+        "opengl_support": "OpenGL 4.6",
+        "recommended_psu_w": 550,
+        "power_connectors": "1x 16-pin",
+        "output_ports": "3x DisplayPort, 1x HDMI"
+      }
+    },
+    {
+      "brand": "NVIDIA",
+      "model": "GeForce RTX 4070 Ti SUPER",
+      "release_year": 2025,
+      "price_usd": 500.0,
+      "specs": {
+        "gpu_chip": "SUPER",
+        "core_clock_mhz": 1925,
+        "cuda_cores": 4000,
+        "memory_size_gb": 16,
+        "memory_type": "GDDR6X",
+        "memory_clock_gbps": 17,
+        "memory_bus_bit": 256,
+        "card_bus": "PCI-E 4.0",
+        "digital_max_resolution": "7680x4320",
+        "multi_view_outputs": 4,
+        "card_length_mm": 265,
+        "card_width_mm": 120,
+        "card_height_mm": 42,
+        "pcb_form_factor": "ATX",
+        "directx_support": "DirectX 12 Ultimate",
+        "opengl_support": "OpenGL 4.6",
+        "recommended_psu_w": 650,
+        "power_connectors": "1x 16-pin",
+        "output_ports": "3x DisplayPort, 1x HDMI"
+      }
+    },
+    {
+      "brand": "NVIDIA",
+      "model": "GeForce RTX 4080",
+      "release_year": 2024,
+      "price_usd": 428.0,
+      "specs": {
+        "gpu_chip": "4080",
+        "core_clock_mhz": 1880,
+        "cuda_cores": 3640,
+        "memory_size_gb": 16,
+        "memory_type": "GDDR6X",
+        "memory_clock_gbps": 18,
+        "memory_bus_bit": 256,
+        "card_bus": "PCI-E 4.0",
+        "digital_max_resolution": "7680x4320",
+        "multi_view_outputs": 4,
+        "card_length_mm": 250,
+        "card_width_mm": 120,
+        "card_height_mm": 42,
+        "pcb_form_factor": "ATX",
+        "directx_support": "DirectX 12 Ultimate",
+        "opengl_support": "OpenGL 4.6",
+        "recommended_psu_w": 550,
+        "power_connectors": "1x 16-pin",
+        "output_ports": "3x DisplayPort, 1x HDMI"
+      }
+    },
+    {
+      "brand": "NVIDIA",
+      "model": "GeForce RTX 4090D",
+      "release_year": 2024,
+      "price_usd": 436.0,
+      "specs": {
+        "gpu_chip": "4090D",
+        "core_clock_mhz": 1885,
+        "cuda_cores": 3680,
+        "memory_size_gb": 16,
+        "memory_type": "GDDR6X",
+        "memory_clock_gbps": 19,
+        "memory_bus_bit": 256,
+        "card_bus": "PCI-E 4.0",
+        "digital_max_resolution": "7680x4320",
+        "multi_view_outputs": 4,
+        "card_length_mm": 265,
+        "card_width_mm": 120,
+        "card_height_mm": 42,
+        "pcb_form_factor": "ATX",
+        "directx_support": "DirectX 12 Ultimate",
+        "opengl_support": "OpenGL 4.6",
+        "recommended_psu_w": 650,
+        "power_connectors": "1x 16-pin",
+        "output_ports": "3x DisplayPort, 1x HDMI"
+      }
+    },
+    {
+      "brand": "AMD",
+      "model": "Radeon RX 7700 XT",
+      "release_year": 2024,
+      "price_usd": 436.0,
+      "specs": {
+        "gpu_chip": "XT",
+        "core_clock_mhz": 1885,
+        "cuda_cores": 3680,
+        "memory_size_gb": 16,
+        "memory_type": "GDDR6",
+        "memory_clock_gbps": 19,
+        "memory_bus_bit": 256,
+        "card_bus": "PCI-E 4.0",
+        "digital_max_resolution": "7680x4320",
+        "multi_view_outputs": 4,
+        "card_length_mm": 265,
+        "card_width_mm": 120,
+        "card_height_mm": 42,
+        "pcb_form_factor": "ATX",
+        "directx_support": "DirectX 12 Ultimate",
+        "opengl_support": "OpenGL 4.6",
+        "recommended_psu_w": 650,
+        "power_connectors": "1x 8-pin",
+        "output_ports": "3x DisplayPort, 1x HDMI"
+      }
+    },
+    {
+      "brand": "AMD",
+      "model": "Radeon RX 7700",
+      "release_year": 2024,
+      "price_usd": 412.0,
+      "specs": {
+        "gpu_chip": "7700",
+        "core_clock_mhz": 1870,
+        "cuda_cores": 3560,
+        "memory_size_gb": 16,
+        "memory_type": "GDDR6",
+        "memory_clock_gbps": 21,
+        "memory_bus_bit": 256,
+        "card_bus": "PCI-E 4.0",
+        "digital_max_resolution": "7680x4320",
+        "multi_view_outputs": 4,
+        "card_length_mm": 280,
+        "card_width_mm": 120,
+        "card_height_mm": 42,
+        "pcb_form_factor": "ATX",
+        "directx_support": "DirectX 12 Ultimate",
+        "opengl_support": "OpenGL 4.6",
+        "recommended_psu_w": 750,
+        "power_connectors": "1x 8-pin",
+        "output_ports": "3x DisplayPort, 1x HDMI"
+      }
+    },
+    {
+      "brand": "AMD",
+      "model": "Radeon RX 7600",
+      "release_year": 2024,
+      "price_usd": 412.0,
+      "specs": {
+        "gpu_chip": "7600",
+        "core_clock_mhz": 1870,
+        "cuda_cores": 3560,
+        "memory_size_gb": 8,
+        "memory_type": "GDDR6",
+        "memory_clock_gbps": 21,
+        "memory_bus_bit": 128,
+        "card_bus": "PCI-E 4.0",
+        "digital_max_resolution": "7680x4320",
+        "multi_view_outputs": 4,
+        "card_length_mm": 280,
+        "card_width_mm": 120,
+        "card_height_mm": 42,
+        "pcb_form_factor": "ATX",
+        "directx_support": "DirectX 12 Ultimate",
+        "opengl_support": "OpenGL 4.6",
+        "recommended_psu_w": 750,
+        "power_connectors": "1x 8-pin",
+        "output_ports": "3x DisplayPort, 1x HDMI"
+      }
+    },
+    {
+      "brand": "AMD",
+      "model": "Radeon RX 7800",
+      "release_year": 2024,
+      "price_usd": 412.0,
+      "specs": {
+        "gpu_chip": "7800",
+        "core_clock_mhz": 1870,
+        "cuda_cores": 3560,
+        "memory_size_gb": 16,
+        "memory_type": "GDDR6",
+        "memory_clock_gbps": 21,
+        "memory_bus_bit": 256,
+        "card_bus": "PCI-E 4.0",
+        "digital_max_resolution": "7680x4320",
+        "multi_view_outputs": 4,
+        "card_length_mm": 280,
+        "card_width_mm": 120,
+        "card_height_mm": 42,
+        "pcb_form_factor": "ATX",
+        "directx_support": "DirectX 12 Ultimate",
+        "opengl_support": "OpenGL 4.6",
+        "recommended_psu_w": 750,
+        "power_connectors": "1x 8-pin",
+        "output_ports": "3x DisplayPort, 1x HDMI"
+      }
+    },
+    {
+      "brand": "NVIDIA",
+      "model": "GeForce RTX 4050",
+      "release_year": 2024,
+      "price_usd": 428.0,
+      "specs": {
+        "gpu_chip": "4050",
+        "core_clock_mhz": 1880,
+        "cuda_cores": 3640,
+        "memory_size_gb": 8,
+        "memory_type": "GDDR6",
+        "memory_clock_gbps": 18,
+        "memory_bus_bit": 128,
+        "card_bus": "PCI-E 4.0",
+        "digital_max_resolution": "7680x4320",
+        "multi_view_outputs": 4,
+        "card_length_mm": 250,
+        "card_width_mm": 120,
+        "card_height_mm": 42,
+        "pcb_form_factor": "ATX",
+        "directx_support": "DirectX 12 Ultimate",
+        "opengl_support": "OpenGL 4.6",
+        "recommended_psu_w": 550,
+        "power_connectors": "1x 16-pin",
+        "output_ports": "3x DisplayPort, 1x HDMI"
+      }
+    },
+    {
+      "brand": "NVIDIA",
+      "model": "GeForce RTX 5080",
+      "release_year": 2025,
+      "price_usd": 428.0,
+      "specs": {
+        "gpu_chip": "5080",
+        "core_clock_mhz": 1880,
+        "cuda_cores": 3640,
+        "memory_size_gb": 16,
+        "memory_type": "GDDR6",
+        "memory_clock_gbps": 18,
+        "memory_bus_bit": 256,
+        "card_bus": "PCI-E 5.0",
+        "digital_max_resolution": "7680x4320",
+        "multi_view_outputs": 4,
+        "card_length_mm": 250,
+        "card_width_mm": 120,
+        "card_height_mm": 42,
+        "pcb_form_factor": "ATX",
+        "directx_support": "DirectX 12 Ultimate",
+        "opengl_support": "OpenGL 4.6",
+        "recommended_psu_w": 550,
+        "power_connectors": "1x 16-pin",
+        "output_ports": "3x DisplayPort, 1x HDMI"
+      }
+    },
+    {
+      "brand": "ASUS",
+      "model": "ROG Strix RTX 3090 Ti OC",
+      "release_year": 2022,
+      "price_usd": 1199,
+      "specs": {
+        "gpu_chip": "RTX 3090 Ti",
+        "core_clock_mhz": 1890,
+        "cuda_cores": 10752,
+        "memory_size_gb": 24,
+        "memory_type": "GDDR6X",
+        "memory_clock_gbps": 21,
+        "memory_bus_bit": 384,
+        "card_bus": "PCIe 4.0 x16",
+        "digital_max_resolution": "7680x4320",
+        "multi_view_outputs": 4,
+        "card_length_mm": 357,
+        "card_width_mm": 158,
+        "card_height_mm": 70,
+        "pcb_form_factor": "Triple Slot",
+        "directx_support": "12 Ultimate",
+        "opengl_support": "4.6",
+        "recommended_psu_w": 850,
+        "power_connectors": "3x 8-pin",
+        "output_ports": "3x DisplayPort 1.4a, 2x HDMI 2.1"
+      }
+    },
+    {
+      "brand": "MSI",
+      "model": "Gaming X RTX 3080",
+      "release_year": 2020,
+      "price_usd": 799,
+      "specs": {
+        "gpu_chip": "RTX 3080",
+        "core_clock_mhz": 1815,
+        "cuda_cores": 8704,
+        "memory_size_gb": 10,
+        "memory_type": "GDDR6X",
+        "memory_clock_gbps": 19,
+        "memory_bus_bit": 320,
+        "card_bus": "PCIe 4.0 x16",
+        "digital_max_resolution": "7680x4320",
+        "multi_view_outputs": 4,
+        "card_length_mm": 323,
+        "card_width_mm": 140,
+        "card_height_mm": 56,
+        "pcb_form_factor": "Dual Slot",
+        "directx_support": "12 Ultimate",
+        "opengl_support": "4.6",
+        "recommended_psu_w": 750,
+        "power_connectors": "2x 8-pin",
+        "output_ports": "3x DisplayPort 1.4a, 1x HDMI 2.1"
+      }
+    },
+    {
+      "brand": "Gigabyte",
+      "model": "Eagle RTX 3070",
+      "release_year": 2020,
+      "price_usd": 549,
+      "specs": {
+        "gpu_chip": "RTX 3070",
+        "core_clock_mhz": 1755,
+        "cuda_cores": 5888,
+        "memory_size_gb": 8,
+        "memory_type": "GDDR6",
+        "memory_clock_gbps": 14,
+        "memory_bus_bit": 256,
+        "card_bus": "PCIe 4.0 x16",
+        "digital_max_resolution": "7680x4320",
+        "multi_view_outputs": 4,
+        "card_length_mm": 286,
+        "card_width_mm": 115,
+        "card_height_mm": 51,
+        "pcb_form_factor": "Dual Slot",
+        "directx_support": "12 Ultimate",
+        "opengl_support": "4.6",
+        "recommended_psu_w": 650,
+        "power_connectors": "1x 8-pin",
+        "output_ports": "2x DisplayPort 1.4a, 2x HDMI 2.1"
+      }
+    },
+    {
+      "brand": "EVGA",
+      "model": "FTW3 RTX 3060 Ti",
+      "release_year": 2020,
+      "price_usd": 429,
+      "specs": {
+        "gpu_chip": "RTX 3060 Ti",
+        "core_clock_mhz": 1695,
+        "cuda_cores": 4864,
+        "memory_size_gb": 8,
+        "memory_type": "GDDR6",
+        "memory_clock_gbps": 14,
+        "memory_bus_bit": 256,
+        "card_bus": "PCIe 4.0 x16",
+        "digital_max_resolution": "7680x4320",
+        "multi_view_outputs": 4,
+        "card_length_mm": 300,
+        "card_width_mm": 136,
+        "card_height_mm": 57,
+        "pcb_form_factor": "Dual Slot",
+        "directx_support": "12 Ultimate",
+        "opengl_support": "4.6",
+        "recommended_psu_w": 600,
+        "power_connectors": "1x 8-pin",
+        "output_ports": "3x DisplayPort 1.4a, 1x HDMI 2.1"
+      }
+    },
+    {
+      "brand": "Sapphire",
+      "model": "Nitro+ RX 6950 XT",
+      "release_year": 2022,
+      "price_usd": 899,
+      "specs": {
+        "gpu_chip": "RX 6950 XT",
+        "core_clock_mhz": 2310,
+        "cuda_cores": 5120,
+        "memory_size_gb": 16,
+        "memory_type": "GDDR6",
+        "memory_clock_gbps": 18,
+        "memory_bus_bit": 256,
+        "card_bus": "PCIe 4.0 x16",
+        "digital_max_resolution": "7680x4320",
+        "multi_view_outputs": 4,
+        "card_length_mm": 310,
+        "card_width_mm": 130,
+        "card_height_mm": 55,
+        "pcb_form_factor": "Triple Slot",
+        "directx_support": "12 Ultimate",
+        "opengl_support": "4.6",
+        "recommended_psu_w": 850,
+        "power_connectors": "2x 8-pin",
+        "output_ports": "2x DisplayPort 1.4, 2x HDMI 2.1"
+      }
+    },
+    {
+      "brand": "XFX",
+      "model": "Speedster MERC RX 6800 XT",
+      "release_year": 2020,
+      "price_usd": 649,
+      "specs": {
+        "gpu_chip": "RX 6800 XT",
+        "core_clock_mhz": 2250,
+        "cuda_cores": 4608,
+        "memory_size_gb": 16,
+        "memory_type": "GDDR6",
+        "memory_clock_gbps": 16,
+        "memory_bus_bit": 256,
+        "card_bus": "PCIe 4.0 x16",
+        "digital_max_resolution": "7680x4320",
+        "multi_view_outputs": 4,
+        "card_length_mm": 300,
+        "card_width_mm": 125,
+        "card_height_mm": 50,
+        "pcb_form_factor": "Triple Slot",
+        "directx_support": "12 Ultimate",
+        "opengl_support": "4.6",
+        "recommended_psu_w": 750,
+        "power_connectors": "2x 8-pin",
+        "output_ports": "2x DisplayPort 1.4, 2x HDMI 2.1"
+      }
+    },
+    {
+      "brand": "ASUS",
+      "model": "ROG Strix RTX 3090 Ti OC",
+      "release_year": 2022,
+      "price_usd": 1199,
+      "specs": {
+        "gpu_chip": "RTX 3090 Ti",
+        "core_clock_mhz": 1890,
+        "cuda_cores": 10752,
+        "memory_size_gb": 24,
+        "memory_type": "GDDR6X",
+        "memory_clock_gbps": 21,
+        "memory_bus_bit": 384,
+        "card_bus": "PCIe 4.0 x16",
+        "digital_max_resolution": "7680x4320",
+        "multi_view_outputs": 4,
+        "card_length_mm": 357,
+        "card_width_mm": 158,
+        "card_height_mm": 70,
+        "pcb_form_factor": "Triple Slot",
+        "directx_support": "12 Ultimate",
+        "opengl_support": "4.6",
+        "recommended_psu_w": 850,
+        "power_connectors": "3x 8-pin",
+        "output_ports": "3x DisplayPort 1.4a, 2x HDMI 2.1"
+      }
+    },
+    {
+      "brand": "MSI",
+      "model": "Gaming X RTX 3080",
+      "release_year": 2020,
+      "price_usd": 799,
+      "specs": {
+        "gpu_chip": "RTX 3080",
+        "core_clock_mhz": 1815,
+        "cuda_cores": 8704,
+        "memory_size_gb": 10,
+        "memory_type": "GDDR6X",
+        "memory_clock_gbps": 19,
+        "memory_bus_bit": 320,
+        "card_bus": "PCIe 4.0 x16",
+        "digital_max_resolution": "7680x4320",
+        "multi_view_outputs": 4,
+        "card_length_mm": 323,
+        "card_width_mm": 140,
+        "card_height_mm": 56,
+        "pcb_form_factor": "Dual Slot",
+        "directx_support": "12 Ultimate",
+        "opengl_support": "4.6",
+        "recommended_psu_w": 750,
+        "power_connectors": "2x 8-pin",
+        "output_ports": "3x DisplayPort 1.4a, 1x HDMI 2.1"
+      }
+    },
+    {
+      "brand": "Gigabyte",
+      "model": "Eagle RTX 3070",
+      "release_year": 2020,
+      "price_usd": 549,
+      "specs": {
+        "gpu_chip": "RTX 3070",
+        "core_clock_mhz": 1755,
+        "cuda_cores": 5888,
+        "memory_size_gb": 8,
+        "memory_type": "GDDR6",
+        "memory_clock_gbps": 14,
+        "memory_bus_bit": 256,
+        "card_bus": "PCIe 4.0 x16",
+        "digital_max_resolution": "7680x4320",
+        "multi_view_outputs": 4,
+        "card_length_mm": 286,
+        "card_width_mm": 115,
+        "card_height_mm": 51,
+        "pcb_form_factor": "Dual Slot",
+        "directx_support": "12 Ultimate",
+        "opengl_support": "4.6",
+        "recommended_psu_w": 650,
+        "power_connectors": "1x 8-pin",
+        "output_ports": "2x DisplayPort 1.4a, 2x HDMI 2.1"
+      }
+    },
+    {
+      "brand": "EVGA",
+      "model": "FTW3 RTX 3060 Ti",
+      "release_year": 2020,
+      "price_usd": 429,
+      "specs": {
+        "gpu_chip": "RTX 3060 Ti",
+        "core_clock_mhz": 1695,
+        "cuda_cores": 4864,
+        "memory_size_gb": 8,
+        "memory_type": "GDDR6",
+        "memory_clock_gbps": 14,
+        "memory_bus_bit": 256,
+        "card_bus": "PCIe 4.0 x16",
+        "digital_max_resolution": "7680x4320",
+        "multi_view_outputs": 4,
+        "card_length_mm": 300,
+        "card_width_mm": 136,
+        "card_height_mm": 57,
+        "pcb_form_factor": "Dual Slot",
+        "directx_support": "12 Ultimate",
+        "opengl_support": "4.6",
+        "recommended_psu_w": 600,
+        "power_connectors": "1x 8-pin",
+        "output_ports": "3x DisplayPort 1.4a, 1x HDMI 2.1"
+      }
+    },
+    {
+      "brand": "Sapphire",
+      "model": "Nitro+ RX 6950 XT",
+      "release_year": 2022,
+      "price_usd": 899,
+      "specs": {
+        "gpu_chip": "RX 6950 XT",
+        "core_clock_mhz": 2310,
+        "cuda_cores": 5120,
+        "memory_size_gb": 16,
+        "memory_type": "GDDR6",
+        "memory_clock_gbps": 18,
+        "memory_bus_bit": 256,
+        "card_bus": "PCIe 4.0 x16",
+        "digital_max_resolution": "7680x4320",
+        "multi_view_outputs": 4,
+        "card_length_mm": 310,
+        "card_width_mm": 130,
+        "card_height_mm": 55,
+        "pcb_form_factor": "Triple Slot",
+        "directx_support": "12 Ultimate",
+        "opengl_support": "4.6",
+        "recommended_psu_w": 850,
+        "power_connectors": "2x 8-pin",
+        "output_ports": "2x DisplayPort 1.4, 2x HDMI 2.1"
+      }
+    },
+    {
+      "brand": "XFX",
+      "model": "Speedster MERC RX 6800 XT",
+      "release_year": 2020,
+      "price_usd": 649,
+      "specs": {
+        "gpu_chip": "RX 6800 XT",
+        "core_clock_mhz": 2250,
+        "cuda_cores": 4608,
+        "memory_size_gb": 16,
+        "memory_type": "GDDR6",
+        "memory_clock_gbps": 16,
+        "memory_bus_bit": 256,
+        "card_bus": "PCIe 4.0 x16",
+        "digital_max_resolution": "7680x4320",
+        "multi_view_outputs": 4,
+        "card_length_mm": 300,
+        "card_width_mm": 125,
+        "card_height_mm": 50,
+        "pcb_form_factor": "Triple Slot",
+        "directx_support": "12 Ultimate",
+        "opengl_support": "4.6",
+        "recommended_psu_w": 750,
+        "power_connectors": "2x 8-pin",
+        "output_ports": "2x DisplayPort 1.4, 2x HDMI 2.1"
+      }
+    },
+    {
+      "brand": "ASUS",
+      "model": "TUF RTX 4080",
+      "release_year": 2022,
+      "price_usd": 1199,
+      "specs": {
+        "gpu_chip": "RTX 4080",
+        "core_clock_mhz": 2505,
+        "cuda_cores": 9728,
+        "memory_size_gb": 16,
+        "memory_type": "GDDR6X",
+        "memory_bus_bit": 256,
+        "recommended_psu_w": 750
+      }
+    },
+    {
+      "brand": "MSI",
+      "model": "Ventus 3X RTX 4070 Ti",
+      "release_year": 2023,
+      "price_usd": 799,
+      "specs": {
+        "gpu_chip": "RTX 4070 Ti",
+        "core_clock_mhz": 2610,
+        "cuda_cores": 7680,
+        "memory_size_gb": 12,
+        "memory_type": "GDDR6X",
+        "memory_bus_bit": 192,
+        "recommended_psu_w": 700
+      }
+    },
+    {
+      "brand": "Gigabyte",
+      "model": "Aorus RTX 4070",
+      "release_year": 2023,
+      "price_usd": 599,
+      "specs": {
+        "gpu_chip": "RTX 4070",
+        "core_clock_mhz": 2475,
+        "cuda_cores": 5888,
+        "memory_size_gb": 12,
+        "memory_type": "GDDR6X",
+        "memory_bus_bit": 192,
+        "recommended_psu_w": 650
+      }
+    },
+    {
+      "brand": "EVGA",
+      "model": "XC3 RTX 3070 Ti",
+      "release_year": 2021,
+      "price_usd": 599,
+      "specs": {
+        "gpu_chip": "RTX 3070 Ti",
+        "core_clock_mhz": 1770,
+        "cuda_cores": 6144,
+        "memory_size_gb": 8,
+        "memory_type": "GDDR6X",
+        "memory_bus_bit": 256,
+        "recommended_psu_w": 750
+      }
+    },
+    {
+      "brand": "Zotac",
+      "model": "Twin Edge RTX 3060",
+      "release_year": 2021,
+      "price_usd": 329,
+      "specs": {
+        "gpu_chip": "RTX 3060",
+        "core_clock_mhz": 1777,
+        "cuda_cores": 3584,
+        "memory_size_gb": 12,
+        "memory_type": "GDDR6",
+        "memory_bus_bit": 192,
+        "recommended_psu_w": 550
+      }
+    },
+    {
+      "brand": "ASUS",
+      "model": "Dual RTX 3050",
+      "release_year": 2022,
+      "price_usd": 249,
+      "specs": {
+        "gpu_chip": "RTX 3050",
+        "core_clock_mhz": 1777,
+        "cuda_cores": 2560,
+        "memory_size_gb": 8,
+        "memory_type": "GDDR6",
+        "memory_bus_bit": 128,
+        "recommended_psu_w": 550
+      }
+    },
+    {
+      "brand": "Sapphire",
+      "model": "Pulse RX 7900 XTX",
+      "release_year": 2022,
+      "price_usd": 999,
+      "specs": {
+        "gpu_chip": "RX 7900 XTX",
+        "core_clock_mhz": 2500,
+        "cuda_cores": 6144,
+        "memory_size_gb": 24,
+        "memory_type": "GDDR6",
+        "memory_bus_bit": 384,
+        "recommended_psu_w": 850
+      }
+    },
+    {
+      "brand": "XFX",
+      "model": "Qick RX 7900 XT",
+      "release_year": 2022,
+      "price_usd": 849,
+      "specs": {
+        "gpu_chip": "RX 7900 XT",
+        "core_clock_mhz": 2400,
+        "cuda_cores": 5376,
+        "memory_size_gb": 20,
+        "memory_type": "GDDR6",
+        "memory_bus_bit": 320,
+        "recommended_psu_w": 750
+      }
+    },
+    {
+      "brand": "ASRock",
+      "model": "Challenger RX 7800 XT",
+      "release_year": 2023,
+      "price_usd": 499,
+      "specs": {
+        "gpu_chip": "RX 7800 XT",
+        "core_clock_mhz": 2430,
+        "cuda_cores": 3840,
+        "memory_size_gb": 16,
+        "memory_type": "GDDR6",
+        "memory_bus_bit": 256,
+        "recommended_psu_w": 700
+      }
+    },
+    {
+      "brand": "PowerColor",
+      "model": "Red Devil RX 7700 XT",
+      "release_year": 2023,
+      "price_usd": 449,
+      "specs": {
+        "gpu_chip": "RX 7700 XT",
+        "core_clock_mhz": 2600,
+        "cuda_cores": 3456,
+        "memory_size_gb": 12,
+        "memory_type": "GDDR6",
+        "memory_bus_bit": 192,
+        "recommended_psu_w": 650
+      }
+    },
+    {
+      "brand": "Gigabyte",
+      "model": "Gaming OC RX 6750 XT",
+      "release_year": 2022,
+      "price_usd": 419,
+      "specs": {
+        "gpu_chip": "RX 6750 XT",
+        "core_clock_mhz": 2623,
+        "cuda_cores": 2560,
+        "memory_size_gb": 12,
+        "memory_type": "GDDR6",
+        "memory_bus_bit": 192,
+        "recommended_psu_w": 650
+      }
+    },
+    {
+      "brand": "MSI",
+      "model": "Mech RX 6650 XT",
+      "release_year": 2022,
+      "price_usd": 299,
+      "specs": {
+        "gpu_chip": "RX 6650 XT",
+        "core_clock_mhz": 2689,
+        "cuda_cores": 2048,
+        "memory_size_gb": 8,
+        "memory_type": "GDDR6",
+        "memory_bus_bit": 128,
+        "recommended_psu_w": 500
+      }
+    }
+  ],
+  "RAM": [
+    {
+      "brand": "Corsair",
+      "model": "Vengeance RGB Pro 32GB 3200MHz",
+      "release_year": 2024,
+      "price_usd": 140.0,
+      "specs": {
+        "ram_type": "DDR4",
+        "model_name": "Vengeance RGB Pro",
+        "capacity_gb": 32,
+        "module_type": "Desktop",
+        "speed_mhz": 3200,
+        "latency": "CL16",
+        "voltage_v": 1.35,
+        "ecc": "Non-ECC",
+        "color": "Black",
+        "heatsink": true,
+        "rgb": true
+      }
+    },
+    {
+      "brand": "Corsair",
+      "model": "Vengeance RGB Pro 16GB 3200MHz",
+      "release_year": 2024,
+      "price_usd": 110.0,
+      "specs": {
+        "ram_type": "DDR4",
+        "model_name": "Vengeance RGB Pro",
+        "capacity_gb": 16,
+        "module_type": "Desktop",
+        "speed_mhz": 3200,
+        "latency": "CL16",
+        "voltage_v": 1.35,
+        "ecc": "Non-ECC",
+        "color": "White",
+        "heatsink": true,
+        "rgb": true
+      }
+    },
+    {
+      "brand": "Corsair",
+      "model": "Vengeance 32GB 5600MHz",
+      "release_year": 2024,
+      "price_usd": 170.0,
+      "specs": {
+        "ram_type": "DDR5",
+        "model_name": "Vengeance",
+        "capacity_gb": 32,
+        "module_type": "Desktop",
+        "speed_mhz": 5600,
+        "latency": "CL36",
+        "voltage_v": 1.25,
+        "ecc": "Non-ECC",
+        "color": "Black",
+        "heatsink": true,
+        "rgb": false
+      }
+    },
+    {
+      "brand": "G.Skill",
+      "model": "Trident Z5 RGB 32GB 6000MHz",
+      "release_year": 2024,
+      "price_usd": 175.0,
+      "specs": {
+        "ram_type": "DDR5",
+        "model_name": "Trident Z5 RGB",
+        "capacity_gb": 32,
+        "module_type": "Desktop",
+        "speed_mhz": 6000,
+        "latency": "CL36",
+        "voltage_v": 1.35,
+        "ecc": "Non-ECC",
+        "color": "Black",
+        "heatsink": true,
+        "rgb": true
+      }
+    },
+    {
+      "brand": "G.Skill",
+      "model": "Ripjaws S5 32GB 5600MHz",
+      "release_year": 2024,
+      "price_usd": 170.0,
+      "specs": {
+        "ram_type": "DDR5",
+        "model_name": "Ripjaws S5",
+        "capacity_gb": 32,
+        "module_type": "Desktop",
+        "speed_mhz": 5600,
+        "latency": "CL36",
+        "voltage_v": 1.25,
+        "ecc": "Non-ECC",
+        "color": "Black",
+        "heatsink": true,
+        "rgb": false
+      }
+    },
+    {
+      "brand": "Kingston",
+      "model": "Fury Beast RGB 32GB 3600MHz",
+      "release_year": 2024,
+      "price_usd": 145.0,
+      "specs": {
+        "ram_type": "DDR4",
+        "model_name": "Fury Beast RGB",
+        "capacity_gb": 32,
+        "module_type": "Desktop",
+        "speed_mhz": 3600,
+        "latency": "CL18",
+        "voltage_v": 1.35,
+        "ecc": "Non-ECC",
+        "color": "Black",
+        "heatsink": true,
+        "rgb": true
+      }
+    },
+    {
+      "brand": "Kingston",
+      "model": "Fury Beast 16GB 3200MHz",
+      "release_year": 2024,
+      "price_usd": 110.0,
+      "specs": {
+        "ram_type": "DDR4",
+        "model_name": "Fury Beast",
+        "capacity_gb": 16,
+        "module_type": "Desktop",
+        "speed_mhz": 3200,
+        "latency": "CL16",
+        "voltage_v": 1.35,
+        "ecc": "Non-ECC",
+        "color": "Black",
+        "heatsink": true,
+        "rgb": false
+      }
+    },
+    {
+      "brand": "TeamGroup",
+      "model": "T-Force Delta RGB 32GB 6400MHz",
+      "release_year": 2024,
+      "price_usd": 180.0,
+      "specs": {
+        "ram_type": "DDR5",
+        "model_name": "T-Force Delta RGB",
+        "capacity_gb": 32,
+        "module_type": "Desktop",
+        "speed_mhz": 6400,
+        "latency": "CL40",
+        "voltage_v": 1.35,
+        "ecc": "Non-ECC",
+        "color": "White",
+        "heatsink": true,
+        "rgb": true
+      }
+    },
+    {
+      "brand": "TeamGroup",
+      "model": "T-Force Delta RGB 48GB 6000MHz",
+      "release_year": 2024,
+      "price_usd": 180,
+      "specs": {
+        "ram_type": "DDR5",
+        "model_name": "T-Force Delta RGB",
+        "capacity_gb": 48,
+        "module_type": "DIMM",
+        "speed_mhz": 6000,
+        "latency": "CL30-36-36-96",
+        "voltage_v": 1.35,
+        "ecc": "Non-ECC",
+        "color": "Black/RGB",
+        "heatsink": true,
+        "rgb": true
+      }
+    },
+    {
+      "brand": "Crucial",
+      "model": "Pro 32GB 5200MHz",
+      "release_year": 2023,
+      "price_usd": 110,
+      "specs": {
+        "ram_type": "DDR5",
+        "model_name": "Crucial Pro",
+        "capacity_gb": 32,
+        "module_type": "DIMM",
+        "speed_mhz": 5200,
+        "latency": "CL38-38-38-84",
+        "voltage_v": 1.25,
+        "ecc": "Non-ECC",
+        "color": "Black",
+        "heatsink": true,
+        "rgb": false
+      }
+    },
+    {
+      "brand": "G.Skill",
+      "model": "Ripjaws V 32GB 3600MHz",
+      "release_year": 2021,
+      "price_usd": 85,
+      "specs": {
+        "ram_type": "DDR4",
+        "model_name": "Ripjaws V",
+        "capacity_gb": 32,
+        "module_type": "DIMM",
+        "speed_mhz": 3600,
+        "latency": "CL16-19-19-39",
+        "voltage_v": 1.35,
+        "ecc": "Non-ECC",
+        "color": "Black",
+        "heatsink": true,
+        "rgb": false
+      }
+    },
+    {
+      "brand": "Kingston",
+      "model": "Fury Renegade 64GB 6400MHz",
+      "release_year": 2024,
+      "price_usd": 270,
+      "specs": {
+        "ram_type": "DDR5",
+        "model_name": "Fury Renegade",
+        "capacity_gb": 64,
+        "module_type": "DIMM",
+        "speed_mhz": 6400,
+        "latency": "CL32-39-39-80",
+        "voltage_v": 1.4,
+        "ecc": "Non-ECC",
+        "color": "Black/RGB",
+        "heatsink": true,
+        "rgb": true
+      }
+    },
+    {
+      "brand": "ADATA",
+      "model": "XPG Spectrix D60G 32GB 3200MHz",
+      "release_year": 2020,
+      "price_usd": 95,
+      "specs": {
+        "ram_type": "DDR4",
+        "model_name": "XPG Spectrix D60G",
+        "capacity_gb": 32,
+        "module_type": "DIMM",
+        "speed_mhz": 3200,
+        "latency": "CL16-18-18-38",
+        "voltage_v": 1.35,
+        "ecc": "Non-ECC",
+        "color": "RGB",
+        "heatsink": true,
+        "rgb": true
+      }
+    },
+    {
+      "brand": "TeamGroup",
+      "model": "T-Force Delta RGB 48GB 6000MHz",
+      "release_year": 2024,
+      "price_usd": 180,
+      "specs": {
+        "ram_type": "DDR5",
+        "model_name": "T-Force Delta RGB",
+        "capacity_gb": 48,
+        "module_type": "DIMM",
+        "speed_mhz": 6000,
+        "latency": "CL30-36-36-96",
+        "voltage_v": 1.35,
+        "ecc": "Non-ECC",
+        "color": "Black/RGB",
+        "heatsink": true,
+        "rgb": true
+      }
+    },
+    {
+      "brand": "Crucial",
+      "model": "Pro 32GB 5200MHz",
+      "release_year": 2023,
+      "price_usd": 110,
+      "specs": {
+        "ram_type": "DDR5",
+        "model_name": "Crucial Pro",
+        "capacity_gb": 32,
+        "module_type": "DIMM",
+        "speed_mhz": 5200,
+        "latency": "CL38-38-38-84",
+        "voltage_v": 1.25,
+        "ecc": "Non-ECC",
+        "color": "Black",
+        "heatsink": true,
+        "rgb": false
+      }
+    },
+    {
+      "brand": "G.Skill",
+      "model": "Ripjaws V 32GB 3600MHz",
+      "release_year": 2021,
+      "price_usd": 85,
+      "specs": {
+        "ram_type": "DDR4",
+        "model_name": "Ripjaws V",
+        "capacity_gb": 32,
+        "module_type": "DIMM",
+        "speed_mhz": 3600,
+        "latency": "CL16-19-19-39",
+        "voltage_v": 1.35,
+        "ecc": "Non-ECC",
+        "color": "Black",
+        "heatsink": true,
+        "rgb": false
+      }
+    },
+    {
+      "brand": "Kingston",
+      "model": "Fury Renegade 64GB 6400MHz",
+      "release_year": 2024,
+      "price_usd": 270,
+      "specs": {
+        "ram_type": "DDR5",
+        "model_name": "Fury Renegade",
+        "capacity_gb": 64,
+        "module_type": "DIMM",
+        "speed_mhz": 6400,
+        "latency": "CL32-39-39-80",
+        "voltage_v": 1.4,
+        "ecc": "Non-ECC",
+        "color": "Black/RGB",
+        "heatsink": true,
+        "rgb": true
+      }
+    },
+    {
+      "brand": "ADATA",
+      "model": "XPG Spectrix D60G 32GB 3200MHz",
+      "release_year": 2020,
+      "price_usd": 95,
+      "specs": {
+        "ram_type": "DDR4",
+        "model_name": "XPG Spectrix D60G",
+        "capacity_gb": 32,
+        "module_type": "DIMM",
+        "speed_mhz": 3200,
+        "latency": "CL16-18-18-38",
+        "voltage_v": 1.35,
+        "ecc": "Non-ECC",
+        "color": "RGB",
+        "heatsink": true,
+        "rgb": true
+      }
+    },
+    {
+      "brand": "Corsair",
+      "model": "Dominator Platinum 64GB 6000MHz",
+      "release_year": 2023,
+      "price_usd": 299,
+      "specs": {
+        "ram_type": "DDR5",
+        "capacity_gb": 64,
+        "speed_mhz": 6000,
+        "latency": "CL30",
+        "rgb": true
+      }
+    },
+    {
+      "brand": "G.Skill",
+      "model": "Flare X5 32GB 6000MHz",
+      "release_year": 2023,
+      "price_usd": 135,
+      "specs": {
+        "ram_type": "DDR5",
+        "capacity_gb": 32,
+        "speed_mhz": 6000,
+        "latency": "CL36",
+        "rgb": false
+      }
+    },
+    {
+      "brand": "Kingston",
+      "model": "Fury Beast 16GB 5600MHz",
+      "release_year": 2022,
+      "price_usd": 65,
+      "specs": {
+        "ram_type": "DDR5",
+        "capacity_gb": 16,
+        "speed_mhz": 5600,
+        "latency": "CL36",
+        "rgb": false
+      }
+    },
+    {
+      "brand": "TeamGroup",
+      "model": "T-Create Classic 64GB 3600MHz",
+      "release_year": 2021,
+      "price_usd": 189,
+      "specs": {
+        "ram_type": "DDR4",
+        "capacity_gb": 64,
+        "speed_mhz": 3600,
+        "latency": "CL18",
+        "rgb": false
+      }
+    },
+    {
+      "brand": "Corsair",
+      "model": "Vengeance LPX 16GB 3200MHz",
+      "release_year": 2019,
+      "price_usd": 49,
+      "specs": {
+        "ram_type": "DDR4",
+        "capacity_gb": 16,
+        "speed_mhz": 3200,
+        "latency": "CL16",
+        "rgb": false
+      }
+    },
+    {
+      "brand": "G.Skill",
+      "model": "Trident Z Neo 32GB 3600MHz",
+      "release_year": 2020,
+      "price_usd": 119,
+      "specs": {
+        "ram_type": "DDR4",
+        "capacity_gb": 32,
+        "speed_mhz": 3600,
+        "latency": "CL16",
+        "rgb": true
+      }
+    },
+    {
+      "brand": "Kingston",
+      "model": "HyperX Predator 16GB 4000MHz",
+      "release_year": 2020,
+      "price_usd": 79,
+      "specs": {
+        "ram_type": "DDR4",
+        "capacity_gb": 16,
+        "speed_mhz": 4000,
+        "latency": "CL19",
+        "rgb": true
+      }
+    },
+    {
+      "brand": "Crucial",
+      "model": "Ballistix MAX 32GB 4400MHz",
+      "release_year": 2020,
+      "price_usd": 199,
+      "specs": {
+        "ram_type": "DDR4",
+        "capacity_gb": 32,
+        "speed_mhz": 4400,
+        "latency": "CL19",
+        "rgb": true
+      }
+    },
+    {
+      "brand": "ADATA",
+      "model": "XPG Lancer 32GB 5200MHz",
+      "release_year": 2022,
+      "price_usd": 105,
+      "specs": {
+        "ram_type": "DDR5",
+        "capacity_gb": 32,
+        "speed_mhz": 5200,
+        "latency": "CL38",
+        "rgb": true
+      }
+    },
+    {
+      "brand": "TeamGroup",
+      "model": "T-Force Vulcan 16GB 3600MHz",
+      "release_year": 2020,
+      "price_usd": 59,
+      "specs": {
+        "ram_type": "DDR4",
+        "capacity_gb": 16,
+        "speed_mhz": 3600,
+        "latency": "CL18",
+        "rgb": false
+      }
+    }
+  ],
+  "SSD": [
+    {
+      "brand": "Samsung",
+      "model": "980 PRO 500GB",
+      "release_year": 2024,
+      "price_usd": 100.0,
+      "specs": {
+        "series": "980 PRO",
+        "capacity_gb": 500,
+        "form_factor": "M.2 2280",
+        "nand_type": "3D TLC",
+        "interface": "PCIe Gen4 x4, NVMe 1.3",
+        "seq_read_mb_s": 3500,
+        "seq_write_mb_s": 3150,
+        "rand_read_iops": 800000,
+        "rand_write_iops": 800000,
+        "endurance_tbw": 300.0,
+        "operating_temp_min_c": 0,
+        "operating_temp_max_c": 70
+      }
+    },
+    {
+      "brand": "Samsung",
+      "model": "980 PRO 1000GB",
+      "release_year": 2024,
+      "price_usd": 140.0,
+      "specs": {
+        "series": "980 PRO",
+        "capacity_gb": 1000,
+        "form_factor": "M.2 2280",
+        "nand_type": "3D TLC",
+        "interface": "PCIe Gen4 x4, NVMe 1.3",
+        "seq_read_mb_s": 3500,
+        "seq_write_mb_s": 3150,
+        "rand_read_iops": 800000,
+        "rand_write_iops": 800000,
+        "endurance_tbw": 600.0,
+        "operating_temp_min_c": 0,
+        "operating_temp_max_c": 70
+      }
+    },
+    {
+      "brand": "Samsung",
+      "model": "980 PRO 2000GB",
+      "release_year": 2024,
+      "price_usd": 220.0,
+      "specs": {
+        "series": "980 PRO",
+        "capacity_gb": 2000,
+        "form_factor": "M.2 2280",
+        "nand_type": "3D TLC",
+        "interface": "PCIe Gen4 x4, NVMe 1.3",
+        "seq_read_mb_s": 3500,
+        "seq_write_mb_s": 3150,
+        "rand_read_iops": 800000,
+        "rand_write_iops": 800000,
+        "endurance_tbw": 1200.0,
+        "operating_temp_min_c": 0,
+        "operating_temp_max_c": 70
+      }
+    },
+    {
+      "brand": "Samsung",
+      "model": "980 PRO 4000GB",
+      "release_year": 2024,
+      "price_usd": 380.0,
+      "specs": {
+        "series": "980 PRO",
+        "capacity_gb": 4000,
+        "form_factor": "M.2 2280",
+        "nand_type": "3D TLC",
+        "interface": "PCIe Gen4 x4, NVMe 1.3",
+        "seq_read_mb_s": 3500,
+        "seq_write_mb_s": 3150,
+        "rand_read_iops": 800000,
+        "rand_write_iops": 800000,
+        "endurance_tbw": 2400.0,
+        "operating_temp_min_c": 0,
+        "operating_temp_max_c": 70
+      }
+    },
+    {
+      "brand": "Samsung",
+      "model": "990 PRO 500GB",
+      "release_year": 2024,
+      "price_usd": 100.0,
+      "specs": {
+        "series": "990 PRO",
+        "capacity_gb": 500,
+        "form_factor": "M.2 2280",
+        "nand_type": "3D TLC",
+        "interface": "PCIe Gen4 x4, NVMe 2.0",
+        "seq_read_mb_s": 7000,
+        "seq_write_mb_s": 6300,
+        "rand_read_iops": 800000,
+        "rand_write_iops": 800000,
+        "endurance_tbw": 300.0,
+        "operating_temp_min_c": 0,
+        "operating_temp_max_c": 70
+      }
+    },
+    {
+      "brand": "Samsung",
+      "model": "990 PRO 1000GB",
+      "release_year": 2024,
+      "price_usd": 140.0,
+      "specs": {
+        "series": "990 PRO",
+        "capacity_gb": 1000,
+        "form_factor": "M.2 2280",
+        "nand_type": "3D TLC",
+        "interface": "PCIe Gen4 x4, NVMe 2.0",
+        "seq_read_mb_s": 7000,
+        "seq_write_mb_s": 6300,
+        "rand_read_iops": 800000,
+        "rand_write_iops": 800000,
+        "endurance_tbw": 600.0,
+        "operating_temp_min_c": 0,
+        "operating_temp_max_c": 70
+      }
+    },
+    {
+      "brand": "Samsung",
+      "model": "990 PRO 2000GB",
+      "release_year": 2024,
+      "price_usd": 220.0,
+      "specs": {
+        "series": "990 PRO",
+        "capacity_gb": 2000,
+        "form_factor": "M.2 2280",
+        "nand_type": "3D TLC",
+        "interface": "PCIe Gen4 x4, NVMe 2.0",
+        "seq_read_mb_s": 7000,
+        "seq_write_mb_s": 6300,
+        "rand_read_iops": 800000,
+        "rand_write_iops": 800000,
+        "endurance_tbw": 1200.0,
+        "operating_temp_min_c": 0,
+        "operating_temp_max_c": 70
+      }
+    },
+    {
+      "brand": "Samsung",
+      "model": "990 PRO 4000GB",
+      "release_year": 2024,
+      "price_usd": 380.0,
+      "specs": {
+        "series": "990 PRO",
+        "capacity_gb": 4000,
+        "form_factor": "M.2 2280",
+        "nand_type": "3D TLC",
+        "interface": "PCIe Gen4 x4, NVMe 2.0",
+        "seq_read_mb_s": 7000,
+        "seq_write_mb_s": 6300,
+        "rand_read_iops": 800000,
+        "rand_write_iops": 800000,
+        "endurance_tbw": 2400.0,
+        "operating_temp_min_c": 0,
+        "operating_temp_max_c": 70
+      }
+    },
+    {
+      "brand": "WD",
+      "model": "Black SN850X 500GB",
+      "release_year": 2024,
+      "price_usd": 100.0,
+      "specs": {
+        "series": "Black SN850X",
+        "capacity_gb": 500,
+        "form_factor": "M.2 2280",
+        "nand_type": "3D TLC",
+        "interface": "PCIe Gen4 x4, NVMe 1.4",
+        "seq_read_mb_s": 7000,
+        "seq_write_mb_s": 6300,
+        "rand_read_iops": 800000,
+        "rand_write_iops": 800000,
+        "endurance_tbw": 300.0,
+        "operating_temp_min_c": 0,
+        "operating_temp_max_c": 70
+      }
+    },
+    {
+      "brand": "WD",
+      "model": "Black SN850X 1000GB",
+      "release_year": 2024,
+      "price_usd": 140.0,
+      "specs": {
+        "series": "Black SN850X",
+        "capacity_gb": 1000,
+        "form_factor": "M.2 2280",
+        "nand_type": "3D TLC",
+        "interface": "PCIe Gen4 x4, NVMe 1.4",
+        "seq_read_mb_s": 7000,
+        "seq_write_mb_s": 6300,
+        "rand_read_iops": 800000,
+        "rand_write_iops": 800000,
+        "endurance_tbw": 600.0,
+        "operating_temp_min_c": 0,
+        "operating_temp_max_c": 70
+      }
+    },
+    {
+      "brand": "WD",
+      "model": "Black SN850X 2000GB",
+      "release_year": 2024,
+      "price_usd": 220.0,
+      "specs": {
+        "series": "Black SN850X",
+        "capacity_gb": 2000,
+        "form_factor": "M.2 2280",
+        "nand_type": "3D TLC",
+        "interface": "PCIe Gen4 x4, NVMe 1.4",
+        "seq_read_mb_s": 7000,
+        "seq_write_mb_s": 6300,
+        "rand_read_iops": 800000,
+        "rand_write_iops": 800000,
+        "endurance_tbw": 1200.0,
+        "operating_temp_min_c": 0,
+        "operating_temp_max_c": 70
+      }
+    },
+    {
+      "brand": "WD",
+      "model": "Black SN850X 4000GB",
+      "release_year": 2024,
+      "price_usd": 380.0,
+      "specs": {
+        "series": "Black SN850X",
+        "capacity_gb": 4000,
+        "form_factor": "M.2 2280",
+        "nand_type": "3D TLC",
+        "interface": "PCIe Gen4 x4, NVMe 1.4",
+        "seq_read_mb_s": 7000,
+        "seq_write_mb_s": 6300,
+        "rand_read_iops": 800000,
+        "rand_write_iops": 800000,
+        "endurance_tbw": 2400.0,
+        "operating_temp_min_c": 0,
+        "operating_temp_max_c": 70
+      }
+    },
+    {
+      "brand": "Crucial",
+      "model": "T700 500GB",
+      "release_year": 2024,
+      "price_usd": 120.0,
+      "specs": {
+        "series": "T700",
+        "capacity_gb": 500,
+        "form_factor": "M.2 2280",
+        "nand_type": "3D TLC",
+        "interface": "PCIe Gen5 x4, NVMe 2.0",
+        "seq_read_mb_s": 11000,
+        "seq_write_mb_s": 9900,
+        "rand_read_iops": 800000,
+        "rand_write_iops": 800000,
+        "endurance_tbw": 300.0,
+        "operating_temp_min_c": 0,
+        "operating_temp_max_c": 70
+      }
+    },
+    {
+      "brand": "Crucial",
+      "model": "T700 1000GB",
+      "release_year": 2024,
+      "price_usd": 160.0,
+      "specs": {
+        "series": "T700",
+        "capacity_gb": 1000,
+        "form_factor": "M.2 2280",
+        "nand_type": "3D TLC",
+        "interface": "PCIe Gen5 x4, NVMe 2.0",
+        "seq_read_mb_s": 11000,
+        "seq_write_mb_s": 9900,
+        "rand_read_iops": 800000,
+        "rand_write_iops": 800000,
+        "endurance_tbw": 600.0,
+        "operating_temp_min_c": 0,
+        "operating_temp_max_c": 70
+      }
+    },
+    {
+      "brand": "Crucial",
+      "model": "T700 2000GB",
+      "release_year": 2024,
+      "price_usd": 240.0,
+      "specs": {
+        "series": "T700",
+        "capacity_gb": 2000,
+        "form_factor": "M.2 2280",
+        "nand_type": "3D TLC",
+        "interface": "PCIe Gen5 x4, NVMe 2.0",
+        "seq_read_mb_s": 11000,
+        "seq_write_mb_s": 9900,
+        "rand_read_iops": 800000,
+        "rand_write_iops": 800000,
+        "endurance_tbw": 1200.0,
+        "operating_temp_min_c": 0,
+        "operating_temp_max_c": 70
+      }
+    },
+    {
+      "brand": "Crucial",
+      "model": "T700 4000GB",
+      "release_year": 2024,
+      "price_usd": 400.0,
+      "specs": {
+        "series": "T700",
+        "capacity_gb": 4000,
+        "form_factor": "M.2 2280",
+        "nand_type": "3D TLC",
+        "interface": "PCIe Gen5 x4, NVMe 2.0",
+        "seq_read_mb_s": 11000,
+        "seq_write_mb_s": 9900,
+        "rand_read_iops": 800000,
+        "rand_write_iops": 800000,
+        "endurance_tbw": 2400.0,
+        "operating_temp_min_c": 0,
+        "operating_temp_max_c": 70
+      }
+    },
+    {
+      "brand": "Seagate",
+      "model": "FireCuda 530 500GB",
+      "release_year": 2024,
+      "price_usd": 100.0,
+      "specs": {
+        "series": "FireCuda 530",
+        "capacity_gb": 500,
+        "form_factor": "M.2 2280",
+        "nand_type": "3D TLC",
+        "interface": "PCIe Gen4 x4, NVMe 1.4",
+        "seq_read_mb_s": 7000,
+        "seq_write_mb_s": 6300,
+        "rand_read_iops": 800000,
+        "rand_write_iops": 800000,
+        "endurance_tbw": 300.0,
+        "operating_temp_min_c": 0,
+        "operating_temp_max_c": 70
+      }
+    },
+    {
+      "brand": "Seagate",
+      "model": "FireCuda 530 1000GB",
+      "release_year": 2024,
+      "price_usd": 140.0,
+      "specs": {
+        "series": "FireCuda 530",
+        "capacity_gb": 1000,
+        "form_factor": "M.2 2280",
+        "nand_type": "3D TLC",
+        "interface": "PCIe Gen4 x4, NVMe 1.4",
+        "seq_read_mb_s": 7000,
+        "seq_write_mb_s": 6300,
+        "rand_read_iops": 800000,
+        "rand_write_iops": 800000,
+        "endurance_tbw": 600.0,
+        "operating_temp_min_c": 0,
+        "operating_temp_max_c": 70
+      }
+    },
+    {
+      "brand": "Seagate",
+      "model": "FireCuda 530 2000GB",
+      "release_year": 2024,
+      "price_usd": 220.0,
+      "specs": {
+        "series": "FireCuda 530",
+        "capacity_gb": 2000,
+        "form_factor": "M.2 2280",
+        "nand_type": "3D TLC",
+        "interface": "PCIe Gen4 x4, NVMe 1.4",
+        "seq_read_mb_s": 7000,
+        "seq_write_mb_s": 6300,
+        "rand_read_iops": 800000,
+        "rand_write_iops": 800000,
+        "endurance_tbw": 1200.0,
+        "operating_temp_min_c": 0,
+        "operating_temp_max_c": 70
+      }
+    },
+    {
+      "brand": "Seagate",
+      "model": "FireCuda 530 4000GB",
+      "release_year": 2024,
+      "price_usd": 380.0,
+      "specs": {
+        "series": "FireCuda 530",
+        "capacity_gb": 4000,
+        "form_factor": "M.2 2280",
+        "nand_type": "3D TLC",
+        "interface": "PCIe Gen4 x4, NVMe 1.4",
+        "seq_read_mb_s": 7000,
+        "seq_write_mb_s": 6300,
+        "rand_read_iops": 800000,
+        "rand_write_iops": 800000,
+        "endurance_tbw": 2400.0,
+        "operating_temp_min_c": 0,
+        "operating_temp_max_c": 70
+      }
+    },
+    {
+      "brand": "SK Hynix",
+      "model": "Platinum P41 2TB",
+      "release_year": 2023,
+      "price_usd": 169,
+      "specs": {
+        "series": "Platinum P41",
+        "capacity_gb": 2000,
+        "form_factor": "M.2 2280",
+        "nand_type": "TLC",
+        "interface": "NVMe PCIe 4.0 x4",
+        "seq_read_mb_s": 7000,
+        "seq_write_mb_s": 6500,
+        "rand_read_iops": 1400000,
+        "rand_write_iops": 1300000,
+        "endurance_tbw": 1200,
+        "operating_temp_min_c": 0,
+        "operating_temp_max_c": 70
+      }
+    },
+    {
+      "brand": "Seagate",
+      "model": "FireCuda 530 1TB",
+      "release_year": 2021,
+      "price_usd": 119,
+      "specs": {
+        "series": "FireCuda 530",
+        "capacity_gb": 1000,
+        "form_factor": "M.2 2280",
+        "nand_type": "TLC",
+        "interface": "NVMe PCIe 4.0 x4",
+        "seq_read_mb_s": 7300,
+        "seq_write_mb_s": 6000,
+        "rand_read_iops": 1000000,
+        "rand_write_iops": 1000000,
+        "endurance_tbw": 1275,
+        "operating_temp_min_c": 0,
+        "operating_temp_max_c": 70
+      }
+    },
+    {
+      "brand": "ADATA",
+      "model": "Legend 960 Max 2TB",
+      "release_year": 2024,
+      "price_usd": 149,
+      "specs": {
+        "series": "Legend 960 Max",
+        "capacity_gb": 2000,
+        "form_factor": "M.2 2280",
+        "nand_type": "TLC",
+        "interface": "NVMe PCIe 4.0 x4",
+        "seq_read_mb_s": 7400,
+        "seq_write_mb_s": 6800,
+        "rand_read_iops": 750000,
+        "rand_write_iops": 700000,
+        "endurance_tbw": 1600,
+        "operating_temp_min_c": 0,
+        "operating_temp_max_c": 70
+      }
+    },
+    {
+      "brand": "Corsair",
+      "model": "MP600 Pro LPX 1TB",
+      "release_year": 2022,
+      "price_usd": 99,
+      "specs": {
+        "series": "MP600 Pro LPX",
+        "capacity_gb": 1000,
+        "form_factor": "M.2 2280",
+        "nand_type": "TLC",
+        "interface": "NVMe PCIe 4.0 x4",
+        "seq_read_mb_s": 7100,
+        "seq_write_mb_s": 5800,
+        "rand_read_iops": 900000,
+        "rand_write_iops": 1000000,
+        "endurance_tbw": 700,
+        "operating_temp_min_c": 0,
+        "operating_temp_max_c": 70
+      }
+    },
+    {
+      "brand": "Crucial",
+      "model": "MX500 2TB SATA",
+      "release_year": 2018,
+      "price_usd": 149,
+      "specs": {
+        "series": "MX500",
+        "capacity_gb": 2000,
+        "form_factor": "2.5-inch",
+        "nand_type": "TLC",
+        "interface": "SATA 3",
+        "seq_read_mb_s": 560,
+        "seq_write_mb_s": 510,
+        "rand_read_iops": 95000,
+        "rand_write_iops": 90000,
+        "endurance_tbw": 700,
+        "operating_temp_min_c": 0,
+        "operating_temp_max_c": 70
+      }
+    },
+    {
+      "brand": "SK Hynix",
+      "model": "Platinum P41 2TB",
+      "release_year": 2023,
+      "price_usd": 169,
+      "specs": {
+        "series": "Platinum P41",
+        "capacity_gb": 2000,
+        "form_factor": "M.2 2280",
+        "nand_type": "TLC",
+        "interface": "NVMe PCIe 4.0 x4",
+        "seq_read_mb_s": 7000,
+        "seq_write_mb_s": 6500,
+        "rand_read_iops": 1400000,
+        "rand_write_iops": 1300000,
+        "endurance_tbw": 1200,
+        "operating_temp_min_c": 0,
+        "operating_temp_max_c": 70
+      }
+    },
+    {
+      "brand": "Seagate",
+      "model": "FireCuda 530 1TB",
+      "release_year": 2021,
+      "price_usd": 119,
+      "specs": {
+        "series": "FireCuda 530",
+        "capacity_gb": 1000,
+        "form_factor": "M.2 2280",
+        "nand_type": "TLC",
+        "interface": "NVMe PCIe 4.0 x4",
+        "seq_read_mb_s": 7300,
+        "seq_write_mb_s": 6000,
+        "rand_read_iops": 1000000,
+        "rand_write_iops": 1000000,
+        "endurance_tbw": 1275,
+        "operating_temp_min_c": 0,
+        "operating_temp_max_c": 70
+      }
+    },
+    {
+      "brand": "ADATA",
+      "model": "Legend 960 Max 2TB",
+      "release_year": 2024,
+      "price_usd": 149,
+      "specs": {
+        "series": "Legend 960 Max",
+        "capacity_gb": 2000,
+        "form_factor": "M.2 2280",
+        "nand_type": "TLC",
+        "interface": "NVMe PCIe 4.0 x4",
+        "seq_read_mb_s": 7400,
+        "seq_write_mb_s": 6800,
+        "rand_read_iops": 750000,
+        "rand_write_iops": 700000,
+        "endurance_tbw": 1600,
+        "operating_temp_min_c": 0,
+        "operating_temp_max_c": 70
+      }
+    },
+    {
+      "brand": "Corsair",
+      "model": "MP600 Pro LPX 1TB",
+      "release_year": 2022,
+      "price_usd": 99,
+      "specs": {
+        "series": "MP600 Pro LPX",
+        "capacity_gb": 1000,
+        "form_factor": "M.2 2280",
+        "nand_type": "TLC",
+        "interface": "NVMe PCIe 4.0 x4",
+        "seq_read_mb_s": 7100,
+        "seq_write_mb_s": 5800,
+        "rand_read_iops": 900000,
+        "rand_write_iops": 1000000,
+        "endurance_tbw": 700,
+        "operating_temp_min_c": 0,
+        "operating_temp_max_c": 70
+      }
+    },
+    {
+      "brand": "Crucial",
+      "model": "MX500 2TB SATA",
+      "release_year": 2018,
+      "price_usd": 149,
+      "specs": {
+        "series": "MX500",
+        "capacity_gb": 2000,
+        "form_factor": "2.5-inch",
+        "nand_type": "TLC",
+        "interface": "SATA 3",
+        "seq_read_mb_s": 560,
+        "seq_write_mb_s": 510,
+        "rand_read_iops": 95000,
+        "rand_write_iops": 90000,
+        "endurance_tbw": 700,
+        "operating_temp_min_c": 0,
+        "operating_temp_max_c": 70
+      }
+    },
+    {
+      "brand": "Samsung",
+      "model": "990 EVO 1TB",
+      "release_year": 2024,
+      "price_usd": 109,
+      "specs": {
+        "capacity_gb": 1000,
+        "form_factor": "M.2 2280",
+        "interface": "NVMe PCIe 4.0/5.0 x4",
+        "seq_read_mb_s": 5000,
+        "seq_write_mb_s": 4200
+      }
+    },
+    {
+      "brand": "WD",
+      "model": "Black SN850X 2TB",
+      "release_year": 2022,
+      "price_usd": 189,
+      "specs": {
+        "capacity_gb": 2000,
+        "form_factor": "M.2 2280",
+        "interface": "NVMe PCIe 4.0 x4",
+        "seq_read_mb_s": 7300,
+        "seq_write_mb_s": 6600
+      }
+    },
+    {
+      "brand": "Crucial",
+      "model": "P3 Plus 1TB",
+      "release_year": 2022,
+      "price_usd": 79,
+      "specs": {
+        "capacity_gb": 1000,
+        "form_factor": "M.2 2280",
+        "interface": "NVMe PCIe 4.0 x4",
+        "seq_read_mb_s": 5000,
+        "seq_write_mb_s": 4200
+      }
+    },
+    {
+      "brand": "Kingston",
+      "model": "NV2 500GB",
+      "release_year": 2022,
+      "price_usd": 39,
+      "specs": {
+        "capacity_gb": 500,
+        "form_factor": "M.2 2280",
+        "interface": "NVMe PCIe 4.0 x4",
+        "seq_read_mb_s": 3500,
+        "seq_write_mb_s": 2100
+      }
+    },
+    {
+      "brand": "Corsair",
+      "model": "MP700 PRO 2TB",
+      "release_year": 2024,
+      "price_usd": 279,
+      "specs": {
+        "capacity_gb": 2000,
+        "form_factor": "M.2 2280",
+        "interface": "NVMe PCIe 5.0 x4",
+        "seq_read_mb_s": 12400,
+        "seq_write_mb_s": 11800
+      }
+    },
+    {
+      "brand": "Seagate",
+      "model": "FireCuda 520 2TB",
+      "release_year": 2020,
+      "price_usd": 199,
+      "specs": {
+        "capacity_gb": 2000,
+        "form_factor": "M.2 2280",
+        "interface": "NVMe PCIe 4.0 x4",
+        "seq_read_mb_s": 5000,
+        "seq_write_mb_s": 4400
+      }
+    },
+    {
+      "brand": "ADATA",
+      "model": "XPG SX8200 Pro 1TB",
+      "release_year": 2019,
+      "price_usd": 89,
+      "specs": {
+        "capacity_gb": 1000,
+        "form_factor": "M.2 2280",
+        "interface": "NVMe PCIe 3.0 x4",
+        "seq_read_mb_s": 3500,
+        "seq_write_mb_s": 3000
+      }
+    },
+    {
+      "brand": "Samsung",
+      "model": "870 QVO 4TB",
+      "release_year": 2020,
+      "price_usd": 329,
+      "specs": {
+        "capacity_gb": 4000,
+        "form_factor": "2.5-inch",
+        "interface": "SATA 3",
+        "seq_read_mb_s": 560,
+        "seq_write_mb_s": 530
+      }
+    },
+    {
+      "brand": "WD",
+      "model": "Blue SN570 1TB",
+      "release_year": 2021,
+      "price_usd": 69,
+      "specs": {
+        "capacity_gb": 1000,
+        "form_factor": "M.2 2280",
+        "interface": "NVMe PCIe 3.0 x4",
+        "seq_read_mb_s": 3500,
+        "seq_write_mb_s": 3000
+      }
+    },
+    {
+      "brand": "Kingston",
+      "model": "KC3000 2TB",
+      "release_year": 2022,
+      "price_usd": 189,
+      "specs": {
+        "capacity_gb": 2000,
+        "form_factor": "M.2 2280",
+        "interface": "NVMe PCIe 4.0 x4",
+        "seq_read_mb_s": 7000,
+        "seq_write_mb_s": 7000
+      }
+    }
+  ],
+  "Mainboard": [
+    {
+      "brand": "ASUS",
+      "model": "Prime B760M-A D4",
+      "release_year": 2024,
+      "price_usd": 150.0,
+      "specs": {
+        "form_factor": "m-ATX",
+        "cpu_socket": "LGA1700",
+        "chipset": "Intel B760",
+        "memory_type": "DDR4",
+        "memory_slots": 4,
+        "max_memory_gb": 128,
+        "memory_speed_support": "DDR4 2133–5333(OC) MHz",
+        "sata_ports": 4,
+        "m2_slots": 2,
+        "raid_support": "Intel RST RAID 0/1/5/10",
+        "audio_codec": "Realtek 7.1 Surround Audio CODEC",
+        "lan_chipset": "Realtek 2.5Gb Ethernet",
+        "lan_speed_gbps": 2.5,
+        "rear_usb_ports": "2x USB 3.2 Gen2, 4x USB 2.0",
+        "rear_display_ports": "1x DisplayPort, 1x HDMI",
+        "rear_audio_jacks": "3x audio jacks",
+        "onboard_usb_headers": "1x USB-C, 2x USB 3.2 Gen1, 2x USB 2.0",
+        "rgb_headers": "3x ARGB Gen2, 1x Aura RGB",
+        "fan_headers": "1x CPU, 1x CPU OPT, 3x chassis fan",
+        "board_length_cm": 24.4,
+        "board_width_cm": 24.4,
+        "power_connectors": "1x 24-pin ATX, 1x 8-pin 12V"
+      }
+    },
+    {
+      "brand": "ASUS",
+      "model": "TUF Gaming B760-PLUS WIFI",
+      "release_year": 2024,
+      "price_usd": 150.0,
+      "specs": {
+        "form_factor": "ATX",
+        "cpu_socket": "LGA1700",
+        "chipset": "Intel B760",
+        "memory_type": "DDR5",
+        "memory_slots": 4,
+        "max_memory_gb": 128,
+        "memory_speed_support": "DDR5 4800–7600(OC) MHz",
+        "sata_ports": 4,
+        "m2_slots": 3,
+        "raid_support": "Intel RST RAID 0/1/5/10",
+        "audio_codec": "Realtek 7.1 Surround Audio CODEC",
+        "lan_chipset": "Realtek 2.5Gb Ethernet",
+        "lan_speed_gbps": 2.5,
+        "rear_usb_ports": "2x USB 3.2 Gen2, 4x USB 2.0",
+        "rear_display_ports": "1x DisplayPort, 1x HDMI",
+        "rear_audio_jacks": "3x audio jacks",
+        "onboard_usb_headers": "1x USB-C, 2x USB 3.2 Gen1, 2x USB 2.0",
+        "rgb_headers": "3x ARGB Gen2, 1x Aura RGB",
+        "fan_headers": "1x CPU, 1x CPU OPT, 3x chassis fan",
+        "board_length_cm": 30.5,
+        "board_width_cm": 24.4,
+        "power_connectors": "1x 24-pin ATX, 1x 8-pin 12V"
+      }
+    },
+    {
+      "brand": "MSI",
+      "model": "MAG B760 Tomahawk WIFI",
+      "release_year": 2024,
+      "price_usd": 150.0,
+      "specs": {
+        "form_factor": "ATX",
+        "cpu_socket": "LGA1700",
+        "chipset": "Intel B760",
+        "memory_type": "DDR5",
+        "memory_slots": 4,
+        "max_memory_gb": 128,
+        "memory_speed_support": "DDR5 4800–7600(OC) MHz",
+        "sata_ports": 4,
+        "m2_slots": 3,
+        "raid_support": "Intel RST RAID 0/1/5/10",
+        "audio_codec": "Realtek 7.1 Surround Audio CODEC",
+        "lan_chipset": "Realtek 2.5Gb Ethernet",
+        "lan_speed_gbps": 2.5,
+        "rear_usb_ports": "2x USB 3.2 Gen2, 4x USB 2.0",
+        "rear_display_ports": "1x DisplayPort, 1x HDMI",
+        "rear_audio_jacks": "3x audio jacks",
+        "onboard_usb_headers": "1x USB-C, 2x USB 3.2 Gen1, 2x USB 2.0",
+        "rgb_headers": "3x ARGB Gen2, 1x Aura RGB",
+        "fan_headers": "1x CPU, 1x CPU OPT, 3x chassis fan",
+        "board_length_cm": 30.5,
+        "board_width_cm": 24.4,
+        "power_connectors": "1x 24-pin ATX, 1x 8-pin 12V"
+      }
+    },
+    {
+      "brand": "Gigabyte",
+      "model": "B760 Aorus Elite AX",
+      "release_year": 2024,
+      "price_usd": 150.0,
+      "specs": {
+        "form_factor": "ATX",
+        "cpu_socket": "LGA1700",
+        "chipset": "Intel B760",
+        "memory_type": "DDR5",
+        "memory_slots": 4,
+        "max_memory_gb": 128,
+        "memory_speed_support": "DDR5 4800–7600(OC) MHz",
+        "sata_ports": 4,
+        "m2_slots": 3,
+        "raid_support": "Intel RST RAID 0/1/5/10",
+        "audio_codec": "Realtek 7.1 Surround Audio CODEC",
+        "lan_chipset": "Realtek 2.5Gb Ethernet",
+        "lan_speed_gbps": 2.5,
+        "rear_usb_ports": "2x USB 3.2 Gen2, 4x USB 2.0",
+        "rear_display_ports": "1x DisplayPort, 1x HDMI",
+        "rear_audio_jacks": "3x audio jacks",
+        "onboard_usb_headers": "1x USB-C, 2x USB 3.2 Gen1, 2x USB 2.0",
+        "rgb_headers": "3x ARGB Gen2, 1x Aura RGB",
+        "fan_headers": "1x CPU, 1x CPU OPT, 3x chassis fan",
+        "board_length_cm": 30.5,
+        "board_width_cm": 24.4,
+        "power_connectors": "1x 24-pin ATX, 1x 8-pin 12V"
+      }
+    },
+    {
+      "brand": "ASRock",
+      "model": "B760M Pro RS",
+      "release_year": 2024,
+      "price_usd": 150.0,
+      "specs": {
+        "form_factor": "m-ATX",
+        "cpu_socket": "LGA1700",
+        "chipset": "Intel B760",
+        "memory_type": "DDR4",
+        "memory_slots": 4,
+        "max_memory_gb": 128,
+        "memory_speed_support": "DDR4 2133–5333(OC) MHz",
+        "sata_ports": 4,
+        "m2_slots": 2,
+        "raid_support": "Intel RST RAID 0/1/5/10",
+        "audio_codec": "Realtek 7.1 Surround Audio CODEC",
+        "lan_chipset": "Realtek 2.5Gb Ethernet",
+        "lan_speed_gbps": 2.5,
+        "rear_usb_ports": "2x USB 3.2 Gen2, 4x USB 2.0",
+        "rear_display_ports": "1x DisplayPort, 1x HDMI",
+        "rear_audio_jacks": "3x audio jacks",
+        "onboard_usb_headers": "1x USB-C, 2x USB 3.2 Gen1, 2x USB 2.0",
+        "rgb_headers": "3x ARGB Gen2, 1x Aura RGB",
+        "fan_headers": "1x CPU, 1x CPU OPT, 3x chassis fan",
+        "board_length_cm": 24.4,
+        "board_width_cm": 24.4,
+        "power_connectors": "1x 24-pin ATX, 1x 8-pin 12V"
+      }
+    },
+    {
+      "brand": "ASUS",
+      "model": "ROG Maximus Z690 Hero",
+      "release_year": 2021,
+      "price_usd": 589,
+      "specs": {
+        "form_factor": "ATX",
+        "cpu_socket": "LGA1700",
+        "chipset": "Z690",
+        "memory_type": "DDR5",
+        "memory_slots": 4,
+        "max_memory_gb": 128,
+        "memory_speed_support": "DDR5 6400+(OC)",
+        "sata_ports": 6,
+        "m2_slots": 5,
+        "raid_support": "RAID 0, 1, 5, 10",
+        "audio_codec": "ROG SupremeFX 7.1",
+        "lan_chipset": "Intel I225-V 2.5GbE",
+        "lan_speed_gbps": 2.5,
+        "rear_usb_ports": "10x USB-A, 2x USB-C",
+        "rear_display_ports": "1x HDMI, 1x DisplayPort",
+        "rear_audio_jacks": 5,
+        "onboard_usb_headers": "4x USB 3.2 Gen 1, 2x USB 3.2 Gen 2",
+        "rgb_headers": "3x RGB, 3x ARGB",
+        "fan_headers": 8,
+        "board_length_cm": 30.5,
+        "board_width_cm": 24.4,
+        "power_connectors": "24-pin ATX, 2x 8-pin EPS"
+      }
+    },
+    {
+      "brand": "Gigabyte",
+      "model": "X670 Gaming X AX",
+      "release_year": 2022,
+      "price_usd": 249,
+      "specs": {
+        "form_factor": "ATX",
+        "cpu_socket": "AM5",
+        "chipset": "X670",
+        "memory_type": "DDR5",
+        "memory_slots": 4,
+        "max_memory_gb": 128,
+        "memory_speed_support": "DDR5 6600+(OC)",
+        "sata_ports": 4,
+        "m2_slots": 4,
+        "raid_support": "RAID 0, 1, 10",
+        "audio_codec": "Realtek ALC897",
+        "lan_chipset": "Realtek 2.5GbE",
+        "lan_speed_gbps": 2.5,
+        "rear_usb_ports": "6x USB-A, 1x USB-C",
+        "rear_display_ports": "1x HDMI",
+        "rear_audio_jacks": 5,
+        "onboard_usb_headers": "2x USB 3.2 Gen 1, 1x USB 3.2 Gen 2",
+        "rgb_headers": "2x RGB, 2x ARGB",
+        "fan_headers": 6,
+        "board_length_cm": 30.5,
+        "board_width_cm": 24.4,
+        "power_connectors": "24-pin ATX, 1x 8-pin EPS"
+      }
+    },
+    {
+      "brand": "MSI",
+      "model": "PRO B550-A PRO",
+      "release_year": 2020,
+      "price_usd": 129,
+      "specs": {
+        "form_factor": "ATX",
+        "cpu_socket": "AM4",
+        "chipset": "B550",
+        "memory_type": "DDR4",
+        "memory_slots": 4,
+        "max_memory_gb": 128,
+        "memory_speed_support": "DDR4 4400+(OC)",
+        "sata_ports": 6,
+        "m2_slots": 2,
+        "raid_support": "RAID 0, 1, 10",
+        "audio_codec": "Realtek ALC892",
+        "lan_chipset": "Realtek RTL8111H 1GbE",
+        "lan_speed_gbps": 1,
+        "rear_usb_ports": "4x USB 3.2, 2x USB 2.0",
+        "rear_display_ports": "1x HDMI, 1x DVI",
+        "rear_audio_jacks": 3,
+        "onboard_usb_headers": "2x USB 3.2 Gen 1",
+        "rgb_headers": "1x RGB, 1x ARGB",
+        "fan_headers": 5,
+        "board_length_cm": 30.5,
+        "board_width_cm": 24.4,
+        "power_connectors": "24-pin ATX, 1x 8-pin EPS"
+      }
+    },
+    {
+      "brand": "ASRock",
+      "model": "B660M Steel Legend",
+      "release_year": 2022,
+      "price_usd": 129,
+      "specs": {
+        "form_factor": "Micro-ATX",
+        "cpu_socket": "LGA1700",
+        "chipset": "B660",
+        "memory_type": "DDR4",
+        "memory_slots": 4,
+        "max_memory_gb": 128,
+        "memory_speed_support": "DDR4 4800+(OC)",
+        "sata_ports": 4,
+        "m2_slots": 2,
+        "raid_support": "RAID 0, 1, 5, 10",
+        "audio_codec": "Realtek ALC897",
+        "lan_chipset": "Dragon RTL8125BG 2.5GbE",
+        "lan_speed_gbps": 2.5,
+        "rear_usb_ports": "5x USB-A, 1x USB-C",
+        "rear_display_ports": "1x HDMI, 1x DisplayPort",
+        "rear_audio_jacks": 5,
+        "onboard_usb_headers": "2x USB 3.2 Gen 1",
+        "rgb_headers": "2x RGB, 1x ARGB",
+        "fan_headers": 4,
+        "board_length_cm": 24.4,
+        "board_width_cm": 24.4,
+        "power_connectors": "24-pin ATX, 1x 8-pin EPS"
+      }
+    },
+    {
+      "brand": "ASUS",
+      "model": "ROG Maximus Z690 Hero",
+      "release_year": 2021,
+      "price_usd": 589,
+      "specs": {
+        "form_factor": "ATX",
+        "cpu_socket": "LGA1700",
+        "chipset": "Z690",
+        "memory_type": "DDR5",
+        "memory_slots": 4,
+        "max_memory_gb": 128,
+        "memory_speed_support": "DDR5 6400+(OC)",
+        "sata_ports": 6,
+        "m2_slots": 5,
+        "raid_support": "RAID 0, 1, 5, 10",
+        "audio_codec": "ROG SupremeFX 7.1",
+        "lan_chipset": "Intel I225-V 2.5GbE",
+        "lan_speed_gbps": 2.5,
+        "rear_usb_ports": "10x USB-A, 2x USB-C",
+        "rear_display_ports": "1x HDMI, 1x DisplayPort",
+        "rear_audio_jacks": 5,
+        "onboard_usb_headers": "4x USB 3.2 Gen 1, 2x USB 3.2 Gen 2",
+        "rgb_headers": "3x RGB, 3x ARGB",
+        "fan_headers": 8,
+        "board_length_cm": 30.5,
+        "board_width_cm": 24.4,
+        "power_connectors": "24-pin ATX, 2x 8-pin EPS"
+      }
+    },
+    {
+      "brand": "Gigabyte",
+      "model": "X670 Gaming X AX",
+      "release_year": 2022,
+      "price_usd": 249,
+      "specs": {
+        "form_factor": "ATX",
+        "cpu_socket": "AM5",
+        "chipset": "X670",
+        "memory_type": "DDR5",
+        "memory_slots": 4,
+        "max_memory_gb": 128,
+        "memory_speed_support": "DDR5 6600+(OC)",
+        "sata_ports": 4,
+        "m2_slots": 4,
+        "raid_support": "RAID 0, 1, 10",
+        "audio_codec": "Realtek ALC897",
+        "lan_chipset": "Realtek 2.5GbE",
+        "lan_speed_gbps": 2.5,
+        "rear_usb_ports": "6x USB-A, 1x USB-C",
+        "rear_display_ports": "1x HDMI",
+        "rear_audio_jacks": 5,
+        "onboard_usb_headers": "2x USB 3.2 Gen 1, 1x USB 3.2 Gen 2",
+        "rgb_headers": "2x RGB, 2x ARGB",
+        "fan_headers": 6,
+        "board_length_cm": 30.5,
+        "board_width_cm": 24.4,
+        "power_connectors": "24-pin ATX, 1x 8-pin EPS"
+      }
+    },
+    {
+      "brand": "MSI",
+      "model": "PRO B550-A PRO",
+      "release_year": 2020,
+      "price_usd": 129,
+      "specs": {
+        "form_factor": "ATX",
+        "cpu_socket": "AM4",
+        "chipset": "B550",
+        "memory_type": "DDR4",
+        "memory_slots": 4,
+        "max_memory_gb": 128,
+        "memory_speed_support": "DDR4 4400+(OC)",
+        "sata_ports": 6,
+        "m2_slots": 2,
+        "raid_support": "RAID 0, 1, 10",
+        "audio_codec": "Realtek ALC892",
+        "lan_chipset": "Realtek RTL8111H 1GbE",
+        "lan_speed_gbps": 1,
+        "rear_usb_ports": "4x USB 3.2, 2x USB 2.0",
+        "rear_display_ports": "1x HDMI, 1x DVI",
+        "rear_audio_jacks": 3,
+        "onboard_usb_headers": "2x USB 3.2 Gen 1",
+        "rgb_headers": "1x RGB, 1x ARGB",
+        "fan_headers": 5,
+        "board_length_cm": 30.5,
+        "board_width_cm": 24.4,
+        "power_connectors": "24-pin ATX, 1x 8-pin EPS"
+      }
+    },
+    {
+      "brand": "ASRock",
+      "model": "B660M Steel Legend",
+      "release_year": 2022,
+      "price_usd": 129,
+      "specs": {
+        "form_factor": "Micro-ATX",
+        "cpu_socket": "LGA1700",
+        "chipset": "B660",
+        "memory_type": "DDR4",
+        "memory_slots": 4,
+        "max_memory_gb": 128,
+        "memory_speed_support": "DDR4 4800+(OC)",
+        "sata_ports": 4,
+        "m2_slots": 2,
+        "raid_support": "RAID 0, 1, 5, 10",
+        "audio_codec": "Realtek ALC897",
+        "lan_chipset": "Dragon RTL8125BG 2.5GbE",
+        "lan_speed_gbps": 2.5,
+        "rear_usb_ports": "5x USB-A, 1x USB-C",
+        "rear_display_ports": "1x HDMI, 1x DisplayPort",
+        "rear_audio_jacks": 5,
+        "onboard_usb_headers": "2x USB 3.2 Gen 1",
+        "rgb_headers": "2x RGB, 1x ARGB",
+        "fan_headers": 4,
+        "board_length_cm": 24.4,
+        "board_width_cm": 24.4,
+        "power_connectors": "24-pin ATX, 1x 8-pin EPS"
+      }
+    },
+    {
+      "brand": "ASUS",
+      "model": "ROG Strix Z790-E Gaming",
+      "release_year": 2022,
+      "price_usd": 449,
+      "specs": {
+        "form_factor": "ATX",
+        "cpu_socket": "LGA1700",
+        "chipset": "Z790",
+        "memory_type": "DDR5",
+        "memory_slots": 4,
+        "max_memory_gb": 128
+      }
+    },
+    {
+      "brand": "MSI",
+      "model": "MPG Z690 Carbon WiFi",
+      "release_year": 2021,
+      "price_usd": 399,
+      "specs": {
+        "form_factor": "ATX",
+        "cpu_socket": "LGA1700",
+        "chipset": "Z690",
+        "memory_type": "DDR5",
+        "memory_slots": 4,
+        "max_memory_gb": 128
+      }
+    },
+    {
+      "brand": "Gigabyte",
+      "model": "Z690 UD DDR4",
+      "release_year": 2021,
+      "price_usd": 199,
+      "specs": {
+        "form_factor": "ATX",
+        "cpu_socket": "LGA1700",
+        "chipset": "Z690",
+        "memory_type": "DDR4",
+        "memory_slots": 4,
+        "max_memory_gb": 128
+      }
+    },
+    {
+      "brand": "ASRock",
+      "model": "Z790 Taichi",
+      "release_year": 2022,
+      "price_usd": 499,
+      "specs": {
+        "form_factor": "ATX",
+        "cpu_socket": "LGA1700",
+        "chipset": "Z790",
+        "memory_type": "DDR5",
+        "memory_slots": 4,
+        "max_memory_gb": 128
+      }
+    },
+    {
+      "brand": "ASUS",
+      "model": "TUF Gaming X670E-Plus",
+      "release_year": 2022,
+      "price_usd": 289,
+      "specs": {
+        "form_factor": "ATX",
+        "cpu_socket": "AM5",
+        "chipset": "X670E",
+        "memory_type": "DDR5",
+        "memory_slots": 4,
+        "max_memory_gb": 128
+      }
+    },
+    {
+      "brand": "MSI",
+      "model": "MAG B650 Tomahawk WiFi",
+      "release_year": 2022,
+      "price_usd": 219,
+      "specs": {
+        "form_factor": "ATX",
+        "cpu_socket": "AM5",
+        "chipset": "B650",
+        "memory_type": "DDR5",
+        "memory_slots": 4,
+        "max_memory_gb": 128
+      }
+    },
+    {
+      "brand": "Gigabyte",
+      "model": "B650 Aorus Elite AX",
+      "release_year": 2022,
+      "price_usd": 199,
+      "specs": {
+        "form_factor": "ATX",
+        "cpu_socket": "AM5",
+        "chipset": "B650",
+        "memory_type": "DDR5",
+        "memory_slots": 4,
+        "max_memory_gb": 128
+      }
+    },
+    {
+      "brand": "ASRock",
+      "model": "B650E Steel Legend",
+      "release_year": 2022,
+      "price_usd": 229,
+      "specs": {
+        "form_factor": "ATX",
+        "cpu_socket": "AM5",
+        "chipset": "B650E",
+        "memory_type": "DDR5",
+        "memory_slots": 4,
+        "max_memory_gb": 128
+      }
+    },
+    {
+      "brand": "ASUS",
+      "model": "ROG Strix B550-F Gaming",
+      "release_year": 2020,
+      "price_usd": 189,
+      "specs": {
+        "form_factor": "ATX",
+        "cpu_socket": "AM4",
+        "chipset": "B550",
+        "memory_type": "DDR4",
+        "memory_slots": 4,
+        "max_memory_gb": 128
+      }
+    },
+    {
+      "brand": "MSI",
+      "model": "MAG B550 Tomahawk",
+      "release_year": 2020,
+      "price_usd": 179,
+      "specs": {
+        "form_factor": "ATX",
+        "cpu_socket": "AM4",
+        "chipset": "B550",
+        "memory_type": "DDR4",
+        "memory_slots": 4,
+        "max_memory_gb": 128
+      }
+    }
+  ],
+  "Monitor": [
+    {
+      "brand": "Samsung",
+      "model": "Odyssey G9 49\"",
+      "release_year": 2023,
+      "price_usd": 1299,
+      "specs": {
+        "screen_size_inch": 49,
+        "aspect_ratio": "32:9",
+        "resolution": "5120x1440",
+        "panel_type": "VA",
+        "refresh_rate_hz": 240,
+        "response_time_ms": 1,
+        "hdr": "HDR1000",
+        "curve": "1000R",
+        "adaptive_sync": "FreeSync Premium Pro",
+        "brightness_nits": 1000,
+        "contrast_ratio": "2500:1",
+        "color_gamut": "125% sRGB",
+        "ports": "1x DisplayPort 1.4, 2x HDMI 2.1, 3x USB 3.0",
+        "vesa_mount": "100x100",
+        "stand_adjustments": "Height, Tilt"
+      }
+    },
+    {
+      "brand": "LG",
+      "model": "27GR95QE-B 27\" OLED",
+      "release_year": 2023,
+      "price_usd": 999,
+      "specs": {
+        "screen_size_inch": 27,
+        "aspect_ratio": "16:9",
+        "resolution": "2560x1440",
+        "panel_type": "OLED",
+        "refresh_rate_hz": 240,
+        "response_time_ms": 0.03,
+        "hdr": "HDR10",
+        "curve": "Flat",
+        "adaptive_sync": "G-Sync Compatible",
+        "brightness_nits": 200,
+        "contrast_ratio": "1500000:1",
+        "color_gamut": "98.5% DCI-P3",
+        "ports": "1x DisplayPort 1.4, 2x HDMI 2.1, 2x USB 3.0",
+        "vesa_mount": "100x100",
+        "stand_adjustments": "Height, Tilt, Pivot, Swivel"
+      }
+    },
+    {
+      "brand": "ASUS",
+      "model": "TUF VG27AQ 27\"",
+      "release_year": 2019,
+      "price_usd": 329,
+      "specs": {
+        "screen_size_inch": 27,
+        "aspect_ratio": "16:9",
+        "resolution": "2560x1440",
+        "panel_type": "IPS",
+        "refresh_rate_hz": 165,
+        "response_time_ms": 1,
+        "hdr": "HDR10",
+        "curve": "Flat",
+        "adaptive_sync": "G-Sync Compatible",
+        "brightness_nits": 350,
+        "contrast_ratio": "1000:1",
+        "color_gamut": "99% sRGB",
+        "ports": "1x DisplayPort 1.2, 2x HDMI 2.0, 2x USB 3.0",
+        "vesa_mount": "100x100",
+        "stand_adjustments": "Height, Tilt, Pivot, Swivel"
+      }
+    },
+    {
+      "brand": "Dell",
+      "model": "U2723DE 27\" USB-C",
+      "release_year": 2022,
+      "price_usd": 569,
+      "specs": {
+        "screen_size_inch": 27,
+        "aspect_ratio": "16:9",
+        "resolution": "2560x1440",
+        "panel_type": "IPS Black",
+        "refresh_rate_hz": 60,
+        "response_time_ms": 5,
+        "hdr": "HDR400",
+        "curve": "Flat",
+        "adaptive_sync": "FreeSync",
+        "brightness_nits": 400,
+        "contrast_ratio": "2000:1",
+        "color_gamut": "95% DCI-P3",
+        "ports": "1x DisplayPort 1.4, 1x HDMI 2.0, 1x USB-C 90W PD, 4x USB-A 3.2",
+        "vesa_mount": "100x100",
+        "stand_adjustments": "Height, Tilt, Pivot, Swivel"
+      }
+    },
+    {
+      "brand": "AOC",
+      "model": "CU34G2X 34\" Ultrawide",
+      "release_year": 2020,
+      "price_usd": 399,
+      "specs": {
+        "screen_size_inch": 34,
+        "aspect_ratio": "21:9",
+        "resolution": "3440x1440",
+        "panel_type": "VA",
+        "refresh_rate_hz": 144,
+        "response_time_ms": 1,
+        "hdr": "HDR10",
+        "curve": "1500R",
+        "adaptive_sync": "FreeSync Premium",
+        "brightness_nits": 300,
+        "contrast_ratio": "3000:1",
+        "color_gamut": "119% sRGB",
+        "ports": "2x DisplayPort 1.4, 2x HDMI 2.0, 4x USB 3.0",
+        "vesa_mount": "100x100",
+        "stand_adjustments": "Height, Tilt"
+      }
+    },
+    {
+      "brand": "Samsung",
+      "model": "Odyssey G9 49\"",
+      "release_year": 2023,
+      "price_usd": 1299,
+      "specs": {
+        "screen_size_inch": 49,
+        "aspect_ratio": "32:9",
+        "resolution": "5120x1440",
+        "panel_type": "VA",
+        "refresh_rate_hz": 240,
+        "response_time_ms": 1,
+        "hdr": "HDR1000",
+        "curve": "1000R",
+        "adaptive_sync": "FreeSync Premium Pro",
+        "brightness_nits": 1000,
+        "contrast_ratio": "2500:1",
+        "color_gamut": "125% sRGB",
+        "ports": "1x DisplayPort 1.4, 2x HDMI 2.1, 3x USB 3.0",
+        "vesa_mount": "100x100",
+        "stand_adjustments": "Height, Tilt"
+      }
+    },
+    {
+      "brand": "LG",
+      "model": "27GR95QE-B 27\" OLED",
+      "release_year": 2023,
+      "price_usd": 999,
+      "specs": {
+        "screen_size_inch": 27,
+        "aspect_ratio": "16:9",
+        "resolution": "2560x1440",
+        "panel_type": "OLED",
+        "refresh_rate_hz": 240,
+        "response_time_ms": 0.03,
+        "hdr": "HDR10",
+        "curve": "Flat",
+        "adaptive_sync": "G-Sync Compatible",
+        "brightness_nits": 200,
+        "contrast_ratio": "1500000:1",
+        "color_gamut": "98.5% DCI-P3",
+        "ports": "1x DisplayPort 1.4, 2x HDMI 2.1, 2x USB 3.0",
+        "vesa_mount": "100x100",
+        "stand_adjustments": "Height, Tilt, Pivot, Swivel"
+      }
+    },
+    {
+      "brand": "ASUS",
+      "model": "TUF VG27AQ 27\"",
+      "release_year": 2019,
+      "price_usd": 329,
+      "specs": {
+        "screen_size_inch": 27,
+        "aspect_ratio": "16:9",
+        "resolution": "2560x1440",
+        "panel_type": "IPS",
+        "refresh_rate_hz": 165,
+        "response_time_ms": 1,
+        "hdr": "HDR10",
+        "curve": "Flat",
+        "adaptive_sync": "G-Sync Compatible",
+        "brightness_nits": 350,
+        "contrast_ratio": "1000:1",
+        "color_gamut": "99% sRGB",
+        "ports": "1x DisplayPort 1.2, 2x HDMI 2.0, 2x USB 3.0",
+        "vesa_mount": "100x100",
+        "stand_adjustments": "Height, Tilt, Pivot, Swivel"
+      }
+    },
+    {
+      "brand": "Dell",
+      "model": "U2723DE 27\" USB-C",
+      "release_year": 2022,
+      "price_usd": 569,
+      "specs": {
+        "screen_size_inch": 27,
+        "aspect_ratio": "16:9",
+        "resolution": "2560x1440",
+        "panel_type": "IPS Black",
+        "refresh_rate_hz": 60,
+        "response_time_ms": 5,
+        "hdr": "HDR400",
+        "curve": "Flat",
+        "adaptive_sync": "FreeSync",
+        "brightness_nits": 400,
+        "contrast_ratio": "2000:1",
+        "color_gamut": "95% DCI-P3",
+        "ports": "1x DisplayPort 1.4, 1x HDMI 2.0, 1x USB-C 90W PD, 4x USB-A 3.2",
+        "vesa_mount": "100x100",
+        "stand_adjustments": "Height, Tilt, Pivot, Swivel"
+      }
+    },
+    {
+      "brand": "AOC",
+      "model": "CU34G2X 34\" Ultrawide",
+      "release_year": 2020,
+      "price_usd": 399,
+      "specs": {
+        "screen_size_inch": 34,
+        "aspect_ratio": "21:9",
+        "resolution": "3440x1440",
+        "panel_type": "VA",
+        "refresh_rate_hz": 144,
+        "response_time_ms": 1,
+        "hdr": "HDR10",
+        "curve": "1500R",
+        "adaptive_sync": "FreeSync Premium",
+        "brightness_nits": 300,
+        "contrast_ratio": "3000:1",
+        "color_gamut": "119% sRGB",
+        "ports": "2x DisplayPort 1.4, 2x HDMI 2.0, 4x USB 3.0",
+        "vesa_mount": "100x100",
+        "stand_adjustments": "Height, Tilt"
+      }
+    },
+    {
+      "brand": "MSI",
+      "model": "MAG274QRF-QD 27\"",
+      "release_year": 2020,
+      "price_usd": 399,
+      "specs": {
+        "screen_size_inch": 27,
+        "resolution": "2560x1440",
+        "panel_type": "IPS",
+        "refresh_rate_hz": 165,
+        "response_time_ms": 1
+      }
+    },
+    {
+      "brand": "BenQ",
+      "model": "MOBIUZ EX2710Q 27\"",
+      "release_year": 2021,
+      "price_usd": 349,
+      "specs": {
+        "screen_size_inch": 27,
+        "resolution": "2560x1440",
+        "panel_type": "IPS",
+        "refresh_rate_hz": 165,
+        "response_time_ms": 1
+      }
+    },
+    {
+      "brand": "Gigabyte",
+      "model": "M32U 32\" 4K",
+      "release_year": 2021,
+      "price_usd": 699,
+      "specs": {
+        "screen_size_inch": 32,
+        "resolution": "3840x2160",
+        "panel_type": "IPS",
+        "refresh_rate_hz": 144,
+        "response_time_ms": 1
+      }
+    },
+    {
+      "brand": "ViewSonic",
+      "model": "XG2431 24\"",
+      "release_year": 2022,
+      "price_usd": 299,
+      "specs": {
+        "screen_size_inch": 24,
+        "resolution": "1920x1080",
+        "panel_type": "IPS",
+        "refresh_rate_hz": 240,
+        "response_time_ms": 1
+      }
+    },
+    {
+      "brand": "LG",
+      "model": "27GP850-B 27\"",
+      "release_year": 2021,
+      "price_usd": 399,
+      "specs": {
+        "screen_size_inch": 27,
+        "resolution": "2560x1440",
+        "panel_type": "IPS",
+        "refresh_rate_hz": 165,
+        "response_time_ms": 1
+      }
+    }
+  ],
+  "HDD": [
+    {
+      "brand": "Toshiba",
+      "model": "X300 Pro 8TB",
+      "release_year": 2020,
+      "price_usd": 189,
+      "specs": {
+        "capacity_gb": 8000,
+        "rpm": 7200,
+        "cache_mb": 256,
+        "interface": "SATA 6Gb/s",
+        "form_factor": "3.5-inch",
+        "sustained_transfer_rate_mb_s": 268,
+        "avg_latency_ms": 4.17,
+        "power_consumption_w": 9.3,
+        "noise_idle_db": 24,
+        "mtbf_hours": 1000000
+      }
+    },
+    {
+      "brand": "Seagate",
+      "model": "Exos X18 16TB",
+      "release_year": 2021,
+      "price_usd": 319,
+      "specs": {
+        "capacity_gb": 16000,
+        "rpm": 7200,
+        "cache_mb": 256,
+        "interface": "SATA 6Gb/s",
+        "form_factor": "3.5-inch",
+        "sustained_transfer_rate_mb_s": 261,
+        "avg_latency_ms": 4.16,
+        "power_consumption_w": 7.5,
+        "noise_idle_db": 28,
+        "mtbf_hours": 2500000
+      }
+    },
+    {
+      "brand": "WD",
+      "model": "Blue 4TB",
+      "release_year": 2019,
+      "price_usd": 79,
+      "specs": {
+        "capacity_gb": 4000,
+        "rpm": 5400,
+        "cache_mb": 256,
+        "interface": "SATA 6Gb/s",
+        "form_factor": "3.5-inch",
+        "sustained_transfer_rate_mb_s": 175,
+        "avg_latency_ms": 5.5,
+        "power_consumption_w": 5.3,
+        "noise_idle_db": 21,
+        "mtbf_hours": 1000000
+      }
+    },
+    {
+      "brand": "Seagate",
+      "model": "BarraCuda 2TB",
+      "release_year": 2018,
+      "price_usd": 49,
+      "specs": {
+        "capacity_gb": 2000,
+        "rpm": 7200,
+        "cache_mb": 256,
+        "interface": "SATA 6Gb/s",
+        "form_factor": "3.5-inch",
+        "sustained_transfer_rate_mb_s": 210,
+        "avg_latency_ms": 4.16,
+        "power_consumption_w": 6.8,
+        "noise_idle_db": 23,
+        "mtbf_hours": 1000000
+      }
+    },
+    {
+      "brand": "Toshiba",
+      "model": "X300 Pro 8TB",
+      "release_year": 2020,
+      "price_usd": 189,
+      "specs": {
+        "capacity_gb": 8000,
+        "rpm": 7200,
+        "cache_mb": 256,
+        "interface": "SATA 6Gb/s",
+        "form_factor": "3.5-inch",
+        "sustained_transfer_rate_mb_s": 268,
+        "avg_latency_ms": 4.17,
+        "power_consumption_w": 9.3,
+        "noise_idle_db": 24,
+        "mtbf_hours": 1000000
+      }
+    },
+    {
+      "brand": "Seagate",
+      "model": "Exos X18 16TB",
+      "release_year": 2021,
+      "price_usd": 319,
+      "specs": {
+        "capacity_gb": 16000,
+        "rpm": 7200,
+        "cache_mb": 256,
+        "interface": "SATA 6Gb/s",
+        "form_factor": "3.5-inch",
+        "sustained_transfer_rate_mb_s": 261,
+        "avg_latency_ms": 4.16,
+        "power_consumption_w": 7.5,
+        "noise_idle_db": 28,
+        "mtbf_hours": 2500000
+      }
+    },
+    {
+      "brand": "WD",
+      "model": "Blue 4TB",
+      "release_year": 2019,
+      "price_usd": 79,
+      "specs": {
+        "capacity_gb": 4000,
+        "rpm": 5400,
+        "cache_mb": 256,
+        "interface": "SATA 6Gb/s",
+        "form_factor": "3.5-inch",
+        "sustained_transfer_rate_mb_s": 175,
+        "avg_latency_ms": 5.5,
+        "power_consumption_w": 5.3,
+        "noise_idle_db": 21,
+        "mtbf_hours": 1000000
+      }
+    },
+    {
+      "brand": "Seagate",
+      "model": "BarraCuda 2TB",
+      "release_year": 2018,
+      "price_usd": 49,
+      "specs": {
+        "capacity_gb": 2000,
+        "rpm": 7200,
+        "cache_mb": 256,
+        "interface": "SATA 6Gb/s",
+        "form_factor": "3.5-inch",
+        "sustained_transfer_rate_mb_s": 210,
+        "avg_latency_ms": 4.16,
+        "power_consumption_w": 6.8,
+        "noise_idle_db": 23,
+        "mtbf_hours": 1000000
+      }
+    },
+    {
+      "brand": "WD",
+      "model": "Red Pro 14TB",
+      "release_year": 2021,
+      "price_usd": 389,
+      "specs": {
+        "capacity_gb": 14000,
+        "rpm": 7200,
+        "cache_mb": 512,
+        "interface": "SATA 6Gb/s"
+      }
+    },
+    {
+      "brand": "Seagate",
+      "model": "IronWolf Pro 18TB",
+      "release_year": 2022,
+      "price_usd": 429,
+      "specs": {
+        "capacity_gb": 18000,
+        "rpm": 7200,
+        "cache_mb": 256,
+        "interface": "SATA 6Gb/s"
+      }
+    },
+    {
+      "brand": "Toshiba",
+      "model": "N300 6TB",
+      "release_year": 2019,
+      "price_usd": 169,
+      "specs": {
+        "capacity_gb": 6000,
+        "rpm": 7200,
+        "cache_mb": 256,
+        "interface": "SATA 6Gb/s"
+      }
+    },
+    {
+      "brand": "WD",
+      "model": "Black 2TB",
+      "release_year": 2018,
+      "price_usd": 119,
+      "specs": {
+        "capacity_gb": 2000,
+        "rpm": 7200,
+        "cache_mb": 64,
+        "interface": "SATA 6Gb/s"
+      }
+    },
+    {
+      "brand": "Seagate",
+      "model": "FireCuda 2TB SSHD",
+      "release_year": 2017,
+      "price_usd": 99,
+      "specs": {
+        "capacity_gb": 2000,
+        "rpm": 7200,
+        "cache_mb": 128,
+        "interface": "SATA 6Gb/s"
+      }
+    },
+    {
+      "brand": "Toshiba",
+      "model": "P300 3TB",
+      "release_year": 2018,
+      "price_usd": 79,
+      "specs": {
+        "capacity_gb": 3000,
+        "rpm": 7200,
+        "cache_mb": 64,
+        "interface": "SATA 6Gb/s"
+      }
+    },
+    {
+      "brand": "WD",
+      "model": "Purple 8TB Surveillance",
+      "release_year": 2020,
+      "price_usd": 199,
+      "specs": {
+        "capacity_gb": 8000,
+        "rpm": 5400,
+        "cache_mb": 256,
+        "interface": "SATA 6Gb/s"
+      }
+    },
+    {
+      "brand": "Seagate",
+      "model": "SkyHawk 10TB Surveillance",
+      "release_year": 2021,
+      "price_usd": 249,
+      "specs": {
+        "capacity_gb": 10000,
+        "rpm": 7200,
+        "cache_mb": 256,
+        "interface": "SATA 6Gb/s"
+      }
+    }
+  ],
+  "PSU": [
+    {
+      "brand": "Thermaltake",
+      "model": "Toughpower GF3 850W",
+      "release_year": 2023,
+      "price_usd": 129,
+      "specs": {
+        "wattage": 850,
+        "efficiency": "80 Plus Gold",
+        "modular": "Full Modular",
+        "form_factor": "ATX",
+        "fan_size_mm": 140,
+        "pcie_connectors": "4x 8-pin",
+        "eps_connectors": "2x 4+4-pin",
+        "sata_connectors": 10,
+        "molex_connectors": 4,
+        "length_mm": 150,
+        "warranty_years": 10
+      }
+    },
+    {
+      "brand": "be quiet!",
+      "model": "Dark Power Pro 12 1200W",
+      "release_year": 2021,
+      "price_usd": 299,
+      "specs": {
+        "wattage": 1200,
+        "efficiency": "80 Plus Titanium",
+        "modular": "Full Modular",
+        "form_factor": "ATX",
+        "fan_size_mm": 135,
+        "pcie_connectors": "6x 8-pin",
+        "eps_connectors": "2x 4+4-pin",
+        "sata_connectors": 12,
+        "molex_connectors": 4,
+        "length_mm": 200,
+        "warranty_years": 10
+      }
+    },
+    {
+      "brand": "Corsair",
+      "model": "RM750e 750W",
+      "release_year": 2023,
+      "price_usd": 99,
+      "specs": {
+        "wattage": 750,
+        "efficiency": "80 Plus Gold",
+        "modular": "Full Modular",
+        "form_factor": "ATX",
+        "fan_size_mm": 120,
+        "pcie_connectors": "4x 8-pin",
+        "eps_connectors": "2x 4+4-pin",
+        "sata_connectors": 8,
+        "molex_connectors": 4,
+        "length_mm": 140,
+        "warranty_years": 10
+      }
+    },
+    {
+      "brand": "Seasonic",
+      "model": "PRIME TX-1000",
+      "release_year": 2019,
+      "price_usd": 279,
+      "specs": {
+        "wattage": 1000,
+        "efficiency": "80 Plus Titanium",
+        "modular": "Full Modular",
+        "form_factor": "ATX",
+        "fan_size_mm": 135,
+        "pcie_connectors": "6x 8-pin",
+        "eps_connectors": "2x 4+4-pin",
+        "sata_connectors": 12,
+        "molex_connectors": 4,
+        "length_mm": 170,
+        "warranty_years": 12
+      }
+    },
+    {
+      "brand": "EVGA",
+      "model": "SuperNOVA 650 GT",
+      "release_year": 2020,
+      "price_usd": 79,
+      "specs": {
+        "wattage": 650,
+        "efficiency": "80 Plus Gold",
+        "modular": "Full Modular",
+        "form_factor": "ATX",
+        "fan_size_mm": 135,
+        "pcie_connectors": "2x 8-pin",
+        "eps_connectors": "1x 4+4-pin",
+        "sata_connectors": 6,
+        "molex_connectors": 3,
+        "length_mm": 150,
+        "warranty_years": 7
+      }
+    },
+    {
+      "brand": "Thermaltake",
+      "model": "Toughpower GF3 850W",
+      "release_year": 2023,
+      "price_usd": 129,
+      "specs": {
+        "wattage": 850,
+        "efficiency": "80 Plus Gold",
+        "modular": "Full Modular",
+        "form_factor": "ATX",
+        "fan_size_mm": 140,
+        "pcie_connectors": "4x 8-pin",
+        "eps_connectors": "2x 4+4-pin",
+        "sata_connectors": 10,
+        "molex_connectors": 4,
+        "length_mm": 150,
+        "warranty_years": 10
+      }
+    },
+    {
+      "brand": "be quiet!",
+      "model": "Dark Power Pro 12 1200W",
+      "release_year": 2021,
+      "price_usd": 299,
+      "specs": {
+        "wattage": 1200,
+        "efficiency": "80 Plus Titanium",
+        "modular": "Full Modular",
+        "form_factor": "ATX",
+        "fan_size_mm": 135,
+        "pcie_connectors": "6x 8-pin",
+        "eps_connectors": "2x 4+4-pin",
+        "sata_connectors": 12,
+        "molex_connectors": 4,
+        "length_mm": 200,
+        "warranty_years": 10
+      }
+    },
+    {
+      "brand": "Corsair",
+      "model": "RM750e 750W",
+      "release_year": 2023,
+      "price_usd": 99,
+      "specs": {
+        "wattage": 750,
+        "efficiency": "80 Plus Gold",
+        "modular": "Full Modular",
+        "form_factor": "ATX",
+        "fan_size_mm": 120,
+        "pcie_connectors": "4x 8-pin",
+        "eps_connectors": "2x 4+4-pin",
+        "sata_connectors": 8,
+        "molex_connectors": 4,
+        "length_mm": 140,
+        "warranty_years": 10
+      }
+    },
+    {
+      "brand": "Seasonic",
+      "model": "PRIME TX-1000",
+      "release_year": 2019,
+      "price_usd": 279,
+      "specs": {
+        "wattage": 1000,
+        "efficiency": "80 Plus Titanium",
+        "modular": "Full Modular",
+        "form_factor": "ATX",
+        "fan_size_mm": 135,
+        "pcie_connectors": "6x 8-pin",
+        "eps_connectors": "2x 4+4-pin",
+        "sata_connectors": 12,
+        "molex_connectors": 4,
+        "length_mm": 170,
+        "warranty_years": 12
+      }
+    },
+    {
+      "brand": "EVGA",
+      "model": "SuperNOVA 650 GT",
+      "release_year": 2020,
+      "price_usd": 79,
+      "specs": {
+        "wattage": 650,
+        "efficiency": "80 Plus Gold",
+        "modular": "Full Modular",
+        "form_factor": "ATX",
+        "fan_size_mm": 135,
+        "pcie_connectors": "2x 8-pin",
+        "eps_connectors": "1x 4+4-pin",
+        "sata_connectors": 6,
+        "molex_connectors": 3,
+        "length_mm": 150,
+        "warranty_years": 7
+      }
+    },
+    {
+      "brand": "Corsair",
+      "model": "HX1000i Platinum",
+      "release_year": 2020,
+      "price_usd": 219,
+      "specs": {
+        "wattage": 1000,
+        "efficiency": "80 Plus Platinum",
+        "modular": "Full Modular"
+      }
+    },
+    {
+      "brand": "EVGA",
+      "model": "SuperNOVA 850 P6",
+      "release_year": 2021,
+      "price_usd": 149,
+      "specs": {
+        "wattage": 850,
+        "efficiency": "80 Plus Platinum",
+        "modular": "Full Modular"
+      }
+    },
+    {
+      "brand": "Seasonic",
+      "model": "Focus GX-750",
+      "release_year": 2019,
+      "price_usd": 109,
+      "specs": {
+        "wattage": 750,
+        "efficiency": "80 Plus Gold",
+        "modular": "Full Modular"
+      }
+    },
+    {
+      "brand": "be quiet!",
+      "model": "Straight Power 11 650W",
+      "release_year": 2018,
+      "price_usd": 119,
+      "specs": {
+        "wattage": 650,
+        "efficiency": "80 Plus Gold",
+        "modular": "Full Modular"
+      }
+    },
+    {
+      "brand": "Thermaltake",
+      "model": "Smart RGB 700W",
+      "release_year": 2019,
+      "price_usd": 69,
+      "specs": {
+        "wattage": 700,
+        "efficiency": "80 Plus",
+        "modular": "Non-Modular"
+      }
+    },
+    {
+      "brand": "Cooler Master",
+      "model": "V850 SFX Gold",
+      "release_year": 2021,
+      "price_usd": 149,
+      "specs": {
+        "wattage": 850,
+        "efficiency": "80 Plus Gold",
+        "modular": "Full Modular"
+      }
+    },
+    {
+      "brand": "Corsair",
+      "model": "SF750 Platinum",
+      "release_year": 2019,
+      "price_usd": 179,
+      "specs": {
+        "wattage": 750,
+        "efficiency": "80 Plus Platinum",
+        "modular": "Full Modular"
+      }
+    },
+    {
+      "brand": "EVGA",
+      "model": "600 BR",
+      "release_year": 2018,
+      "price_usd": 49,
+      "specs": {
+        "wattage": 600,
+        "efficiency": "80 Plus Bronze",
+        "modular": "Non-Modular"
+      }
+    }
+  ],
+  "Case": [
+    {
+      "brand": "Lian Li",
+      "model": "O11 Dynamic EVO",
+      "release_year": 2022,
+      "price_usd": 169,
+      "specs": {
+        "form_factor": "Mid Tower",
+        "color": "Black",
+        "side_panel": "Tempered Glass",
+        "mobo_support": "E-ATX, ATX, Micro-ATX, Mini-ITX",
+        "max_gpu_length_mm": 420,
+        "max_cpu_cooler_height_mm": 167,
+        "drive_bays_35": 2,
+        "drive_bays_25": 6,
+        "fan_slots": "13x 120mm or 9x 140mm",
+        "radiator_support": "360mm top/side/bottom",
+        "front_io": "2x USB 3.0, 1x USB-C, Audio",
+        "dimensions_mm": "446x285x479"
+      }
+    },
+    {
+      "brand": "Fractal Design",
+      "model": "Torrent Compact",
+      "release_year": 2022,
+      "price_usd": 189,
+      "specs": {
+        "form_factor": "Mid Tower",
+        "color": "Black",
+        "side_panel": "Tempered Glass",
+        "mobo_support": "ATX, Micro-ATX, Mini-ITX",
+        "max_gpu_length_mm": 360,
+        "max_cpu_cooler_height_mm": 176,
+        "drive_bays_35": 2,
+        "drive_bays_25": 4,
+        "fan_slots": "6x 120mm or 5x 140mm",
+        "radiator_support": "360mm top/front",
+        "front_io": "2x USB 3.0, 1x USB-C, Audio",
+        "dimensions_mm": "474x240x450"
+      }
+    },
+    {
+      "brand": "Cooler Master",
+      "model": "HAF 700 EVO",
+      "release_year": 2023,
+      "price_usd": 499,
+      "specs": {
+        "form_factor": "Full Tower",
+        "color": "Black",
+        "side_panel": "Tempered Glass",
+        "mobo_support": "E-ATX, ATX, Micro-ATX, Mini-ITX",
+        "max_gpu_length_mm": 490,
+        "max_cpu_cooler_height_mm": 190,
+        "drive_bays_35": 6,
+        "drive_bays_25": 6,
+        "fan_slots": "16x 120mm or 12x 140mm",
+        "radiator_support": "420mm top/front/side",
+        "front_io": "4x USB 3.2, 2x USB-C, Audio",
+        "dimensions_mm": "622x305x643"
+      }
+    },
+    {
+      "brand": "NZXT",
+      "model": "H9 Flow",
+      "release_year": 2022,
+      "price_usd": 149,
+      "specs": {
+        "form_factor": "Mid Tower",
+        "color": "White",
+        "side_panel": "Tempered Glass",
+        "mobo_support": "E-ATX, ATX, Micro-ATX, Mini-ITX",
+        "max_gpu_length_mm": 400,
+        "max_cpu_cooler_height_mm": 185,
+        "drive_bays_35": 2,
+        "drive_bays_25": 5,
+        "fan_slots": "9x 120mm or 7x 140mm",
+        "radiator_support": "360mm top/front",
+        "front_io": "2x USB 3.1, 1x USB-C, Audio",
+        "dimensions_mm": "505x230x480"
+      }
+    },
+    {
+      "brand": "Phanteks",
+      "model": "Enthoo Pro 2",
+      "release_year": 2020,
+      "price_usd": 139,
+      "specs": {
+        "form_factor": "Full Tower",
+        "color": "Black",
+        "side_panel": "Tempered Glass",
+        "mobo_support": "E-ATX, ATX, Micro-ATX, Mini-ITX",
+        "max_gpu_length_mm": 510,
+        "max_cpu_cooler_height_mm": 192,
+        "drive_bays_35": 10,
+        "drive_bays_25": 5,
+        "fan_slots": "11x 120mm or 9x 140mm",
+        "radiator_support": "420mm top/front",
+        "front_io": "2x USB 3.0, 1x USB-C, Audio",
+        "dimensions_mm": "575x275x600"
+      }
+    },
+    {
+      "brand": "Lian Li",
+      "model": "O11 Dynamic EVO",
+      "release_year": 2022,
+      "price_usd": 169,
+      "specs": {
+        "form_factor": "Mid Tower",
+        "color": "Black",
+        "side_panel": "Tempered Glass",
+        "mobo_support": "E-ATX, ATX, Micro-ATX, Mini-ITX",
+        "max_gpu_length_mm": 420,
+        "max_cpu_cooler_height_mm": 167,
+        "drive_bays_35": 2,
+        "drive_bays_25": 6,
+        "fan_slots": "13x 120mm or 9x 140mm",
+        "radiator_support": "360mm top/side/bottom",
+        "front_io": "2x USB 3.0, 1x USB-C, Audio",
+        "dimensions_mm": "446x285x479"
+      }
+    },
+    {
+      "brand": "Fractal Design",
+      "model": "Torrent Compact",
+      "release_year": 2022,
+      "price_usd": 189,
+      "specs": {
+        "form_factor": "Mid Tower",
+        "color": "Black",
+        "side_panel": "Tempered Glass",
+        "mobo_support": "ATX, Micro-ATX, Mini-ITX",
+        "max_gpu_length_mm": 360,
+        "max_cpu_cooler_height_mm": 176,
+        "drive_bays_35": 2,
+        "drive_bays_25": 4,
+        "fan_slots": "6x 120mm or 5x 140mm",
+        "radiator_support": "360mm top/front",
+        "front_io": "2x USB 3.0, 1x USB-C, Audio",
+        "dimensions_mm": "474x240x450"
+      }
+    },
+    {
+      "brand": "Cooler Master",
+      "model": "HAF 700 EVO",
+      "release_year": 2023,
+      "price_usd": 499,
+      "specs": {
+        "form_factor": "Full Tower",
+        "color": "Black",
+        "side_panel": "Tempered Glass",
+        "mobo_support": "E-ATX, ATX, Micro-ATX, Mini-ITX",
+        "max_gpu_length_mm": 490,
+        "max_cpu_cooler_height_mm": 190,
+        "drive_bays_35": 6,
+        "drive_bays_25": 6,
+        "fan_slots": "16x 120mm or 12x 140mm",
+        "radiator_support": "420mm top/front/side",
+        "front_io": "4x USB 3.2, 2x USB-C, Audio",
+        "dimensions_mm": "622x305x643"
+      }
+    },
+    {
+      "brand": "NZXT",
+      "model": "H9 Flow",
+      "release_year": 2022,
+      "price_usd": 149,
+      "specs": {
+        "form_factor": "Mid Tower",
+        "color": "White",
+        "side_panel": "Tempered Glass",
+        "mobo_support": "E-ATX, ATX, Micro-ATX, Mini-ITX",
+        "max_gpu_length_mm": 400,
+        "max_cpu_cooler_height_mm": 185,
+        "drive_bays_35": 2,
+        "drive_bays_25": 5,
+        "fan_slots": "9x 120mm or 7x 140mm",
+        "radiator_support": "360mm top/front",
+        "front_io": "2x USB 3.1, 1x USB-C, Audio",
+        "dimensions_mm": "505x230x480"
+      }
+    },
+    {
+      "brand": "Phanteks",
+      "model": "Enthoo Pro 2",
+      "release_year": 2020,
+      "price_usd": 139,
+      "specs": {
+        "form_factor": "Full Tower",
+        "color": "Black",
+        "side_panel": "Tempered Glass",
+        "mobo_support": "E-ATX, ATX, Micro-ATX, Mini-ITX",
+        "max_gpu_length_mm": 510,
+        "max_cpu_cooler_height_mm": 192,
+        "drive_bays_35": 10,
+        "drive_bays_25": 5,
+        "fan_slots": "11x 120mm or 9x 140mm",
+        "radiator_support": "420mm top/front",
+        "front_io": "2x USB 3.0, 1x USB-C, Audio",
+        "dimensions_mm": "575x275x600"
+      }
+    },
+    {
+      "brand": "Corsair",
+      "model": "5000D Airflow",
+      "release_year": 2021,
+      "price_usd": 159,
+      "specs": {
+        "form_factor": "Mid Tower",
+        "color": "Black",
+        "mobo_support": "E-ATX, ATX, Micro-ATX",
+        "max_gpu_length_mm": 400
+      }
+    },
+    {
+      "brand": "NZXT",
+      "model": "H510 Elite",
+      "release_year": 2019,
+      "price_usd": 169,
+      "specs": {
+        "form_factor": "Mid Tower",
+        "color": "Black/White",
+        "mobo_support": "ATX, Micro-ATX",
+        "max_gpu_length_mm": 381
+      }
+    },
+    {
+      "brand": "Lian Li",
+      "model": "Lancool II Mesh",
+      "release_year": 2020,
+      "price_usd": 119,
+      "specs": {
+        "form_factor": "Mid Tower",
+        "color": "Black",
+        "mobo_support": "E-ATX, ATX, Micro-ATX",
+        "max_gpu_length_mm": 384
+      }
+    },
+    {
+      "brand": "Fractal Design",
+      "model": "Meshify 2",
+      "release_year": 2020,
+      "price_usd": 149,
+      "specs": {
+        "form_factor": "Mid Tower",
+        "color": "Black",
+        "mobo_support": "E-ATX, ATX, Micro-ATX",
+        "max_gpu_length_mm": 467
+      }
+    },
+    {
+      "brand": "be quiet!",
+      "model": "Pure Base 500DX",
+      "release_year": 2020,
+      "price_usd": 109,
+      "specs": {
+        "form_factor": "Mid Tower",
+        "color": "Black/White",
+        "mobo_support": "ATX, Micro-ATX",
+        "max_gpu_length_mm": 369
+      }
+    },
+    {
+      "brand": "Phanteks",
+      "model": "Eclipse P400A",
+      "release_year": 2020,
+      "price_usd": 89,
+      "specs": {
+        "form_factor": "Mid Tower",
+        "color": "Black/White",
+        "mobo_support": "ATX, Micro-ATX",
+        "max_gpu_length_mm": 420
+      }
+    },
+    {
+      "brand": "Cooler Master",
+      "model": "MasterBox TD500 Mesh",
+      "release_year": 2019,
+      "price_usd": 99,
+      "specs": {
+        "form_factor": "Mid Tower",
+        "color": "Black/White",
+        "mobo_support": "ATX, Micro-ATX",
+        "max_gpu_length_mm": 410
+      }
+    },
+    {
+      "brand": "Lian Li",
+      "model": "O11 Air Mini",
+      "release_year": 2021,
+      "price_usd": 119,
+      "specs": {
+        "form_factor": "Mid Tower",
+        "color": "Black/White",
+        "mobo_support": "ATX, Micro-ATX, Mini-ITX",
+        "max_gpu_length_mm": 357
+      }
+    }
+  ],
+  "Cooling": [
+    {
+      "brand": "Arctic",
+      "model": "Liquid Freezer III 360",
+      "release_year": 2023,
+      "price_usd": 109,
+      "specs": {
+        "type": "AIO Liquid",
+        "radiator_size_mm": 360,
+        "fan_count": 3,
+        "fan_size_mm": 120,
+        "pump_speed_rpm": 1800,
+        "fan_speed_rpm": "200-1800",
+        "noise_level_dba": 22.5,
+        "rgb": false,
+        "socket_support": "LGA1700/1200/115x, AM5/AM4",
+        "dimensions_mm": "397x120x38",
+        "warranty_years": 6
+      }
+    },
+    {
+      "brand": "Deepcool",
+      "model": "AK620",
+      "release_year": 2021,
+      "price_usd": 59,
+      "specs": {
+        "type": "Air Cooler",
+        "radiator_size_mm": null,
+        "fan_count": 2,
+        "fan_size_mm": 120,
+        "pump_speed_rpm": null,
+        "fan_speed_rpm": "500-1850",
+        "noise_level_dba": 28,
+        "rgb": false,
+        "socket_support": "LGA1700/1200/115x, AM5/AM4",
+        "dimensions_mm": "129x138x160",
+        "warranty_years": 3
+      }
+    },
+    {
+      "brand": "Cooler Master",
+      "model": "MasterLiquid ML240L V2",
+      "release_year": 2020,
+      "price_usd": 79,
+      "specs": {
+        "type": "AIO Liquid",
+        "radiator_size_mm": 240,
+        "fan_count": 2,
+        "fan_size_mm": 120,
+        "pump_speed_rpm": 4200,
+        "fan_speed_rpm": "650-1800",
+        "noise_level_dba": 16,
+        "rgb": true,
+        "socket_support": "LGA1700/1200/115x, AM4",
+        "dimensions_mm": "277x120x27",
+        "warranty_years": 2
+      }
+    },
+    {
+      "brand": "be quiet!",
+      "model": "Dark Rock Pro 4",
+      "release_year": 2018,
+      "price_usd": 89,
+      "specs": {
+        "type": "Air Cooler",
+        "radiator_size_mm": null,
+        "fan_count": 2,
+        "fan_size_mm": 120,
+        "pump_speed_rpm": null,
+        "fan_speed_rpm": "1400",
+        "noise_level_dba": 24.3,
+        "rgb": false,
+        "socket_support": "LGA1700/1200/115x, AM5/AM4",
+        "dimensions_mm": "146x136x163",
+        "warranty_years": 3
+      }
+    },
+    {
+      "brand": "NZXT",
+      "model": "Kraken 360 RGB",
+      "release_year": 2023,
+      "price_usd": 199,
+      "specs": {
+        "type": "AIO Liquid",
+        "radiator_size_mm": 360,
+        "fan_count": 3,
+        "fan_size_mm": 120,
+        "pump_speed_rpm": 2800,
+        "fan_speed_rpm": "500-1800",
+        "noise_level_dba": 21,
+        "rgb": true,
+        "socket_support": "LGA1700/1200/115x, AM5/AM4",
+        "dimensions_mm": "394x120x27",
+        "warranty_years": 6
+      }
+    },
+    {
+      "brand": "Arctic",
+      "model": "Liquid Freezer III 360",
+      "release_year": 2023,
+      "price_usd": 109,
+      "specs": {
+        "type": "AIO Liquid",
+        "radiator_size_mm": 360,
+        "fan_count": 3,
+        "fan_size_mm": 120,
+        "pump_speed_rpm": 1800,
+        "fan_speed_rpm": "200-1800",
+        "noise_level_dba": 22.5,
+        "rgb": false,
+        "socket_support": "LGA1700/1200/115x, AM5/AM4",
+        "dimensions_mm": "397x120x38",
+        "warranty_years": 6
+      }
+    },
+    {
+      "brand": "Deepcool",
+      "model": "AK620",
+      "release_year": 2021,
+      "price_usd": 59,
+      "specs": {
+        "type": "Air Cooler",
+        "radiator_size_mm": null,
+        "fan_count": 2,
+        "fan_size_mm": 120,
+        "pump_speed_rpm": null,
+        "fan_speed_rpm": "500-1850",
+        "noise_level_dba": 28,
+        "rgb": false,
+        "socket_support": "LGA1700/1200/115x, AM5/AM4",
+        "dimensions_mm": "129x138x160",
+        "warranty_years": 3
+      }
+    },
+    {
+      "brand": "Cooler Master",
+      "model": "MasterLiquid ML240L V2",
+      "release_year": 2020,
+      "price_usd": 79,
+      "specs": {
+        "type": "AIO Liquid",
+        "radiator_size_mm": 240,
+        "fan_count": 2,
+        "fan_size_mm": 120,
+        "pump_speed_rpm": 4200,
+        "fan_speed_rpm": "650-1800",
+        "noise_level_dba": 16,
+        "rgb": true,
+        "socket_support": "LGA1700/1200/115x, AM4",
+        "dimensions_mm": "277x120x27",
+        "warranty_years": 2
+      }
+    },
+    {
+      "brand": "be quiet!",
+      "model": "Dark Rock Pro 4",
+      "release_year": 2018,
+      "price_usd": 89,
+      "specs": {
+        "type": "Air Cooler",
+        "radiator_size_mm": null,
+        "fan_count": 2,
+        "fan_size_mm": 120,
+        "pump_speed_rpm": null,
+        "fan_speed_rpm": "1400",
+        "noise_level_dba": 24.3,
+        "rgb": false,
+        "socket_support": "LGA1700/1200/115x, AM5/AM4",
+        "dimensions_mm": "146x136x163",
+        "warranty_years": 3
+      }
+    },
+    {
+      "brand": "NZXT",
+      "model": "Kraken 360 RGB",
+      "release_year": 2023,
+      "price_usd": 199,
+      "specs": {
+        "type": "AIO Liquid",
+        "radiator_size_mm": 360,
+        "fan_count": 3,
+        "fan_size_mm": 120,
+        "pump_speed_rpm": 2800,
+        "fan_speed_rpm": "500-1800",
+        "noise_level_dba": 21,
+        "rgb": true,
+        "socket_support": "LGA1700/1200/115x, AM5/AM4",
+        "dimensions_mm": "394x120x27",
+        "warranty_years": 6
+      }
+    },
+    {
+      "brand": "Corsair",
+      "model": "iCUE H150i Elite Capellix",
+      "release_year": 2020,
+      "price_usd": 179,
+      "specs": {
+        "type": "AIO Liquid",
+        "radiator_size_mm": 360,
+        "fan_count": 3,
+        "rgb": true
+      }
+    },
+    {
+      "brand": "Noctua",
+      "model": "NH-D15 chromax.black",
+      "release_year": 2019,
+      "price_usd": 109,
+      "specs": {
+        "type": "Air Cooler",
+        "fan_count": 2,
+        "fan_size_mm": 140,
+        "rgb": false
+      }
+    },
+    {
+      "brand": "NZXT",
+      "model": "Kraken Z63 RGB",
+      "release_year": 2020,
+      "price_usd": 249,
+      "specs": {
+        "type": "AIO Liquid",
+        "radiator_size_mm": 280,
+        "fan_count": 2,
+        "rgb": true
+      }
+    },
+    {
+      "brand": "be quiet!",
+      "model": "Shadow Rock 3",
+      "release_year": 2020,
+      "price_usd": 49,
+      "specs": {
+        "type": "Air Cooler",
+        "fan_count": 1,
+        "fan_size_mm": 120,
+        "rgb": false
+      }
+    },
+    {
+      "brand": "Arctic",
+      "model": "Freezer 34 eSports DUO",
+      "release_year": 2019,
+      "price_usd": 49,
+      "specs": {
+        "type": "Air Cooler",
+        "fan_count": 2,
+        "fan_size_mm": 120,
+        "rgb": false
+      }
+    },
+    {
+      "brand": "Cooler Master",
+      "model": "Hyper 212 RGB Black",
+      "release_year": 2019,
+      "price_usd": 44,
+      "specs": {
+        "type": "Air Cooler",
+        "fan_count": 1,
+        "fan_size_mm": 120,
+        "rgb": true
+      }
+    },
+    {
+      "brand": "Corsair",
+      "model": "H100x",
+      "release_year": 2018,
+      "price_usd": 89,
+      "specs": {
+        "type": "AIO Liquid",
+        "radiator_size_mm": 240,
+        "fan_count": 2,
+        "rgb": false
+      }
+    },
+    {
+      "brand": "Deepcool",
+      "model": "Gammaxx GTE V2",
+      "release_year": 2020,
+      "price_usd": 34,
+      "specs": {
+        "type": "Air Cooler",
+        "fan_count": 1,
+        "fan_size_mm": 120,
+        "rgb": true
+      }
+    }
+  ]
+}

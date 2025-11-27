@@ -50,7 +50,7 @@ class User extends Authenticatable
 
     public function cartItems()
     {
-        return $this->hasMany(CartItem::class);
+        return $this->hasManyThrough(CartItem::class, Cart::class);
     }
 
 

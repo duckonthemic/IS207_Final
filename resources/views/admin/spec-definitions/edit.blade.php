@@ -142,7 +142,7 @@
                     Cập Nhật
                 </button>
                 <a href="{{ route('admin.spec-definitions.index', ['component_type_id' => $specDefinition->component_type_id]) }}" 
-                   class="px-6 py-3 bg-gray-100 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-200 transition font-medium">
+                   class="px-6 py-3 bg-gray-100 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-800 transition font-medium">
                     Hủy
                 </a>
             </div>

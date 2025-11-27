@@ -31,8 +31,8 @@ class CartController extends Controller
             'quantity' => 'required|integer|min:1|max:100',
         ]);
 
-        if (!$product || $product->status !== 1) {
-            return $this->errorResponse('Sản phẩm không tồn tại', 404);
+        if (!$product || !$product->is_active) {
+            return $this->errorResponse('Sản phẩm không tồn tại hoặc ngừng kinh doanh', 404);
         }
 
         $cart = auth()->user()->getOrCreateActiveCart();

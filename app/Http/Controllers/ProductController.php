@@ -293,4 +293,55 @@ class ProductController extends Controller
 
         return view('products.show', compact('product', 'relatedProducts', 'canReview', 'userReview'));
     }
+
+    /**
+     * Get product details as JSON for PC Builder
+     */
+    public function getJson(Product $product)
+    {
+        $product->load(['specs.specDefinition', 'category']);
+        
+        $specs = $product->specs->mapWithKeys(function ($spec) {
+            return [$spec->specDefinition->code => $spec->value];
+        });
+
+        return response()->json([
+            'id' => $product->id,
+            'name' => $product->name,
+            'price' => $product->price,
+            'image' => $product->image_url ?? asset('images/no-image.png'),
+            'specs' => $specs,
+            'category_slug' => $product->category->slug,
+        ]);
+    }
+
+    /**
+     * Compare products
+     */
+    public function compare(Request $request)
+    {
+        $ids = explode(',', $request->query('ids', ''));
+        $products = Product::with(['specs.specDefinition', 'category'])
+            ->whereIn('id', $ids)
+            ->get();
+
+        if ($products->isEmpty()) {
+            return redirect()->route('products.index')->with('error', 'Vui lòng chọn sản phẩm để so sánh');
+        }
+
+        // Get all unique spec definitions from these products
+        $specDefinitions = collect();
+        foreach ($products as $product) {
+            foreach ($product->specs as $spec) {
+                if (!$specDefinitions->contains('id', $spec->specDefinition->id)) {
+                    $specDefinitions->push($spec->specDefinition);
+                }
+            }
+        }
+        
+        // Sort specs by sort_order
+        $specDefinitions = $specDefinitions->sortBy('sort_order');
+
+        return view('products.compare', compact('products', 'specDefinitions'));
+    }
 }

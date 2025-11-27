@@ -3,177 +3,172 @@
 @section('title', 'Xác nhận đơn hàng - UITech')
 
 @section('content')
-<div class="container mx-auto px-4 py-8">
-    {{-- Progress Steps --}}
-    <div class="mb-8">
-        <div class="flex items-center justify-center">
-            <div class="flex items-center">
-                <div class="flex items-center text-cyber-glow">
-                    <div class="rounded-full h-10 w-10 bg-cyber-glow text-cyber-darker flex items-center justify-center font-bold">✓</div>
-                    <span class="ml-2">Giao hàng</span>
-                </div>
-                <div class="w-16 h-1 bg-cyber-glow mx-4"></div>
-                <div class="flex items-center text-cyber-glow">
-                    <div class="rounded-full h-10 w-10 bg-cyber-glow text-cyber-darker flex items-center justify-center font-bold">✓</div>
-                    <span class="ml-2">Thanh toán</span>
-                </div>
-                <div class="w-16 h-1 bg-cyber-accent mx-4"></div>
-                <div class="flex items-center text-cyber-accent">
-                    <div class="rounded-full h-10 w-10 bg-cyber-accent text-cyber-darker flex items-center justify-center font-bold">3</div>
-                    <span class="ml-2 font-semibold">Xác nhận</span>
+<div class="bg-gray-50 min-h-screen py-12">
+    <div class="container mx-auto px-4 max-w-6xl">
+        {{-- Progress Steps --}}
+        <div class="mb-12">
+            <div class="flex items-center justify-center">
+                <div class="flex items-center">
+                    <div class="flex items-center text-green-600">
+                        <div class="h-10 w-10 bg-green-600 text-white rounded-full flex items-center justify-center font-bold shadow-lg shadow-green-500/30">✓</div>
+                        <span class="ml-3 font-medium text-gray-900">Giao hàng</span>
+                    </div>
+                    <div class="w-24 h-1 bg-green-600 mx-4 rounded-full"></div>
+                    <div class="flex items-center text-green-600">
+                        <div class="h-10 w-10 bg-green-600 text-white rounded-full flex items-center justify-center font-bold shadow-lg shadow-green-500/30">✓</div>
+                        <span class="ml-3 font-medium text-gray-900">Thanh toán</span>
+                    </div>
+                    <div class="w-24 h-1 bg-green-600 mx-4 rounded-full"></div>
+                    <div class="flex items-center text-blue-600">
+                        <div class="h-10 w-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold shadow-lg shadow-blue-500/30">3</div>
+                        <span class="ml-3 font-bold text-gray-900">Xác nhận</span>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div class="lg:col-span-2 space-y-6">
-            {{-- Order Items --}}
-            <div class="bg-cyber-card border border-cyber-border rounded-lg p-6">
-                <h2 class="text-xl font-bold text-cyber-text mb-6">Sản phẩm đặt mua</h2>
-                
-                <div class="space-y-4">
-                    @foreach($cart->items as $item)
-                        <div class="flex gap-4 pb-4 border-b border-cyber-border last:border-0">
-                            <div class="w-20 h-20 bg-cyber-darker rounded-lg flex-shrink-0 overflow-hidden">
-                                @if($item->product->images->first())
-                                    <img src="{{ $item->product->images->first()->url }}" alt="{{ $item->product->name }}" class="w-full h-full object-cover">
-                                @else
-                                    <div class="w-full h-full flex items-center justify-center text-cyber-muted text-xs">No image</div>
-                                @endif
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <div class="lg:col-span-8 space-y-6">
+                {{-- Review Information --}}
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                    <div class="p-6 border-b border-gray-100">
+                        <h2 class="text-xl font-bold text-gray-900">Kiểm tra thông tin đơn hàng</h2>
+                        <p class="text-sm text-gray-500 mt-1">Vui lòng kiểm tra kỹ thông tin trước khi đặt hàng</p>
+                    </div>
+                    
+                    <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-8">
+                        {{-- Shipping Info --}}
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="font-bold text-gray-900 flex items-center gap-2">
+                                    <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                    Địa chỉ giao hàng
+                                </h3>
+                                <a href="{{ route('checkout.shipping') }}" class="text-blue-600 text-sm font-medium hover:text-blue-700 hover:underline transition-colors">Sửa</a>
                             </div>
-                            <div class="flex-1">
-                                <h3 class="font-bold text-cyber-text">{{ $item->product->name }}</h3>
-                                <p class="text-cyber-muted text-sm mt-1">SKU: {{ $item->product->sku }}</p>
-                                <div class="flex items-center justify-between mt-2">
-                                    <span class="text-cyber-muted text-sm">Số lượng: {{ $item->qty }}</span>
-                                    <span class="text-cyber-accent font-bold">{{ number_format($item->subtotal, 0, ',', '.') }}₫</span>
-                                </div>
+                            <div class="bg-gray-50 rounded-xl p-4 border border-gray-100 h-full">
+                                <p class="font-bold text-gray-900 text-lg">{{ $address->fullname }}</p>
+                                <p class="text-sm text-gray-500 mt-1 font-medium">{{ $address->phone }}</p>
+                                <p class="text-sm text-gray-600 mt-2 leading-relaxed">
+                                    {{ $address->address }}
+                                    @if($address->ward), {{ $address->ward }}@endif
+                                    @if($address->district), {{ $address->district }}@endif
+                                    @if($address->city), {{ $address->city }}@endif
+                                </p>
                             </div>
                         </div>
-                    @endforeach
-                </div>
-            </div>
 
-            {{-- Shipping Address --}}
-            <div class="bg-cyber-card border border-cyber-border rounded-lg p-6">
-                <div class="flex items-center justify-between mb-4">
-                    <h3 class="font-bold text-cyber-text text-lg">Địa chỉ giao hàng</h3>
-                    <a href="{{ route('checkout.shipping') }}" class="text-cyber-accent text-sm hover:underline">Thay đổi</a>
-                </div>
-                <div class="bg-cyber-darker rounded-lg p-4">
-                    <p class="font-semibold text-cyber-text">{{ $address->fullname }}</p>
-                    <p class="text-sm text-cyber-muted mt-1">📱 {{ $address->phone }}</p>
-                    <p class="text-sm text-cyber-text mt-2">
-                        📍 {{ $address->address }}
-                        @if($address->ward), {{ $address->ward }}@endif
-                        @if($address->district), {{ $address->district }}@endif
-                        @if($address->city), {{ $address->city }}@endif
-                        @if($address->postal_code) {{ $address->postal_code }}@endif
-                    </p>
-                </div>
-            </div>
-
-            {{-- Payment Method --}}
-            <div class="bg-cyber-card border border-cyber-border rounded-lg p-6">
-                <div class="flex items-center justify-between mb-4">
-                    <h3 class="font-bold text-cyber-text text-lg">Phương thức thanh toán</h3>
-                    <a href="{{ route('checkout.payment') }}" class="text-cyber-accent text-sm hover:underline">Thay đổi</a>
-                </div>
-                <div class="bg-cyber-darker rounded-lg p-4 flex items-center gap-3">
-                    <div class="text-2xl">
-                        @if($paymentMethod === 'cod')
-                            💵
-                        @else
-                            🏦
-                        @endif
-                    </div>
-                    <div>
-                        <p class="font-semibold text-cyber-text">
-                            @if($paymentMethod === 'cod')
-                                Thanh toán khi nhận hàng (COD)
-                            @else
-                                Chuyển khoản ngân hàng
-                            @endif
-                        </p>
-                        <p class="text-sm text-cyber-muted mt-1">
-                            @if($paymentMethod === 'cod')
-                                Thanh toán bằng tiền mặt khi nhận hàng
-                            @else
-                                Vui lòng chuyển khoản theo thông tin đã cung cấp
-                            @endif
-                        </p>
+                        {{-- Payment Info --}}
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="font-bold text-gray-900 flex items-center gap-2">
+                                    <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
+                                    Phương thức thanh toán
+                                </h3>
+                                <a href="{{ route('checkout.payment') }}" class="text-blue-600 text-sm font-medium hover:text-blue-700 hover:underline transition-colors">Sửa</a>
+                            </div>
+                            <div class="bg-gray-50 rounded-xl p-4 border border-gray-100 h-full flex items-center">
+                                @if($paymentMethod == 'cod')
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-10 h-10 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-xl">💵</div>
+                                        <div>
+                                            <p class="font-bold text-gray-900">Thanh toán khi nhận hàng (COD)</p>
+                                            <p class="text-xs text-gray-500 mt-0.5">Thanh toán tiền mặt</p>
+                                        </div>
+                                    </div>
+                                @else
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xl">🏦</div>
+                                        <div>
+                                            <p class="font-bold text-gray-900">Chuyển khoản ngân hàng</p>
+                                            <p class="text-xs text-gray-500 mt-0.5">Internet Banking / QR Code</p>
+                                        </div>
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            {{-- Place Order Form --}}
-            <form method="POST" action="{{ route('checkout.place-order') }}" id="place-order-form">
-                @csrf
-                <div class="flex gap-4">
-                    <a href="{{ route('checkout.payment') }}" class="px-6 py-3 border border-cyber-border text-cyber-text rounded-lg hover:border-cyber-accent transition-all">
+                {{-- Order Items --}}
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                    <div class="p-6 border-b border-gray-100">
+                        <h3 class="font-bold text-gray-900 text-lg">Chi tiết đơn hàng</h3>
+                    </div>
+                    <div class="divide-y divide-gray-100">
+                        @foreach($cart->items as $item)
+                            <div class="p-6 flex gap-6 hover:bg-gray-50 transition-colors">
+                                <div class="w-24 h-24 bg-gray-50 rounded-xl overflow-hidden border border-gray-100 shrink-0">
+                                    @if($item->product->images->first())
+                                        <img src="{{ $item->product->images->first()->url }}" alt="{{ $item->product->name }}" class="w-full h-full object-contain p-2">
+                                    @endif
+                                </div>
+                                <div class="flex-1 min-w-0 flex flex-col justify-center">
+                                    <h4 class="text-gray-900 font-bold text-lg mb-1 truncate">{{ $item->product->name }}</h4>
+                                    <p class="text-sm text-gray-500 mb-2">Đơn giá: {{ number_format($item->price, 0, ',', '.') }}₫</p>
+                                    <div class="flex items-center justify-between">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                                            x{{ $item->qty }}
+                                        </span>
+                                        <span class="text-blue-600 font-bold text-lg">{{ number_format($item->subtotal, 0, ',', '.') }}₫</span>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                    <a href="{{ route('checkout.payment') }}" class="px-6 py-3.5 border-2 border-gray-200 text-gray-700 rounded-xl hover:border-gray-900 hover:text-gray-900 transition-all font-bold text-center">
                         ← Quay lại
                     </a>
-                    <button type="submit" class="flex-1 px-6 py-4 bg-cyber-accent text-cyber-darker rounded-lg hover:shadow-glow-cyan transition-all font-bold text-lg">
-                        🛒 Đặt hàng
-                    </button>
+                    <form action="{{ route('checkout.place-order') }}" method="POST" class="flex-1" id="place-order-form">
+                        @csrf
+                        <button type="submit" class="w-full px-6 py-3.5 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-all font-bold shadow-lg hover:shadow-blue-500/30 transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
+                            <span>Đặt hàng ngay</span>
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        </button>
+                    </form>
                 </div>
-            </form>
-        </div>
+            </div>
 
-        {{-- Order Summary --}}
-        <div class="lg:col-span-1">
-            <div class="bg-cyber-card border border-cyber-border rounded-lg p-6 sticky top-20">
-                <h3 class="font-bold text-cyber-text text-lg mb-4">Tóm tắt đơn hàng</h3>
-                
-                <div class="space-y-3 pb-4 border-b border-cyber-border">
-                    <div class="flex justify-between text-cyber-text">
-                        <span>Tạm tính ({{ $cart->items->count() }} sản phẩm):</span>
-                        <span>{{ number_format($subtotal, 0, ',', '.') }}₫</span>
+            {{-- Order Summary --}}
+            <div class="lg:col-span-4">
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sticky top-24">
+                    <h3 class="font-bold text-gray-900 text-lg mb-6">Tổng quan đơn hàng</h3>
+                    
+                    <div class="space-y-4">
+                        <div class="flex justify-between text-gray-600">
+                            <span>Tạm tính</span>
+                            <span class="font-medium text-gray-900">{{ number_format($cart->getTotal(), 0, ',', '.') }}₫</span>
+                        </div>
+                        <div class="flex justify-between text-gray-600">
+                            <span>Phí vận chuyển</span>
+                            <span class="text-gray-900 font-medium">30.000₫</span>
+                        </div>
+                        <div class="flex justify-between text-gray-600">
+                            <span>Giảm giá</span>
+                            <span class="text-green-600 font-medium">-0₫</span>
+                        </div>
+                        
+                        <div class="border-t border-gray-100 pt-4 mt-4">
+                            <div class="flex justify-between items-end mb-1">
+                                <span class="font-bold text-gray-900 text-lg">Tổng thanh toán</span>
+                                <span class="text-3xl font-bold text-blue-600">{{ number_format($cart->getTotal() + 30000, 0, ',', '.') }}₫</span>
+                            </div>
+                            <p class="text-right text-xs text-gray-400">(Đã bao gồm VAT)</p>
+                        </div>
                     </div>
-                    <div class="flex justify-between text-cyber-text">
-                        <span>Phí vận chuyển:</span>
-                        <span>{{ number_format($shippingFee, 0, ',', '.') }}₫</span>
-                    </div>
-                </div>
 
-                <div class="py-4 border-b border-cyber-border">
-                    <div class="flex justify-between font-bold text-cyber-accent text-2xl">
-                        <span>Tổng cộng:</span>
-                        <span>{{ number_format($total, 0, ',', '.') }}₫</span>
-                    </div>
-                </div>
-
-                <div class="mt-4 space-y-3">
-                    <div class="flex items-start gap-2 text-sm text-cyber-muted">
-                        <svg class="w-5 h-5 text-cyber-glow flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                        </svg>
-                        <span>Giao hàng trong 2-3 ngày làm việc</span>
-                    </div>
-                    <div class="flex items-start gap-2 text-sm text-cyber-muted">
-                        <svg class="w-5 h-5 text-cyber-glow flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                        </svg>
-                        <span>Kiểm tra hàng trước khi thanh toán (COD)</span>
-                    </div>
-                    <div class="flex items-start gap-2 text-sm text-cyber-muted">
-                        <svg class="w-5 h-5 text-cyber-glow flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                        </svg>
-                        <span>Bảo hành chính hãng theo quy định</span>
+                    <div class="mt-6 p-4 bg-blue-50 rounded-xl border border-blue-100">
+                        <div class="flex gap-3">
+                            <svg class="w-5 h-5 text-blue-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                            <p class="text-sm text-blue-800">
+                                Bằng việc đặt hàng, bạn đồng ý với <a href="#" class="font-bold underline hover:text-blue-900">Điều khoản dịch vụ</a> và <a href="#" class="font-bold underline hover:text-blue-900">Chính sách bảo mật</a> của chúng tôi.
+                            </p>
+                        </div>
                     </div>
                 </div>
-
-                @if($paymentMethod === 'bank_transfer')
-                    <div class="mt-6 p-4 bg-cyber-error/10 border border-cyber-error/30 rounded-lg">
-                        <p class="text-sm text-cyber-error font-semibold mb-2">⚠️ Lưu ý quan trọng:</p>
-                        <p class="text-xs text-cyber-error">
-                            Đơn hàng sẽ được xử lý sau khi chúng tôi nhận được xác nhận chuyển khoản thành công. 
-                            Vui lòng ghi rõ nội dung: <span class="font-mono bg-cyber-darker px-1 rounded">{{ $address->fullname }} {{ $address->phone }}</span>
-                        </p>
-                    </div>
-                @endif
             </div>
         </div>
     </div>

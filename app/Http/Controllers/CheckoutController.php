@@ -7,6 +7,9 @@ use App\Models\OrderItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Mail\OrderPlaced;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Log;
 
 class CheckoutController extends Controller
 {
@@ -179,10 +182,18 @@ class CheckoutController extends Controller
 
             DB::commit();
 
+            // Send email
+            try {
+                Mail::to(Auth::user()->email)->send(new OrderPlaced($order));
+            } catch (\Exception $e) {
+                Log::error('Failed to send order email: ' . $e->getMessage());
+            }
+
             return redirect()->route('orders.show', $order)->with('success', 'Đặt hàng thành công! Mã đơn hàng: ' . $order->order_code);
 
         } catch (\Exception $e) {
             DB::rollBack();
+            Log::error('Order placement error: ' . $e->getMessage());
             return back()->with('error', 'Có lỗi xảy ra. Vui lòng thử lại.');
         }
     }

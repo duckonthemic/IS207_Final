@@ -17,6 +17,8 @@ Route::get('/', function () {
 
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
+Route::get('/api/products/{product}', [ProductController::class, 'getJson'])->name('products.json');
+Route::get('/products/compare', [ProductController::class, 'compare'])->name('products.compare');
 
 // PC Gaming & Build PC
 Route::get('/pc-gaming', [PcGamingController::class, 'index'])->name('pc-gaming.index');
@@ -87,7 +89,10 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('/orders/{order}', [\App\Http\Controllers\Admin\OrderController::class, 'show'])->name('orders.show');
     Route::post('/orders/{order}/status', [\App\Http\Controllers\Admin\OrderController::class, 'updateStatus'])->name('orders.update-status');
 
-    
+    // Reviews
+    Route::get('/reviews', [\App\Http\Controllers\Admin\ReviewController::class, 'index'])->name('reviews.index');
+    Route::patch('/reviews/{review}/status', [\App\Http\Controllers\Admin\ReviewController::class, 'updateStatus'])->name('reviews.update-status');
+    Route::delete('/reviews/{review}', [\App\Http\Controllers\Admin\ReviewController::class, 'destroy'])->name('reviews.destroy');
 });
 
 Route::get('/logout', function () {
@@ -98,3 +103,4 @@ Route::get('/logout', function () {
 });
 
 require __DIR__.'/auth.php';
+
