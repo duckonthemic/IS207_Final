@@ -84,7 +84,7 @@ class ProductController extends Controller
                 break;
         }
 
-        $products = $query->paginate($perPage)->withQueryString();
+        $products = $query->paginate($perPage)->withQueryString()->fragment('product-list');
         $categories = Category::root()->with('children')->orderBy('name')->get();
 
         // Get available filter options based on current category

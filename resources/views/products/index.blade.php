@@ -31,15 +31,15 @@
             <div class="flex items-center gap-3 bg-white p-1 rounded-xl border border-gray-200 shadow-sm">
                 <span class="text-sm font-medium text-gray-500 pl-3">Sắp xếp:</span>
                 <div class="flex">
-                    <a href="{{ route('products.index', array_merge(request()->except('sort'), ['sort' => 'latest'])) }}"
+                    <a href="{{ route('products.index', array_merge(request()->except('sort'), ['sort' => 'latest'])) }}#product-list"
                        class="px-4 py-2 rounded-lg text-sm font-medium transition-all {{ request('sort', 'latest') == 'latest' ? 'bg-gray-100 text-gray-900' : 'text-gray-500 hover:text-gray-900' }}">
                         Mới nhất
                     </a>
-                    <a href="{{ route('products.index', array_merge(request()->except('sort'), ['sort' => 'price_asc'])) }}"
+                    <a href="{{ route('products.index', array_merge(request()->except('sort'), ['sort' => 'price_asc'])) }}#product-list"
                        class="px-4 py-2 rounded-lg text-sm font-medium transition-all {{ request('sort') == 'price_asc' ? 'bg-gray-100 text-gray-900' : 'text-gray-500 hover:text-gray-900' }}">
                         Giá tăng
                     </a>
-                    <a href="{{ route('products.index', array_merge(request()->except('sort'), ['sort' => 'price_desc'])) }}"
+                    <a href="{{ route('products.index', array_merge(request()->except('sort'), ['sort' => 'price_desc'])) }}#product-list"
                        class="px-4 py-2 rounded-lg text-sm font-medium transition-all {{ request('sort') == 'price_desc' ? 'bg-gray-100 text-gray-900' : 'text-gray-500 hover:text-gray-900' }}">
                         Giá giảm
                     </a>
@@ -47,7 +47,7 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-12 gap-8">
+        <div class="grid grid-cols-12 gap-8" id="product-list">
             {{-- Sidebar Filters --}}
             <aside class="col-span-12 lg:col-span-3 space-y-6">
                 <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sticky top-24">
@@ -58,7 +58,7 @@
                         </a>
                     </div>
                     
-                    <form method="GET" action="{{ route('products.index') }}" id="filterForm">
+                    <form method="GET" action="{{ route('products.index') }}#product-list" id="filterForm">
                         @if(request('category'))
                             <input type="hidden" name="category" value="{{ request('category') }}">
                         @endif
