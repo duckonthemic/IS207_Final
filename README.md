@@ -201,10 +201,10 @@ php artisan serve
 |-----------|----------|
 | **Tên môn học** | Phát triển ứng dụng Web |
 | **Mã môn học** | IS207 |
-| **Mã lớp** | IS207.P11 |
-| **Năm học** | 2024-2025 |
+| **Mã lớp** | IS207.Q13 |
+| **Năm học** | 2025-2026 |
 | **Học kỳ** | 1 |
-| **Giảng viên** | ThS. Nguyễn Tấn Toàn |
+| **Giảng viên** | Thầy Phương |
 
 ---
 
