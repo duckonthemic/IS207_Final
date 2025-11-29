@@ -96,7 +96,10 @@ class ProductController extends Controller
             $subcategories = $this->getSubcategoriesWithCounts($currentCategory, $request);
         }
 
-        return view('products.index', compact('products', 'categories', 'filterOptions', 'currentCategory', 'subcategories'));
+        // Get main categories with counts
+        $mainCategoriesWithCounts = $this->getMainCategoriesWithCounts();
+
+        return view('products.index', compact('products', 'categories', 'filterOptions', 'currentCategory', 'subcategories', 'mainCategoriesWithCounts'));
     }
 
     /**
@@ -167,17 +170,33 @@ class ProductController extends Controller
                         }
                     });
                 } else {
-                    // For other filters, use spec-based filtering
-                    $query->whereHas('specs', function ($q) use ($filterParam, $values) {
-                        $q->whereHas('specDefinition', function ($sq) use ($filterParam) {
-                            // Match exact spec code
-                            $sq->where('code', $filterParam);
-                        })->where(function ($valueQuery) use ($values) {
-                            foreach ($values as $value) {
-                                $valueQuery->orWhere('value', 'like', "%{$value}%");
+                    // Find the spec definition to know the type
+                    $specDef = SpecDefinition::where('code', $filterParam)->first();
+
+                    if ($specDef) {
+                        $query->whereHas('specs', function ($q) use ($specDef, $values) {
+                            $q->where('spec_definition_id', $specDef->id);
+
+                            if ($specDef->input_type === 'range') {
+                                // Handle range filter: expect "min-max" string
+                                $rangeValue = $values[0] ?? '';
+                                $parts = explode('-', $rangeValue);
+                                if (count($parts) === 2) {
+                                    $min = (float)$parts[0];
+                                    $max = (float)$parts[1];
+                                    // Cast value to decimal for numeric comparison
+                                    $q->whereRaw('CAST(value AS DECIMAL(10,2)) BETWEEN ? AND ?', [$min, $max]);
+                                }
+                            } else {
+                                // Default behavior (checkboxes, etc)
+                                $q->where(function ($valueQuery) use ($values) {
+                                    foreach ($values as $value) {
+                                        $valueQuery->orWhere('value', 'like', "%{$value}%");
+                                    }
+                                });
                             }
                         });
-                    });
+                    }
                 }
             }
         }
@@ -211,7 +230,7 @@ class ProductController extends Controller
 
         // Get unique values for each filterable spec with product counts
         foreach ($specDefinitions as $specDef) {
-            $valuesWithCounts = DB::table('product_specs')
+            $rawValues = DB::table('product_specs')
                 ->join('products', 'product_specs.product_id', '=', 'products.id')
                 ->whereIn('products.category_id', $categoryIds)
                 ->where('product_specs.spec_definition_id', $specDef->id)
@@ -220,33 +239,45 @@ class ProductController extends Controller
                 ->select('product_specs.value', DB::raw('COUNT(DISTINCT products.id) as count'))
                 ->groupBy('product_specs.value')
                 ->orderBy('product_specs.value')
-                ->get()
-                ->map(function ($item) {
-                    return [
-                        'value' => trim($item->value),
-                        'count' => $item->count,
+                ->get();
+
+            // Merge similar values (case-insensitive, whitespace)
+            $mergedValues = [];
+            foreach ($rawValues as $item) {
+                $value = trim($item->value);
+                // Normalize: lowercase and remove extra spaces
+                $normalized = strtolower(preg_replace('/\s+/', ' ', $value));
+                
+                // Skip invalid values
+                if (empty($value) || in_array($normalized, ['desktop', 'undefined', 'null', 'n/a'])) {
+                    continue;
+                }
+
+                if (!isset($mergedValues[$normalized])) {
+                    $mergedValues[$normalized] = [
+                        'value' => $value, // Keep the first encountered casing
+                        'count' => 0
                     ];
-                })
-                ->filter(function ($item) {
-                    // Filter out unwanted values
-                    $value = strtolower($item['value']);
-                    $blacklist = ['desktop', 'undefined', 'null', 'n/a', ''];
-                    return !empty($item['value']) && $item['count'] > 0 && !in_array($value, $blacklist);
-                })
-                ->unique('value') // Remove duplicates
-                ->values()
-                ->toArray();
+                }
+                $mergedValues[$normalized]['count'] += $item->count;
+            }
+
+            $valuesWithCounts = array_values($mergedValues);
+            
+            // Sort by value for display
+            usort($valuesWithCounts, function($a, $b) {
+                return strnatcasecmp($a['value'], $b['value']);
+            });
 
             if (!empty($valuesWithCounts)) {
-                // Extract the base code without component prefix for form field name
-                $baseCode = preg_replace('/^[a-z]+_/', '', $specDef->code);
-                
-                $options[$baseCode] = [
+                $options[$specDef->code] = [
                     'name' => $specDef->name,
-                    'code' => $baseCode,
+                    'code' => $specDef->code,
                     'unit' => $specDef->unit,
                     'values' => $valuesWithCounts,
                     'spec_code' => $specDef->code,
+                    'input_type' => $specDef->input_type,
+                    'meta_data' => $specDef->meta_data,
                 ];
             }
         }
@@ -343,5 +374,43 @@ class ProductController extends Controller
         $specDefinitions = $specDefinitions->sortBy('sort_order');
 
         return view('products.compare', compact('products', 'specDefinitions'));
+    }
+
+    /**
+     * Get main categories with product counts
+     */
+    private function getMainCategoriesWithCounts(): array
+    {
+        $mainCategories = [
+            'CPU' => ['cpu'],
+            'VGA' => ['vga'],
+            'RAM' => ['ram'],
+            'SSD' => ['ssd'],
+            'Mainboard' => ['mainboard'],
+            'HDD' => ['hdd'],
+            'Case' => ['case'],
+            'PSU' => ['psu'],
+            'Monitor' => ['monitor'],
+        ];
+
+        $result = [];
+
+        foreach ($mainCategories as $name => $slugs) {
+            $count = 0;
+            $category = Category::whereIn('slug', $slugs)->first();
+            
+            if ($category) {
+                $ids = $this->getCategoryAndChildrenIds($category);
+                $count = Product::whereIn('category_id', $ids)->count();
+            }
+
+            $result[] = [
+                'name' => $name,
+                'slug' => $slugs[0],
+                'count' => $count
+            ];
+        }
+
+        return $result;
     }
 }

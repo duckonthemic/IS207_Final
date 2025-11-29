@@ -111,16 +111,17 @@ class HardwareProductSeeder extends Seeder
             'warranty_years' => 'psu_warranty',
         ],
         'Case' => [
+            'brand' => 'case_brand',
+            'type' => 'case_type',
             'form_factor' => 'case_form_factor',
             'color' => 'case_color',
             'side_panel' => 'case_side_panel',
-            'mobo_support' => 'case_mobo_support',
-            'max_gpu_length_mm' => 'case_gpu_clearance',
-            'max_cpu_cooler_height_mm' => 'case_cpu_cooler_height',
-            'drive_bays_35' => 'case_hdd_35_slots',
-            'drive_bays_25' => 'case_ssd_25_slots',
-            'fan_slots' => 'case_fan_slots',
-            'front_io' => 'case_front_io',
+            'material' => 'case_material',
+            'psu_shroud' => 'case_psu_shroud',
+            'max_gpu_length_mm' => 'case_max_gpu_length',
+            'max_cpu_height_mm' => 'case_max_cpu_height',
+            'dimensions_mm' => 'case_dimensions',
+            'weight_kg' => 'case_weight',
         ],
         'Monitor' => [
             'screen_size_inch' => 'monitor_size',
@@ -131,6 +132,41 @@ class HardwareProductSeeder extends Seeder
             'curve' => 'monitor_curvature',
             'ports' => 'monitor_ports',
         ],
+        'Cooling' => [
+            'brand' => 'cooling_brand',
+            'type' => 'cooling_type',
+            'radiator_size_mm' => 'cooling_radiator_size',
+            'fan_count' => 'cooling_fan_count',
+            'fan_size_mm' => 'cooling_fan_size',
+            'rgb' => 'cooling_rgb',
+            'socket_support' => 'cooling_socket_support',
+        ],
+    ];
+
+    protected $categoryMapping = [
+        'GPU' => 'VGA',
+        'Monitor' => 'Màn hình',
+        'Cooling' => 'Tản nhiệt',
+        'Case' => 'Vỏ máy tính',
+        'PSU' => 'Nguồn máy tính',
+        'RAM' => 'RAM',
+        'SSD' => 'SSD',
+        'CPU' => 'CPU',
+        'Mainboard' => 'Mainboard',
+        'HDD' => 'HDD',
+    ];
+
+    protected $slugMapping = [
+        'GPU' => 'vga',
+        'Monitor' => 'monitor',
+        'Cooling' => 'tan-nhiet',
+        'Case' => 'case',
+        'PSU' => 'psu',
+        'RAM' => 'ram',
+        'SSD' => 'ssd',
+        'CPU' => 'cpu',
+        'Mainboard' => 'mainboard',
+        'HDD' => 'hdd',
     ];
 
     public function run(): void
@@ -143,19 +179,26 @@ class HardwareProductSeeder extends Seeder
 
         $data = json_decode(File::get($jsonPath), true);
 
-        foreach ($data as $categoryName => $products) {
-            $this->command->info("Processing category: $categoryName");
+        foreach ($data as $originalCategoryName => $products) {
+            $categoryName = $this->categoryMapping[$originalCategoryName] ?? $originalCategoryName;
+            $slug = $this->slugMapping[$originalCategoryName] ?? Str::slug($categoryName);
+            
+            $this->command->info("Processing category: $categoryName (slug: $slug)");
 
             // 1. Create or Get Category
             $category = Category::firstOrCreate(
-                ['slug' => Str::slug($categoryName)],
+                ['slug' => $slug],
                 ['name' => $categoryName, 'description' => "All $categoryName products"]
             );
 
             // 2. Create or Get ComponentType
+            // We keep the code based on the ORIGINAL category name from JSON to match SpecDefinitionSeeder codes (e.g. 'gpu', 'ram')
+            // OR we need to update SpecDefinitionSeeder to match.
+            // SpecDefinitionSeeder uses 'gpu', 'ram', 'ssd', 'monitor', 'mainboard', 'psu', 'case'.
+            // So we should keep component type code as Str::slug($originalCategoryName).
             $componentType = ComponentType::firstOrCreate(
-                ['code' => Str::slug($categoryName)],
-                ['name' => $categoryName]
+                ['code' => Str::slug($originalCategoryName)],
+                ['name' => $originalCategoryName]
             );
 
             foreach ($products as $productData) {
@@ -180,7 +223,7 @@ class HardwareProductSeeder extends Seeder
                 // 4. Process Specs
                 if (isset($productData['specs'])) {
                     foreach ($productData['specs'] as $specKey => $specValue) {
-                        $code = $this->getSpecCode($categoryName, $specKey);
+                        $code = $this->getSpecCode($originalCategoryName, $specKey);
 
                         // Try to find existing definition first (from SpecDefinitionSeeder)
                         $specDef = SpecDefinition::where('component_type_id', $componentType->id)
@@ -200,13 +243,48 @@ class HardwareProductSeeder extends Seeder
                         }
 
                         // Create ProductSpec
+                        $finalValue = is_array($specValue) ? json_encode($specValue) : (string) $specValue;
+
+                        // Normalize specific values to avoid duplicates in filters
+                        if ($code === 'cpu_generation') {
+                            if (str_contains($finalValue, '12th')) {
+                                $finalValue = '12th Gen';
+                            } elseif (str_contains($finalValue, '13th')) {
+                                $finalValue = '13th Gen';
+                            } elseif (str_contains($finalValue, '14th')) {
+                                $finalValue = '14th Gen';
+                            } elseif (str_contains($finalValue, 'Ryzen 7000') || str_contains($finalValue, 'Zen 4')) {
+                                $finalValue = 'Ryzen 7000 (Zen 4)';
+                            } elseif (str_contains($finalValue, 'Ryzen 5000') || str_contains($finalValue, 'Zen 3')) {
+                                $finalValue = 'Ryzen 5000 (Zen 3)';
+                            }
+                        }
+
+                        if ($code === 'cpu_socket' || $code === 'mb_cpu_socket') {
+                            if (str_contains(strtoupper($finalValue), 'LGA1700') || str_contains(strtoupper($finalValue), 'LGA 1700')) {
+                                $finalValue = 'LGA 1700';
+                            } elseif (str_contains(strtoupper($finalValue), 'AM5')) {
+                                $finalValue = 'AM5';
+                            } elseif (str_contains(strtoupper($finalValue), 'AM4')) {
+                                $finalValue = 'AM4';
+                            }
+                        }
+
+                        if ($code === 'ram_type' || $code === 'mb_memory_type') {
+                            if (str_contains(strtoupper($finalValue), 'DDR5')) {
+                                $finalValue = 'DDR5';
+                            } elseif (str_contains(strtoupper($finalValue), 'DDR4')) {
+                                $finalValue = 'DDR4';
+                            }
+                        }
+
                         ProductSpec::updateOrCreate(
                             [
                                 'product_id' => $product->id,
                                 'spec_definition_id' => $specDef->id,
                             ],
                             [
-                                'value' => is_array($specValue) ? json_encode($specValue) : (string) $specValue,
+                                'value' => $finalValue,
                             ]
                         );
                     }

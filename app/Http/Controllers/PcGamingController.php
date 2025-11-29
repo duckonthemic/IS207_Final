@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\SpecDefinition;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PcGamingController extends Controller
 {
@@ -50,9 +52,10 @@ class PcGamingController extends Controller
 
     private function getProductsByCategory(Request $request, $categorySlug, $title, $description)
     {
-        $query = Product::whereHas('category', function ($q) use ($categorySlug) {
-            $q->where('slug', $categorySlug);
-        })->with(['category', 'images', 'specs.specDefinition']);
+        $category = Category::where('slug', $categorySlug)->firstOrFail();
+        
+        $query = Product::where('category_id', $category->id)
+            ->with(['category', 'images', 'specs.specDefinition']);
 
         // Filter by price range
         if ($request->filled('min_price')) {
@@ -61,6 +64,9 @@ class PcGamingController extends Controller
         if ($request->filled('max_price')) {
             $query->where('price', '<=', $request->input('max_price'));
         }
+
+        // Apply spec filters
+        $this->applySpecFilters($query, $request);
 
         // Sort
         $sort = $request->input('sort', 'latest');
@@ -77,12 +83,100 @@ class PcGamingController extends Controller
         }
 
         $builds = $query->paginate(12)->withQueryString();
+        $filterOptions = $this->getFilterOptions($category->id);
 
         return view('pc-gaming.index', [
             'builds' => $builds,
             'pageTitle' => $title,
-            'pageDescription' => $description
+            'pageDescription' => $description,
+            'filterOptions' => $filterOptions
         ]);
+    }
+
+    private function applySpecFilters($query, Request $request): void
+    {
+        $excludeParams = ['min_price', 'max_price', 'sort', 'page'];
+        $filterParams = array_diff_key($request->all(), array_flip($excludeParams));
+
+        foreach ($filterParams as $filterParam => $values) {
+            if (!empty($values)) {
+                $values = (array) $values;
+                $query->whereHas('specs', function ($q) use ($filterParam, $values) {
+                    $q->whereHas('specDefinition', function ($sq) use ($filterParam) {
+                        $sq->where('code', $filterParam);
+                    })->where(function ($valueQuery) use ($values) {
+                        foreach ($values as $value) {
+                            $valueQuery->orWhere('value', 'like', "%{$value}%");
+                        }
+                    });
+                });
+            }
+        }
+    }
+
+    private function getFilterOptions($categoryId): array
+    {
+        $options = [];
+        
+        // Get component type
+        $componentTypeId = Product::where('category_id', $categoryId)
+            ->whereNotNull('component_type_id')
+            ->value('component_type_id');
+
+        if (!$componentTypeId) {
+            return $options;
+        }
+
+        $specDefinitions = SpecDefinition::where('component_type_id', $componentTypeId)
+            ->where('is_filterable', true)
+            ->orderBy('sort_order')
+            ->get();
+
+        foreach ($specDefinitions as $specDef) {
+            $rawValues = DB::table('product_specs')
+                ->join('products', 'product_specs.product_id', '=', 'products.id')
+                ->where('products.category_id', $categoryId)
+                ->where('product_specs.spec_definition_id', $specDef->id)
+                ->whereNotNull('product_specs.value')
+                ->where('product_specs.value', '!=', '')
+                ->select('product_specs.value', DB::raw('COUNT(DISTINCT products.id) as count'))
+                ->groupBy('product_specs.value')
+                ->orderBy('product_specs.value')
+                ->get();
+
+            $mergedValues = [];
+            foreach ($rawValues as $item) {
+                $value = trim($item->value);
+                $normalized = strtolower(preg_replace('/\s+/', ' ', $value));
+                
+                if (empty($value) || in_array($normalized, ['desktop', 'undefined', 'null', 'n/a'])) {
+                    continue;
+                }
+
+                if (!isset($mergedValues[$normalized])) {
+                    $mergedValues[$normalized] = [
+                        'value' => $value,
+                        'count' => 0
+                    ];
+                }
+                $mergedValues[$normalized]['count'] += $item->count;
+            }
+
+            $valuesWithCounts = array_values($mergedValues);
+            usort($valuesWithCounts, function($a, $b) {
+                return strnatcasecmp($a['value'], $b['value']);
+            });
+
+            if (!empty($valuesWithCounts)) {
+                $options[$specDef->code] = [
+                    'name' => $specDef->name,
+                    'code' => $specDef->code,
+                    'values' => $valuesWithCounts,
+                ];
+            }
+        }
+
+        return $options;
     }
 }
 

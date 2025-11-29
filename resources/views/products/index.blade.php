@@ -11,9 +11,25 @@
             <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
             </svg>
-            <span class="text-gray-900 font-medium">
-                {{ isset($currentCategory) ? $currentCategory->name : 'Danh Mục Sản Phẩm' }}
-            </span>
+            <a href="{{ route('products.index') }}" class="hover:text-blue-600 transition-colors">Sản phẩm</a>
+            
+            @if(isset($currentCategory))
+                @if($currentCategory->parent)
+                    <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                    <a href="{{ route('products.index', ['category' => $currentCategory->parent->slug]) }}" class="hover:text-blue-600 transition-colors">
+                        {{ $currentCategory->parent->name }}
+                    </a>
+                @endif
+                
+                <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+                <span class="text-gray-900 font-medium">
+                    {{ $currentCategory->name }}
+                </span>
+            @endif
         </nav>
 
         {{-- Page Title --}}
@@ -31,15 +47,15 @@
             <div class="flex items-center gap-3 bg-white p-1 rounded-xl border border-gray-200 shadow-sm">
                 <span class="text-sm font-medium text-gray-500 pl-3">Sắp xếp:</span>
                 <div class="flex">
-                    <a href="{{ route('products.index', array_merge(request()->except('sort'), ['sort' => 'latest'])) }}#product-list"
+                    <a href="{{ route('products.index', array_merge(request()->except('sort'), ['sort' => 'latest'])) }}"
                        class="px-4 py-2 rounded-lg text-sm font-medium transition-all {{ request('sort', 'latest') == 'latest' ? 'bg-gray-100 text-gray-900' : 'text-gray-500 hover:text-gray-900' }}">
                         Mới nhất
                     </a>
-                    <a href="{{ route('products.index', array_merge(request()->except('sort'), ['sort' => 'price_asc'])) }}#product-list"
+                    <a href="{{ route('products.index', array_merge(request()->except('sort'), ['sort' => 'price_asc'])) }}"
                        class="px-4 py-2 rounded-lg text-sm font-medium transition-all {{ request('sort') == 'price_asc' ? 'bg-gray-100 text-gray-900' : 'text-gray-500 hover:text-gray-900' }}">
                         Giá tăng
                     </a>
-                    <a href="{{ route('products.index', array_merge(request()->except('sort'), ['sort' => 'price_desc'])) }}#product-list"
+                    <a href="{{ route('products.index', array_merge(request()->except('sort'), ['sort' => 'price_desc'])) }}"
                        class="px-4 py-2 rounded-lg text-sm font-medium transition-all {{ request('sort') == 'price_desc' ? 'bg-gray-100 text-gray-900' : 'text-gray-500 hover:text-gray-900' }}">
                         Giá giảm
                     </a>
@@ -58,13 +74,13 @@
                         </a>
                     </div>
                     
-                    <form method="GET" action="{{ route('products.index') }}#product-list" id="filterForm">
+                    <form method="GET" action="{{ route('products.index') }}" id="filterForm">
                         @if(request('category'))
                             <input type="hidden" name="category" value="{{ request('category') }}">
                         @endif
 
                         {{-- Search --}}
-                        <div class="mb-8">
+                        <div class="mb-6">
                             <label class="block text-sm font-bold text-gray-900 mb-3">Tìm kiếm</label>
                             <div class="relative">
                                 <input type="text" name="search" value="{{ request('search') }}" 
@@ -76,38 +92,29 @@
                             </div>
                         </div>
 
-                        @php
-                            $mainCategories = [
-                                'CPU' => ['cpu'],
-                                'VGA' => ['vga'],
-                                'RAM' => ['ram'],
-                                'SSD' => ['ssd'],
-                                'Mainboard' => ['mainboard'],
-                                'HDD' => ['hdd'],
-                                'Case' => ['case'],
-                                'PSU' => ['psu'],
-                                'Monitor' => ['monitor'],
-                            ];
-                        @endphp
-
                         {{-- Main Categories --}}
-                        <div class="mb-8">
+                        <div class="mb-6">
                             <h3 class="font-bold text-gray-900 mb-4 text-sm">Danh Mục</h3>
                             <div class="space-y-2">
-                                <label class="flex items-center group cursor-pointer">
-                                    <input type="radio" name="category" value="" 
-                                        {{ !request('category') ? 'checked' : '' }}
-                                        onchange="this.form.submit()"
-                                        class="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500">
-                                    <span class="ml-3 text-sm text-gray-600 group-hover:text-blue-600 transition-colors">Tất cả</span>
-                                </label>
-                                @foreach($mainCategories as $name => $slugs)
-                                    <label class="flex items-center group cursor-pointer">
-                                        <input type="radio" name="category" value="{{ $slugs[0] }}" 
-                                            {{ in_array(request('category'), $slugs) ? 'checked' : '' }}
+                                <label class="flex items-center justify-between group cursor-pointer hover:bg-gray-50 p-2 rounded-lg transition-colors -mx-2">
+                                    <div class="flex items-center">
+                                        <input type="radio" name="category" value="" 
+                                            {{ !request('category') ? 'checked' : '' }}
                                             onchange="this.form.submit()"
                                             class="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500">
-                                        <span class="ml-3 text-sm text-gray-600 group-hover:text-blue-600 transition-colors">{{ $name }}</span>
+                                        <span class="ml-3 text-sm text-gray-600 group-hover:text-blue-600 transition-colors">Tất cả</span>
+                                    </div>
+                                </label>
+                                @foreach($mainCategoriesWithCounts as $cat)
+                                    <label class="flex items-center justify-between group cursor-pointer hover:bg-gray-50 p-2 rounded-lg transition-colors -mx-2">
+                                        <div class="flex items-center">
+                                            <input type="radio" name="category" value="{{ $cat['slug'] }}" 
+                                                {{ request('category') == $cat['slug'] ? 'checked' : '' }}
+                                                onchange="this.form.submit()"
+                                                class="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500">
+                                            <span class="ml-3 text-sm text-gray-600 group-hover:text-blue-600 transition-colors">{{ $cat['name'] }}</span>
+                                        </div>
+                                        <span class="text-xs text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full group-hover:bg-white group-hover:shadow-sm transition-all">{{ $cat['count'] }}</span>
                                     </label>
                                 @endforeach
                             </div>
@@ -115,7 +122,7 @@
 
                         {{-- Subcategories --}}
                         @if(!empty($subcategories) && count($subcategories) > 0)
-                            <div class="mb-8 pb-6 border-b border-gray-100">
+                            <div class="mb-6 pb-4 border-b border-gray-100">
                                 <h3 class="font-bold text-gray-900 mb-4 text-sm">Phân Loại</h3>
                                 <div class="space-y-1">
                                     @foreach($subcategories as $sub)
@@ -132,8 +139,8 @@
                         {{-- Dynamic Filters --}}
                         @if(!empty($filterOptions) && count($filterOptions) > 0)
                             @foreach($filterOptions as $code => $option)
-                                <div class="mb-8 pb-6 border-b border-gray-100 last:border-0 last:pb-0 last:mb-0" x-data="{ expanded: true }">
-                                    <button type="button" @click="expanded = !expanded" class="flex items-center justify-between w-full mb-4 group">
+                                <div class="mb-4 pb-4 border-b border-gray-100 last:border-0 last:pb-0 last:mb-0" x-data="{ expanded: true }">
+                                    <button type="button" @click="expanded = !expanded" class="flex items-center justify-between w-full mb-2 group">
                                         <h3 class="font-bold text-gray-900 text-sm flex items-center gap-2">
                                             {{ $option['name'] }}
                                             @if($option['unit'])
@@ -146,23 +153,86 @@
                                     </button>
                                     
                                     <div x-show="expanded" x-collapse class="space-y-2 max-h-60 overflow-y-auto custom-scrollbar pr-2">
-                                        @foreach($option['values'] as $item)
-                                            @if(!empty(trim($item['value'])))
-                                                <label class="flex items-center justify-between group cursor-pointer hover:bg-gray-50 p-2 rounded-lg transition-colors -mx-2">
-                                                    <div class="flex items-center">
-                                                        <div class="relative flex items-center">
-                                                            <input type="checkbox" 
-                                                                   name="{{ $code }}[]" 
-                                                                   value="{{ $item['value'] }}"
-                                                                   {{ in_array($item['value'], (array)request($code, [])) ? 'checked' : '' }}
-                                                                   class="peer w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500 transition-all">
-                                                        </div>
-                                                        <span class="ml-3 text-sm text-gray-600 group-hover:text-gray-900 transition-colors font-medium">{{ $item['value'] }}</span>
+                                        @if(isset($option['input_type']) && $option['input_type'] === 'range')
+                                            @php
+                                                $meta = $option['meta_data'] ?? [];
+                                                $min = $meta['min'] ?? 0;
+                                                $max = $meta['max'] ?? 100;
+                                                $step = $meta['step'] ?? 1;
+                                                // Get current value from request
+                                                $currentVal = request($code, []);
+                                                $currentMin = $min;
+                                                $currentMax = $max;
+                                                if (!empty($currentVal) && is_array($currentVal)) {
+                                                    $parts = explode('-', $currentVal[0] ?? '');
+                                                    if (count($parts) === 2) {
+                                                        $currentMin = $parts[0];
+                                                        $currentMax = $parts[1];
+                                                    }
+                                                }
+                                            @endphp
+                                            <div x-data="{ 
+                                                min: {{ $min }}, 
+                                                max: {{ $max }}, 
+                                                minThumb: {{ $currentMin }}, 
+                                                maxThumb: {{ $currentMax }},
+                                                step: {{ $step }}
+                                            }" class="px-2 py-4">
+                                                <div class="relative h-2 bg-gray-200 rounded-full">
+                                                    <div class="absolute h-full bg-blue-600 rounded-full" 
+                                                         :style="'left: ' + ((Math.min(minThumb, maxThumb) - min) / (max - min) * 100) + '%; right: ' + (100 - (Math.max(minThumb, maxThumb) - min) / (max - min) * 100) + '%'"></div>
+                                                    
+                                                    <input type="range" :min="min" :max="max" :step="step" x-model="minThumb" 
+                                                           class="absolute w-full h-full opacity-0 cursor-pointer z-10">
+                                                    <input type="range" :min="min" :max="max" :step="step" x-model="maxThumb" 
+                                                           class="absolute w-full h-full opacity-0 cursor-pointer z-10">
+                                                    
+                                                    {{-- Thumbs visual --}}
+                                                    <div class="absolute w-4 h-4 bg-white border-2 border-blue-600 rounded-full shadow top-1/2 transform -translate-y-1/2 -translate-x-1/2 pointer-events-none"
+                                                         :style="'left: ' + ((Math.min(minThumb, maxThumb) - min) / (max - min) * 100) + '%'"></div>
+                                                    <div class="absolute w-4 h-4 bg-white border-2 border-blue-600 rounded-full shadow top-1/2 transform -translate-y-1/2 -translate-x-1/2 pointer-events-none"
+                                                         :style="'left: ' + ((Math.max(minThumb, maxThumb) - min) / (max - min) * 100) + '%'"></div>
+                                                </div>
+                                                <div class="flex justify-between mt-4 text-xs text-gray-600 font-medium">
+                                                    <span><span x-text="Math.min(minThumb, maxThumb)"></span> {{ $option['unit'] }}</span>
+                                                    <span><span x-text="Math.max(minThumb, maxThumb)"></span> {{ $option['unit'] }}</span>
+                                                </div>
+                                                <input type="hidden" name="{{ $code }}[]" :value="Math.min(minThumb, maxThumb) + '-' + Math.max(minThumb, maxThumb)">
+                                            </div>
+
+                                        @elseif(isset($option['input_type']) && $option['input_type'] === 'switch')
+                                            <label class="flex items-center justify-between group cursor-pointer hover:bg-gray-50 p-2 rounded-lg transition-colors -mx-2">
+                                                <div class="flex items-center">
+                                                    <div class="relative inline-flex items-center cursor-pointer">
+                                                        <input type="checkbox" name="{{ $code }}[]" value="1" 
+                                                               {{ in_array('1', (array)request($code, [])) ? 'checked' : '' }}
+                                                               class="sr-only peer">
+                                                        <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-blue-600"></div>
                                                     </div>
-                                                    <span class="text-xs text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full group-hover:bg-white group-hover:shadow-sm transition-all">{{ $item['count'] }}</span>
-                                                </label>
-                                            @endif
-                                        @endforeach
+                                                    <span class="ml-3 text-sm text-gray-600 group-hover:text-gray-900 transition-colors font-medium">Có</span>
+                                                </div>
+                                            </label>
+
+                                        @else
+                                            {{-- Default Checkbox --}}
+                                            @foreach($option['values'] as $item)
+                                                @if(!empty(trim($item['value'])))
+                                                    <label class="flex items-center justify-between group cursor-pointer hover:bg-gray-50 p-2 rounded-lg transition-colors -mx-2">
+                                                        <div class="flex items-center">
+                                                            <div class="relative flex items-center">
+                                                                <input type="checkbox" 
+                                                                       name="{{ $code }}[]" 
+                                                                       value="{{ $item['value'] }}"
+                                                                       {{ in_array($item['value'], (array)request($code, [])) ? 'checked' : '' }}
+                                                                       class="peer w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500 transition-all">
+                                                            </div>
+                                                            <span class="ml-3 text-sm text-gray-600 group-hover:text-gray-900 transition-colors font-medium">{{ $item['value'] }}</span>
+                                                        </div>
+                                                        <span class="text-xs text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full group-hover:bg-white group-hover:shadow-sm transition-all">{{ $item['count'] }}</span>
+                                                    </label>
+                                                @endif
+                                            @endforeach
+                                        @endif
                                     </div>
                                 </div>
                             @endforeach

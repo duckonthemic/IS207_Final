@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Log;
 class CheckoutController extends Controller
 {
     /**
-     * Redirect to first checkout step
+     * Show the checkout page
      */
     public function index()
     {
@@ -24,95 +24,18 @@ class CheckoutController extends Controller
             return redirect()->route('cart.index')->with('error', 'Giỏ hàng trống');
         }
 
-        return redirect()->route('checkout.shipping');
-    }
-
-    /**
-     * Shipping address selection
-     */
-    public function shipping()
-    {
-        $cart = Auth::user()->getActiveCart();
-        
-        if (!$cart || $cart->items->isEmpty()) {
-            return redirect()->route('cart.index')->with('error', 'Giỏ hàng trống');
-        }
-
-        $cart->load('items.product');
-        $addresses = Auth::user()->addresses()->get();
+        $cart->load('items.product.images');
+        $user = Auth::user();
+        $addresses = $user->addresses()->get();
         $defaultAddress = $addresses->where('is_default', true)->first();
-
-        return view('checkout.shipping', compact('cart', 'addresses', 'defaultAddress'));
-    }
-
-    /**
-     * Store shipping address and proceed to payment
-     */
-    public function storeShipping(Request $request)
-    {
-        $request->validate([
-            'address_id' => 'required|exists:user_addresses,id',
-        ]);
-
-        // Verify address belongs to user
-        $address = Auth::user()->addresses()->findOrFail($request->address_id);
-
-        // Store in session
-        session(['checkout.address_id' => $address->id]);
-
-        return redirect()->route('checkout.payment');
-    }
-
-    /**
-     * Payment method selection
-     */
-    public function payment()
-    {
-        if (!session('checkout.address_id')) {
-            return redirect()->route('checkout.shipping')->with('error', 'Vui lòng chọn địa chỉ giao hàng');
-        }
-
-        $cart = Auth::user()->getActiveCart();
-        $cart->load('items.product');
-        $address = Auth::user()->addresses()->findOrFail(session('checkout.address_id'));
-
-        return view('checkout.payment', compact('cart', 'address'));
-    }
-
-    /**
-     * Store payment method and proceed to review
-     */
-    public function storePayment(Request $request)
-    {
-        $request->validate([
-            'payment_method' => 'required|in:cod,bank_transfer',
-        ]);
-
-        session(['checkout.payment_method' => $request->payment_method]);
-
-        return redirect()->route('checkout.review');
-    }
-
-    /**
-     * Review order before placing
-     */
-    public function review()
-    {
-        if (!session('checkout.address_id') || !session('checkout.payment_method')) {
-            return redirect()->route('checkout.shipping')->with('error', 'Vui lòng hoàn thành các bước trước');
-        }
-
-        $cart = Auth::user()->getActiveCart();
-        $cart->load('items.product');
-        $address = Auth::user()->addresses()->findOrFail(session('checkout.address_id'));
-        $paymentMethod = session('checkout.payment_method');
         
         // Calculate totals
         $subtotal = $cart->getTotal();
-        $shippingFee = 30000; // Fixed shipping fee
+        $shippingFee = 0; // Free shipping as per image "Báo phí sau" or logic
+        
         $total = $subtotal + $shippingFee;
 
-        return view('checkout.review', compact('cart', 'address', 'paymentMethod', 'subtotal', 'shippingFee', 'total'));
+        return view('checkout.index', compact('cart', 'user', 'addresses', 'defaultAddress', 'subtotal', 'shippingFee', 'total'));
     }
 
     /**
@@ -120,9 +43,15 @@ class CheckoutController extends Controller
      */
     public function placeOrder(Request $request)
     {
-        if (!session('checkout.address_id') || !session('checkout.payment_method')) {
-            return redirect()->route('checkout.shipping')->with('error', 'Vui lòng hoàn thành các bước trước');
-        }
+        $request->validate([
+            'fullname' => 'required|string|max:255',
+            'phone' => 'required|string|max:20',
+            'address' => 'required|string|max:255',
+            'city' => 'required|string|max:255',
+            'district' => 'required|string|max:255',
+            'ward' => 'nullable|string|max:255',
+            'payment_method' => 'required|in:cod,bank_transfer,atm,fundiin,payoo',
+        ]);
 
         $cart = Auth::user()->getActiveCart();
         
@@ -132,7 +61,7 @@ class CheckoutController extends Controller
 
         $cart->load('items.product');
 
-        // Verify stock for all items
+        // Verify stock
         foreach ($cart->items as $item) {
             if ($item->product->stock < $item->qty) {
                 return back()->with('error', "Sản phẩm {$item->product->name} không đủ hàng trong kho");
@@ -142,8 +71,7 @@ class CheckoutController extends Controller
         DB::beginTransaction();
         
         try {
-            $address = Auth::user()->addresses()->findOrFail(session('checkout.address_id'));
-            $shippingFee = 30000;
+            $shippingFee = 0; 
             $subtotal = $cart->getTotal();
             
             // Create order
@@ -151,14 +79,14 @@ class CheckoutController extends Controller
                 'user_id' => Auth::id(),
                 'order_code' => $this->generateOrderCode(),
                 'status' => 'pending',
-                'payment_method' => session('checkout.payment_method'),
+                'payment_method' => $request->payment_method,
                 'payment_status' => 'pending',
                 'total' => $subtotal + $shippingFee,
                 'placed_at' => now(),
-                'shipping_name' => $address->fullname,
-                'shipping_phone' => $address->phone,
-                'shipping_address' => $address->address . ', ' . $address->ward . ', ' . $address->district,
-                'shipping_city' => $address->city,
+                'shipping_name' => $request->fullname,
+                'shipping_phone' => $request->phone,
+                'shipping_address' => $request->address . ($request->ward ? ', ' . $request->ward : '') . ', ' . $request->district,
+                'shipping_city' => $request->city,
             ]);
 
             // Create order items and update stock
@@ -177,9 +105,6 @@ class CheckoutController extends Controller
             // Mark cart as ordered
             $cart->update(['status' => 'ordered']);
 
-            // Clear session
-            session()->forget(['checkout.address_id', 'checkout.payment_method']);
-
             DB::commit();
 
             // Send email
@@ -194,7 +119,7 @@ class CheckoutController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error('Order placement error: ' . $e->getMessage());
-            return back()->with('error', 'Có lỗi xảy ra. Vui lòng thử lại.');
+            return back()->with('error', 'Có lỗi xảy ra. Vui lòng thử lại. ' . $e->getMessage());
         }
     }
 
@@ -206,4 +131,11 @@ class CheckoutController extends Controller
 
         return $code;
     }
+
+    // Redirect legacy routes to index
+    public function shipping() { return redirect()->route('checkout.index'); }
+    public function payment() { return redirect()->route('checkout.index'); }
+    public function review() { return redirect()->route('checkout.index'); }
+    public function storeShipping() { return redirect()->route('checkout.index'); }
+    public function storePayment() { return redirect()->route('checkout.index'); }
 }

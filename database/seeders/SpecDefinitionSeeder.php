@@ -254,6 +254,28 @@ class SpecDefinitionSeeder extends Seeder
             $this->command->info('✅ Created Case specs');
         }
 
+        // Cooling Specs
+        $coolingType = ComponentType::where('code', 'cooling')->first();
+        if ($coolingType) {
+            $coolingSpecs = [
+                ['name' => 'Hãng sản xuất', 'code' => 'cooling_brand', 'unit' => null, 'input_type' => 'text', 'sort_order' => 1, 'is_filterable' => true],
+                ['name' => 'Loại tản nhiệt', 'code' => 'cooling_type', 'unit' => null, 'input_type' => 'text', 'sort_order' => 2, 'is_filterable' => true],
+                ['name' => 'Kích thước Radiator', 'code' => 'cooling_radiator_size', 'unit' => 'mm', 'input_type' => 'number', 'sort_order' => 3, 'is_filterable' => true],
+                ['name' => 'Số lượng quạt', 'code' => 'cooling_fan_count', 'unit' => null, 'input_type' => 'number', 'sort_order' => 4],
+                ['name' => 'Kích thước quạt', 'code' => 'cooling_fan_size', 'unit' => 'mm', 'input_type' => 'number', 'sort_order' => 5],
+                ['name' => 'RGB', 'code' => 'cooling_rgb', 'unit' => null, 'input_type' => 'text', 'sort_order' => 6, 'is_filterable' => true],
+                ['name' => 'Hỗ trợ Socket', 'code' => 'cooling_socket_support', 'unit' => null, 'input_type' => 'text', 'sort_order' => 7],
+            ];
+            
+            foreach ($coolingSpecs as $spec) {
+                SpecDefinition::updateOrCreate(
+                    ['component_type_id' => $coolingType->id, 'code' => $spec['code']],
+                    array_merge($spec, ['component_type_id' => $coolingType->id])
+                );
+            }
+            $this->command->info('✅ Created Cooling specs');
+        }
+
         $this->command->info('✅ All spec definitions created successfully!');
     }
 }

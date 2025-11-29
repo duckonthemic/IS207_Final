@@ -20,8 +20,9 @@ return new class extends Migration
             $table->string('name'); // Tên thông số hiển thị (VD: "Số nhân", "Dung lượng RAM")
             $table->string('code')->unique(); // Mã nội bộ (VD: "core_count", "ram_capacity")
             $table->string('unit')->nullable(); // Đơn vị (VD: "core", "GB", "GHz")
-            $table->enum('input_type', ['text', 'number', 'select', 'textarea'])->default('text'); // Kiểu nhập liệu
-            $table->text('options')->nullable(); // JSON options cho select (nếu input_type = 'select')
+            $table->enum('input_type', ['text', 'number', 'select', 'textarea', 'checkbox', 'radio', 'range', 'switch'])->default('text'); // Kiểu nhập liệu
+            $table->text('options')->nullable(); // JSON options cho select/checkbox/radio
+            $table->json('meta_data')->nullable(); // Metadata cho range (min, max, step) hoặc cấu hình khác
             $table->integer('sort_order')->default(0); // Thứ tự hiển thị
             $table->boolean('is_required')->default(false); // Bắt buộc nhập hay không
             $table->boolean('is_filterable')->default(false); // Có thể dùng để lọc sản phẩm không

@@ -18,6 +18,7 @@ class SpecDefinition extends Model
         'unit',
         'input_type',
         'options',
+        'meta_data',
         'sort_order',
         'is_required',
         'is_filterable',
@@ -25,6 +26,7 @@ class SpecDefinition extends Model
 
     protected $casts = [
         'options' => 'array',
+        'meta_data' => 'array',
         'is_required' => 'boolean',
         'is_filterable' => 'boolean',
         'sort_order' => 'integer',

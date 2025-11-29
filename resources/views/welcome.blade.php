@@ -40,54 +40,93 @@
 
 <!-- Featured Categories Section -->
 @php
-    $featuredCategories = [
-        ['name' => 'CPU', 'slug' => 'cpu-processor', 'image' => 'https://www.intel.com/content/dam/www/central-libraries/us/en/images/2022-08/core-i9-13900k-front-angle-transparent-background.png.rendition.intel.web.576.324.png', 'count' => \App\Models\Product::whereHas('category', function($q) { $q->where('slug', 'cpu-processor'); })->count()],
-        ['name' => 'VGA', 'slug' => 'vga-card-man-hinh', 'image' => 'https://dlcdnwebimgs.asus.com/gain/4d6e6567-8643-49c9-9e72-9c257464c6d8/', 'count' => \App\Models\Product::whereHas('category', function($q) { $q->where('slug', 'vga-card-man-hinh'); })->count()],
-        ['name' => 'RAM', 'slug' => 'ram-bo-nho', 'image' => 'https://www.corsair.com/medias/sys_master/images/images/h80/h90/9659502493726/CMH32GX5M2B5200C40/Gallery/CMH32GX5M2B5200C40_-01/-CMH32GX5M2B5200C40-01.png', 'count' => \App\Models\Product::whereHas('category', function($q) { $q->where('slug', 'ram-bo-nho'); })->count()],
-        ['name' => 'SSD', 'slug' => 'ssd-o-cung', 'image' => 'https://images.samsung.com/is/image/samsung/p6pim/vn/mz-v9p1t0bw/gallery/vn-990-pro-nvme-m2-ssd-mz-v9p1t0bw-534436483?$684_547_PNG$', 'count' => \App\Models\Product::whereHas('category', function($q) { $q->where('slug', 'ssd-o-cung'); })->count()],
-        ['name' => 'Mainboard', 'slug' => 'mainboard-mainboard', 'image' => 'https://dlcdnwebimgs.asus.com/gain/07b04a2b-5a8c-4580-b7d9-539e22d7b885/', 'count' => \App\Models\Product::whereHas('category', function($q) { $q->where('slug', 'mainboard-mainboard'); })->count()],
-        ['name' => 'Monitor', 'slug' => 'monitor-man-hinh', 'image' => 'https://dlcdnwebimgs.asus.com/gain/9233c983-f5a0-45b2-9670-040065e1e980/', 'count' => \App\Models\Product::whereHas('category', function($q) { $q->where('slug', 'monitor-man-hinh'); })->count()],
+    $tabCategories = [
+        ['name' => 'Nổi Bật', 'slug' => 'featured', 'products' => \App\Models\Product::with('category', 'images')->inRandomOrder()->limit(8)->get()],
+        ['name' => 'CPU', 'slug' => 'cpu', 'products' => \App\Models\Product::whereHas('category', fn($q) => $q->where('slug', 'cpu'))->with('category', 'images')->limit(8)->get()],
+        ['name' => 'VGA', 'slug' => 'vga', 'products' => \App\Models\Product::whereHas('category', fn($q) => $q->where('slug', 'vga'))->with('category', 'images')->limit(8)->get()],
+        ['name' => 'Màn Hình', 'slug' => 'monitor', 'products' => \App\Models\Product::whereHas('category', fn($q) => $q->where('slug', 'monitor'))->with('category', 'images')->limit(8)->get()],
+        ['name' => 'Mainboard', 'slug' => 'mainboard', 'products' => \App\Models\Product::whereHas('category', fn($q) => $q->where('slug', 'mainboard'))->with('category', 'images')->limit(8)->get()],
     ];
 @endphp
-<section class="py-20 bg-white">
+<section class="py-16 bg-white" x-data="{ activeTab: 'featured' }">
     <div class="container mx-auto px-4 max-w-7xl">
-        <div class="text-center mb-16">
-            <h2 class="text-3xl font-bold text-gray-900 mb-4">Danh mục nổi bật</h2>
-            <p class="text-gray-500 max-w-2xl mx-auto">Lựa chọn linh kiện phù hợp nhất cho bộ PC mơ ước của bạn từ các danh mục hàng đầu.</p>
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">Khám Phá Sản Phẩm</h2>
+            
+            {{-- Category Tabs --}}
+            <div class="flex flex-wrap justify-center gap-4 mt-8">
+                @foreach($tabCategories as $cat)
+                    <button @click="activeTab = '{{ $cat['slug'] }}'" 
+                            :class="{ 'bg-blue-600 text-white shadow-lg scale-105': activeTab === '{{ $cat['slug'] }}', 'bg-gray-100 text-gray-600 hover:bg-gray-200': activeTab !== '{{ $cat['slug'] }}' }"
+                            class="px-6 py-2.5 rounded-full font-bold transition-all duration-300 transform">
+                        {{ $cat['name'] }}
+                    </button>
+                @endforeach
+            </div>
         </div>
         
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-            @foreach($featuredCategories as $cat)
-            <a href="{{ route('products.index', ['category' => $cat['slug']]) }}" 
-               class="group bg-gray-50 rounded-2xl p-6 text-center hover:bg-white hover:shadow-xl transition-all duration-300 border border-transparent hover:border-gray-100">
-                <div class="h-24 mb-4 flex items-center justify-center">
-                    <img src="{{ $cat['image'] }}" alt="{{ $cat['name'] }}" class="max-h-full max-w-full object-contain group-hover:scale-110 transition-transform duration-500">
-                </div>
-                <h3 class="font-bold text-gray-900 group-hover:text-blue-600 transition-colors">{{ $cat['name'] }}</h3>
-                <p class="text-xs text-gray-500 mt-1">{{ $cat['count'] }} sản phẩm</p>
+        {{-- Tab Contents --}}
+        @foreach($tabCategories as $cat)
+            <div x-show="activeTab === '{{ $cat['slug'] }}'" 
+                 x-transition:enter="transition ease-out duration-300"
+                 x-transition:enter-start="opacity-0 translate-y-4"
+                 x-transition:enter-end="opacity-100 translate-y-0"
+                 class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                @foreach($cat['products'] as $product)
+                    <x-product-card :product="$product" />
+                @endforeach
+                
+                @if($cat['products']->isEmpty())
+                    <div class="col-span-full text-center py-12 text-gray-400">
+                        <p>Đang cập nhật sản phẩm...</p>
+                    </div>
+                @endif
+            </div>
+        @endforeach
+        
+        <div class="text-center mt-12">
+            <a href="{{ route('products.index') }}" class="inline-flex items-center gap-2 text-blue-600 font-bold hover:text-blue-700 transition-colors">
+                Xem tất cả sản phẩm
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
             </a>
-            @endforeach
         </div>
     </div>
 </section>
 
 <!-- Flash Deals Section -->
-<section class="py-20 bg-gray-50">
+<section class="py-20 bg-gray-50" x-data="countdown()">
     <div class="container mx-auto px-4 max-w-7xl">
-        <div class="flex items-center justify-between mb-12">
-            <div class="flex items-center gap-4">
-                <h2 class="text-3xl font-bold text-gray-900">Deal Giờ Vàng</h2>
-                <div class="flex items-center gap-1 text-white font-bold text-sm">
-                    <span class="bg-gray-900 rounded px-2 py-1">08</span>
-                    <span class="text-gray-900">:</span>
-                    <span class="bg-gray-900 rounded px-2 py-1">53</span>
-                    <span class="text-gray-900">:</span>
-                    <span class="bg-gray-900 rounded px-2 py-1">47</span>
+        <div class="flex flex-col md:flex-row items-center justify-between mb-12 gap-6">
+            <div class="flex items-center gap-6">
+                <div class="flex items-center gap-3">
+                    <span class="flex h-3 w-3 relative">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+                    </span>
+                    <h2 class="text-3xl font-bold text-gray-900">Deal Giờ Vàng</h2>
+                </div>
+                
+                {{-- Countdown Timer --}}
+                <div class="flex items-center gap-2 text-white font-bold text-lg">
+                    <div class="bg-gray-900 rounded-lg px-3 py-2 min-w-[3rem] text-center shadow-lg">
+                        <span x-text="String(hours).padStart(2, '0')">00</span>
+                    </div>
+                    <span class="text-gray-900 font-bold text-xl">:</span>
+                    <div class="bg-gray-900 rounded-lg px-3 py-2 min-w-[3rem] text-center shadow-lg">
+                        <span x-text="String(minutes).padStart(2, '0')">00</span>
+                    </div>
+                    <span class="text-gray-900 font-bold text-xl">:</span>
+                    <div class="bg-gray-900 rounded-lg px-3 py-2 min-w-[3rem] text-center shadow-lg">
+                        <span x-text="String(seconds).padStart(2, '0')">00</span>
+                    </div>
                 </div>
             </div>
-            <a href="{{ route('products.index') }}" class="text-blue-600 font-medium hover:text-blue-700 flex items-center gap-1">
+            
+            <a href="{{ route('products.index') }}" class="text-blue-600 font-medium hover:text-blue-700 flex items-center gap-1 group">
                 Xem tất cả
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                 </svg>
             </a>
@@ -97,6 +136,7 @@
             @php
                 $flashDeals = \App\Models\Product::with('category', 'images')
                     ->where('sale_price', '>', 0)
+                    ->inRandomOrder()
                     ->limit(4)
                     ->get();
             @endphp
@@ -110,6 +150,36 @@
         </div>
     </div>
 </section>
+
+<script>
+    function countdown() {
+        return {
+            hours: 0,
+            minutes: 0,
+            seconds: 0,
+            endTime: new Date().setHours(24, 0, 0, 0), // Midnight tonight
+            init() {
+                this.updateTimer();
+                setInterval(() => {
+                    this.updateTimer();
+                }, 1000);
+            },
+            updateTimer() {
+                const now = new Date().getTime();
+                const distance = this.endTime - now;
+                
+                if (distance < 0) {
+                    // Reset for next day
+                    this.endTime += 86400000;
+                }
+                
+                this.hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                this.minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                this.seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            }
+        }
+    }
+</script>
 
 <!-- Featured Products -->
 <section class="py-20 bg-white">

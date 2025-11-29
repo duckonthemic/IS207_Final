@@ -11,11 +11,8 @@ class DatabaseSeeder extends Seeder
         // Call seeders
         $this->call([
             AdminUserSeeder::class,
-            CategorySeeder::class,
-            ComponentTypeSeeder::class,
-            SpecDefinitionSeeder::class,
-            HardwareProductSeeder::class,
-            ProductSpecSeeder::class,
+            SmartProductSeeder::class,
+            PrebuiltPcSeeder::class, // Temporarily disable or update if needed
         ]);
     }
 }

@@ -7,8 +7,7 @@
                 {{-- Logo --}}
                 <a href="{{ route('home') }}" class="flex items-center gap-3 shrink-0 group">
                     <div class="relative">
-                        <div class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-200"></div>
-                        <img src="{{ asset('images/logo/uitech-logo.png') }}" alt="UITech Store" class="relative h-12 w-auto object-contain">
+                        <img src="{{ asset('images/logo/uitech-logo.png') }}" alt="UITech Store" class="relative h-16 w-auto object-contain">
                     </div>
                     <div class="flex flex-col">
                         <span class="text-xl font-bold tracking-tight text-gray-900">UITech Store</span>
@@ -39,7 +38,8 @@
                         </svg>
                         @auth
                             @php
-                                $itemCount = auth()->user()->cartItems()->sum('qty');
+                                $cart = auth()->user()->getActiveCart();
+                                $itemCount = $cart ? $cart->items->sum('qty') : 0;
                             @endphp
                             @if($itemCount > 0)
                                 <span class="absolute top-0 right-0 bg-blue-600 text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center ring-2 ring-white">
@@ -203,7 +203,7 @@
                                 </a>
 
                                 {{-- Cooling --}}
-                                <a href="{{ route('products.index', ['category' => 'fan-cooler-quat-tan-nhiet']) }}"
+                                <a href="{{ route('products.index', ['category' => 'tan-nhiet']) }}"
                                    @mouseenter="subMenu = 'cooling'"
                                    class="flex items-center justify-between px-4 py-3 mx-2 rounded-lg transition-colors cursor-pointer"
                                    :class="subMenu === 'cooling' ? 'bg-white text-blue-600 shadow-sm font-medium' : 'text-gray-600 hover:bg-gray-100'">
@@ -391,15 +391,86 @@
                                     <p class="text-sm font-medium">Di chuột vào danh mục để xem chi tiết</p>
                                 </div>
 
-                                {{-- Other categories (PSU, Case, Cooling) --}}
-                                <div x-show="subMenu === 'psu' || subMenu === 'case' || subMenu === 'cooling'" x-transition class="flex flex-col items-center justify-center h-full">
-                                    <p class="text-gray-500 mb-6">Khám phá các sản phẩm chất lượng cao</p>
-                                    <a :href="subMenu === 'psu' ? '{{ route('products.index', ['category' => 'psu']) }}' :
-                                              subMenu === 'case' ? '{{ route('products.index', ['category' => 'case']) }}' :
-                                              '{{ route('products.index') }}'"
-                                       class="inline-flex items-center justify-center px-8 py-3 border border-transparent text-sm font-medium rounded-full text-white bg-black hover:bg-gray-800 transition-colors shadow-lg hover:shadow-xl">
-                                        Xem tất cả sản phẩm
-                                    </a>
+                                {{-- PSU Filters --}}
+                                <div x-show="subMenu === 'psu'" x-transition class="grid grid-cols-3 gap-8">
+                                    <div>
+                                        <h4 class="font-bold text-xs tracking-wider text-gray-400 mb-4 uppercase">Hãng sản xuất</h4>
+                                        <ul class="space-y-3 text-sm">
+                                            <li><a href="{{ route('products.index', ['category' => 'psu', 'psu_brand' => ['Corsair']]) }}" class="text-gray-700 hover:text-blue-600 hover:translate-x-1 transition-all inline-block">Corsair</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'psu', 'psu_brand' => ['Cooler Master']]) }}" class="text-gray-700 hover:text-blue-600 hover:translate-x-1 transition-all inline-block">Cooler Master</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'psu', 'psu_brand' => ['ASUS']]) }}" class="text-gray-700 hover:text-blue-600 hover:translate-x-1 transition-all inline-block">ASUS</a></li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-xs tracking-wider text-gray-400 mb-4 uppercase">Công suất</h4>
+                                        <ul class="space-y-3 text-sm">
+                                            <li><a href="{{ route('products.index', ['category' => 'psu', 'psu_wattage' => ['650W']]) }}" class="text-gray-700 hover:text-blue-600 hover:translate-x-1 transition-all inline-block">650W</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'psu', 'psu_wattage' => ['750W']]) }}" class="text-gray-700 hover:text-blue-600 hover:translate-x-1 transition-all inline-block">750W</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'psu', 'psu_wattage' => ['850W']]) }}" class="text-gray-700 hover:text-blue-600 hover:translate-x-1 transition-all inline-block">850W</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'psu', 'psu_wattage' => ['1000W']]) }}" class="text-gray-700 hover:text-blue-600 hover:translate-x-1 transition-all inline-block">1000W+</a></li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-xs tracking-wider text-gray-400 mb-4 uppercase">Chuẩn nguồn</h4>
+                                        <ul class="space-y-3 text-sm">
+                                            <li><a href="{{ route('products.index', ['category' => 'psu', 'psu_efficiency' => ['80 Plus Gold']]) }}" class="text-gray-700 hover:text-blue-600 hover:translate-x-1 transition-all inline-block">80 Plus Gold</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'psu', 'psu_efficiency' => ['80 Plus Bronze']]) }}" class="text-gray-700 hover:text-blue-600 hover:translate-x-1 transition-all inline-block">80 Plus Bronze</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'psu', 'psu_efficiency' => ['80 Plus Platinum']]) }}" class="text-gray-700 hover:text-blue-600 hover:translate-x-1 transition-all inline-block">80 Plus Platinum</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                {{-- Case Filters --}}
+                                <div x-show="subMenu === 'case'" x-transition class="grid grid-cols-3 gap-8">
+                                    <div>
+                                        <h4 class="font-bold text-xs tracking-wider text-gray-400 mb-4 uppercase">Hãng sản xuất</h4>
+                                        <ul class="space-y-3 text-sm">
+                                            <li><a href="{{ route('products.index', ['category' => 'case', 'case_brand' => ['NZXT']]) }}" class="text-gray-700 hover:text-blue-600 hover:translate-x-1 transition-all inline-block">NZXT</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'case', 'case_brand' => ['Corsair']]) }}" class="text-gray-700 hover:text-blue-600 hover:translate-x-1 transition-all inline-block">Corsair</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'case', 'case_brand' => ['Lian Li']]) }}" class="text-gray-700 hover:text-blue-600 hover:translate-x-1 transition-all inline-block">Lian Li</a></li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-xs tracking-wider text-gray-400 mb-4 uppercase">Kích thước</h4>
+                                        <ul class="space-y-3 text-sm">
+                                            <li><a href="{{ route('products.index', ['category' => 'case', 'case_form_factor' => ['Mid Tower']]) }}" class="text-gray-700 hover:text-blue-600 hover:translate-x-1 transition-all inline-block">Mid Tower</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'case', 'case_form_factor' => ['Full Tower']]) }}" class="text-gray-700 hover:text-blue-600 hover:translate-x-1 transition-all inline-block">Full Tower</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'case', 'case_form_factor' => ['Mini ITX']]) }}" class="text-gray-700 hover:text-blue-600 hover:translate-x-1 transition-all inline-block">Mini ITX</a></li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-xs tracking-wider text-gray-400 mb-4 uppercase">Màu sắc</h4>
+                                        <ul class="space-y-3 text-sm">
+                                            <li><a href="{{ route('products.index', ['category' => 'case', 'case_color' => ['Black']]) }}" class="text-gray-700 hover:text-blue-600 hover:translate-x-1 transition-all inline-block">Đen</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'case', 'case_color' => ['White']]) }}" class="text-gray-700 hover:text-blue-600 hover:translate-x-1 transition-all inline-block">Trắng</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                {{-- Cooling Filters --}}
+                                <div x-show="subMenu === 'cooling'" x-transition class="grid grid-cols-3 gap-8">
+                                    <div>
+                                        <h4 class="font-bold text-xs tracking-wider text-gray-400 mb-4 uppercase">Hãng sản xuất</h4>
+                                        <ul class="space-y-3 text-sm">
+                                            <li><a href="{{ route('products.index', ['category' => 'tan-nhiet', 'cooling_brand' => ['Corsair']]) }}" class="text-gray-700 hover:text-blue-600 hover:translate-x-1 transition-all inline-block">Corsair</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'tan-nhiet', 'cooling_brand' => ['NZXT']]) }}" class="text-gray-700 hover:text-blue-600 hover:translate-x-1 transition-all inline-block">NZXT</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'tan-nhiet', 'cooling_brand' => ['Deepcool']]) }}" class="text-gray-700 hover:text-blue-600 hover:translate-x-1 transition-all inline-block">Deepcool</a></li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-xs tracking-wider text-gray-400 mb-4 uppercase">Loại tản nhiệt</h4>
+                                        <ul class="space-y-3 text-sm">
+                                            <li><a href="{{ route('products.index', ['category' => 'tan-nhiet', 'cooling_type' => ['AIO Liquid']]) }}" class="text-gray-700 hover:text-blue-600 hover:translate-x-1 transition-all inline-block">Tản nhiệt nước AIO</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'tan-nhiet', 'cooling_type' => ['Air Cooler']]) }}" class="text-gray-700 hover:text-blue-600 hover:translate-x-1 transition-all inline-block">Tản nhiệt khí</a></li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-xs tracking-wider text-gray-400 mb-4 uppercase">Kích thước Radiator</h4>
+                                        <ul class="space-y-3 text-sm">
+                                            <li><a href="{{ route('products.index', ['category' => 'tan-nhiet', 'cooling_radiator_size' => ['360']]) }}" class="text-gray-700 hover:text-blue-600 hover:translate-x-1 transition-all inline-block">360mm</a></li>
+                                            <li><a href="{{ route('products.index', ['category' => 'tan-nhiet', 'cooling_radiator_size' => ['240']]) }}" class="text-gray-700 hover:text-blue-600 hover:translate-x-1 transition-all inline-block">240mm</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
