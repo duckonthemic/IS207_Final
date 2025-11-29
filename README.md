@@ -7,14 +7,191 @@
 **UITech Store - Hệ thống E-Commerce bán linh kiện máy tính**
 
 [![Laravel](https://img.shields.io/badge/Laravel-10.49-FF2D20?logo=laravel&logoColor=white)](https://laravel.com)
-[![PHP](https://img.shields.io/badge/PHP-8.3.26-777BB4?logo=php&logoColor=white)](https://php.net)
+[![PHP](https://img.shields.io/badge/PHP-8.2+-777BB4?logo=php&logoColor=white)](https://php.net)
 [![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?logo=mysql&logoColor=white)](https://mysql.com)
+[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?logo=docker&logoColor=white)](https://docker.com)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.3-06B6D4?logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
-[![Alpine.js](https://img.shields.io/badge/Alpine.js-3.x-8BC0D0?logo=alpine.js&logoColor=white)](https://alpinejs.dev)
-
-[📖 Tài liệu cài đặt](docs/INSTALLATION.md) • [🏗️ Cấu trúc dự án](docs/STRUCTURE.md) • [✅ Tính năng](docs/TODO_FEATURES.md)
 
 </div>
+
+---
+
+## 📚 MỤC LỤC
+
+- [🚀 Cài đặt nhanh với Docker](#-cài-đặt-nhanh-với-docker-khuyên-dùng)
+- [💻 Cài đặt thủ công](#-cài-đặt-thủ-công)
+- [🔐 Tài khoản mặc định](#-tài-khoản-mặc-định)
+- [📚 Giới thiệu môn học](#-giới-thiệu-môn-học)
+- [✨ Chức năng chính](#-chức-năng-chính)
+
+---
+
+## 🚀 CÀI ĐẶT NHANH VỚI DOCKER (Khuyên dùng)
+
+### Yêu cầu
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) (Windows/Mac) hoặc Docker Engine (Linux)
+- Git
+
+### Các bước cài đặt
+
+```powershell
+# 1. Clone repository
+git clone https://github.com/duckonthemic/IS207_Final.git
+cd IS207_Final
+
+# 2. Khởi động Docker containers
+docker-compose up -d
+
+# 3. Đợi khoảng 30 giây để khởi tạo database và seed data
+# Kiểm tra logs:
+docker-compose logs -f app
+```
+
+### Truy cập ứng dụng
+
+| Service | URL | Mô tả |
+|---------|-----|-------|
+| 🌐 **Web App** | http://localhost:8000 | Trang web chính |
+| 📊 **phpMyAdmin** | http://localhost:8080 | Quản lý database |
+| 🔴 **Redis** | localhost:6379 | Cache & Queue |
+| 🐬 **MySQL** | localhost:3307 | Database |
+
+### Các lệnh Docker hữu ích
+
+```powershell
+# Xem logs
+docker-compose logs -f app
+
+# Dừng containers
+docker-compose down
+
+# Rebuild và khởi động lại
+docker-compose down && docker-compose build --no-cache && docker-compose up -d
+
+# Chạy artisan command
+docker-compose exec app php artisan <command>
+
+# Reset database
+docker-compose exec app php artisan migrate:fresh --seed
+```
+
+---
+
+## 💻 CÀI ĐẶT THỦ CÔNG
+
+### Yêu cầu hệ thống
+
+| Yêu cầu | Phiên bản | Ghi chú |
+|---------|-----------|---------|
+| **PHP** | 8.2+ | Với các extension: pdo_mysql, mbstring, exif, pcntl, bcmath, gd, zip |
+| **Composer** | 2.x | PHP Package Manager |
+| **Node.js** | 18+ | Với npm |
+| **MySQL** | 8.0+ | Hoặc MariaDB 10.5+ |
+| **Git** | 2.x | Version control |
+
+### Khuyến nghị môi trường phát triển
+
+- **Windows:** [Laragon](https://laragon.org/) (bao gồm PHP, MySQL, Apache)
+- **macOS:** [Herd](https://herd.laravel.com/) hoặc [Valet](https://laravel.com/docs/valet)
+- **Linux:** LAMP Stack hoặc [Sail](https://laravel.com/docs/sail)
+
+---
+
+### Bước 1: Clone repository
+
+```powershell
+git clone https://github.com/duckonthemic/IS207_Final.git
+cd IS207_Final
+```
+
+### Bước 2: Cài đặt PHP dependencies
+
+```powershell
+composer install
+```
+
+> **Lỗi?** Nếu gặp lỗi extension, kiểm tra `php.ini` đã bật các extension cần thiết chưa.
+
+### Bước 3: Cài đặt Node.js dependencies
+
+```powershell
+npm install
+```
+
+### Bước 4: Cấu hình môi trường
+
+```powershell
+# Copy file .env
+copy .env.example .env
+
+# Tạo application key
+php artisan key:generate
+```
+
+### Bước 5: Cấu hình Database
+
+1. **Tạo database** trong phpMyAdmin hoặc MySQL CLI:
+
+```sql
+CREATE DATABASE uitech_store CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+```
+
+2. **Cập nhật file `.env`** với thông tin database:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=uitech_store
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+### Bước 6: Chạy Migrations và Seed Data
+
+```powershell
+# Chạy migrations (tạo bảng)
+php artisan migrate
+
+# Seed data mẫu
+php artisan db:seed
+
+# Hoặc chạy cả 2 cùng lúc
+php artisan migrate:fresh --seed
+```
+
+### Bước 7: Tạo symbolic link cho storage
+
+```powershell
+php artisan storage:link
+```
+
+### Bước 8: Build Frontend Assets
+
+```powershell
+# Development (với hot reload)
+npm run dev
+
+# Hoặc Production build
+npm run build
+```
+
+### Bước 9: Khởi động ứng dụng
+
+```powershell
+php artisan serve
+```
+
+🎉 **Truy cập:** http://localhost:8000
+
+---
+
+## 🔐 TÀI KHOẢN MẶC ĐỊNH
+
+| Vai trò | Email | Password |
+|---------|-------|----------|
+| 👨‍💼 **Admin** | admin@uitech.com | password |
+| 👤 **User** | user@uitech.com | password |
 
 ---
 
@@ -46,69 +223,31 @@
 ### 🔗 Liên kết
 
 - **Repository:** [github.com/duckonthemic/IS207_Final](https://github.com/duckonthemic/IS207_Final)
-- **Demo:** [uitech-store.com](https://uitech-store.com) _(đang cập nhật)_
-- **Báo cáo:** [docs/PROJECT_PROGRESS_REPORT.md](docs/PROJECT_PROGRESS_REPORT.md)
 
 ---
 
 ## 🛠️ CÔNG NGHỆ SỬ DỤNG
 
-### 🔹 Backend Framework & Language
-
-| Công nghệ | Phiên bản | Vai trò |
-|-----------|-----------|---------|
-| **PHP** | 8.3.26 | Ngôn ngữ lập trình backend |
-| **Laravel** | 10.49.1 | PHP Framework (MVC Pattern, ORM, Routing) |
-| **Composer** | 2.8.4 | PHP Package Manager |
-
-### 🔹 Database
-
-| Công nghệ | Phiên bản | Vai trò |
-|-----------|-----------|---------|
-| **MySQL** | 8.0+ | Relational Database Management System |
-
-### 🔹 Frontend Technologies
-
-| Công nghệ | Phiên bản | Vai trò |
-|-----------|-----------|---------|
-| **Blade** | (Laravel) | Template Engine - render HTML |
-| **Tailwind CSS** | 3.3+ | Utility-first CSS Framework |
-| **Alpine.js** | 3.x | Lightweight JavaScript Framework |
-| **HTML5 & CSS3** | - | Markup & Styling |
-
-### 🔹 Development Tools
-
-| Tool | Mục đích |
-|------|----------|
-| **Laragon** | Local development environment (Windows) |
-| **VS Code** | Source code editor |
-| **Git** | Version control system |
-| **phpMyAdmin** | Database management tool |
-| **Vite** | Frontend asset bundler |
+| Layer | Công nghệ |
+|-------|-----------|
+| **Backend** | PHP 8.2+, Laravel 10, Eloquent ORM |
+| **Frontend** | Blade, Tailwind CSS 3.3, Alpine.js 3.x |
+| **Database** | MySQL 8.0, Redis |
+| **DevOps** | Docker, Docker Compose, Nginx |
+| **Build Tools** | Vite, npm |
 
 ---
 
 ## 👥 THÀNH VIÊN NHÓM
 
-<<<<<<< HEAD
-| STT | MSSV | Họ và Tên | Vai trò | GitHub | Email |
-|-----|------|-----------|---------|--------|-------|
-| 1 | 23520xxx | **Hoàng Bảo Long** | Team Leader, Backend Dev | [@duckonthemic](https://github.com/duckonthemic) | 23520xxx@gm.uit.edu.vn |
-| 2 | 23520xxx | **Ngụy Công Vũ Trung** | Backend Developer | [@username](https://github.com/username) | 23520xxx@gm.uit.edu.vn |
-| 3 | 23520xxx | **Lương Tuấn Vỹ** | Frontend Developer | [@username](https://github.com/username) | 23520xxx@gm.uit.edu.vn |
-| 4 | 23520xxx | **Nguyễn Duy Phương** | Database Designer | [@username](https://github.com/username) | 23520xxx@gm.uit.edu.vn |
-| 5 | 23520xxx | **Trần Thanh Huy** | UI/UX Designer | [@username](https://github.com/username) | 23520xxx@gm.uit.edu.vn |
-| 6 | 23520xxx | **Nguyễn Tuấn Minh** | Tester & QA | [@username](https://github.com/username) | 23520xxx@gm.uit.edu.vn |
-=======
-| STT | MSSV | Họ và Tên | GitHub | Email |
-|-----|------|-----------|--------|-------|
-| 1 | 23520xxx | Hoàng Bảo Long | [@duckonthemic](https://github.com/duckonthemic) | 23520xxx@gm.uit.edu.vn |
-| 2 | 23520xxx | Ngụy Công Vũ Trung | [@username](https://github.com/username) | 23520xxx@gm.uit.edu.vn |
-| 3 | 23520xxx | Lương Tuấn Vỹ | [@username](https://github.com/username) | 23520xxx@gm.uit.edu.vn |
-| 4 | 23520xxx | Nguyễn Duy Phương | [@username](https://github.com/username) | 23520xxx@gm.uit.edu.vn |
-| 5 | 23520xxx | Trần Thanh Huy | [@username](https://github.com/username) | 23520xxx@gm.uit.edu.vn |
-| 6 | 23520xxx | Trần Tuấn Minh | [@username](https://github.com/username) | 23520xxx@gm.uit.edu.vn |
->>>>>>> a73fa3b37460c62c8d45b31ee633d68b36cddd0d
+| STT | MSSV | Họ và Tên | Vai trò |
+|-----|------|-----------|---------|
+| 1 | 23520xxx | **Hoàng Bảo Long** | Team Leader, Backend Dev |
+| 2 | 23520xxx | **Ngụy Công Vũ Trung** | Backend Developer |
+| 3 | 23520xxx | **Lương Tuấn Vỹ** | Frontend Developer |
+| 4 | 23520xxx | **Nguyễn Duy Phương** | Database Designer |
+| 5 | 23520xxx | **Trần Thanh Huy** | UI/UX Designer |
+| 6 | 23520xxx | **Nguyễn Tuấn Minh** | Tester & QA |
 
 ---
 
@@ -184,51 +323,22 @@
 
 ## 🚀 HƯỚNG DẪN CÀI ĐẶT NHANH
 
-> 📖 **Chi tiết đầy đủ:** Xem [docs/INSTALLATION.md](docs/INSTALLATION.md)
+> ⬆️ **Xem phần đầu README để có hướng dẫn cài đặt đầy đủ!**
 
-### ⚡ Quick Start (5 phút)
+### ⚡ Tóm tắt lệnh (cho người đã quen)
 
 ```powershell
-# 1. Clone repository
-git clone https://github.com/duckonthemic/IS207_Final.git
-cd IS207_Final
+# Docker (nhanh nhất)
+docker-compose up -d
 
-# 2. Cài dependencies
-composer install
-npm install
-
-# 3. Setup môi trường
+# Hoặc thủ công
+composer install && npm install
 copy .env.example .env
 php artisan key:generate
-
-# 4. Tạo database 'uitech_store' trong phpMyAdmin
-
-# 5. Cấu hình .env
-# DB_DATABASE=uitech_store
-# DB_USERNAME=root
-# DB_PASSWORD=
-
-# 6. Chạy migrations & seed data
 php artisan migrate --seed
-
-# 7. Build assets
 npm run build
-
-# 8. Khởi động server
 php artisan serve
 ```
-
-### 🔐 Tài khoản mặc định
-
-| Vai trò | Email | Password |
-|---------|-------|----------|
-| **Admin** | admin@uitech.com | password |
-| **User** | user@uitech.com | password |
-
-### 🌐 Truy cập
-
-- **Frontend:** http://localhost:8000
-- **Admin Panel:** http://localhost:8000/admin/dashboard
 
 ---
 
@@ -347,22 +457,57 @@ php artisan storage:link       # Link storage to public
 
 ## 🐛 TROUBLESHOOTING
 
-### Lỗi: "SQLSTATE[HY000] [1045] Access denied"
+### ❌ Docker: "laravel-worker exited with status 1"
 ```powershell
-# Kiểm tra thông tin database trong .env
-# Đảm bảo MySQL đang chạy (Start Laragon)
+# Đảm bảo PHP Redis extension được cài trong Dockerfile
+# Kiểm tra logs:
+docker-compose logs app
 ```
 
-### Lỗi: "Class not found"
+### ❌ Lỗi: "SQLSTATE[HY000] [1045] Access denied"
+```powershell
+# Kiểm tra thông tin database trong .env
+DB_HOST=127.0.0.1
+DB_DATABASE=uitech_store
+DB_USERNAME=root
+DB_PASSWORD=
+
+# Đảm bảo MySQL đang chạy
+```
+
+### ❌ Lỗi: "Class not found"
 ```powershell
 composer dump-autoload
 php artisan optimize:clear
 ```
 
-### Assets không load
+### ❌ Assets không load / CSS không hiển thị
 ```powershell
 npm run build
 php artisan view:clear
+php artisan cache:clear
+```
+
+### ❌ Lỗi: "The stream or file could not be opened"
+```powershell
+# Cấp quyền cho thư mục storage
+chmod -R 775 storage bootstrap/cache   # Linux/Mac
+
+# Windows: Click chuột phải → Properties → Security → Edit
+```
+
+### ❌ Lỗi: "CSRF token mismatch"
+```powershell
+php artisan cache:clear
+php artisan config:clear
+# Xóa cookies trình duyệt và thử lại
+```
+
+### ❌ Docker: Port đã được sử dụng
+```powershell
+# Đổi port trong docker-compose.yml
+# Hoặc dừng service đang dùng port đó
+netstat -ano | findstr :8000
 ```
 
 ---
