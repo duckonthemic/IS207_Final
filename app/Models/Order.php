@@ -45,6 +45,13 @@ class Order extends Model
         return $this->hasMany(OrderItem::class);
     }
 
+    public function promotions(): BelongsToMany
+    {
+        return $this->belongsToMany(Promotion::class, 'order_promotions')
+            ->withPivot(['code', 'discount_value'])
+            ->withTimestamps();
+    }
+
     // Scopes
     public function scopePending($query)
     {
@@ -74,8 +81,7 @@ class Order extends Model
     // Methods
     public function getTotalDiscount()
     {
-        // Promotions not implemented yet - return 0
-        return 0;
+        return $this->promotions()->sum('order_promotions.discount_value');
     }
 
     public function getNetTotal()
@@ -97,6 +103,27 @@ class Order extends Model
      */
     public function getTotalDiscountAttribute()
     {
-        return 0; // Placeholder - implement if promotions are enabled
+        return $this->getTotalDiscount();
+    }
+
+    /**
+     * Apply a promotion to this order
+     */
+    public function applyPromotion(Promotion $promotion): float
+    {
+        $subtotal = $this->items->sum(fn($item) => $item->price * $item->quantity);
+        $discount = $promotion->calculateDiscount($subtotal);
+
+        if ($discount > 0) {
+            $this->promotions()->attach($promotion->id, [
+                'code' => $promotion->code,
+                'discount_value' => $discount,
+            ]);
+
+            $promotion->incrementUsage();
+        }
+
+        return $discount;
     }
 }
+

@@ -36,6 +36,10 @@
                     class="block px-4 py-3 rounded-none text-sm font-bold uppercase tracking-wider transition-colors {{ request()->routeIs('admin.reviews.*') ? 'bg-cyber-white text-cyber-black' : 'text-cyber-text hover:bg-cyber-gray hover:text-cyber-white' }}">
                     Đánh giá
                 </a>
+                <a href="{{ route('admin.promotions.index') }}"
+                    class="block px-4 py-3 rounded-none text-sm font-bold uppercase tracking-wider transition-colors {{ request()->routeIs('admin.promotions.*') ? 'bg-cyber-white text-cyber-black' : 'text-cyber-text hover:bg-cyber-gray hover:text-cyber-white' }}">
+                    Mã giảm giá
+                </a>
                 <a href="#"
                     class="block px-4 py-3 rounded-none text-sm font-bold uppercase tracking-wider transition-colors text-cyber-text hover:bg-cyber-gray hover:text-cyber-white">
                     Người dùng
