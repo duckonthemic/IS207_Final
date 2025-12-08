@@ -11,13 +11,10 @@ class UserAddress extends Model
 
     protected $fillable = [
         'user_id',
-        'fullname',
+        'label',
+        'recipient_name',
         'phone',
-        'address',
-        'city',
-        'district',
-        'ward',
-        'postal_code',
+        'address_line',
         'is_default',
     ];
 
@@ -42,7 +39,7 @@ class UserAddress extends Model
     {
         // Remove default from other addresses
         $this->user->addresses()->where('id', '!=', $this->id)->update(['is_default' => false]);
-        
+
         // Set this as default
         $this->update(['is_default' => true]);
     }

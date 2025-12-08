@@ -27,16 +27,14 @@ class AddressController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'fullname' => 'required|string|max:255',
+            'label' => 'nullable|string|max:100',
+            'recipient_name' => 'required|string|max:255',
             'phone' => 'required|string|max:20',
-            'address' => 'required|string',
-            'city' => 'required|string|max:100',
-            'district' => 'nullable|string|max:100',
-            'ward' => 'nullable|string|max:100',
-            'postal_code' => 'nullable|string|max:20',
+            'address_line' => 'required|string',
             'is_default' => 'boolean',
         ]);
 
+        $validated['label'] = $validated['label'] ?? 'Home';
         $validated['user_id'] = Auth::id();
         $validated['is_default'] = $request->boolean('is_default');
 
@@ -72,16 +70,14 @@ class AddressController extends Controller
         }
 
         $validated = $request->validate([
-            'fullname' => 'required|string|max:255',
+            'label' => 'nullable|string|max:100',
+            'recipient_name' => 'required|string|max:255',
             'phone' => 'required|string|max:20',
-            'address' => 'required|string',
-            'city' => 'required|string|max:100',
-            'district' => 'nullable|string|max:100',
-            'ward' => 'nullable|string|max:100',
-            'postal_code' => 'nullable|string|max:20',
+            'address_line' => 'required|string',
             'is_default' => 'boolean',
         ]);
 
+        $validated['label'] = $validated['label'] ?? $address->label ?? 'Home';
         $validated['is_default'] = $request->boolean('is_default');
 
         if ($validated['is_default']) {
