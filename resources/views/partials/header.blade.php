@@ -32,19 +32,192 @@
                     </div>
                 </a>
 
-                {{-- Search Bar (Desktop) --}}
-                <div class="hidden lg:flex flex-1 max-w-2xl">
-                    <form action="{{ route('products.index') }}" method="GET" class="relative group w-full">
-                        <input type="text" name="search" value="{{ request('search') }}"
-                            placeholder="Tìm kiếm sản phẩm..."
-                            class="w-full px-5 py-3 pl-12 bg-gray-50 border border-gray-200 text-gray-900 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all placeholder-gray-400 text-sm">
-                        <svg class="absolute left-4 top-3.5 w-5 h-5 text-gray-400 group-focus-within:text-blue-500 transition-colors"
-                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                        </svg>
-                    </form>
+                {{-- Smart Search Bar (Desktop) --}}
+                <div class="hidden lg:flex flex-1 max-w-2xl" x-data="smartSearch()" @click.away="showDropdown = false">
+                    <div class="relative w-full">
+                        <form action="{{ route('products.index') }}" method="GET" class="relative group w-full">
+                            <input type="text" name="search" x-model="query" @input.debounce.300ms="search()"
+                                @focus="if(query.length >= 2) showDropdown = true"
+                                @keydown.escape="showDropdown = false"
+                                @keydown.enter="if(selectedIndex >= 0) $event.preventDefault(); goToSelected()"
+                                @keydown.arrow-down.prevent="navigateDown()" @keydown.arrow-up.prevent="navigateUp()"
+                                value="{{ request('search') }}" placeholder="Tìm kiếm CPU, VGA, RAM, SSD..."
+                                autocomplete="off"
+                                class="w-full px-5 py-3 pl-12 pr-24 bg-white border-2 border-gray-900 text-gray-900 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-600 transition-all placeholder-gray-400 text-sm">
+                            <svg class="absolute left-4 top-3.5 w-5 h-5 text-gray-500 group-focus-within:text-blue-600 transition-colors"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                            </svg>
+                            <button type="submit"
+                                class="absolute right-2 top-1.5 px-4 py-1.5 bg-gray-900 text-white text-sm font-medium rounded-full hover:bg-blue-600 transition-colors">
+                                Tìm kiếm
+                            </button>
+                        </form>
+
+                        {{-- Smart Search Dropdown --}}
+                        <div x-show="showDropdown && (results.products.length > 0 || results.categories.length > 0 || results.brands.length > 0)"
+                            x-transition:enter="transition ease-out duration-200"
+                            x-transition:enter-start="opacity-0 translate-y-2"
+                            x-transition:enter-end="opacity-100 translate-y-0"
+                            x-transition:leave="transition ease-in duration-150"
+                            x-transition:leave-start="opacity-100 translate-y-0"
+                            x-transition:leave-end="opacity-0 translate-y-2"
+                            class="absolute left-0 right-0 top-full mt-2 bg-white rounded-2xl shadow-2xl border border-gray-100 z-50 overflow-hidden max-h-[500px] overflow-y-auto">
+
+                            {{-- Loading --}}
+                            <div x-show="loading" class="p-4 text-center">
+                                <svg class="animate-spin h-6 w-6 mx-auto text-blue-600" fill="none" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
+                                        stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor"
+                                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                                    </path>
+                                </svg>
+                            </div>
+
+                            {{-- Products Section --}}
+                            <template x-if="!loading && results.products.length > 0">
+                                <div class="p-3">
+                                    <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider px-2 mb-2">Sản
+                                        phẩm</h3>
+                                    <template x-for="(product, index) in results.products" :key="product.id">
+                                        <a :href="product.url"
+                                            class="flex items-center gap-3 p-2 rounded-xl hover:bg-gray-50 transition-colors"
+                                            :class="{'bg-blue-50': selectedIndex === index}">
+                                            <div
+                                                class="w-14 h-14 bg-gray-50 rounded-lg border border-gray-100 flex-shrink-0 overflow-hidden">
+                                                <img :src="product.image" :alt="product.name"
+                                                    class="w-full h-full object-contain p-1">
+                                            </div>
+                                            <div class="flex-1 min-w-0">
+                                                <p class="text-sm font-medium text-gray-900 line-clamp-1"
+                                                    x-text="product.name"></p>
+                                                <p class="text-xs text-gray-500" x-text="product.category"></p>
+                                            </div>
+                                            <div class="text-right flex-shrink-0">
+                                                <p class="text-sm font-bold text-blue-600"
+                                                    x-text="product.formatted_price"></p>
+                                                <template x-if="product.original_price">
+                                                    <p class="text-xs text-gray-400 line-through"
+                                                        x-text="formatPrice(product.original_price)"></p>
+                                                </template>
+                                            </div>
+                                        </a>
+                                    </template>
+                                </div>
+                            </template>
+
+                            {{-- Categories Section --}}
+                            <template x-if="!loading && results.categories.length > 0">
+                                <div class="p-3 border-t border-gray-100">
+                                    <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider px-2 mb-2">Danh
+                                        mục</h3>
+                                    <div class="flex flex-wrap gap-2">
+                                        <template x-for="category in results.categories" :key="category.id">
+                                            <a :href="category.url"
+                                                class="inline-flex items-center gap-2 px-3 py-1.5 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-blue-100 hover:text-blue-700 transition-colors">
+                                                <span x-text="category.name"></span>
+                                                <span class="text-gray-400"
+                                                    x-text="'(' + category.product_count + ')'"></span>
+                                            </a>
+                                        </template>
+                                    </div>
+                                </div>
+                            </template>
+
+                            {{-- Brands Section --}}
+                            <template x-if="!loading && results.brands.length > 0">
+                                <div class="p-3 border-t border-gray-100">
+                                    <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider px-2 mb-2">
+                                        Thương hiệu</h3>
+                                    <div class="flex flex-wrap gap-2">
+                                        <template x-for="brand in results.brands" :key="brand.name">
+                                            <a :href="brand.url"
+                                                class="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-50 text-blue-700 rounded-full text-sm hover:bg-blue-100 transition-colors font-medium">
+                                                <span x-text="brand.name"></span>
+                                            </a>
+                                        </template>
+                                    </div>
+                                </div>
+                            </template>
+
+                            {{-- View All Results --}}
+                            <template x-if="!loading && results.products.length > 0">
+                                <div class="p-3 border-t border-gray-100 bg-gray-50">
+                                    <a :href="'/products?search=' + encodeURIComponent(query)"
+                                        class="flex items-center justify-center gap-2 w-full py-2 text-blue-600 hover:text-blue-700 font-medium text-sm">
+                                        <span>Xem tất cả kết quả cho </span>
+                                        <span class="font-bold" x-text="'\"' + query + ' \"'"></span>
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </template>
+                        </div>
+
+                        {{-- No Results --}}
+                        <div x-show="showDropdown && !loading && query.length >= 2 && results.products.length === 0 && results.categories.length === 0"
+                            class="absolute left-0 right-0 top-full mt-2 bg-white rounded-xl shadow-lg border border-gray-100 z-50 p-6 text-center">
+                            <svg class="w-12 h-12 mx-auto text-gray-300 mb-3" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                                </path>
+                            </svg>
+                            <p class="text-gray-500 text-sm">Không tìm thấy kết quả cho "<span class="font-medium"
+                                    x-text="query"></span>"</p>
+                        </div>
+                    </div>
                 </div>
+
+                <script>
+                    function smartSearch() {
+                        return {
+                            query: '{{ request("search", "") }}',
+                            showDropdown: false,
+                            loading: false,
+                            selectedIndex: -1,
+                            results: { products: [], categories: [], brands: [] },
+
+                            async search() {
+                                if (this.query.length < 2) {
+                                    this.showDropdown = false;
+                                    this.results = { products: [], categories: [], brands: [] };
+                                    return;
+                                }
+                                this.loading = true;
+                                this.showDropdown = true;
+                                this.selectedIndex = -1;
+
+                                try {
+                                    const response = await fetch(`/api/search/suggestions?q=${encodeURIComponent(this.query)}`);
+                                    this.results = await response.json();
+                                } catch (error) {
+                                    console.error('Search error:', error);
+                                }
+                                this.loading = false;
+                            },
+
+                            navigateDown() {
+                                if (this.selectedIndex < this.results.products.length - 1) this.selectedIndex++;
+                            },
+                            navigateUp() {
+                                if (this.selectedIndex > 0) this.selectedIndex--;
+                            },
+                            goToSelected() {
+                                if (this.selectedIndex >= 0 && this.results.products[this.selectedIndex]) {
+                                    window.location.href = this.results.products[this.selectedIndex].url;
+                                }
+                            },
+                            formatPrice(price) {
+                                return new Intl.NumberFormat('vi-VN').format(price) + '₫';
+                            }
+                        }
+                    }
+                </script>
 
                 {{-- Actions --}}
                 <div class="flex items-center gap-3 lg:gap-6 text-gray-600">

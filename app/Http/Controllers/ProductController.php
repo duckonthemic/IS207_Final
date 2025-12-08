@@ -26,7 +26,7 @@ class ProductController extends Controller
             $searchTerm = $request->string('q') ?: $request->string('search');
             $query->where(function ($q) use ($searchTerm) {
                 $q->where('name', 'like', "%{$searchTerm}%")
-                  ->orWhere('description', 'like', "%{$searchTerm}%");
+                    ->orWhere('description', 'like', "%{$searchTerm}%");
             });
         }
 
@@ -53,7 +53,7 @@ class ProductController extends Controller
         // Price range filter
         if ($request->filled('price_range')) {
             [$min, $max] = explode('-', $request->string('price_range'));
-            $query->whereBetween('price', [(float)$min, (float)$max]);
+            $query->whereBetween('price', [(float) $min, (float) $max]);
         } elseif ($request->filled('min_price') || $request->filled('max_price')) {
             if ($request->filled('min_price')) {
                 $query->where('price', '>=', (float) $request->input('min_price'));
@@ -89,7 +89,7 @@ class ProductController extends Controller
 
         // Get available filter options based on current category
         $filterOptions = $this->getFilterOptions($currentCategory, $categoryIds);
-        
+
         // Get subcategories if viewing a parent category
         $subcategories = [];
         if ($currentCategory) {
@@ -108,11 +108,11 @@ class ProductController extends Controller
     private function getCategoryAndChildrenIds($category): array
     {
         $ids = [$category->id];
-        
+
         foreach ($category->children as $child) {
             $ids = array_merge($ids, $this->getCategoryAndChildrenIds($child));
         }
-        
+
         return $ids;
     }
 
@@ -122,20 +122,20 @@ class ProductController extends Controller
     private function getSubcategoriesWithCounts($category, Request $request): array
     {
         $subcategories = [];
-        
+
         foreach ($category->children as $child) {
             // Clone the base query for counting
             $countQuery = Product::query();
-            
+
             // Apply same filters as main query
             $categoryIds = $this->getCategoryAndChildrenIds($child);
             $countQuery->whereIn('category_id', $categoryIds);
-            
+
             // Apply spec filters
             $this->applySpecFilters($countQuery, $request);
-            
+
             $count = $countQuery->count();
-            
+
             if ($count > 0) {
                 $subcategories[] = [
                     'id' => $child->id,
@@ -145,7 +145,7 @@ class ProductController extends Controller
                 ];
             }
         }
-        
+
         return $subcategories;
     }
 
@@ -161,10 +161,10 @@ class ProductController extends Controller
         foreach ($filterParams as $filterParam => $values) {
             if (!empty($values)) {
                 $values = (array) $values;
-                
+
                 // Special handling for 'brand' filter - search in product name
                 if ($filterParam === 'brand') {
-                    $query->where(function($nameQuery) use ($values) {
+                    $query->where(function ($nameQuery) use ($values) {
                         foreach ($values as $value) {
                             $nameQuery->orWhere('name', 'like', "%{$value}%");
                         }
@@ -182,8 +182,8 @@ class ProductController extends Controller
                                 $rangeValue = $values[0] ?? '';
                                 $parts = explode('-', $rangeValue);
                                 if (count($parts) === 2) {
-                                    $min = (float)$parts[0];
-                                    $max = (float)$parts[1];
+                                    $min = (float) $parts[0];
+                                    $max = (float) $parts[1];
                                     // Cast value to decimal for numeric comparison
                                     $q->whereRaw('CAST(value AS DECIMAL(10,2)) BETWEEN ? AND ?', [$min, $max]);
                                 }
@@ -247,7 +247,7 @@ class ProductController extends Controller
                 $value = trim($item->value);
                 // Normalize: lowercase and remove extra spaces
                 $normalized = strtolower(preg_replace('/\s+/', ' ', $value));
-                
+
                 // Skip invalid values
                 if (empty($value) || in_array($normalized, ['desktop', 'undefined', 'null', 'n/a'])) {
                     continue;
@@ -263,9 +263,9 @@ class ProductController extends Controller
             }
 
             $valuesWithCounts = array_values($mergedValues);
-            
+
             // Sort by value for display
-            usort($valuesWithCounts, function($a, $b) {
+            usort($valuesWithCounts, function ($a, $b) {
                 return strnatcasecmp($a['value'], $b['value']);
             });
 
@@ -291,10 +291,10 @@ class ProductController extends Controller
     public function show(Product $product): View
     {
         $product->load([
-            'category', 
-            'images', 
+            'category',
+            'images',
             'approvedReviews.user',
-            'specs.specDefinition' => function($query) {
+            'specs.specDefinition' => function ($query) {
                 $query->orderBy('sort_order');
             }
         ]);
@@ -308,16 +308,16 @@ class ProductController extends Controller
         // Check if current user can review (has purchased and not reviewed yet)
         $canReview = false;
         $userReview = null;
-        
+
         if (auth()->check()) {
             $userReview = $product->reviews()
                 ->where('user_id', auth()->id())
                 ->first();
-            
+
             if (!$userReview) {
-                $canReview = \App\Models\OrderItem::whereHas('order', function($query) {
+                $canReview = \App\Models\OrderItem::whereHas('order', function ($query) {
                     $query->where('user_id', auth()->id())
-                          ->whereIn('status', ['delivered', 'completed']);
+                        ->whereIn('status', ['delivered', 'completed']);
                 })->where('product_id', $product->id)->exists();
             }
         }
@@ -331,7 +331,7 @@ class ProductController extends Controller
     public function getJson(Product $product)
     {
         $product->load(['specs.specDefinition', 'category']);
-        
+
         $specs = $product->specs->mapWithKeys(function ($spec) {
             return [$spec->specDefinition->code => $spec->value];
         });
@@ -369,7 +369,7 @@ class ProductController extends Controller
                 }
             }
         }
-        
+
         // Sort specs by sort_order
         $specDefinitions = $specDefinitions->sortBy('sort_order');
 
@@ -398,7 +398,7 @@ class ProductController extends Controller
         foreach ($mainCategories as $name => $slugs) {
             $count = 0;
             $category = Category::whereIn('slug', $slugs)->first();
-            
+
             if ($category) {
                 $ids = $this->getCategoryAndChildrenIds($category);
                 $count = Product::whereIn('category_id', $ids)->count();
@@ -412,5 +412,69 @@ class ProductController extends Controller
         }
 
         return $result;
+    }
+
+    /**
+     * Search suggestions API for smart search bar
+     */
+    public function searchSuggestions(Request $request)
+    {
+        $query = $request->input('q', '');
+
+        if (strlen($query) < 2) {
+            return response()->json([
+                'products' => [],
+                'categories' => [],
+                'brands' => []
+            ]);
+        }
+
+        // Search products (limit to 5)
+        $products = Product::where('name', 'like', "%{$query}%")
+            ->orWhere('sku', 'like', "%{$query}%")
+            ->with(['images' => fn($q) => $q->limit(1), 'category'])
+            ->limit(5)
+            ->get()
+            ->map(fn($product) => [
+                'id' => $product->id,
+                'name' => $product->name,
+                'slug' => $product->slug,
+                'price' => $product->sale_price ?? $product->price,
+                'original_price' => $product->sale_price ? $product->price : null,
+                'formatted_price' => number_format($product->sale_price ?? $product->price, 0, ',', '.') . '₫',
+                'image' => $product->images->first()?->url ?? asset('images/placeholder.png'),
+                'category' => $product->category?->name,
+                'url' => route('products.show', $product->slug)
+            ]);
+
+        // Search categories (limit to 3)
+        $categories = Category::where('name', 'like', "%{$query}%")
+            ->withCount('products')
+            ->limit(3)
+            ->get()
+            ->map(fn($cat) => [
+                'id' => $cat->id,
+                'name' => $cat->name,
+                'product_count' => $cat->products_count,
+                'url' => route('products.index', ['category' => $cat->slug])
+            ]);
+
+        // Get unique brands matching query
+        $brands = Product::select('brand')
+            ->where('brand', 'like', "%{$query}%")
+            ->whereNotNull('brand')
+            ->distinct()
+            ->limit(5)
+            ->pluck('brand')
+            ->map(fn($brand) => [
+                'name' => $brand,
+                'url' => route('products.index', ['brand' => [$brand]])
+            ]);
+
+        return response()->json([
+            'products' => $products,
+            'categories' => $categories,
+            'brands' => $brands
+        ]);
     }
 }
