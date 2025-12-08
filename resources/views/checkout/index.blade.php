@@ -25,7 +25,7 @@
                     <div class="space-y-4">
                         <div class="grid grid-cols-1 gap-4">
                             <input type="text" name="fullname" placeholder="Họ và tên" 
-                                   value="{{ old('fullname', $defaultAddress->fullname ?? Auth::user()->name ?? '') }}"
+                                   value="{{ old('fullname', $defaultAddress->recipient_name ?? Auth::user()->name ?? '') }}"
                                    class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" required>
                             
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -38,22 +38,22 @@
                                        class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" required>
                             </div>
 
-                            <input type="text" name="address" placeholder="Địa chỉ" 
-                                   value="{{ old('address', $defaultAddress->address ?? '') }}"
+                            <input type="text" name="address" placeholder="Địa chỉ chi tiết (số nhà, tên đường)" 
+                                   value="{{ old('address', '') }}"
                                    class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" required>
 
                             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                                 <select name="city" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" required>
                                     <option value="">Chọn tỉnh / thành</option>
-                                    <option value="Hồ Chí Minh" {{ (old('city', $defaultAddress->city ?? '') == 'Hồ Chí Minh') ? 'selected' : '' }}>Hồ Chí Minh</option>
-                                    <option value="Hà Nội" {{ (old('city', $defaultAddress->city ?? '') == 'Hà Nội') ? 'selected' : '' }}>Hà Nội</option>
-                                    <option value="Đà Nẵng" {{ (old('city', $defaultAddress->city ?? '') == 'Đà Nẵng') ? 'selected' : '' }}>Đà Nẵng</option>
+                                    <option value="Hồ Chí Minh" {{ old('city') == 'Hồ Chí Minh' ? 'selected' : '' }}>Hồ Chí Minh</option>
+                                    <option value="Hà Nội" {{ old('city') == 'Hà Nội' ? 'selected' : '' }}>Hà Nội</option>
+                                    <option value="Đà Nẵng" {{ old('city') == 'Đà Nẵng' ? 'selected' : '' }}>Đà Nẵng</option>
                                 </select>
 
                                 <select name="district" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" required>
                                     <option value="">Chọn quận / huyện</option>
-                                    <option value="Quận 1" {{ (old('district', $defaultAddress->district ?? '') == 'Quận 1') ? 'selected' : '' }}>Quận 1</option>
-                                    <option value="Thủ Đức" {{ (old('district', $defaultAddress->district ?? '') == 'Thủ Đức') ? 'selected' : '' }}>Thủ Đức</option>
+                                    <option value="Quận 1" {{ old('district') == 'Quận 1' ? 'selected' : '' }}>Quận 1</option>
+                                    <option value="Thủ Đức" {{ old('district') == 'Thủ Đức' ? 'selected' : '' }}>Thủ Đức</option>
                                 </select>
 
                                 <select name="ward" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
