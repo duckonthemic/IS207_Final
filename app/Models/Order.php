@@ -74,11 +74,29 @@ class Order extends Model
     // Methods
     public function getTotalDiscount()
     {
-        return $this->promotions()->sum('order_promotions.discount_value');
+        // Promotions not implemented yet - return 0
+        return 0;
     }
 
     public function getNetTotal()
     {
         return $this->total - $this->getTotalDiscount();
+    }
+
+    /**
+     * Accessor for total_amount (alias for total column)
+     * For backwards compatibility with views
+     */
+    public function getTotalAmountAttribute()
+    {
+        return $this->total;
+    }
+
+    /**
+     * Accessor for total_discount
+     */
+    public function getTotalDiscountAttribute()
+    {
+        return 0; // Placeholder - implement if promotions are enabled
     }
 }
