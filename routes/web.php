@@ -8,6 +8,8 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\PcGamingController;
+use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 
 // Public routes
@@ -16,9 +18,9 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+Route::get('/products/compare', [ProductController::class, 'compare'])->name('products.compare');
 Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
 Route::get('/api/products/{product}', [ProductController::class, 'getJson'])->name('products.json');
-Route::get('/products/compare', [ProductController::class, 'compare'])->name('products.compare');
 
 // PC Gaming & Build PC
 Route::get('/pc-gaming', [PcGamingController::class, 'index'])->name('pc-gaming.index');
@@ -26,6 +28,12 @@ Route::get('/pc-ai', [PcGamingController::class, 'pcAI'])->name('pc-ai.index');
 Route::get('/pc-office', [PcGamingController::class, 'pcOffice'])->name('pc-office.index');
 Route::get('/pc-design', [PcGamingController::class, 'pcDesign'])->name('pc-design.index');
 Route::get('/build-pc', [PcGamingController::class, 'buildPc'])->name('build-pc');
+
+// Newsletter
+Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe'])->name('newsletter.subscribe');
+
+// Static Pages
+Route::get('/page/{slug}', [PageController::class, 'show'])->name('page.show');
 
 // Cart add - can be accessed by guests (will redirect to login)
 Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('cart.add')->middleware('auth');
@@ -76,14 +84,17 @@ Route::middleware('auth')->group(function () {
 // Admin routes
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
-    
+
     // Products
     Route::resource('products', \App\Http\Controllers\Admin\ProductController::class);
     Route::get('/products/specs/by-component-type', [\App\Http\Controllers\Admin\ProductController::class, 'getSpecDefinitions'])->name('products.specs.by-component-type');
-    
+
+    // Categories
+    Route::resource('categories', \App\Http\Controllers\Admin\CategoryController::class);
+
     // Spec Definitions
     Route::resource('spec-definitions', \App\Http\Controllers\Admin\SpecDefinitionController::class);
-    
+
     // Orders
     Route::get('/orders', [\App\Http\Controllers\Admin\OrderController::class, 'index'])->name('orders.index');
     Route::get('/orders/{order}', [\App\Http\Controllers\Admin\OrderController::class, 'show'])->name('orders.show');
@@ -102,5 +113,5 @@ Route::get('/logout', function () {
     return redirect('/login');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 

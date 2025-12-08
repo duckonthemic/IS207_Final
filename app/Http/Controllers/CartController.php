@@ -61,6 +61,11 @@ class CartController extends Controller
             ]);
         }
 
+        // If action is "buy_now", redirect to checkout instead of cart
+        if ($request->input('action') === 'buy_now') {
+            return redirect()->route('checkout.index')->with('success', 'Đã thêm vào giỏ hàng');
+        }
+
         return redirect()->route('cart.index')->with('success', 'Đã thêm vào giỏ hàng');
     }
 
@@ -83,7 +88,7 @@ class CartController extends Controller
         }
 
         $cartItem->update(['qty' => $request->integer('qty')]);
-        
+
         $cart = auth()->user()->getActiveCart();
 
         if ($request->expectsJson()) {
@@ -109,7 +114,7 @@ class CartController extends Controller
         }
 
         $cartItem->delete();
-        
+
         $cart = auth()->user()->getActiveCart();
 
         if ($request->expectsJson()) {
