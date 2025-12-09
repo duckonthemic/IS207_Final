@@ -133,6 +133,21 @@ IS207_Final/
 - **Năm học:** 2025-2026, Học kỳ 1
 - **Trường:** Đại học Công nghệ Thông tin - ĐHQG TP.HCM
 
+## Performance Optimizations
+
+UITech Store được tối ưu hóa hiệu suất toàn diện:
+
+- ⚡ **80-90% giảm queries** trên trang danh sách sản phẩm
+- 🚀 **70-75% giảm queries** trên trang chi tiết sản phẩm
+- 📊 **65-70% giảm queries** trên admin dashboard
+- 💾 **Caching thông minh** cho dữ liệu thường xuyên truy cập
+- 🔍 **Database indexes** cho các truy vấn phổ biến
+
+Xem chi tiết tại:
+- [PERFORMANCE_SUMMARY.md](PERFORMANCE_SUMMARY.md) - Tổng quan và metrics
+- [PERFORMANCE_IMPROVEMENTS.md](PERFORMANCE_IMPROVEMENTS.md) - Chi tiết kỹ thuật
+- [PERFORMANCE_GUIDE.md](PERFORMANCE_GUIDE.md) - Hướng dẫn best practices
+
 ## License
 
 [MIT License](LICENSE)
