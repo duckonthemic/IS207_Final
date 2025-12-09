@@ -17,10 +17,12 @@ class DashboardController extends Controller
      */
     public function index(): View
     {
-        // Optimize query execution by combining similar queries
+        // Define completed order statuses (used for revenue calculations)
+        // Note: These are hardcoded constants, not user input - safe to use in SQL
         $completedStatuses = ['completed', 'shipping', 'processing'];
         
-        // Total stats - combine related queries
+        // Total stats - combine related queries to reduce database round trips
+        // Using CASE WHEN for conditional aggregation in a single query
         $orderStats = Order::selectRaw('
             COUNT(*) as total_orders,
             SUM(CASE WHEN status IN ("completed", "shipping", "processing") THEN total ELSE 0 END) as total_revenue,

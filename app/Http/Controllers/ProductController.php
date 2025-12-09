@@ -106,13 +106,14 @@ class ProductController extends Controller
 
     /**
      * Get category and all its children IDs recursively using a single query
+     * Note: Uses the 'recursiveChildren' relationship defined in Category model (line 44-47)
      */
     private function getCategoryAndChildrenIds($category): array
     {
         // Use a more efficient approach - collect all IDs in a single query with recursive loading
         $ids = [$category->id];
         
-        // Load all descendants at once
+        // Load all descendants at once using the recursive relationship
         $category->loadMissing('recursiveChildren');
         
         // Recursively collect IDs
@@ -143,7 +144,8 @@ class ProductController extends Controller
         // Build base query for counting
         $baseQuery = Product::query();
         
-        // Apply spec filters to the base query
+        // Apply spec filters to the base query (filters by product specifications like CPU, RAM, etc.)
+        // This method is defined below and handles dynamic filtering from request parameters
         $this->applySpecFilters($baseQuery, $request);
         
         // Get counts for all children in a single query using groupBy
