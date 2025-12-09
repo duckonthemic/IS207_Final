@@ -17,7 +17,13 @@ class CartController extends Controller
     public function index(): View
     {
         $cart = auth()->user()->getOrCreateActiveCart();
-        $cart->load('items.product');
+        // Eager load items with minimal product data needed for display
+        $cart->load([
+            'items.product:id,name,slug,price,sale_price,stock,image',
+            'items.product.images' => function($query) {
+                $query->where('is_primary', true)->limit(1);
+            }
+        ]);
 
         return view('cart.index', compact('cart'));
     }
@@ -82,6 +88,9 @@ class CartController extends Controller
             return $this->errorResponse('Unauthorized', 403);
         }
 
+        // Eager load product to check stock efficiently
+        $cartItem->load('product:id,stock');
+        
         // Check product stock
         if ($request->integer('qty') > $cartItem->product->stock) {
             return $this->errorResponse('Số lượng vượt quá tồn kho (còn ' . $cartItem->product->stock . ')', 400);
@@ -89,7 +98,9 @@ class CartController extends Controller
 
         $cartItem->update(['qty' => $request->integer('qty')]);
 
+        // Load items for accurate calculations
         $cart = auth()->user()->getActiveCart();
+        $cart->load('items');
 
         if ($request->expectsJson()) {
             return response()->json([
@@ -97,7 +108,7 @@ class CartController extends Controller
                 'message' => 'Đã cập nhật giỏ hàng',
                 'cart_total' => $cart->getTotal(),
                 'item_count' => $cart->getItemCount(),
-                'subtotal' => $cartItem->subtotal,
+                'subtotal' => $cartItem->price * $cartItem->qty,
             ]);
         }
 
@@ -116,6 +127,11 @@ class CartController extends Controller
         $cartItem->delete();
 
         $cart = auth()->user()->getActiveCart();
+        
+        // Load items for accurate calculations
+        if ($cart) {
+            $cart->load('items');
+        }
 
         if ($request->expectsJson()) {
             return response()->json([

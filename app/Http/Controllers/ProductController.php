@@ -86,10 +86,8 @@ class ProductController extends Controller
 
         $products = $query->paginate($perPage)->withQueryString()->fragment('product-list');
 
-        // Eager load categories only when needed - load root categories with their immediate children only
-        $categories = Category::root()->with(['children' => function($query) {
-            $query->orderBy('name');
-        }])->orderBy('name')->get();
+        // Use cached categories to reduce database load
+        $categories = Category::getRootWithChildrenCached();
 
         // Get available filter options based on current category
         $filterOptions = $this->getFilterOptions($currentCategory, $categoryIds);

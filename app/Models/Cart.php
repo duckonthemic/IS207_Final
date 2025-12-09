@@ -41,11 +41,21 @@ class Cart extends Model
     // Methods
     public function getTotal()
     {
+        // Use loaded items if available to avoid extra query
+        if ($this->relationLoaded('items')) {
+            return $this->items->sum(function ($item) {
+                return $item->price * $item->qty;
+            });
+        }
         return $this->items()->sum(\DB::raw('price * qty'));
     }
 
     public function getItemCount()
     {
+        // Use loaded items if available to avoid extra query
+        if ($this->relationLoaded('items')) {
+            return $this->items->sum('qty');
+        }
         return $this->items()->sum('qty');
     }
 }

@@ -61,4 +61,36 @@ class Category extends Model
     {
         return $query->whereNull('parent_id');
     }
+
+    /**
+     * Get all root categories with their children (cached)
+     * Cache for 1 hour to reduce database load
+     */
+    public static function getRootWithChildrenCached()
+    {
+        return cache()->remember('categories_root_with_children', 3600, function () {
+            return self::root()
+                ->with(['children' => function($query) {
+                    $query->orderBy('name');
+                }])
+                ->orderBy('name')
+                ->get();
+        });
+    }
+
+    /**
+     * Clear category cache when categories are modified
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::saved(function () {
+            cache()->forget('categories_root_with_children');
+        });
+
+        static::deleted(function () {
+            cache()->forget('categories_root_with_children');
+        });
+    }
 }
