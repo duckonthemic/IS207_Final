@@ -85,7 +85,11 @@ class ProductController extends Controller
         }
 
         $products = $query->paginate($perPage)->withQueryString()->fragment('product-list');
-        $categories = Category::root()->with('children')->orderBy('name')->get();
+
+        // Eager load categories only when needed - load root categories with their immediate children only
+        $categories = Category::root()->with(['children' => function($query) {
+            $query->orderBy('name');
+        }])->orderBy('name')->get();
 
         // Get available filter options based on current category
         $filterOptions = $this->getFilterOptions($currentCategory, $categoryIds);
@@ -103,39 +107,59 @@ class ProductController extends Controller
     }
 
     /**
-     * Get category and all its children IDs recursively
+     * Get category and all its children IDs recursively using a single query
      */
     private function getCategoryAndChildrenIds($category): array
     {
+        // Use a more efficient approach - collect all IDs in a single query with recursive loading
         $ids = [$category->id];
-
-        foreach ($category->children as $child) {
-            $ids = array_merge($ids, $this->getCategoryAndChildrenIds($child));
-        }
+        
+        // Load all descendants at once
+        $category->loadMissing('recursiveChildren');
+        
+        // Recursively collect IDs
+        $collectIds = function($cat) use (&$collectIds, &$ids) {
+            foreach ($cat->recursiveChildren as $child) {
+                $ids[] = $child->id;
+                $collectIds($child);
+            }
+        };
+        
+        $collectIds($category);
 
         return $ids;
     }
 
     /**
-     * Get subcategories with product counts
+     * Get subcategories with product counts using optimized query
      */
     private function getSubcategoriesWithCounts($category, Request $request): array
     {
+        if ($category->children->isEmpty()) {
+            return [];
+        }
+
+        // Get all child category IDs
+        $childIds = $category->children->pluck('id')->toArray();
+        
+        // Build base query for counting
+        $baseQuery = Product::query();
+        
+        // Apply spec filters to the base query
+        $this->applySpecFilters($baseQuery, $request);
+        
+        // Get counts for all children in a single query using groupBy
+        $counts = (clone $baseQuery)
+            ->select('category_id', DB::raw('COUNT(*) as count'))
+            ->whereIn('category_id', $childIds)
+            ->groupBy('category_id')
+            ->pluck('count', 'category_id');
+
         $subcategories = [];
-
+        
         foreach ($category->children as $child) {
-            // Clone the base query for counting
-            $countQuery = Product::query();
-
-            // Apply same filters as main query
-            $categoryIds = $this->getCategoryAndChildrenIds($child);
-            $countQuery->whereIn('category_id', $categoryIds);
-
-            // Apply spec filters
-            $this->applySpecFilters($countQuery, $request);
-
-            $count = $countQuery->count();
-
+            $count = $counts->get($child->id, 0);
+            
             if ($count > 0) {
                 $subcategories[] = [
                     'id' => $child->id,
@@ -290,20 +314,29 @@ class ProductController extends Controller
      */
     public function show(Product $product): View
     {
+        // Optimize eager loading with specific constraints
         $product->load([
-            'category',
-            'images',
-            'approvedReviews.user',
+            'category:id,name,slug',
+            'images' => function($query) {
+                $query->orderBy('is_primary', 'desc');
+            },
+            'approvedReviews' => function($query) {
+                $query->latest()->limit(10);
+            },
+            'approvedReviews.user:id,name',
             'specs.specDefinition' => function ($query) {
                 $query->orderBy('sort_order');
             }
         ]);
 
-        // Get related products (same category)
+        // Get related products (same category) with minimal data
         $relatedProducts = Product::where('category_id', $product->category_id)
             ->where('id', '!=', $product->id)
+            ->with(['images' => function($query) {
+                $query->where('is_primary', true)->limit(1);
+            }])
             ->limit(4)
-            ->get();
+            ->get(['id', 'name', 'slug', 'price', 'sale_price', 'category_id']);
 
         // Check if current user can review (has purchased and not reviewed yet)
         $canReview = false;
@@ -315,10 +348,14 @@ class ProductController extends Controller
                 ->first();
 
             if (!$userReview) {
-                $canReview = \App\Models\OrderItem::whereHas('order', function ($query) {
-                    $query->where('user_id', auth()->id())
-                        ->whereIn('status', ['delivered', 'completed']);
-                })->where('product_id', $product->id)->exists();
+                // Optimize the purchase check query
+                $canReview = \App\Models\OrderItem::query()
+                    ->whereHas('order', function ($query) {
+                        $query->where('user_id', auth()->id())
+                            ->whereIn('status', ['delivered', 'completed']);
+                    })
+                    ->where('product_id', $product->id)
+                    ->exists();
             }
         }
 
@@ -377,7 +414,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Get main categories with product counts
+     * Get main categories with product counts using optimized query
      */
     private function getMainCategoriesWithCounts(): array
     {
@@ -393,21 +430,46 @@ class ProductController extends Controller
             'Monitor' => ['monitor'],
         ];
 
-        $result = [];
+        // Get all categories at once
+        $allSlugs = array_merge(...array_values($mainCategories));
+        $categoriesCollection = Category::whereIn('slug', $allSlugs)
+            ->with('recursiveChildren')
+            ->get()
+            ->keyBy('slug');
 
-        foreach ($mainCategories as $name => $slugs) {
-            $count = 0;
-            $category = Category::whereIn('slug', $slugs)->first();
-
-            if ($category) {
-                $ids = $this->getCategoryAndChildrenIds($category);
-                $count = Product::whereIn('category_id', $ids)->count();
+        // Build category ID to slug mapping for all categories and their children
+        $categoryIdToSlug = [];
+        foreach ($categoriesCollection as $slug => $category) {
+            $ids = $this->getCategoryAndChildrenIds($category);
+            foreach ($ids as $id) {
+                $categoryIdToSlug[$id] = $slug;
             }
+        }
 
+        // Get all product counts in a single query
+        $counts = Product::select('category_id', DB::raw('COUNT(*) as count'))
+            ->whereIn('category_id', array_keys($categoryIdToSlug))
+            ->groupBy('category_id')
+            ->pluck('count', 'category_id');
+
+        // Aggregate counts by category slug
+        $slugCounts = [];
+        foreach ($counts as $categoryId => $count) {
+            $slug = $categoryIdToSlug[$categoryId] ?? null;
+            if ($slug) {
+                if (!isset($slugCounts[$slug])) {
+                    $slugCounts[$slug] = 0;
+                }
+                $slugCounts[$slug] += $count;
+            }
+        }
+
+        $result = [];
+        foreach ($mainCategories as $name => $slugs) {
             $result[] = [
                 'name' => $name,
                 'slug' => $slugs[0],
-                'count' => $count
+                'count' => $slugCounts[$slugs[0]] ?? 0
             ];
         }
 
@@ -429,12 +491,17 @@ class ProductController extends Controller
             ]);
         }
 
-        // Search products (limit to 5)
+        // Search products (limit to 5) with optimized eager loading
         $products = Product::where('name', 'like', "%{$query}%")
             ->orWhere('sku', 'like', "%{$query}%")
-            ->with(['images' => fn($q) => $q->limit(1), 'category'])
+            ->with([
+                'images' => function($q) {
+                    $q->where('is_primary', true)->limit(1);
+                },
+                'category:id,name'
+            ])
             ->limit(5)
-            ->get()
+            ->get(['id', 'name', 'slug', 'price', 'sale_price', 'category_id'])
             ->map(fn($product) => [
                 'id' => $product->id,
                 'name' => $product->name,
@@ -447,11 +514,11 @@ class ProductController extends Controller
                 'url' => route('products.show', $product->slug)
             ]);
 
-        // Search categories (limit to 3)
+        // Search categories (limit to 3) with product counts
         $categories = Category::where('name', 'like', "%{$query}%")
             ->withCount('products')
             ->limit(3)
-            ->get()
+            ->get(['id', 'name', 'slug'])
             ->map(fn($cat) => [
                 'id' => $cat->id,
                 'name' => $cat->name,

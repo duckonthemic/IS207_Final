@@ -24,7 +24,12 @@ class CheckoutController extends Controller
             return redirect()->route('cart.index')->with('error', 'Giỏ hàng trống');
         }
 
-        $cart->load('items.product.images');
+        // Eager load product images efficiently - only load first image
+        $cart->load([
+            'items.product.images' => function($query) {
+                $query->orderBy('is_primary', 'desc')->limit(1);
+            }
+        ]);
         $user = Auth::user();
         $addresses = $user->addresses()->get();
         $defaultAddress = $addresses->where('is_default', true)->first();
@@ -59,13 +64,19 @@ class CheckoutController extends Controller
             return redirect()->route('cart.index')->with('error', 'Giỏ hàng trống');
         }
 
-        $cart->load('items.product');
+        // Eager load products efficiently - only need stock and basic info for validation
+        $cart->load('items.product:id,name,stock');
 
-        // Verify stock
+        // Verify stock for all items at once
+        $stockIssues = [];
         foreach ($cart->items as $item) {
             if ($item->product->stock < $item->qty) {
-                return back()->with('error', "Sản phẩm {$item->product->name} không đủ hàng trong kho");
+                $stockIssues[] = "Sản phẩm {$item->product->name} không đủ hàng trong kho";
             }
+        }
+        
+        if (!empty($stockIssues)) {
+            return back()->with('error', implode(', ', $stockIssues));
         }
 
         DB::beginTransaction();

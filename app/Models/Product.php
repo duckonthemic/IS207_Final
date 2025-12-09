@@ -109,14 +109,18 @@ class Product extends Model
         return $this->sale_price ?? $this->price;
     }
 
+    // Note: Use withCount and withAvg in queries to avoid N+1 issues
+    // Example: Product::withCount('approvedReviews')->withAvg('approvedReviews', 'rating')->get()
     public function getAverageRatingAttribute()
     {
-        return $this->approvedReviews()->avg('rating') ?? 0;
+        // Use the preloaded aggregate if available
+        return $this->approved_reviews_avg_rating ?? $this->approvedReviews()->avg('rating') ?? 0;
     }
 
     public function getReviewsCountAttribute()
     {
-        return $this->approvedReviews()->count();
+        // Use the preloaded count if available
+        return $this->approved_reviews_count ?? $this->approvedReviews()->count();
     }
 
     public function getDiscountPercentAttribute()

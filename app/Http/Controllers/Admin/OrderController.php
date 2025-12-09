@@ -18,7 +18,8 @@ class OrderController extends Controller
         $status = $request->input('status');
         $payment_status = $request->input('payment_status');
 
-        $query = Order::with('user', 'items');
+        // Optimize eager loading - only load necessary user fields
+        $query = Order::with('user:id,name,email', 'items:id,order_id,product_id,qty,price');
 
         if ($status) {
             $query->where('status', $status);
@@ -38,7 +39,14 @@ class OrderController extends Controller
      */
     public function show(Order $order): View
     {
-        $order->load('user', 'items.product');
+        // Eager load with specific fields to reduce data transfer
+        $order->load([
+            'user:id,name,email',
+            'items.product:id,name,slug,price,image',
+            'items.product.images' => function($query) {
+                $query->where('is_primary', true)->limit(1);
+            }
+        ]);
 
         return view('admin.orders.show', compact('order'));
     }
