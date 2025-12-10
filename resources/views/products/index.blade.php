@@ -69,7 +69,7 @@
                 <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sticky top-24">
                     <div class="flex items-center justify-between mb-6 pb-4 border-b border-gray-100">
                         <h2 class="font-bold text-lg text-gray-900">Bộ Lọc</h2>
-                        <a href="{{ route('products.index') }}" class="text-xs font-medium text-blue-600 hover:text-blue-700">
+                        <a href="{{ route('products.index') }}" class="text-xs font-medium text-gray-900 hover:text-gray-700">
                             Xóa tất cả
                         </a>
                     </div>
@@ -85,7 +85,7 @@
                             <div class="relative">
                                 <input type="text" name="search" value="{{ request('search') }}" 
                                     placeholder="Tên sản phẩm..."
-                                    class="w-full pl-10 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all">
+                                    class="w-full pl-10 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-gray-900 focus:border-gray-900 transition-all">
                                 <svg class="w-4 h-4 text-gray-400 absolute left-3 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                                 </svg>
@@ -101,7 +101,7 @@
                                         <input type="radio" name="category" value="" 
                                             {{ !request('category') ? 'checked' : '' }}
                                             onchange="this.form.submit()"
-                                            class="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500">
+                                            class="w-4 h-4 text-gray-900 border-gray-300 focus:ring-gray-900">
                                         <span class="ml-3 text-sm text-gray-600 group-hover:text-blue-600 transition-colors">Tất cả</span>
                                     </div>
                                 </label>
@@ -127,7 +127,7 @@
                                 <div class="space-y-1">
                                     @foreach($subcategories as $sub)
                                         <a href="{{ route('products.index', array_merge(request()->except('category'), ['category' => $sub['slug']])) }}" 
-                                           class="flex items-center justify-between px-3 py-2 rounded-lg transition-colors {{ request('category') == $sub['slug'] ? 'bg-blue-50 text-blue-700 font-medium' : 'text-gray-600 hover:bg-gray-50' }}">
+                                           class="flex items-center justify-between px-3 py-2 rounded-lg transition-colors {{ request('category') == $sub['slug'] ? 'bg-gray-100 text-gray-900 font-medium' : 'text-gray-600 hover:bg-gray-50' }}">
                                             <span class="text-sm">{{ $sub['name'] }}</span>
                                             <span class="text-xs bg-white px-2 py-0.5 rounded-full border border-gray-100 text-gray-400">{{ $sub['count'] }}</span>
                                         </a>
@@ -179,7 +179,7 @@
                                                 step: {{ $step }}
                                             }" class="px-2 py-4">
                                                 <div class="relative h-2 bg-gray-200 rounded-full">
-                                                    <div class="absolute h-full bg-blue-600 rounded-full" 
+                                                    <div class="absolute h-full bg-gray-900 rounded-full" 
                                                          :style="'left: ' + ((Math.min(minThumb, maxThumb) - min) / (max - min) * 100) + '%; right: ' + (100 - (Math.max(minThumb, maxThumb) - min) / (max - min) * 100) + '%'"></div>
                                                     
                                                     <input type="range" :min="min" :max="max" :step="step" x-model="minThumb" 
@@ -190,7 +190,7 @@
                                                     {{-- Thumbs visual --}}
                                                     <div class="absolute w-4 h-4 bg-white border-2 border-blue-600 rounded-full shadow top-1/2 transform -translate-y-1/2 -translate-x-1/2 pointer-events-none"
                                                          :style="'left: ' + ((Math.min(minThumb, maxThumb) - min) / (max - min) * 100) + '%'"></div>
-                                                    <div class="absolute w-4 h-4 bg-white border-2 border-blue-600 rounded-full shadow top-1/2 transform -translate-y-1/2 -translate-x-1/2 pointer-events-none"
+                                                    <div class="absolute w-4 h-4 bg-white border-2 border-gray-900 rounded-full shadow top-1/2 transform -translate-y-1/2 -translate-x-1/2 pointer-events-none"
                                                          :style="'left: ' + ((Math.max(minThumb, maxThumb) - min) / (max - min) * 100) + '%'"></div>
                                                 </div>
                                                 <div class="flex justify-between mt-4 text-xs text-gray-600 font-medium">
@@ -207,7 +207,7 @@
                                                         <input type="checkbox" name="{{ $code }}[]" value="1" 
                                                                {{ in_array('1', (array)request($code, [])) ? 'checked' : '' }}
                                                                class="sr-only peer">
-                                                        <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-blue-600"></div>
+                                                        <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-gray-400 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-gray-900"></div>
                                                     </div>
                                                     <span class="ml-3 text-sm text-gray-600 group-hover:text-gray-900 transition-colors font-medium">Có</span>
                                                 </div>
@@ -224,7 +224,7 @@
                                                                        name="{{ $code }}[]" 
                                                                        value="{{ $item['value'] }}"
                                                                        {{ in_array($item['value'], (array)request($code, [])) ? 'checked' : '' }}
-                                                                       class="peer w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500 transition-all">
+                                                                       class="peer w-4 h-4 text-gray-900 border-gray-300 rounded focus:ring-gray-900 transition-all">
                                                             </div>
                                                             <span class="ml-3 text-sm text-gray-600 group-hover:text-gray-900 transition-colors font-medium">{{ $item['value'] }}</span>
                                                         </div>
@@ -245,11 +245,11 @@
                             <div class="grid grid-cols-2 gap-3 mb-4">
                                 <div>
                                     <input type="number" name="min_price" value="{{ request('min_price') }}" placeholder="Min"
-                                           class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                           class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-gray-900 focus:border-gray-900">
                                 </div>
                                 <div>
                                     <input type="number" name="max_price" value="{{ request('max_price') }}" placeholder="Max"
-                                           class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                           class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-gray-900 focus:border-gray-900">
                                 </div>
                             </div>
 
@@ -283,7 +283,7 @@
                         </div>
                         <h3 class="text-xl font-bold text-gray-900 mb-2">Không tìm thấy sản phẩm</h3>
                         <p class="text-gray-500 mb-8 max-w-md mx-auto">Rất tiếc, chúng tôi không tìm thấy sản phẩm nào phù hợp với bộ lọc của bạn.</p>
-                        <a href="{{ route('products.index') }}" class="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-full text-white bg-blue-600 hover:bg-blue-700 md:py-4 md:text-lg md:px-10 shadow-lg hover:shadow-xl transition-all">
+                        <a href="{{ route('products.index') }}" class="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-full text-white bg-gray-900 hover:bg-gray-800 md:py-4 md:text-lg md:px-10 shadow-lg hover:shadow-xl transition-all">
                             Xóa bộ lọc & Xem tất cả
                         </a>
                     </div>

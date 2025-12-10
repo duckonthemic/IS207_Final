@@ -15,12 +15,12 @@
             <div class="max-w-3xl">
                 <div
                     class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 mb-8">
-                    <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
+                    <span class="w-2 h-2 rounded-full bg-gray-900 animate-pulse"></span>
                     <span class="text-sm font-medium text-white">Công nghệ mới nhất 2025</span>
                 </div>
                 <h1 class="text-5xl md:text-7xl font-bold text-white leading-tight tracking-tight mb-6">
                     Build PC <br />
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">Đỉnh Cao Hiệu
+                    <span class="text-white">Đỉnh Cao Hiệu
                         Năng</span>
                 </h1>
                 <p class="text-gray-300 text-xl max-w-xl leading-relaxed mb-10">
@@ -29,7 +29,7 @@
                 </p>
                 <div class="flex flex-wrap gap-4">
                     <a href="{{ route('products.index') }}"
-                        class="px-8 py-4 bg-blue-600 text-white font-bold rounded-full hover:bg-blue-700 transition-all shadow-lg hover:shadow-blue-500/30 transform hover:-translate-y-1">
+                        class="px-8 py-4 bg-gray-900 text-white font-bold rounded-full hover:bg-gray-800 transition-all shadow-lg hover:shadow-gray-900/20 transform hover:-translate-y-1">
                         Mua sắm ngay
                     </a>
                     <a href="{{ route('build-pc') }}"
@@ -65,7 +65,7 @@
                 <div class="flex flex-wrap justify-center gap-4 mt-8">
                     @foreach($tabCategories as $cat)
                         <button @click="activeTab = '{{ $cat['slug'] }}'"
-                            :class="{ 'bg-blue-600 text-white shadow-lg scale-105': activeTab === '{{ $cat['slug'] }}', 'bg-gray-100 text-gray-600 hover:bg-gray-200': activeTab !== '{{ $cat['slug'] }}' }"
+                            :class="{ 'bg-gray-900 text-white shadow-lg scale-105': activeTab === '{{ $cat['slug'] }}', 'bg-gray-100 text-gray-600 hover:bg-gray-200': activeTab !== '{{ $cat['slug'] }}' }"
                             class="px-6 py-2.5 rounded-full font-bold transition-all duration-300 transform">
                             {{ $cat['name'] }}
                         </button>
@@ -92,7 +92,7 @@
 
             <div class="text-center mt-12">
                 <a href="{{ route('products.index') }}"
-                    class="inline-flex items-center gap-2 text-blue-600 font-bold hover:text-blue-700 transition-colors">
+                    class="inline-flex items-center gap-2 text-gray-900 font-bold hover:text-gray-700 transition-colors">
                     Xem tất cả sản phẩm
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3">
@@ -134,7 +134,7 @@
                 </div>
 
                 <a href="{{ route('products.index') }}"
-                    class="text-blue-600 font-medium hover:text-blue-700 flex items-center gap-1 group">
+                    class="text-gray-900 font-medium hover:text-gray-700 flex items-center gap-1 group">
                     Xem tất cả
                     <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor"
                         viewBox="0 0 24 24">
@@ -224,7 +224,7 @@
         <div class="container mx-auto px-4 max-w-7xl">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="flex gap-6 p-6 bg-white rounded-2xl shadow-sm border border-gray-100">
-                    <div class="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center text-2xl shrink-0">🚚
+                    <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center text-2xl shrink-0">🚚
                     </div>
                     <div>
                         <h3 class="text-lg font-bold text-gray-900 mb-2">Giao Hàng Nhanh</h3>
@@ -234,7 +234,7 @@
                 </div>
 
                 <div class="flex gap-6 p-6 bg-white rounded-2xl shadow-sm border border-gray-100">
-                    <div class="w-12 h-12 bg-green-50 rounded-full flex items-center justify-center text-2xl shrink-0">🛡️
+                    <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center text-2xl shrink-0">🛡️
                     </div>
                     <div>
                         <h3 class="text-lg font-bold text-gray-900 mb-2">Bảo Hành Chính Hãng</h3>
@@ -244,7 +244,7 @@
                 </div>
 
                 <div class="flex gap-6 p-6 bg-white rounded-2xl shadow-sm border border-gray-100">
-                    <div class="w-12 h-12 bg-purple-50 rounded-full flex items-center justify-center text-2xl shrink-0">💳
+                    <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center text-2xl shrink-0">💳
                     </div>
                     <div>
                         <h3 class="text-lg font-bold text-gray-900 mb-2">Thanh Toán Linh Hoạt</h3>
@@ -259,8 +259,8 @@
     <!-- Newsletter Section -->
     <section class="py-20 bg-gray-900 text-white overflow-hidden relative">
         <div class="absolute inset-0 opacity-20">
-            <div class="absolute -top-24 -right-24 w-96 h-96 bg-blue-500 rounded-full filter blur-3xl"></div>
-            <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-purple-500 rounded-full filter blur-3xl"></div>
+            <div class="absolute -top-24 -right-24 w-96 h-96 bg-gray-500 rounded-full filter blur-3xl"></div>
+            <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-gray-600 rounded-full filter blur-3xl"></div>
         </div>
 
         <div class="container mx-auto px-4 max-w-2xl text-center relative z-10">
@@ -268,36 +268,36 @@
             <p class="text-gray-400 mb-8">Nhận thông tin về sản phẩm mới, khuyến mãi và voucher độc quyền.</p>
 
             <div x-data="{ 
-                email: '', 
-                loading: false, 
-                message: '', 
-                messageType: '',
-                async subscribe() {
-                    if (!this.email) return;
-                    this.loading = true;
-                    this.message = '';
-                    try {
-                        const response = await fetch('{{ route('newsletter.subscribe') }}', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                                'Accept': 'application/json'
-                            },
-                            body: JSON.stringify({ email: this.email })
-                        });
-                        const data = await response.json();
-                        this.message = data.message;
-                        this.messageType = data.success ? 'success' : (data.type || 'error');
-                        if (data.success) this.email = '';
-                    } catch (error) {
-                        this.message = 'Có lỗi xảy ra, vui lòng thử lại.';
-                        this.messageType = 'error';
+                    email: '', 
+                    loading: false, 
+                    message: '', 
+                    messageType: '',
+                    async subscribe() {
+                        if (!this.email) return;
+                        this.loading = true;
+                        this.message = '';
+                        try {
+                            const response = await fetch('{{ route('newsletter.subscribe') }}', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                                    'Accept': 'application/json'
+                                },
+                                body: JSON.stringify({ email: this.email })
+                            });
+                            const data = await response.json();
+                            this.message = data.message;
+                            this.messageType = data.success ? 'success' : (data.type || 'error');
+                            if (data.success) this.email = '';
+                        } catch (error) {
+                            this.message = 'Có lỗi xảy ra, vui lòng thử lại.';
+                            this.messageType = 'error';
+                        }
+                        this.loading = false;
+                        setTimeout(() => { this.message = ''; }, 5000);
                     }
-                    this.loading = false;
-                    setTimeout(() => { this.message = ''; }, 5000);
-                }
-            }">
+                }">
                 <form @submit.prevent="subscribe" class="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
                     <input type="email" x-model="email" :disabled="loading" placeholder="Nhập email của bạn..." required
                         class="flex-1 px-6 py-4 bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:bg-white/20 focus:border-white/40 transition-all rounded-full backdrop-blur-sm disabled:opacity-50">
@@ -319,10 +319,10 @@
                     x-transition:enter-start="opacity-0 transform translate-y-2"
                     x-transition:enter-end="opacity-100 transform translate-y-0" class="mt-4">
                     <p :class="{
-                        'text-green-400': messageType === 'success',
-                        'text-yellow-400': messageType === 'info',
-                        'text-red-400': messageType === 'error'
-                    }" class="text-sm font-medium" x-text="message"></p>
+                            'text-green-400': messageType === 'success',
+                            'text-yellow-400': messageType === 'info',
+                            'text-red-400': messageType === 'error'
+                        }" class="text-sm font-medium" x-text="message"></p>
                 </div>
             </div>
         </div>

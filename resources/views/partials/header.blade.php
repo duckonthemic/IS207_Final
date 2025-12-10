@@ -43,8 +43,8 @@
                                 @keydown.arrow-down.prevent="navigateDown()" @keydown.arrow-up.prevent="navigateUp()"
                                 value="{{ request('search') }}" placeholder="Tìm kiếm CPU, VGA, RAM, SSD..."
                                 autocomplete="off"
-                                class="w-full px-5 py-3 pl-12 pr-24 bg-white border-2 border-gray-900 text-gray-900 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-600 transition-all placeholder-gray-400 text-sm">
-                            <svg class="absolute left-4 top-3.5 w-5 h-5 text-gray-500 group-focus-within:text-blue-600 transition-colors"
+                                class="w-full px-5 py-3 pl-12 pr-24 bg-white border-2 border-gray-900 text-gray-900 rounded-full focus:outline-none focus:ring-2 focus:ring-gray-900/20 focus:border-gray-900 transition-all placeholder-gray-400 text-sm">
+                            <svg class="absolute left-4 top-3.5 w-5 h-5 text-gray-500 group-focus-within:text-gray-900 transition-colors"
                                 fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
@@ -67,7 +67,7 @@
 
                             {{-- Loading --}}
                             <div x-show="loading" class="p-4 text-center">
-                                <svg class="animate-spin h-6 w-6 mx-auto text-blue-600" fill="none" viewBox="0 0 24 24">
+                                <svg class="animate-spin h-6 w-6 mx-auto text-gray-900" fill="none" viewBox="0 0 24 24">
                                     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
                                         stroke-width="4"></circle>
                                     <path class="opacity-75" fill="currentColor"
@@ -84,7 +84,7 @@
                                     <template x-for="(product, index) in results.products" :key="product.id">
                                         <a :href="product.url"
                                             class="flex items-center gap-3 p-2 rounded-xl hover:bg-gray-50 transition-colors"
-                                            :class="{'bg-blue-50': selectedIndex === index}">
+                                            :class="{'bg-gray-100': selectedIndex === index}">
                                             <div
                                                 class="w-14 h-14 bg-gray-50 rounded-lg border border-gray-100 flex-shrink-0 overflow-hidden">
                                                 <img :src="product.image" :alt="product.name"
@@ -96,7 +96,7 @@
                                                 <p class="text-xs text-gray-500" x-text="product.category"></p>
                                             </div>
                                             <div class="text-right flex-shrink-0">
-                                                <p class="text-sm font-bold text-blue-600"
+                                                <p class="text-sm font-bold text-gray-900"
                                                     x-text="product.formatted_price"></p>
                                                 <template x-if="product.original_price">
                                                     <p class="text-xs text-gray-400 line-through"
@@ -116,7 +116,7 @@
                                     <div class="flex flex-wrap gap-2">
                                         <template x-for="category in results.categories" :key="category.id">
                                             <a :href="category.url"
-                                                class="inline-flex items-center gap-2 px-3 py-1.5 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-blue-100 hover:text-blue-700 transition-colors">
+                                                class="inline-flex items-center gap-2 px-3 py-1.5 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-gray-200 hover:text-gray-900 transition-colors">
                                                 <span x-text="category.name"></span>
                                                 <span class="text-gray-400"
                                                     x-text="'(' + category.product_count + ')'"></span>
@@ -134,7 +134,7 @@
                                     <div class="flex flex-wrap gap-2">
                                         <template x-for="brand in results.brands" :key="brand.name">
                                             <a :href="brand.url"
-                                                class="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-50 text-blue-700 rounded-full text-sm hover:bg-blue-100 transition-colors font-medium">
+                                                class="inline-flex items-center gap-2 px-3 py-1.5 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-gray-200 transition-colors font-medium">
                                                 <span x-text="brand.name"></span>
                                             </a>
                                         </template>
@@ -146,7 +146,7 @@
                             <template x-if="!loading && results.products.length > 0">
                                 <div class="p-3 border-t border-gray-100 bg-gray-50">
                                     <a :href="'/products?search=' + encodeURIComponent(query)"
-                                        class="flex items-center justify-center gap-2 w-full py-2 text-blue-600 hover:text-blue-700 font-medium text-sm">
+                                        class="flex items-center justify-center gap-2 w-full py-2 text-gray-900 hover:text-gray-700 font-medium text-sm">
                                         <span>Xem tất cả kết quả cho </span>
                                         <span class="font-bold" x-text="'\"' + query + ' \"'"></span>
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -244,7 +244,7 @@
                             @endphp
                             @if($itemCount > 0)
                                 <span
-                                    class="absolute top-0 right-0 bg-blue-600 text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center ring-2 ring-white">
+                                    class="absolute top-0 right-0 bg-gray-900 text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center ring-2 ring-white">
                                     {{ $itemCount }}
                                 </span>
                             @endif
@@ -257,7 +257,7 @@
                             <button @click="open = !open"
                                 class="flex items-center gap-2 hover:text-blue-600 transition-colors p-1 pr-3 rounded-full hover:bg-gray-50 border border-transparent hover:border-gray-200">
                                 <div
-                                    class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold text-xs">
+                                    class="w-8 h-8 rounded-full bg-gray-900 flex items-center justify-center text-white font-bold text-xs">
                                     {{ substr(auth()->user()->name, 0, 1) }}
                                 </div>
                                 <span class="font-medium text-sm hidden lg:inline">{{ auth()->user()->name }}</span>
@@ -291,7 +291,7 @@
                         {{-- Mobile User Icon --}}
                         <a href="{{ route('profile.edit') }}" class="lg:hidden">
                             <div
-                                class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold text-xs">
+                                class="w-8 h-8 rounded-full bg-gray-900 flex items-center justify-center text-white font-bold text-xs">
                                 {{ substr(auth()->user()->name, 0, 1) }}
                             </div>
                         </a>
@@ -326,7 +326,7 @@
             {{-- Mobile Search --}}
             <form action="{{ route('products.index') }}" method="GET" class="mb-4">
                 <input type="text" name="search" value="{{ request('search') }}" placeholder="Tìm kiếm sản phẩm..."
-                    class="w-full px-4 py-3 bg-gray-50 border border-gray-200 text-gray-900 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 text-sm">
+                    class="w-full px-4 py-3 bg-gray-50 border border-gray-200 text-gray-900 rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-900/20 focus:border-gray-900 text-sm">
             </form>
 
             {{-- Mobile Navigation Links --}}

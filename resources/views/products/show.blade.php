@@ -92,7 +92,7 @@
                         {{-- Brand & Category --}}
                         <div class="flex items-center gap-2 mb-4">
                             <span
-                                class="bg-blue-50 text-blue-700 text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wide">
+                                class="bg-gray-100 text-gray-700 text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wide">
                                 {{ $product->category->name }}
                             </span>
                             @if($product->brand)
@@ -137,7 +137,7 @@
                             @if($product->sale_price)
                                 <div class="flex items-end gap-3 mb-2">
                                     <span
-                                        class="text-4xl font-bold text-blue-600">{{ number_format($product->sale_price, 0, ',', '.') }}₫</span>
+                                        class="text-4xl font-bold text-gray-900">{{ number_format($product->sale_price, 0, ',', '.') }}₫</span>
                                     <span
                                         class="text-lg text-gray-400 line-through mb-1">{{ number_format($product->price, 0, ',', '.') }}₫</span>
                                     <span class="bg-red-100 text-red-600 text-xs font-bold px-2 py-1 rounded-full mb-2">
@@ -212,7 +212,7 @@
                                         Thêm vào giỏ
                                     </button>
                                     <button type="submit" name="action" value="buy_now"
-                                        class="col-span-1 bg-blue-600 text-white font-bold py-4 rounded-xl hover:bg-blue-700 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                                        class="col-span-1 bg-gray-900 text-white font-bold py-4 rounded-xl hover:bg-gray-800 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
                                         Mua ngay
                                     </button>
                                 </div>
@@ -349,11 +349,11 @@
                                         <div class="mb-4">
                                             <label class="block text-sm font-medium text-gray-700 mb-2">Nhận xét</label>
                                             <textarea name="comment" rows="3"
-                                                class="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                                                class="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-gray-900 focus:border-gray-900 transition-all"
                                                 placeholder="Chia sẻ trải nghiệm của bạn về sản phẩm này...">{{ old('comment') }}</textarea>
                                         </div>
                                         <button type="submit"
-                                            class="bg-blue-600 text-white font-bold py-2.5 px-6 rounded-lg hover:bg-blue-700 transition-colors shadow-md">
+                                            class="bg-gray-900 text-white font-bold py-2.5 px-6 rounded-lg hover:bg-gray-800 transition-colors shadow-md">
                                             Gửi đánh giá
                                         </button>
                                     </form>
