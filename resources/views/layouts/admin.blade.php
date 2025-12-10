@@ -11,10 +11,10 @@
 <body class="min-h-screen bg-cyber-black font-sans text-cyber-text antialiased">
     <div class="grid grid-cols-12 gap-0 min-h-screen">
         <aside class="col-span-3 md:col-span-2 bg-cyber-black border-r border-cyber-border">
-            <div
-                class="p-6 font-black text-xl text-cyber-white uppercase tracking-tighter border-b border-cyber-border mb-4">
+            <a href="{{ route('home') }}"
+                class="block p-6 font-black text-xl text-cyber-white uppercase tracking-tighter border-b border-cyber-border mb-4 hover:bg-cyber-gray transition-colors">
                 UITech<span class="text-cyber-text-muted">.Admin</span>
-            </div>
+            </a>
             <nav class="px-4 space-y-1">
                 <a href="{{ route('admin.dashboard') }}"
                     class="block px-4 py-3 rounded-none text-sm font-bold uppercase tracking-wider transition-colors {{ request()->routeIs('admin.dashboard') ? 'bg-cyber-white text-cyber-black' : 'text-cyber-text hover:bg-cyber-gray hover:text-cyber-white' }}">
