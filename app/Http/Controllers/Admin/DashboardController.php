@@ -19,20 +19,21 @@ class DashboardController extends Controller
     {
         // Total stats
         $totalOrders = Order::count();
-        $totalRevenue = Order::whereIn('status', ['completed', 'shipping', 'processing'])->sum('total');
+        // Include 'delivered' status for revenue calculation
+        $totalRevenue = Order::whereIn('status', ['delivered', 'completed', 'shipped', 'processing'])->sum('total');
         $totalUsers = User::where('role', 'user')->count();
         $totalProducts = Product::count();
 
         // Recent orders - with user to avoid N+1
         $recentOrders = Order::with('user')
-            ->latest()
+            ->latest('created_at')
             ->limit(8)
             ->get();
 
         // Today stats
         $pendingOrders = Order::where('status', 'pending')->count();
         $revenueToday = Order::whereDate('created_at', today())
-            ->whereIn('status', ['completed', 'shipping', 'processing'])
+            ->whereIn('status', ['delivered', 'completed', 'shipped', 'processing'])
             ->sum('total');
         $newUsersToday = User::whereDate('created_at', today())->count();
 
@@ -51,7 +52,7 @@ class DashboardController extends Controller
         $endDate = Carbon::today();
 
         $revenueByDate = Order::whereBetween('created_at', [$startDate->startOfDay(), $endDate->endOfDay()])
-            ->whereIn('status', ['completed', 'shipping', 'processing'])
+            ->whereIn('status', ['delivered', 'completed', 'shipped', 'processing'])
             ->selectRaw('DATE(created_at) as date, SUM(total) as revenue')
             ->groupBy('date')
             ->pluck('revenue', 'date');
