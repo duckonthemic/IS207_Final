@@ -34,6 +34,10 @@ Route::get('/build-pc', [PcGamingController::class, 'buildPc'])->name('build-pc'
 Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe'])->name('newsletter.subscribe');
 
 // Static Pages
+Route::get('/terms', function () {
+    return view('pages.terms'); })->name('terms');
+Route::get('/privacy', function () {
+    return view('pages.privacy'); })->name('privacy');
 Route::get('/page/{slug}', [PageController::class, 'show'])->name('page.show');
 
 // Cart add - can be accessed by guests (will redirect to login)

@@ -15,9 +15,23 @@ class ProfileUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(User::class)->ignore($this->user()->id)],
-        ];
+        $rules = [];
+
+        // If name is present in request, validate it
+        if ($this->has('name')) {
+            $rules['name'] = ['required', 'string', 'max:255'];
+        }
+
+        // If email is present in request, validate it
+        if ($this->has('email')) {
+            $rules['email'] = ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(User::class)->ignore($this->user()->id)];
+        }
+
+        // Contact info fields (optional)
+        $rules['phone'] = ['nullable', 'string', 'max:20'];
+        $rules['birthday'] = ['nullable', 'date'];
+        $rules['gender'] = ['nullable', 'in:male,female,other'];
+
+        return $rules;
     }
 }

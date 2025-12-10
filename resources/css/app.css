@@ -1,3 +1,242 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ============================================
+   Neumorphism Design System
+   Adapted for UITech Store gray-900/white theme
+   ============================================ */
+
+/* Base Neumorphism Background */
+.neu-bg {
+    background: linear-gradient(145deg, #f0f0f3, #cacace);
+}
+
+.neu-bg-light {
+    background: #e8e8ec;
+}
+
+/* Raised Neumorphism Effect (Card, Buttons) */
+.neu-raised {
+    background: linear-gradient(145deg, #ffffff, #e6e6e9);
+    box-shadow: 
+        8px 8px 16px #bebec1,
+        -8px -8px 16px #ffffff;
+    border-radius: 24px;
+}
+
+.neu-raised-sm {
+    background: linear-gradient(145deg, #ffffff, #e6e6e9);
+    box-shadow: 
+        4px 4px 8px #bebec1,
+        -4px -4px 8px #ffffff;
+    border-radius: 16px;
+}
+
+/* Inset Neumorphism Effect (Inputs) */
+.neu-inset {
+    background: #e8e8ec;
+    box-shadow: 
+        inset 4px 4px 8px #c8c8cc,
+        inset -4px -4px 8px #ffffff;
+    border: none;
+    border-radius: 12px;
+}
+
+.neu-inset:focus {
+    box-shadow: 
+        inset 5px 5px 10px #c0c0c4,
+        inset -5px -5px 10px #ffffff;
+    outline: none;
+}
+
+/* Neumorphism Button */
+.neu-btn {
+    background: linear-gradient(145deg, #1a1a1f, #0f0f12);
+    box-shadow: 
+        6px 6px 12px #bebec1,
+        -6px -6px 12px #ffffff;
+    border-radius: 16px;
+    color: white;
+    font-weight: 700;
+    padding: 16px 32px;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.neu-btn:hover {
+    background: linear-gradient(145deg, #0f0f12, #1a1a1f);
+    box-shadow: 
+        4px 4px 8px #bebec1,
+        -4px -4px 8px #ffffff;
+    transform: translateY(-2px);
+}
+
+.neu-btn:active {
+    box-shadow: 
+        inset 2px 2px 5px rgba(0,0,0,0.2),
+        inset -2px -2px 5px rgba(255,255,255,0.1);
+    transform: translateY(0);
+}
+
+/* Neumorphism Social Button */
+.neu-social-btn {
+    background: linear-gradient(145deg, #ffffff, #e6e6e9);
+    box-shadow: 
+        4px 4px 8px #bebec1,
+        -4px -4px 8px #ffffff;
+    border-radius: 12px;
+    padding: 12px 20px;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 600;
+    color: #374151;
+}
+
+.neu-social-btn:hover {
+    box-shadow: 
+        2px 2px 4px #bebec1,
+        -2px -2px 4px #ffffff;
+    transform: translateY(-1px);
+}
+
+.neu-social-btn:active {
+    box-shadow: 
+        inset 2px 2px 4px #bebec1,
+        inset -2px -2px 4px #ffffff;
+}
+
+/* Neumorphism Checkbox */
+.neu-checkbox {
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    background: #e8e8ec;
+    box-shadow: 
+        inset 2px 2px 4px #c8c8cc,
+        inset -2px -2px 4px #ffffff;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.neu-checkbox:checked {
+    background: #111827;
+    box-shadow: 
+        inset 2px 2px 4px rgba(0,0,0,0.3),
+        inset -2px -2px 4px rgba(255,255,255,0.1);
+}
+
+.neu-checkbox:checked::after {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 3px;
+    width: 6px;
+    height: 12px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+/* Neumorphism Input Group with Icon */
+.neu-input-group {
+    position: relative;
+}
+
+.neu-input-group .neu-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6b7280;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.neu-input-group input {
+    padding-left: 48px;
+}
+
+/* Neumorphism Logo Container */
+.neu-logo {
+    background: linear-gradient(145deg, #ffffff, #e6e6e9);
+    box-shadow: 
+        6px 6px 12px #bebec1,
+        -6px -6px 12px #ffffff;
+    border-radius: 50%;
+    padding: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Neumorphism Divider */
+.neu-divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    color: #9ca3af;
+    font-size: 14px;
+    margin: 24px 0;
+}
+
+.neu-divider::before,
+.neu-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #d1d5db, transparent);
+}
+
+/* Animations */
+@keyframes neu-pulse {
+    0%, 100% {
+        box-shadow: 
+            8px 8px 16px #bebec1,
+            -8px -8px 16px #ffffff;
+    }
+    50% {
+        box-shadow: 
+            6px 6px 12px #bebec1,
+            -6px -6px 12px #ffffff;
+    }
+}
+
+.neu-pulse {
+    animation: neu-pulse 2s ease-in-out infinite;
+}
+
+/* Password Strength Indicator */
+.password-strength {
+    display: flex;
+    gap: 4px;
+    margin-top: 8px;
+}
+
+.password-strength-bar {
+    height: 4px;
+    flex: 1;
+    background: #e8e8ec;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.password-strength-bar.active.weak {
+    background: #ef4444;
+}
+
+.password-strength-bar.active.medium {
+    background: #f59e0b;
+}
+
+.password-strength-bar.active.strong {
+    background: #10b981;
+}
