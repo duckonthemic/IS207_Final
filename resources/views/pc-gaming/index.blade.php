@@ -148,29 +148,25 @@
 
                             <!-- Specs -->
                             @php
-                                $specs = $product->specs->keyBy(fn($spec) => $spec->specDefinition->code);
-                                $cpu = $specs['cpu']->value ?? 'N/A';
-                                $gpu = $specs['vga']->value ?? 'N/A';
-                                $ram = $specs['ram']->value ?? 'N/A';
-                                $storage = $specs['ssd']->value ?? 'N/A';
+                                // Get all specs for this product - show first 4
+                                $productSpecs = $product->specs->take(4);
                             @endphp
                             <div class="space-y-2 mb-6 text-xs text-gray-500 flex-1">
-                                <div class="flex items-center border-b border-gray-100 pb-1">
-                                    <span class="font-bold w-12 text-gray-700">CPU:</span>
-                                    <span class="truncate text-gray-600" title="{{ $cpu }}">{{ $cpu }}</span>
-                                </div>
-                                <div class="flex items-center border-b border-gray-100 pb-1">
-                                    <span class="font-bold w-12 text-gray-700">VGA:</span>
-                                    <span class="truncate text-gray-600" title="{{ $gpu }}">{{ $gpu }}</span>
-                                </div>
-                                <div class="flex items-center border-b border-gray-100 pb-1">
-                                    <span class="font-bold w-12 text-gray-700">RAM:</span>
-                                    <span class="text-gray-600" title="{{ $ram }}">{{ $ram }}</span>
-                                </div>
-                                <div class="flex items-center border-b border-gray-100 pb-1">
-                                    <span class="font-bold w-12 text-gray-700">SSD:</span>
-                                    <span class="text-gray-600" title="{{ $storage }}">{{ $storage }}</span>
-                                </div>
+                                @forelse($productSpecs as $spec)
+                                    <div class="flex items-center border-b border-gray-100 pb-1">
+                                        <span class="font-bold w-16 text-gray-700 truncate" title="{{ $spec->specDefinition->name }}">{{ $spec->specDefinition->name }}:</span>
+                                        <span class="truncate text-gray-600 flex-1" title="{{ $spec->value }}{{ $spec->specDefinition->unit ? ' ' . $spec->specDefinition->unit : '' }}">
+                                            {{ $spec->value }}{{ $spec->specDefinition->unit ? ' ' . $spec->specDefinition->unit : '' }}
+                                        </span>
+                                    </div>
+                                @empty
+                                    {{-- If no specs, show from product description --}}
+                                    @if($product->short_description)
+                                        <div class="text-gray-600">{{ Str::limit($product->short_description, 100) }}</div>
+                                    @else
+                                        <div class="text-gray-400 italic">Chưa có thông số kỹ thuật</div>
+                                    @endif
+                                @endforelse
                             </div>
 
                             <!-- Price -->
