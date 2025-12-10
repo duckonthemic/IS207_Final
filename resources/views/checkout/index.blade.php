@@ -269,6 +269,153 @@
                                 </div>
                             </label>
                         </div>
+
+                        {{-- Bank Transfer QR Code Section --}}
+                        <div x-show="selectedPayment === 'bank_transfer'" x-transition
+                            class="mt-6 p-6 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl border border-blue-200">
+                            <h3 class="font-bold text-gray-900 mb-4 flex items-center gap-2">
+                                <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z">
+                                    </path>
+                                </svg>
+                                Thông tin chuyển khoản
+                            </h3>
+
+                            <div class="flex flex-col md:flex-row gap-6 items-center">
+                                {{-- QR Code --}}
+                                <div class="flex-shrink-0">
+                                    <div class="w-48 h-48 bg-white p-3 rounded-xl shadow-md border-2 border-blue-200">
+                                        <img :src="'https://img.vietqr.io/image/VCB-1234567890-compact2.png?amount=' + total + '&addInfo=' + encodeURIComponent('UITECH ' + orderCodePreview)"
+                                            class="w-full h-full object-contain" alt="QR Code">
+                                    </div>
+                                    <p class="text-center text-xs text-gray-500 mt-2">Quét mã để thanh toán</p>
+                                </div>
+
+                                {{-- Bank Info --}}
+                                <div class="flex-1 space-y-3">
+                                    <div class="bg-white p-4 rounded-lg border border-gray-200">
+                                        <p class="text-xs text-gray-500 uppercase font-bold mb-1">Ngân hàng</p>
+                                        <p class="font-bold text-gray-900">Vietcombank (VCB)</p>
+                                    </div>
+                                    <div class="bg-white p-4 rounded-lg border border-gray-200">
+                                        <p class="text-xs text-gray-500 uppercase font-bold mb-1">Số tài khoản</p>
+                                        <p class="font-bold text-gray-900 font-mono text-lg">1234567890</p>
+                                    </div>
+                                    <div class="bg-white p-4 rounded-lg border border-gray-200">
+                                        <p class="text-xs text-gray-500 uppercase font-bold mb-1">Chủ tài khoản</p>
+                                        <p class="font-bold text-gray-900">CONG TY TNHH UITECH</p>
+                                    </div>
+                                    <div class="bg-white p-4 rounded-lg border border-gray-200">
+                                        <p class="text-xs text-gray-500 uppercase font-bold mb-1">Số tiền</p>
+                                        <p class="font-bold text-blue-600 text-xl" x-text="formattedTotal"></p>
+                                    </div>
+                                    <div class="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
+                                        <p class="text-xs text-yellow-700 uppercase font-bold mb-1">Nội dung chuyển khoản
+                                        </p>
+                                        <p class="font-bold text-yellow-800 font-mono"
+                                            x-text="'UITECH ' + orderCodePreview"></p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-4 p-3 bg-blue-100 rounded-lg text-sm text-blue-800">
+                                <strong>Lưu ý:</strong> Vui lòng chuyển khoản đúng số tiền và nội dung để đơn hàng được xử
+                                lý nhanh chóng.
+                            </div>
+                        </div>
+
+                        {{-- ATM/Card Payment Form --}}
+                        <div x-show="selectedPayment === 'atm'" x-transition
+                            class="mt-6 p-6 bg-gradient-to-br from-gray-50 to-slate-50 rounded-xl border border-gray-200">
+                            <h3 class="font-bold text-gray-900 mb-4 flex items-center gap-2">
+                                <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z">
+                                    </path>
+                                </svg>
+                                Thông tin thẻ thanh toán
+                            </h3>
+
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Số thẻ *</label>
+                                    <input type="text" name="card_number" placeholder="1234 5678 9012 3456" maxlength="19"
+                                        x-model="cardNumber" @input="formatCardNumber"
+                                        class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 font-mono text-lg">
+                                </div>
+
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Ngày hết hạn *</label>
+                                        <input type="text" name="card_expiry" placeholder="MM/YY" maxlength="5"
+                                            x-model="cardExpiry" @input="formatCardExpiry"
+                                            class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 font-mono">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">CVV *</label>
+                                        <input type="password" name="card_cvv" placeholder="•••" maxlength="4"
+                                            class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 font-mono">
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Tên chủ thẻ *</label>
+                                    <input type="text" name="card_holder" placeholder="NGUYEN VAN A"
+                                        class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 uppercase">
+                                </div>
+                            </div>
+
+                            <div class="mt-4 flex items-center gap-4 text-sm text-gray-500">
+                                <div class="flex items-center gap-1">
+                                    <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
+                                        </path>
+                                    </svg>
+                                    <span>SSL Encrypted</span>
+                                </div>
+                                <div class="flex gap-2">
+                                    <span class="px-2 py-0.5 bg-blue-800 text-white text-xs font-bold rounded">VISA</span>
+                                    <span class="px-2 py-0.5 bg-red-600 text-white text-xs font-bold rounded">MC</span>
+                                    <span class="px-2 py-0.5 bg-green-600 text-white text-xs font-bold rounded">JCB</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- Fundiin Info --}}
+                        <div x-show="selectedPayment === 'fundiin'" x-transition
+                            class="mt-6 p-6 bg-gradient-to-br from-orange-50 to-red-50 rounded-xl border border-orange-200">
+                            <div class="flex items-center gap-4 mb-4">
+                                <div
+                                    class="w-16 h-16 bg-gradient-to-r from-orange-500 to-red-500 rounded-xl flex items-center justify-center">
+                                    <span class="text-white font-black text-xl">F</span>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-gray-900">Mua trả sau với Fundiin</h3>
+                                    <p class="text-sm text-gray-600">Chia nhỏ thanh toán, 0% lãi suất</p>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-3 gap-4 mb-4">
+                                <div class="bg-white p-4 rounded-lg border border-orange-200 text-center">
+                                    <p class="text-xs text-gray-500 mb-1">Trả trước</p>
+                                    <p class="font-bold text-orange-600" x-text="formatCurrency(Math.round(total / 3))"></p>
+                                </div>
+                                <div class="bg-white p-4 rounded-lg border border-orange-200 text-center">
+                                    <p class="text-xs text-gray-500 mb-1">Kỳ 2</p>
+                                    <p class="font-bold text-orange-600" x-text="formatCurrency(Math.round(total / 3))"></p>
+                                </div>
+                                <div class="bg-white p-4 rounded-lg border border-orange-200 text-center">
+                                    <p class="text-xs text-gray-500 mb-1">Kỳ 3</p>
+                                    <p class="font-bold text-orange-600" x-text="formatCurrency(Math.round(total / 3))"></p>
+                                </div>
+                            </div>
+
+                            <p class="text-sm text-gray-600">Sau khi đặt hàng, bạn sẽ được chuyển đến trang Fundiin để hoàn
+                                tất thanh toán.</p>
+                        </div>
                     </div>
                 </div>
 
@@ -296,7 +443,8 @@
                                     </div>
                                     <div class="text-right">
                                         <p class="text-gray-900 text-sm font-bold">
-                                            {{ number_format($item->subtotal, 0, ',', '.') }}₫</p>
+                                            {{ number_format($item->subtotal, 0, ',', '.') }}₫
+                                        </p>
                                     </div>
                                 </div>
                             @endforeach
@@ -554,6 +702,38 @@
                         e.preventDefault();
                         alert('Vui lòng chọn tỉnh/thành và phương thức vận chuyển');
                     }
+                },
+
+                // Card formatting
+                cardNumber: '',
+                cardExpiry: '',
+                
+                formatCardNumber() {
+                    let value = this.cardNumber.replace(/\s/g, '').replace(/\D/g, '');
+                    let formatted = value.match(/.{1,4}/g)?.join(' ') || value;
+                    this.cardNumber = formatted.substring(0, 19);
+                },
+                
+                formatCardExpiry() {
+                    let value = this.cardExpiry.replace(/\D/g, '');
+                    if (value.length >= 2) {
+                        value = value.substring(0, 2) + '/' + value.substring(2, 4);
+                    }
+                    this.cardExpiry = value.substring(0, 5);
+                },
+
+                // Order code preview for bank transfer
+                get orderCodePreview() {
+                    const date = new Date();
+                    const dateStr = date.getFullYear().toString() + 
+                                    String(date.getMonth() + 1).padStart(2, '0') + 
+                                    String(date.getDate()).padStart(2, '0');
+                    return dateStr + '-XXXXX';
+                },
+
+                // Currency formatter
+                formatCurrency(amount) {
+                    return new Intl.NumberFormat('vi-VN').format(amount) + '₫';
                 }
             }
         }

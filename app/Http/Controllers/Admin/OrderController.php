@@ -38,7 +38,7 @@ class OrderController extends Controller
      */
     public function show(Order $order): View
     {
-        $order->load(['user', 'items.product.images']);
+        $order->load(['user', 'items.product.images', 'promotions']);
 
         return view('admin.orders.show', compact('order'));
     }
@@ -49,12 +49,34 @@ class OrderController extends Controller
     public function update(Request $request, Order $order)
     {
         $validated = $request->validate([
-            'status' => 'required|in:pending,paid,picking,shipped,delivered,cancelled,refunded',
+            'status' => 'required|in:pending,processing,picking,shipped,delivered,cancelled,refunded',
             'payment_status' => 'required|in:pending,paid,failed,refunded',
         ]);
 
         $order->update($validated);
 
         return back()->with('success', 'Trạng thái đơn hàng đã được cập nhật');
+    }
+
+    /**
+     * Update order status via AJAX
+     */
+    public function updateStatus(Request $request, Order $order)
+    {
+        $validated = $request->validate([
+            'status' => 'sometimes|in:pending,processing,picking,shipped,delivered,cancelled,refunded',
+            'payment_status' => 'sometimes|in:pending,paid,failed,refunded',
+        ]);
+
+        $order->update($validated);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Trạng thái đã được cập nhật',
+            'order' => [
+                'status' => $order->status,
+                'payment_status' => $order->payment_status,
+            ]
+        ]);
     }
 }
