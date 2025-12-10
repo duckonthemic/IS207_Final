@@ -53,9 +53,10 @@ class PcGamingController extends Controller
     private function getProductsByCategory(Request $request, $categorySlug, $title, $description)
     {
         $category = Category::where('slug', $categorySlug)->firstOrFail();
-        
+
         $query = Product::where('category_id', $category->id)
-            ->with(['category', 'images', 'specs.specDefinition']);
+            ->with(['category', 'images', 'specs.specDefinition'])
+            ->withCount(['approvedReviews as approved_reviews_count']);
 
         // Filter by price range
         if ($request->filled('min_price')) {
@@ -117,7 +118,7 @@ class PcGamingController extends Controller
     private function getFilterOptions($categoryId): array
     {
         $options = [];
-        
+
         // Get component type
         $componentTypeId = Product::where('category_id', $categoryId)
             ->whereNotNull('component_type_id')
@@ -148,7 +149,7 @@ class PcGamingController extends Controller
             foreach ($rawValues as $item) {
                 $value = trim($item->value);
                 $normalized = strtolower(preg_replace('/\s+/', ' ', $value));
-                
+
                 if (empty($value) || in_array($normalized, ['desktop', 'undefined', 'null', 'n/a'])) {
                     continue;
                 }
@@ -163,7 +164,7 @@ class PcGamingController extends Controller
             }
 
             $valuesWithCounts = array_values($mergedValues);
-            usort($valuesWithCounts, function($a, $b) {
+            usort($valuesWithCounts, function ($a, $b) {
                 return strnatcasecmp($a['value'], $b['value']);
             });
 
@@ -179,4 +180,3 @@ class PcGamingController extends Controller
         return $options;
     }
 }
-

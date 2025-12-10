@@ -24,12 +24,12 @@ class ProductController extends Controller
         $perPage = $request->input('per_page', 20);
         $search = $request->input('search');
 
-        $query = Product::with('category');
+        $query = Product::with(['category', 'images']);
 
         if ($search) {
             $query->where(function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
-                  ->orWhere('sku', 'like', "%{$search}%");
+                    ->orWhere('sku', 'like', "%{$search}%");
             });
         }
 
@@ -110,10 +110,10 @@ class ProductController extends Controller
         $categories = Category::all();
         $brands = Brand::ordered()->get();
         $componentTypes = ComponentType::ordered()->get();
-        
+
         // Load specs với definitions
         $product->load(['specs.specDefinition']);
-        
+
         // Lấy spec definitions cho component_type hiện tại
         $specDefinitions = [];
         if ($product->component_type_id) {
@@ -121,7 +121,7 @@ class ProductController extends Controller
                 ->ordered()
                 ->get();
         }
-        
+
         return view('admin.products.edit', compact('product', 'categories', 'brands', 'componentTypes', 'specDefinitions'));
     }
 
@@ -184,7 +184,7 @@ class ProductController extends Controller
     public function getSpecDefinitions(Request $request)
     {
         $componentTypeId = $request->input('component_type_id');
-        
+
         if (!$componentTypeId) {
             return response()->json([]);
         }
