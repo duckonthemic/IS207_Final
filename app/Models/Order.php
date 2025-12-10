@@ -18,6 +18,9 @@ class Order extends Model
         'payment_status',
         'payment_method',
         'status',
+        'subtotal',
+        'discount',
+        'shipping_fee',
         'total',
         'placed_at',
         // Gộp từ OrderAddress
@@ -25,9 +28,13 @@ class Order extends Model
         'shipping_address',
         'shipping_city',
         'shipping_phone',
+        'shipping_method',
     ];
 
     protected $casts = [
+        'subtotal' => 'decimal:2',
+        'discount' => 'decimal:2',
+        'shipping_fee' => 'decimal:2',
         'total' => 'decimal:2',
         'placed_at' => 'datetime',
     ];

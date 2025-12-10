@@ -35,9 +35,11 @@ Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe'])
 
 // Static Pages
 Route::get('/terms', function () {
-    return view('pages.terms'); })->name('terms');
+    return view('pages.terms');
+})->name('terms');
 Route::get('/privacy', function () {
-    return view('pages.privacy'); })->name('privacy');
+    return view('pages.privacy');
+})->name('privacy');
 Route::get('/page/{slug}', [PageController::class, 'show'])->name('page.show');
 
 // Cart add - can be accessed by guests (will redirect to login)
@@ -62,6 +64,10 @@ Route::middleware('auth')->group(function () {
 
     // Checkout
     Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+    Route::post('/checkout/apply-coupon', [CheckoutController::class, 'applyCoupon'])->name('checkout.apply-coupon');
+    Route::post('/checkout/remove-coupon', [CheckoutController::class, 'removeCoupon'])->name('checkout.remove-coupon');
+    Route::get('/checkout/shipping-methods', [CheckoutController::class, 'getShippingMethodsApi'])->name('checkout.shipping-methods');
+    Route::post('/checkout/update-shipping', [CheckoutController::class, 'updateShipping'])->name('checkout.update-shipping');
     Route::get('/checkout/shipping', [CheckoutController::class, 'shipping'])->name('checkout.shipping');
     Route::post('/checkout/shipping', [CheckoutController::class, 'storeShipping'])->name('checkout.store-shipping');
     Route::get('/checkout/payment', [CheckoutController::class, 'payment'])->name('checkout.payment');
