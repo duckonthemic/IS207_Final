@@ -111,11 +111,29 @@ class Product extends Model
 
     public function getAverageRatingAttribute()
     {
+        // Use cached/loaded relation if available to avoid N+1
+        if ($this->relationLoaded('approvedReviews')) {
+            $reviews = $this->approvedReviews;
+            return $reviews->count() > 0 ? $reviews->avg('rating') : 0;
+        }
+
+        // Fallback to query (but this should be avoided with proper eager loading)
         return $this->approvedReviews()->avg('rating') ?? 0;
     }
 
     public function getReviewsCountAttribute()
     {
+        // Use withCount if available
+        if (array_key_exists('approved_reviews_count', $this->attributes)) {
+            return $this->attributes['approved_reviews_count'];
+        }
+
+        // Use cached/loaded relation if available to avoid N+1
+        if ($this->relationLoaded('approvedReviews')) {
+            return $this->approvedReviews->count();
+        }
+
+        // Fallback to query
         return $this->approvedReviews()->count();
     }
 

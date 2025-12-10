@@ -19,7 +19,8 @@ class ProductController extends Controller
     {
         $perPage = $request->input('per_page', 12);
 
-        $query = Product::with(['category', 'images']);
+        $query = Product::with(['category', 'images'])
+            ->withCount(['approvedReviews as approved_reviews_count']);
 
         // Search
         if ($request->filled('q') || $request->filled('search')) {
@@ -299,8 +300,10 @@ class ProductController extends Controller
             }
         ]);
 
-        // Get related products (same category)
-        $relatedProducts = Product::where('category_id', $product->category_id)
+        // Get related products (same category) with eager loading
+        $relatedProducts = Product::with(['category', 'images'])
+            ->withCount(['approvedReviews as approved_reviews_count'])
+            ->where('category_id', $product->category_id)
             ->where('id', '!=', $product->id)
             ->limit(4)
             ->get();
@@ -377,36 +380,60 @@ class ProductController extends Controller
     }
 
     /**
-     * Get main categories with product counts
+     * Get main categories with product counts - optimized with single query
      */
     private function getMainCategoriesWithCounts(): array
     {
-        $mainCategories = [
-            'CPU' => ['cpu'],
-            'VGA' => ['vga'],
-            'RAM' => ['ram'],
-            'SSD' => ['ssd'],
-            'Mainboard' => ['mainboard'],
-            'HDD' => ['hdd'],
-            'Case' => ['case'],
-            'PSU' => ['psu'],
-            'Monitor' => ['monitor'],
-        ];
+        $mainCategorySlugs = ['cpu', 'vga', 'ram', 'ssd', 'mainboard', 'hdd', 'case', 'psu', 'monitor'];
 
-        $result = [];
+        // Get all relevant categories with their children in one query
+        $categories = Category::with('children')
+            ->whereIn('slug', $mainCategorySlugs)
+            ->get()
+            ->keyBy('slug');
 
-        foreach ($mainCategories as $name => $slugs) {
-            $count = 0;
-            $category = Category::whereIn('slug', $slugs)->first();
-
+        // Collect all category IDs (including children) for a single count query
+        $categoryIdMap = [];
+        foreach ($mainCategorySlugs as $slug) {
+            $category = $categories->get($slug);
             if ($category) {
                 $ids = $this->getCategoryAndChildrenIds($category);
-                $count = Product::whereIn('category_id', $ids)->count();
+                $categoryIdMap[$slug] = $ids;
+            }
+        }
+
+        // Get all product counts in one query
+        $allCategoryIds = collect($categoryIdMap)->flatten()->unique()->toArray();
+        $productCounts = Product::whereIn('category_id', $allCategoryIds)
+            ->selectRaw('category_id, COUNT(*) as count')
+            ->groupBy('category_id')
+            ->pluck('count', 'category_id');
+
+        // Build result
+        $result = [];
+        $nameMap = [
+            'cpu' => 'CPU',
+            'vga' => 'VGA',
+            'ram' => 'RAM',
+            'ssd' => 'SSD',
+            'mainboard' => 'Mainboard',
+            'hdd' => 'HDD',
+            'case' => 'Case',
+            'psu' => 'PSU',
+            'monitor' => 'Monitor'
+        ];
+
+        foreach ($mainCategorySlugs as $slug) {
+            $count = 0;
+            if (isset($categoryIdMap[$slug])) {
+                foreach ($categoryIdMap[$slug] as $catId) {
+                    $count += $productCounts->get($catId, 0);
+                }
             }
 
             $result[] = [
-                'name' => $name,
-                'slug' => $slugs[0],
+                'name' => $nameMap[$slug] ?? ucfirst($slug),
+                'slug' => $slug,
                 'count' => $count
             ];
         }

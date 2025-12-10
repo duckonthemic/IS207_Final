@@ -12,7 +12,7 @@ class OrderController extends Controller
      */
     public function index(): View
     {
-        $query = auth()->user()->orders()->with('items.product');
+        $query = auth()->user()->orders()->with(['items.product.images']);
 
         // Filter by status
         if (request('status') && request('status') !== 'all') {
@@ -39,7 +39,7 @@ class OrderController extends Controller
             abort(403);
         }
 
-        $order->load('items.product');
+        $order->load('items.product.images');
 
         return view('orders.show', compact('order'));
     }
@@ -60,7 +60,7 @@ class OrderController extends Controller
             // Check if product still exists and has stock
             if ($item->product && $item->product->status === 'active' && $item->product->stock > 0) {
                 $existingItem = $cart->items()->where('product_id', $item->product_id)->first();
-                
+
                 if ($existingItem) {
                     // Update quantity if item already in cart
                     $newQty = min($existingItem->qty + $item->qty, $item->product->stock);
