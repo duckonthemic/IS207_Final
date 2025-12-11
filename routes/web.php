@@ -137,5 +137,8 @@ Route::get('/logout', function () {
     return redirect('/login');
 });
 
+// Language Switching
+Route::get('/language/{locale}', [\App\Http\Controllers\LanguageController::class, 'switch'])->name('language.switch');
+
 require __DIR__ . '/auth.php';
 

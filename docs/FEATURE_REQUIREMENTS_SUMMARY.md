@@ -10,8 +10,8 @@
 
 | Loại yêu cầu | Đã hoàn thành | Chưa hoàn thành | Cần cải thiện |
 |--------------|---------------|-----------------|---------------|
-| **Cơ bản bắt buộc** | 18/18 | 0 | 1 |
-| **Nâng cao** | 4/6 | 2 | 0 |
+| **Cơ bản bắt buộc** | 18/18 | 0 | 0 |
+| **Nâng cao** | 5/6 | 1 | 0 |
 | **Giao diện & UX** | 5/5 | 0 | 0 |
 
 ---
@@ -170,11 +170,14 @@
   - Sử dụng MySQL COLLATE hoặc full-text search
 
 #### 1.17 Quốc tế hóa/Bản địa hóa
-- **Trạng thái:** ⚠️ **CHƯA HOÀN THÀNH**
-- **Mô tả:** Chưa có tùy chọn ngôn ngữ, chỉ có tiếng Việt
-- **Đề xuất:**
-  - Sử dụng Laravel Localization
-  - Tạo file `resources/lang/{locale}/`
+- **Trạng thái:** ✅ **HOÀN THÀNH** (Mới triển khai)
+- **Vị trí:** `lang/vi/messages.php`, `lang/en/messages.php`
+- **Tính năng:**
+  - Hỗ trợ 2 ngôn ngữ: Tiếng Việt (mặc định) và English
+  - Language switcher dropdown trong header
+  - Middleware `SetLocale` tự động xác định ngôn ngữ
+  - Lưu preference vào session
+  - File translation với 100+ keys cho navigation, products, cart, checkout, orders, auth, profile
 
 #### 1.18 Chọn địa chỉ theo đơn vị hành chính
 - **Trạng thái:** ⚠️ **CHƯA HOÀN THÀNH** 
