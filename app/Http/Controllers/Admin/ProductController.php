@@ -198,6 +198,18 @@ class ProductController extends Controller
     }
 
     /**
+     * Delete a product image
+     */
+    public function deleteImage(\App\Models\ProductImage $image): RedirectResponse
+    {
+        $productId = $image->product_id;
+        $image->delete();
+
+        return redirect()->route('admin.products.edit', $productId)
+            ->with('success', 'Đã xóa hình ảnh');
+    }
+
+    /**
      * Get spec definitions by component type (AJAX)
      */
     public function getSpecDefinitions(Request $request)

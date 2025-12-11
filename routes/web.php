@@ -99,6 +99,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 
     // Products
     Route::resource('products', \App\Http\Controllers\Admin\ProductController::class);
+    Route::delete('/products/images/{image}', [\App\Http\Controllers\Admin\ProductController::class, 'deleteImage'])->name('products.deleteImage');
     Route::get('/products/specs/by-component-type', [\App\Http\Controllers\Admin\ProductController::class, 'getSpecDefinitions'])->name('products.specs.by-component-type');
 
     // Categories
