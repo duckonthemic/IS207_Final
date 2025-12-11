@@ -40,8 +40,8 @@
                     class="block px-4 py-3 rounded-none text-sm font-bold uppercase tracking-wider transition-colors {{ request()->routeIs('admin.promotions.*') ? 'bg-cyber-white text-cyber-black' : 'text-cyber-text hover:bg-cyber-gray hover:text-cyber-white' }}">
                     Mã giảm giá
                 </a>
-                <a href="#"
-                    class="block px-4 py-3 rounded-none text-sm font-bold uppercase tracking-wider transition-colors text-cyber-text hover:bg-cyber-gray hover:text-cyber-white">
+                <a href="{{ route('admin.users.index') }}"
+                    class="block px-4 py-3 rounded-none text-sm font-bold uppercase tracking-wider transition-colors {{ request()->routeIs('admin.users.*') ? 'bg-cyber-white text-cyber-black' : 'text-cyber-text hover:bg-cyber-gray hover:text-cyber-white' }}">
                     Người dùng
                 </a>
                 <a href="#"
