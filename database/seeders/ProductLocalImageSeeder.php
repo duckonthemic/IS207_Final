@@ -92,10 +92,11 @@ class ProductLocalImageSeeder extends Seeder
      */
     private function parseFilename(string $filename): array
     {
-        // Check for suffix pattern like "-1", "-2" at the end
-        if (preg_match('/^(.+)-(\d+)$/', $filename, $matches)) {
+        // Check for suffix pattern like " 1", " 2", " 3" (single digit only) at the end
+        // This avoids false matches on names like "DDR5 32GB"
+        if (preg_match('/^(.+)\s([1-9])$/', $filename, $matches)) {
             return [
-                'name' => $matches[1],
+                'name' => trim($matches[1]),
                 'order' => (int) $matches[2],
             ];
         }
