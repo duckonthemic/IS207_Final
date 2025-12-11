@@ -87,6 +87,7 @@ class OrderController extends Controller
         // Restore stock if order is being cancelled/refunded
         if ($isBecomingCancelled || $isPaymentRefunded) {
             $this->restoreStock($order);
+            $this->rollbackPromotionUsage($order);
         }
 
         $order->update($validated);
@@ -128,9 +129,10 @@ class OrderController extends Controller
         $isPaymentRefunded = $newPaymentStatus === 'refunded'
             && $oldPaymentStatus !== 'refunded';
 
-        // Restore stock if being cancelled/refunded
+        // Restore stock and rollback promotion if being cancelled/refunded
         if ($isBecomingCancelled || $isPaymentRefunded) {
             $this->restoreStock($order);
+            $this->rollbackPromotionUsage($order);
         }
 
         $order->update($validated);
@@ -163,6 +165,20 @@ class OrderController extends Controller
         foreach ($order->items as $item) {
             if ($item->product) {
                 $item->product->increment('stock', $item->qty);
+            }
+        }
+    }
+
+    /**
+     * Rollback promotion usage when order is cancelled/refunded
+     */
+    private function rollbackPromotionUsage(Order $order): void
+    {
+        $order->load('promotions');
+
+        foreach ($order->promotions as $promotion) {
+            if ($promotion->usage_count > 0) {
+                $promotion->decrement('usage_count');
             }
         }
     }

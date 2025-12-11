@@ -181,6 +181,16 @@ class ProductController extends Controller
      */
     public function destroy(Product $product): RedirectResponse
     {
+        // Check if product has been ordered
+        if ($product->orderItems()->exists()) {
+            return back()->with('error', 'Không thể xóa sản phẩm đã có trong đơn hàng. Bạn có thể vô hiệu hóa (is_active = false) thay thế.');
+        }
+
+        // Check if product is in any active cart
+        if ($product->cartItems()->exists()) {
+            return back()->with('error', 'Sản phẩm đang có trong giỏ hàng của khách. Vui lòng thử lại sau.');
+        }
+
         AuditService::logDelete($product);
         $product->delete();
         return redirect()->route('admin.products.index')

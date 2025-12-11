@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Promotion;
+use App\Services\AuditService;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -79,7 +80,9 @@ class PromotionController extends Controller
         $validated['is_active'] = $request->boolean('is_active', true);
         $validated['usage_per_user'] = $validated['usage_per_user'] ?? 1;
 
-        Promotion::create($validated);
+        $promotion = Promotion::create($validated);
+
+        AuditService::logCreate($promotion);
 
         return redirect()->route('admin.promotions.index')
             ->with('success', 'Mã giảm giá đã được tạo thành công');
@@ -117,7 +120,10 @@ class PromotionController extends Controller
         $validated['is_active'] = $request->boolean('is_active', true);
         $validated['usage_per_user'] = $validated['usage_per_user'] ?? 1;
 
+        $oldValues = $promotion->toArray();
         $promotion->update($validated);
+
+        AuditService::logUpdate($promotion, $oldValues);
 
         return redirect()->route('admin.promotions.index')
             ->with('success', 'Mã giảm giá đã được cập nhật');
@@ -133,6 +139,7 @@ class PromotionController extends Controller
             return back()->with('error', 'Không thể xóa mã giảm giá đã được sử dụng. Bạn có thể vô hiệu hóa thay thế.');
         }
 
+        AuditService::logDelete($promotion);
         $promotion->delete();
 
         return redirect()->route('admin.promotions.index')
@@ -144,7 +151,10 @@ class PromotionController extends Controller
      */
     public function toggleStatus(Promotion $promotion): RedirectResponse
     {
+        $oldValues = $promotion->toArray();
         $promotion->update(['is_active' => !$promotion->is_active]);
+
+        AuditService::logUpdate($promotion, $oldValues);
 
         $status = $promotion->is_active ? 'kích hoạt' : 'vô hiệu hóa';
         return back()->with('success', "Mã giảm giá đã được {$status}");

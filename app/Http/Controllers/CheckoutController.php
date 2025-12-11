@@ -297,10 +297,16 @@ class CheckoutController extends Controller
 
         $cart->load('items.product');
 
-        // Verify stock
+        // Verify stock and product availability
         foreach ($cart->items as $item) {
+            if (!$item->product) {
+                return back()->with('error', "Sản phẩm đã bị xóa khỏi hệ thống. Vui lòng kiểm tra giỏ hàng.");
+            }
+            if (!$item->product->is_active) {
+                return back()->with('error', "Sản phẩm {$item->product->name} không còn kinh doanh.");
+            }
             if ($item->product->stock < $item->qty) {
-                return back()->with('error', "Sản phẩm {$item->product->name} không đủ hàng trong kho");
+                return back()->with('error', "Sản phẩm {$item->product->name} chỉ còn {$item->product->stock} sản phẩm trong kho.");
             }
         }
 

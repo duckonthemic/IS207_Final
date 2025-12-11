@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
             SmartProductSeeder::class,
             PrebuiltPcSeeder::class, // Temporarily disable or update if needed
             ProductLocalImageSeeder::class, // Map local images to products
+            PromotionSeeder::class,
         ]);
     }
 }
