@@ -79,7 +79,7 @@
                             <div class="p-5 flex gap-4 hover:bg-gray-50 transition-colors">
                                 <div class="w-16 h-16 bg-gray-50 rounded-lg border border-gray-100 flex-shrink-0 overflow-hidden p-1">
                                     @if($item->product && $item->product->images->first())
-                                        <img src="{{ $item->product->images->first()->url }}" alt="{{ $item->product->name }}" class="w-full h-full object-contain">
+                                        <img src="{{ asset($item->product->images->first()->url) }}" alt="{{ $item->product->name }}" class="w-full h-full object-contain">
                                     @endif
                                 </div>
                                 <div class="flex-1 min-w-0">

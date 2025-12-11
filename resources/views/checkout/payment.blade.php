@@ -225,7 +225,8 @@
                                     <div
                                         class="w-16 h-16 bg-gray-50 rounded-lg overflow-hidden border border-gray-100 shrink-0">
                                         @if($item->product->images->first())
-                                            <img src="{{ $item->product->images->first()->url }}" alt="{{ $item->product->name }}"
+                                            <img src="{{ asset($item->product->images->first()->url) }}"
+                                                alt="{{ $item->product->name }}"
                                                 class="w-full h-full object-contain p-1 group-hover:scale-110 transition-transform duration-500">
                                         @endif
                                     </div>
@@ -235,7 +236,8 @@
                                         <div class="flex justify-between items-center">
                                             <p class="text-gray-500 text-xs">SL: {{ $item->qty }}</p>
                                             <p class="text-gray-900 text-sm font-bold">
-                                                {{ number_format($item->subtotal, 0, ',', '.') }}₫</p>
+                                                {{ number_format($item->subtotal, 0, ',', '.') }}₫
+                                            </p>
                                         </div>
                                     </div>
                                 </div>

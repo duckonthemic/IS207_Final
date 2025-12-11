@@ -34,7 +34,7 @@
                             <div @click="showLightbox = true"
                                 class="cursor-zoom-in flex items-center justify-center aspect-square">
                                 <img id="mainImage"
-                                    src="{{ $product->images->first()?->url ?? 'https://via.placeholder.com/600x600?text=' . urlencode($product->name) }}"
+                                    src="{{ $product->images->first() ? asset($product->images->first()->url) : 'https://via.placeholder.com/600x600?text=' . urlencode($product->name) }}"
                                     alt="{{ $product->name }}"
                                     class="max-w-full max-h-full object-contain transition-transform duration-500 group-hover:scale-105">
                             </div>
@@ -76,8 +76,8 @@
                             <div class="grid grid-cols-5 gap-4">
                                 @foreach($product->images as $image)
                                     <div class="bg-white rounded-xl border border-gray-100 p-2 cursor-pointer hover:border-blue-500 hover:shadow-md transition-all aspect-square flex items-center justify-center"
-                                        onclick="document.getElementById('mainImage').src='{{ $image->url }}'">
-                                        <img src="{{ $image->url }}" alt="{{ $product->name }}"
+                                        onclick="document.getElementById('mainImage').src='{{ asset($image->url) }}'">
+                                        <img src="{{ asset($image->url) }}" alt="{{ $product->name }}"
                                             class="max-w-full max-h-full object-contain">
                                     </div>
                                 @endforeach

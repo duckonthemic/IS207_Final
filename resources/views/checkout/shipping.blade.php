@@ -114,7 +114,7 @@
                             <div class="flex gap-4 group">
                                 <div class="w-16 h-16 bg-gray-50 rounded-lg overflow-hidden border border-gray-100 shrink-0">
                                     @if($item->product->images->first())
-                                        <img src="{{ $item->product->images->first()->url }}" alt="{{ $item->product->name }}" class="w-full h-full object-contain p-1 group-hover:scale-110 transition-transform duration-500">
+                                        <img src="{{ asset($item->product->images->first()->url) }}" alt="{{ $item->product->name }}" class="w-full h-full object-contain p-1 group-hover:scale-110 transition-transform duration-500">
                                     @endif
                                 </div>
                                 <div class="flex-1 min-w-0">

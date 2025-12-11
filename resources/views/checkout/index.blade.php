@@ -303,7 +303,7 @@
                                     <div
                                         class="w-14 h-14 bg-gray-50 rounded-lg border border-gray-100 flex-shrink-0 overflow-hidden p-1 relative">
                                         @if($item->product->images->first())
-                                            <img src="{{ $item->product->images->first()->url }}" alt="{{ $item->product->name }}"
+                                            <img src="{{ asset($item->product->images->first()->url) }}" alt="{{ $item->product->name }}"
                                                 class="w-full h-full object-contain">
                                         @endif
                                         <span

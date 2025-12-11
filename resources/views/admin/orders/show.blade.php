@@ -142,7 +142,7 @@
                                 <td class="px-6 py-4">
                                     <div class="flex items-center gap-3">
                                         @if($item->product && $item->product->images->first())
-                                            <img src="{{ $item->product->images->first()->url }}" alt="" class="w-12 h-12 object-contain bg-white rounded">
+                                            <img src="{{ asset($item->product->images->first()->url) }}" alt="" class="w-12 h-12 object-contain bg-white rounded">
                                         @endif
                                         <div>
                                             <p class="text-cyber-white font-bold text-sm">{{ $item->product->name ?? 'Sản phẩm đã xóa' }}</p>

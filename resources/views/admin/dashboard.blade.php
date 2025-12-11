@@ -42,7 +42,8 @@
                         <div>
                             <p class="text-cyber-text-muted text-xs font-bold uppercase tracking-wider mb-2">Doanh thu</p>
                             <h3 class="text-3xl font-black text-cyber-white font-mono">
-                                {{ number_format($totalRevenue, 0, ',', '.') }}₫</h3>
+                                {{ number_format($totalRevenue, 0, ',', '.') }}₫
+                            </h3>
                             <p class="text-xs text-cyber-text-muted mt-2 font-mono">
                                 <span
                                     class="text-green-400 font-bold">+{{ number_format($revenueToday, 0, ',', '.') }}₫</span>
@@ -136,49 +137,49 @@
                                 </thead>
                                 <tbody class="divide-y divide-cyber-border">
                                     @foreach($recentOrders as $order)
-                                                                <tr class="hover:bg-cyber-gray transition-colors">
-                                                                    <td class="py-3">
-                                                                        <a href="{{ route('admin.orders.show', $order) }}"
-                                                                            class="text-cyber-white hover:text-cyber-text-muted font-mono text-sm font-bold">
-                                                                            {{ $order->order_code ?? 'ORD-' . $order->id }}
-                                                                        </a>
-                                                                    </td>
-                                                                    <td class="py-3 text-cyber-text text-sm">
-                                                                        {{ $order->user->name ?? $order->shipping_name ?? 'N/A' }}
-                                                                    </td>
-                                                                    <td class="py-3 text-right text-cyber-white font-mono font-bold text-sm">
-                                                                        {{ number_format($order->total ?? 0, 0, ',', '.') }}₫
-                                                                    </td>
-                                                                    <td class="py-3 text-center">
-                                                                        @php
-                                                                            $statusClasses = [
-                                                                                'pending' => 'text-yellow-500 border-yellow-500',
-                                                                                'processing' => 'text-purple-400 border-purple-400',
-                                                                                'picking' => 'text-blue-400 border-blue-400',
-                                                                                'shipped' => 'text-indigo-400 border-indigo-400',
-                                                                                'delivered' => 'text-green-400 border-green-400',
-                                                                                'cancelled' => 'text-red-500 border-red-500',
-                                                                                'refunded' => 'text-gray-400 border-gray-400',
-                                                                            ];
-                                                                            $statusLabels = [
-                                                                                'pending' => 'Chờ xử lý',
-                                                                                'processing' => 'Đang xử lý',
-                                                                                'picking' => 'Đang lấy hàng',
-                                                                                'shipped' => 'Đang giao',
-                                                                                'delivered' => 'Đã giao',
-                                                                                'cancelled' => 'Đã hủy',
-                                                                                'refunded' => 'Hoàn tiền',
-                                                                            ];
-                                                                        @endphp
-                                         <span
-                                                                            class="inline-block px-2 py-1 border text-[10px] font-bold uppercase tracking-wider {{ $statusClasses[$order->status] ?? 'text-gray-400 border-gray-400' }}">
-                                                                            {{ $statusLabels[$order->status] ?? $order->status }}
-                                                                        </span>
-                                                                    </td>
-                                                                    <td class="py-3 text-right text-cyber-text-muted text-xs font-mono">
-                                                                        {{ $order->created_at->diffForHumans() }}
-                                                                    </td>
-                                                                </tr>
+                                        <tr class="hover:bg-cyber-gray transition-colors">
+                                            <td class="py-3">
+                                                <a href="{{ route('admin.orders.show', $order) }}"
+                                                    class="text-cyber-white hover:text-cyber-text-muted font-mono text-sm font-bold">
+                                                    {{ $order->order_code ?? 'ORD-' . $order->id }}
+                                                </a>
+                                            </td>
+                                            <td class="py-3 text-cyber-text text-sm">
+                                                {{ $order->user->name ?? $order->shipping_name ?? 'N/A' }}
+                                            </td>
+                                            <td class="py-3 text-right text-cyber-white font-mono font-bold text-sm">
+                                                {{ number_format($order->total ?? 0, 0, ',', '.') }}₫
+                                            </td>
+                                            <td class="py-3 text-center">
+                                                @php
+                                                    $statusClasses = [
+                                                        'pending' => 'text-yellow-500 border-yellow-500',
+                                                        'processing' => 'text-purple-400 border-purple-400',
+                                                        'picking' => 'text-blue-400 border-blue-400',
+                                                        'shipped' => 'text-indigo-400 border-indigo-400',
+                                                        'delivered' => 'text-green-400 border-green-400',
+                                                        'cancelled' => 'text-red-500 border-red-500',
+                                                        'refunded' => 'text-gray-400 border-gray-400',
+                                                    ];
+                                                    $statusLabels = [
+                                                        'pending' => 'Chờ xử lý',
+                                                        'processing' => 'Đang xử lý',
+                                                        'picking' => 'Đang lấy hàng',
+                                                        'shipped' => 'Đang giao',
+                                                        'delivered' => 'Đã giao',
+                                                        'cancelled' => 'Đã hủy',
+                                                        'refunded' => 'Hoàn tiền',
+                                                    ];
+                                                @endphp
+                                                <span
+                                                    class="inline-block px-2 py-1 border text-[10px] font-bold uppercase tracking-wider {{ $statusClasses[$order->status] ?? 'text-gray-400 border-gray-400' }}">
+                                                    {{ $statusLabels[$order->status] ?? $order->status }}
+                                                </span>
+                                            </td>
+                                            <td class="py-3 text-right text-cyber-text-muted text-xs font-mono">
+                                                {{ $order->created_at->diffForHumans() }}
+                                            </td>
+                                        </tr>
                                     @endforeach
                                 </tbody>
                             </table>
@@ -207,7 +208,7 @@
                                     class="flex items-center gap-3 p-3 bg-cyber-gray border border-cyber-border hover:border-red-500 transition-colors group">
                                     <div class="flex-shrink-0 w-12 h-12 bg-cyber-black border border-cyber-border p-1">
                                         @if($product->images->first())
-                                            <img src="{{ $product->images->first()->url }}" alt="{{ $product->name }}"
+                                            <img src="{{ asset($product->images->first()->url) }}" alt="{{ $product->name }}"
                                                 class="w-full h-full object-contain">
                                         @else
                                             <div class="w-full h-full flex items-center justify-center text-cyber-text-muted text-xs">
@@ -217,7 +218,8 @@
                                     <div class="flex-1 min-w-0">
                                         <p
                                             class="text-sm font-bold text-cyber-white truncate group-hover:text-red-500 transition-colors">
-                                            {{ $product->name }}</p>
+                                            {{ $product->name }}
+                                        </p>
                                         <div class="flex items-center gap-2 mt-1">
                                             <span class="text-xs text-red-500 font-bold uppercase tracking-wider">Stock:
                                                 {{ $product->stock }}</span>
