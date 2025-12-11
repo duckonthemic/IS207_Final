@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'UITech Store - Cửa hàng linh kiện máy tính chính hãng')
+@section('title', __('home.page_title'))
 
 @section('content')
     <!-- Hero Section -->
@@ -16,21 +16,19 @@
                 <div
                     class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 mb-8">
                     <span class="w-2 h-2 rounded-full bg-gray-900 animate-pulse"></span>
-                    <span class="text-sm font-medium text-white">Công nghệ mới nhất 2025</span>
+                    <span class="text-sm font-medium text-white">{{ __('home.hero_badge') }}</span>
                 </div>
                 <h1 class="text-5xl md:text-7xl font-bold text-white leading-tight tracking-tight mb-6">
-                    Build PC <br />
-                    <span class="text-white">Đỉnh Cao Hiệu
-                        Năng</span>
+                    {{ __('home.hero_title') }} <br />
+                    <span class="text-white">{{ __('home.hero_subtitle') }}</span>
                 </h1>
                 <p class="text-gray-300 text-xl max-w-xl leading-relaxed mb-10">
-                    Trải nghiệm sức mạnh tuyệt đối với linh kiện máy tính chính hãng. Bảo hành 36 tháng, hỗ trợ kỹ thuật
-                    trọn đời.
+                    {{ __('home.hero_description') }}
                 </p>
                 <div class="flex flex-wrap gap-4">
                     <a href="{{ route('products.index') }}"
                         class="px-8 py-4 bg-gray-900 text-white font-bold rounded-full hover:bg-gray-800 transition-all shadow-lg hover:shadow-gray-900/20 transform hover:-translate-y-1">
-                        Mua sắm ngay
+                        {{ __('home.shop_now') }}
                     </a>
                     <a href="{{ route('build-pc') }}"
                         class="px-8 py-4 bg-white/10 text-white border border-white/20 font-bold rounded-full hover:bg-white/20 transition-all backdrop-blur-sm flex items-center gap-2">
@@ -39,7 +37,7 @@
                                 d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z">
                             </path>
                         </svg>
-                        Build PC
+                        {{ __('home.build_pc') }}
                     </a>
                 </div>
             </div>
@@ -49,17 +47,17 @@
     <!-- Featured Categories Section -->
     @php
         $tabCategories = [
-            ['name' => 'Nổi Bật', 'slug' => 'featured', 'products' => \App\Models\Product::with('category', 'images')->inRandomOrder()->limit(8)->get()],
+            ['name' => __('home.featured'), 'slug' => 'featured', 'products' => \App\Models\Product::with('category', 'images')->inRandomOrder()->limit(8)->get()],
             ['name' => 'CPU', 'slug' => 'cpu', 'products' => \App\Models\Product::whereHas('category', fn($q) => $q->where('slug', 'cpu'))->with('category', 'images')->limit(8)->get()],
             ['name' => 'VGA', 'slug' => 'vga', 'products' => \App\Models\Product::whereHas('category', fn($q) => $q->where('slug', 'vga'))->with('category', 'images')->limit(8)->get()],
-            ['name' => 'Màn Hình', 'slug' => 'monitor', 'products' => \App\Models\Product::whereHas('category', fn($q) => $q->where('slug', 'monitor'))->with('category', 'images')->limit(8)->get()],
+            ['name' => __('home.monitor'), 'slug' => 'monitor', 'products' => \App\Models\Product::whereHas('category', fn($q) => $q->where('slug', 'monitor'))->with('category', 'images')->limit(8)->get()],
             ['name' => 'Mainboard', 'slug' => 'mainboard', 'products' => \App\Models\Product::whereHas('category', fn($q) => $q->where('slug', 'mainboard'))->with('category', 'images')->limit(8)->get()],
         ];
     @endphp
     <section class="py-16 bg-white" x-data="{ activeTab: 'featured' }">
         <div class="container mx-auto px-4 max-w-7xl">
             <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-900 mb-4">Khám Phá Sản Phẩm</h2>
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">{{ __('home.discover_products') }}</h2>
 
                 {{-- Category Tabs --}}
                 <div class="flex flex-wrap justify-center gap-4 mt-8">
@@ -84,7 +82,7 @@
 
                     @if($cat['products']->isEmpty())
                         <div class="col-span-full text-center py-12 text-gray-400">
-                            <p>Đang cập nhật sản phẩm...</p>
+                            <p>{{ __('home.updating_products') }}</p>
                         </div>
                     @endif
                 </div>
@@ -93,7 +91,7 @@
             <div class="text-center mt-12">
                 <a href="{{ route('products.index') }}"
                     class="inline-flex items-center gap-2 text-gray-900 font-bold hover:text-gray-700 transition-colors">
-                    Xem tất cả sản phẩm
+                    {{ __('home.view_all_products') }}
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3">
                         </path>
@@ -114,7 +112,7 @@
                                 class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
                             <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
                         </span>
-                        <h2 class="text-3xl font-bold text-gray-900">Deal Giờ Vàng</h2>
+                        <h2 class="text-3xl font-bold text-gray-900">{{ __('home.flash_deals') }}</h2>
                     </div>
 
                     {{-- Countdown Timer --}}
@@ -135,7 +133,7 @@
 
                 <a href="{{ route('products.index') }}"
                     class="text-gray-900 font-medium hover:text-gray-700 flex items-center gap-1 group">
-                    Xem tất cả
+                    {{ __('home.view_all') }}
                     <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor"
                         viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -155,7 +153,7 @@
                     <x-product-card :product="$product" />
                 @empty
                     <div class="col-span-full text-center py-12 text-gray-500">
-                        <p>Chưa có deal nào đang diễn ra.</p>
+                        <p>{{ __('home.no_deals') }}</p>
                     </div>
                 @endforelse
             </div>
@@ -196,8 +194,8 @@
     <section class="py-20 bg-white">
         <div class="container mx-auto px-4 max-w-7xl">
             <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold text-gray-900 mb-4">Sản phẩm được ưa chuộng</h2>
-                <p class="text-gray-500">Những sản phẩm bán chạy nhất tuần qua</p>
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">{{ __('home.popular_products') }}</h2>
+                <p class="text-gray-500">{{ __('home.popular_subtitle') }}</p>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -205,7 +203,7 @@
                     <x-product-card :product="$product" />
                 @empty
                     <div class="col-span-full text-center py-12 text-gray-400">
-                        <p>Chưa có sản phẩm nào</p>
+                        <p>{{ __('home.no_products') }}</p>
                     </div>
                 @endforelse
             </div>
@@ -213,7 +211,7 @@
             <div class="text-center mt-16">
                 <a href="{{ route('products.index') }}"
                     class="inline-block px-10 py-4 bg-white border border-gray-200 text-gray-900 font-bold rounded-full hover:bg-gray-50 hover:border-gray-300 transition-all shadow-sm hover:shadow-md">
-                    Xem Tất Cả Sản Phẩm
+                    {{ __('home.view_all_products_btn') }}
                 </a>
             </div>
         </div>
@@ -227,9 +225,8 @@
                     <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center text-2xl shrink-0">🚚
                     </div>
                     <div>
-                        <h3 class="text-lg font-bold text-gray-900 mb-2">Giao Hàng Nhanh</h3>
-                        <p class="text-gray-500 text-sm leading-relaxed">Miễn phí vận chuyển cho đơn hàng trên 500K. Giao
-                            hàng hỏa tốc trong 2h tại nội thành.</p>
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">{{ __('home.fast_delivery') }}</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed">{{ __('home.fast_delivery_desc') }}</p>
                     </div>
                 </div>
 
@@ -237,9 +234,8 @@
                     <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center text-2xl shrink-0">🛡️
                     </div>
                     <div>
-                        <h3 class="text-lg font-bold text-gray-900 mb-2">Bảo Hành Chính Hãng</h3>
-                        <p class="text-gray-500 text-sm leading-relaxed">Cam kết hàng chính hãng 100%. Bảo hành đổi mới
-                            trong 30 ngày đầu nếu lỗi.</p>
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">{{ __('home.genuine_warranty') }}</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed">{{ __('home.genuine_warranty_desc') }}</p>
                     </div>
                 </div>
 
@@ -247,9 +243,8 @@
                     <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center text-2xl shrink-0">💳
                     </div>
                     <div>
-                        <h3 class="text-lg font-bold text-gray-900 mb-2">Thanh Toán Linh Hoạt</h3>
-                        <p class="text-gray-500 text-sm leading-relaxed">Hỗ trợ trả góp 0%. Thanh toán qua thẻ, ví điện tử
-                            hoặc COD.</p>
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">{{ __('home.flexible_payment') }}</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed">{{ __('home.flexible_payment_desc') }}</p>
                     </div>
                 </div>
             </div>
@@ -264,42 +259,43 @@
         </div>
 
         <div class="container mx-auto px-4 max-w-2xl text-center relative z-10">
-            <h2 class="text-3xl font-bold mb-4">Đăng ký nhận tin tức</h2>
-            <p class="text-gray-400 mb-8">Nhận thông tin về sản phẩm mới, khuyến mãi và voucher độc quyền.</p>
+            <h2 class="text-3xl font-bold mb-4">{{ __('home.newsletter_title') }}</h2>
+            <p class="text-gray-400 mb-8">{{ __('home.newsletter_desc') }}</p>
 
             <div x-data="{ 
-                    email: '', 
-                    loading: false, 
-                    message: '', 
-                    messageType: '',
-                    async subscribe() {
-                        if (!this.email) return;
-                        this.loading = true;
-                        this.message = '';
-                        try {
-                            const response = await fetch('{{ route('newsletter.subscribe') }}', {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                                    'Accept': 'application/json'
-                                },
-                                body: JSON.stringify({ email: this.email })
-                            });
-                            const data = await response.json();
-                            this.message = data.message;
-                            this.messageType = data.success ? 'success' : (data.type || 'error');
-                            if (data.success) this.email = '';
-                        } catch (error) {
-                            this.message = 'Có lỗi xảy ra, vui lòng thử lại.';
-                            this.messageType = 'error';
-                        }
-                        this.loading = false;
-                        setTimeout(() => { this.message = ''; }, 5000);
-                    }
-                }">
+                                email: '', 
+                                loading: false, 
+                                message: '', 
+                                messageType: '',
+                                async subscribe() {
+                                    if (!this.email) return;
+                                    this.loading = true;
+                                    this.message = '';
+                                    try {
+                                        const response = await fetch('{{ route('newsletter.subscribe') }}', {
+                                            method: 'POST',
+                                            headers: {
+                                                'Content-Type': 'application/json',
+                                                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                                                'Accept': 'application/json'
+                                            },
+                                            body: JSON.stringify({ email: this.email })
+                                        });
+                                        const data = await response.json();
+                                        this.message = data.message;
+                                        this.messageType = data.success ? 'success' : (data.type || 'error');
+                                        if (data.success) this.email = '';
+                                    } catch (error) {
+                                        this.message = '{{ __('home.error_occurred') }}';
+                                        this.messageType = 'error';
+                                    }
+                                    this.loading = false;
+                                    setTimeout(() => { this.message = ''; }, 5000);
+                                }
+                            }">
                 <form @submit.prevent="subscribe" class="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
-                    <input type="email" x-model="email" :disabled="loading" placeholder="Nhập email của bạn..." required
+                    <input type="email" x-model="email" :disabled="loading" placeholder="{{ __('home.email_placeholder') }}"
+                        required
                         class="flex-1 px-6 py-4 bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:bg-white/20 focus:border-white/40 transition-all rounded-full backdrop-blur-sm disabled:opacity-50">
                     <button type="submit" :disabled="loading"
                         class="px-8 py-4 bg-white text-gray-900 font-bold hover:bg-gray-100 transition-all rounded-full shadow-lg disabled:opacity-50 flex items-center justify-center gap-2">
@@ -310,7 +306,7 @@
                                 d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
                             </path>
                         </svg>
-                        <span x-text="loading ? 'Đang gửi...' : 'Đăng Ký'"></span>
+                        <span x-text="loading ? '{{ __('home.sending') }}' : '{{ __('home.subscribe') }}'"></span>
                     </button>
                 </form>
 
@@ -319,10 +315,10 @@
                     x-transition:enter-start="opacity-0 transform translate-y-2"
                     x-transition:enter-end="opacity-100 transform translate-y-0" class="mt-4">
                     <p :class="{
-                            'text-green-400': messageType === 'success',
-                            'text-yellow-400': messageType === 'info',
-                            'text-red-400': messageType === 'error'
-                        }" class="text-sm font-medium" x-text="message"></p>
+                                        'text-green-400': messageType === 'success',
+                                        'text-yellow-400': messageType === 'info',
+                                        'text-red-400': messageType === 'error'
+                                    }" class="text-sm font-medium" x-text="message"></p>
                 </div>
             </div>
         </div>

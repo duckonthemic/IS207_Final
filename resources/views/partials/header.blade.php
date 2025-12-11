@@ -41,7 +41,7 @@
                                 @keydown.escape="showDropdown = false"
                                 @keydown.enter="if(selectedIndex >= 0) $event.preventDefault(); goToSelected()"
                                 @keydown.arrow-down.prevent="navigateDown()" @keydown.arrow-up.prevent="navigateUp()"
-                                value="{{ request('search') }}" placeholder="Tìm kiếm CPU, VGA, RAM, SSD..."
+                                value="{{ request('search') }}" placeholder="{{ __('messages.search_placeholder') }}"
                                 autocomplete="off"
                                 class="w-full px-5 py-3 pl-12 pr-24 bg-white border-2 border-gray-900 text-gray-900 rounded-full focus:outline-none focus:ring-2 focus:ring-gray-900/20 focus:border-gray-900 transition-all placeholder-gray-400 text-sm">
                             <svg class="absolute left-4 top-3.5 w-5 h-5 text-gray-500 group-focus-within:text-gray-900 transition-colors"
@@ -51,7 +51,7 @@
                             </svg>
                             <button type="submit"
                                 class="absolute right-2 top-1.5 px-4 py-1.5 bg-gray-900 text-white text-sm font-medium rounded-full hover:bg-blue-600 transition-colors">
-                                Tìm kiếm
+                                {{ __('messages.search') }}
                             </button>
                         </form>
 
@@ -274,7 +274,7 @@
                             <div x-show="open" @click.away="open = false" x-transition
                                 class="absolute right-0 mt-2 w-56 bg-white border border-gray-100 rounded-xl shadow-lg py-2 z-50">
                                 <div class="px-4 py-2 border-b border-gray-100 mb-2">
-                                    <p class="text-sm font-medium text-gray-900">Tài khoản của tôi</p>
+                                    <p class="text-sm font-medium text-gray-900">{{ __('messages.my_account') }}</p>
                                     <p class="text-xs text-gray-500 truncate">{{ auth()->user()->email }}</p>
                                 </div>
                                 @if(auth()->user()->isAdmin() || auth()->user()->isModerator())
@@ -285,22 +285,20 @@
                                                 d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
                                             </path>
                                         </svg>
-                                        Admin Dashboard
+                                        {{ __('messages.admin_dashboard') }}
                                     </a>
                                     <div class="border-t border-gray-100 my-2"></div>
                                 @endif
                                 <a href="{{ route('profile.edit') }}"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-600">Cài
-                                    đặt tài khoản</a>
+                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-600">{{ __('messages.account_settings') }}</a>
                                 <a href="{{ route('orders.index') }}"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-600">Đơn
-                                    hàng của tôi</a>
+                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-600">{{ __('messages.my_orders') }}</a>
                                 <div class="border-t border-gray-100 my-2"></div>
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
                                     <button type="submit"
                                         class="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50">
-                                        Đăng xuất
+                                        {{ __('messages.logout') }}
                                     </button>
                                 </form>
                             </div>
@@ -314,11 +312,9 @@
                         </a>
                     @else
                         <div class="hidden lg:flex items-center gap-4 text-sm font-medium">
-                            <a href="{{ route('login') }}" class="text-gray-600 hover:text-blue-600 transition-colors">Đăng
-                                nhập</a>
+                            <a href="{{ route('login') }}" class="text-gray-600 hover:text-blue-600 transition-colors">{{ __('messages.login') }}</a>
                             <a href="{{ route('register') }}"
-                                class="px-4 py-2 bg-black text-white rounded-full hover:bg-gray-800 transition-colors shadow-sm hover:shadow">Đăng
-                                ký</a>
+                                class="px-4 py-2 bg-black text-white rounded-full hover:bg-gray-800 transition-colors shadow-sm hover:shadow">{{ __('messages.register') }}</a>
                         </div>
                         {{-- Mobile Login --}}
                         <a href="{{ route('login') }}" class="lg:hidden p-2 rounded-full hover:bg-gray-100">
