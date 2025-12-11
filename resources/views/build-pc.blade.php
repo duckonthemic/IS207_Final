@@ -3,140 +3,122 @@
 @section('title', 'Tự Build PC - Tùy chỉnh linh kiện')
 
 @section('content')
-    <div class="bg-gray-50 min-h-screen" x-data="pcBuilder()">
+    <div class="bg-gray-50 min-h-screen" x-data="pcBuilder()" x-init="init()">
         <div class="container mx-auto px-4 py-8 max-w-7xl">
-            {{-- Breadcrumb --}}
+            <!-- Breadcrumb -->
             <nav class="flex items-center gap-2 text-sm mb-6">
-                <a href="{{ route('home') }}" class="text-gray-500 hover:text-gray-900">Trang chủ</a>
-                <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                </svg>
+                <a href="{{ route('home') }}" class="text-gray-500 hover:text-gray-900 transition">Trang chủ</a>
+                <span class="text-gray-400">/</span>
                 <span class="text-gray-900 font-medium">Build PC</span>
             </nav>
 
-            {{-- Header --}}
-            <div class="mb-10 text-center">
-                <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-3">
-                    🖥️ Tự Build PC
-                </h1>
-                <p class="text-gray-500 text-lg">Chọn từng linh kiện để tạo nên bộ PC hoàn hảo của bạn</p>
+            <!-- Header -->
+            <div class="mb-8">
+                <h1 class="text-3xl font-bold text-gray-900 mb-2">Tự Build PC</h1>
+                <p class="text-gray-600">Chọn từng linh kiện để tạo nên bộ PC hoàn hảo của bạn</p>
             </div>
 
             <!-- Compatibility Alerts -->
-            <template x-if="compatibilityMessages.length > 0">
-                <div class="mb-6 space-y-2">
-                    <template x-for="msg in compatibilityMessages" :key="msg.text">
-                        <div :class="msg.type === 'error' ? 'bg-red-50 border-red-400 text-red-700' : (msg.type === 'warning' ? 'bg-yellow-50 border-yellow-400 text-yellow-700' : 'bg-blue-50 border-blue-400 text-blue-700')"
-                            class="border-l-4 px-4 py-3 rounded-r-lg flex items-center gap-3" role="alert">
-                            <span class="text-xl"
-                                x-text="msg.type === 'error' ? '❌' : (msg.type === 'warning' ? '⚠️' : 'ℹ️')"></span>
-                            <span x-text="msg.text"></span>
-                        </div>
-                    </template>
+            <template x-if="compatibilityErrors.length > 0">
+                <div class="mb-6 bg-red-50 border border-red-200 rounded-lg p-4">
+                    <div class="font-semibold text-red-800 mb-2">Cảnh báo tương thích</div>
+                    <ul class="text-sm text-red-700 space-y-1">
+                        <template x-for="error in compatibilityErrors" :key="error">
+                            <li x-text="error"></li>
+                        </template>
+                    </ul>
                 </div>
             </template>
 
-            <!-- Compatibility Info (when filtering active) -->
-            <template x-if="getActiveFilter()">
-                <div class="mb-6 bg-blue-50 border border-blue-200 rounded-2xl p-4 flex items-center gap-3">
-                    <span class="text-2xl">🎯</span>
-                    <div>
-                        <div class="font-semibold text-blue-900">Đang lọc theo tương thích</div>
-                        <div class="text-sm text-blue-700" x-text="getActiveFilter()"></div>
-                    </div>
+            <!-- Info about auto-filtering -->
+            <template x-if="getFilterHint()">
+                <div class="mb-6 bg-blue-50 border border-blue-200 rounded-lg p-4 text-sm text-blue-800">
+                    <span x-text="getFilterHint()"></span>
                 </div>
             </template>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                {{-- Component Selection --}}
-                <div class="lg:col-span-2 space-y-4">
+                <!-- Component Selection -->
+                <div class="lg:col-span-2 space-y-3">
 
                     @php
                         $components = [
-                            ['key' => 'cpu', 'name' => 'CPU - Bộ vi xử lý', 'required' => true, 'icon' => '🔲'],
-                            ['key' => 'mainboard', 'name' => 'Mainboard - Bo mạch chủ', 'required' => true, 'icon' => '🔌'],
-                            ['key' => 'gpu', 'name' => 'VGA - Card màn hình', 'required' => true, 'icon' => '🎮'],
-                            ['key' => 'ram', 'name' => 'RAM - Bộ nhớ', 'required' => true, 'icon' => '💾'],
-                            ['key' => 'ssd', 'name' => 'SSD - Ổ cứng', 'required' => false, 'icon' => '💿'],
-                            ['key' => 'psu', 'name' => 'PSU - Nguồn', 'required' => false, 'icon' => '⚡'],
-                            ['key' => 'case', 'name' => 'Case - Vỏ máy', 'required' => false, 'icon' => '🖥️'],
-                            ['key' => 'cooler', 'name' => 'Cooler - Tản nhiệt', 'required' => false, 'icon' => '❄️'],
+                            ['key' => 'cpu', 'name' => 'CPU - Bộ vi xử lý', 'required' => true, 'category' => 'cpu'],
+                            ['key' => 'mainboard', 'name' => 'Mainboard - Bo mạch chủ', 'required' => true, 'category' => 'mainboard'],
+                            ['key' => 'gpu', 'name' => 'VGA - Card màn hình', 'required' => true, 'category' => 'vga'],
+                            ['key' => 'ram', 'name' => 'RAM - Bộ nhớ', 'required' => true, 'category' => 'ram'],
+                            ['key' => 'ssd', 'name' => 'SSD - Ổ cứng', 'required' => false, 'category' => 'ssd'],
+                            ['key' => 'psu', 'name' => 'PSU - Nguồn', 'required' => false, 'category' => 'psu'],
+                            ['key' => 'case', 'name' => 'Case - Vỏ máy', 'required' => false, 'category' => 'case'],
+                            ['key' => 'cooler', 'name' => 'Cooler - Tản nhiệt', 'required' => false, 'category' => 'cooler'],
                         ];
                     @endphp
 
                     @foreach($components as $comp)
                         <div
-                            class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow">
-                            <div class="px-6 py-4 flex items-center justify-between border-b border-gray-100">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-10 h-10 bg-gray-100 rounded-xl flex items-center justify-center text-xl">
-                                        {{ $comp['icon'] }}
+                            class="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
+                            <div class="px-5 py-4 flex items-center justify-between">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center">
+                                        <span
+                                            class="text-gray-600 font-bold text-xs uppercase">{{ strtoupper(substr($comp['key'], 0, 3)) }}</span>
                                     </div>
-                                    <h3 class="font-bold text-gray-900">{{ $comp['name'] }}</h3>
+                                    <div>
+                                        <h3 class="font-semibold text-gray-900">{{ $comp['name'] }}</h3>
+                                        @if($comp['required'])
+                                            <span class="text-xs text-red-500">Bắt buộc</span>
+                                        @else
+                                            <span class="text-xs text-gray-400">Tùy chọn</span>
+                                        @endif
+                                    </div>
                                 </div>
-                                @if($comp['required'])
-                                    <span class="text-red-500 text-xs font-medium bg-red-50 px-3 py-1 rounded-full">* Bắt
-                                        buộc</span>
-                                @else
-                                    <span class="text-gray-400 text-xs bg-gray-50 px-3 py-1 rounded-full">Tùy chọn</span>
-                                @endif
-                            </div>
-                            <div class="p-4">
+
                                 <template x-if="!selectedComponents.{{ $comp['key'] }}">
-                                    <button @click="openModal('{{ $comp['key'] }}')"
-                                        class="w-full border-2 border-dashed border-gray-200 rounded-xl p-6 text-center hover:border-gray-900 hover:bg-gray-50 transition-all group cursor-pointer">
-                                        <svg class="w-10 h-10 mx-auto text-gray-300 group-hover:text-gray-900 mb-2 transition-colors"
-                                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                                        </svg>
-                                        <p class="text-gray-500 group-hover:text-gray-900 font-medium transition-colors">Chọn
-                                            {{ $comp['name'] }}</p>
-                                        <p class="text-xs text-gray-400 mt-1">Click để xem danh sách</p>
+                                    <button @click="openModal('{{ $comp['key'] }}', '{{ $comp['category'] }}')"
+                                        class="px-4 py-2 bg-gray-900 text-white text-sm font-medium rounded-lg hover:bg-gray-800 transition">
+                                        Chọn
                                     </button>
                                 </template>
+
                                 <template x-if="selectedComponents.{{ $comp['key'] }}">
-                                    <div class="flex items-center gap-4 bg-gray-50 rounded-xl p-4 border border-gray-100">
-                                        <img :src="selectedComponents.{{ $comp['key'] }}.image || '/images/no-image.png'"
-                                            alt="{{ $comp['name'] }}"
-                                            class="w-16 h-16 object-contain bg-white rounded-lg p-1 border border-gray-200">
-                                        <div class="flex-1 min-w-0">
-                                            <h4 class="font-semibold text-gray-900 truncate"
-                                                x-text="selectedComponents.{{ $comp['key'] }}.name"></h4>
-                                            <p class="text-lg font-bold text-gray-900 mt-1">
-                                                <span x-text="formatPrice(selectedComponents.{{ $comp['key'] }}.price)"></span>₫
-                                            </p>
-                                            <!-- Show specs info -->
-                                            <p class="text-xs text-gray-500 mt-1"
-                                                x-show="selectedComponents.{{ $comp['key'] }}.specs">
-                                                <template x-if="'{{ $comp['key'] }}' === 'cpu'">
-                                                    <span
-                                                        x-text="'Socket: ' + (selectedComponents.{{ $comp['key'] }}.specs?.socket || 'N/A')"></span>
+                                    <div class="flex items-center gap-4">
+                                        <div class="text-right">
+                                            <div class="font-semibold text-gray-900"
+                                                x-text="selectedComponents.{{ $comp['key'] }}.name.substring(0, 40) + (selectedComponents.{{ $comp['key'] }}.name.length > 40 ? '...' : '')">
+                                            </div>
+                                            <div class="text-sm text-gray-600"
+                                                x-text="formatPrice(selectedComponents.{{ $comp['key'] }}.price) + '₫'"></div>
+                                            <!-- Socket/RAM info -->
+                                            <div class="text-xs text-gray-500">
+                                                <template
+                                                    x-if="'{{ $comp['key'] }}' === 'cpu' && selectedComponents.cpu?.specs?.cpu_socket">
+                                                    <span x-text="'Socket: ' + selectedComponents.cpu.specs.cpu_socket"></span>
                                                 </template>
-                                                <template x-if="'{{ $comp['key'] }}' === 'mainboard'">
+                                                <template
+                                                    x-if="'{{ $comp['key'] }}' === 'mainboard' && selectedComponents.mainboard?.specs?.mb_socket">
                                                     <span
-                                                        x-text="(selectedComponents.{{ $comp['key'] }}.specs?.socket || '') + ' | ' + (selectedComponents.{{ $comp['key'] }}.specs?.memory_type || '')"></span>
+                                                        x-text="selectedComponents.mainboard.specs.mb_socket + ' | ' + (selectedComponents.mainboard.specs.mb_memory_type || '')"></span>
                                                 </template>
-                                                <template x-if="'{{ $comp['key'] }}' === 'ram'">
-                                                    <span
-                                                        x-text="selectedComponents.{{ $comp['key'] }}.specs?.type || ''"></span>
+                                                <template
+                                                    x-if="'{{ $comp['key'] }}' === 'ram' && selectedComponents.ram?.specs?.ram_type">
+                                                    <span x-text="selectedComponents.ram.specs.ram_type"></span>
                                                 </template>
-                                            </p>
+                                            </div>
                                         </div>
-                                        <div class="flex gap-2">
-                                            <button @click="openModal('{{ $comp['key'] }}')"
-                                                class="text-gray-500 hover:text-gray-900 p-2 hover:bg-gray-200 rounded-lg transition"
-                                                title="Đổi linh kiện">
-                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <div class="flex gap-1">
+                                            <button @click="openModal('{{ $comp['key'] }}', '{{ $comp['category'] }}')"
+                                                class="p-2 text-gray-500 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition"
+                                                title="Đổi">
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                         d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
                                                     </path>
                                                 </svg>
                                             </button>
                                             <button @click="removeComponent('{{ $comp['key'] }}')"
-                                                class="text-gray-500 hover:text-red-600 p-2 hover:bg-red-50 rounded-lg transition"
+                                                class="p-2 text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-lg transition"
                                                 title="Xóa">
-                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                         d="M6 18L18 6M6 6l12 12"></path>
                                                 </svg>
@@ -149,63 +131,70 @@
                     @endforeach
                 </div>
 
-                {{-- Summary Sidebar --}}
+                <!-- Summary Sidebar -->
                 <div class="lg:col-span-1">
-                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 sticky top-24">
-                        <div class="bg-gray-900 text-white px-6 py-5 rounded-t-2xl">
-                            <h3 class="font-bold text-xl">📋 Tổng Quan Build</h3>
+                    <div class="bg-white rounded-lg border border-gray-200 sticky top-24">
+                        <div class="bg-gray-900 text-white px-5 py-4 rounded-t-lg">
+                            <h3 class="font-bold text-lg">Tổng Quan Build</h3>
                         </div>
 
-                        <div class="p-6 space-y-4">
-                            {{-- Component Count --}}
+                        <div class="p-5 space-y-4">
+                            <!-- Component Count -->
                             <div class="flex items-center justify-between pb-4 border-b border-gray-100">
                                 <span class="text-gray-600">Linh kiện đã chọn</span>
-                                <span class="font-bold text-2xl text-gray-900" x-text="componentCount + '/8'"></span>
+                                <span class="font-bold text-xl text-gray-900" x-text="componentCount + '/8'"></span>
                             </div>
 
-                            {{-- Selected Components List --}}
-                            <div class="space-y-2 pb-4 border-b border-gray-100 max-h-60 overflow-y-auto">
+                            <!-- Selected Components List -->
+                            <div class="space-y-2 pb-4 border-b border-gray-100 max-h-48 overflow-y-auto">
                                 <template x-for="(comp, key) in selectedComponents" :key="key">
                                     <div x-show="comp" class="flex justify-between text-sm py-1">
                                         <span class="text-gray-500 uppercase font-medium" x-text="key"></span>
-                                        <span class="font-semibold text-gray-900"
+                                        <span class="font-medium text-gray-900"
                                             x-text="formatPrice(comp?.price || 0) + '₫'"></span>
                                     </div>
                                 </template>
                             </div>
 
-                            {{-- Total Price --}}
-                            <div class="bg-gray-100 rounded-xl p-5 text-center">
+                            <!-- Total Price -->
+                            <div class="bg-gray-50 rounded-lg p-4 text-center">
                                 <div class="text-sm text-gray-600 mb-1">Tổng giá trị</div>
-                                <div class="text-3xl font-bold text-gray-900" x-text="formatPrice(totalPrice) + '₫'"></div>
+                                <div class="text-2xl font-bold text-gray-900" x-text="formatPrice(totalPrice) + '₫'"></div>
                             </div>
 
-                            {{-- Actions --}}
-                            <template x-if="canAddToCart">
-                                <button @click="addAllToCart()"
-                                    class="w-full bg-gray-900 hover:bg-gray-800 text-white font-bold py-4 rounded-full transition-all shadow-lg hover:shadow-xl">
-                                    🛒 Thêm Tất Cả Vào Giỏ
-                                </button>
-                            </template>
+                            <!-- Actions -->
+                            @auth
+                                <template x-if="canAddToCart">
+                                    <button @click="addAllToCart()"
+                                        class="w-full bg-gray-900 hover:bg-gray-800 text-white font-semibold py-3 rounded-lg transition">
+                                        Thêm Tất Cả Vào Giỏ
+                                    </button>
+                                </template>
+                            @else
+                                <a href="{{ route('login') }}"
+                                    class="block w-full bg-gray-900 hover:bg-gray-800 text-white font-semibold py-3 rounded-lg transition text-center">
+                                    Đăng nhập để mua hàng
+                                </a>
+                            @endauth
+
                             <template x-if="!canAddToCart">
-                                <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-4 text-sm text-yellow-700">
-                                    <div class="font-semibold mb-1">⚠️ Chưa đủ linh kiện</div>
-                                    <div class="text-xs">Vui lòng chọn CPU, Mainboard, VGA và RAM</div>
+                                <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-3 text-sm text-yellow-700">
+                                    <div class="font-medium mb-1">Chưa đủ linh kiện bắt buộc</div>
+                                    <div class="text-xs" x-text="getMissingComponents()"></div>
                                 </div>
                             </template>
 
                             <button @click="resetBuild()"
-                                class="w-full border border-gray-200 text-gray-600 hover:border-gray-300 hover:bg-gray-50 font-medium py-3 rounded-full transition">
-                                🔄 Đặt Lại
+                                class="w-full border border-gray-200 text-gray-600 hover:bg-gray-50 font-medium py-2.5 rounded-lg transition">
+                                Đặt Lại
                             </button>
 
-                            {{-- Compatibility Tips --}}
-                            <div class="bg-gray-50 border border-gray-100 rounded-xl p-4 text-sm">
-                                <div class="font-semibold text-gray-900 mb-2">💡 Tương thích tự động</div>
+                            <!-- Compatibility Tips -->
+                            <div class="bg-gray-50 rounded-lg p-4 text-sm">
+                                <div class="font-medium text-gray-900 mb-2">Tương thích tự động</div>
                                 <ul class="space-y-1 text-xs text-gray-600">
-                                    <li>• Chọn CPU → Mainboard tự lọc theo socket</li>
-                                    <li>• Chọn Mainboard → RAM tự lọc theo DDR</li>
-                                    <li>• Hệ thống kiểm tra và cảnh báo tự động</li>
+                                    <li>• Chọn CPU sẽ lọc Mainboard theo socket</li>
+                                    <li>• Chọn Mainboard sẽ lọc RAM theo DDR</li>
                                 </ul>
                             </div>
                         </div>
@@ -214,78 +203,73 @@
             </div>
         </div>
 
-        {{-- Component Selection Modal --}}
-        <div x-show="modalOpen" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0"
-            x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200"
+        <!-- Component Selection Modal -->
+        <div x-show="modalOpen" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0"
+            x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-150"
             x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
             class="fixed inset-0 z-50 overflow-hidden" style="display: none;">
 
-            {{-- Backdrop --}}
-            <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" @click="closeModal()"></div>
+            <!-- Backdrop -->
+            <div class="absolute inset-0 bg-black/50" @click="closeModal()"></div>
 
-            {{-- Modal Content --}}
-            <div class="absolute inset-4 md:inset-8 lg:inset-12 bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden"
-                x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 scale-95"
+            <!-- Modal Content -->
+            <div class="absolute inset-4 md:inset-8 lg:inset-12 bg-white rounded-lg shadow-2xl flex flex-col overflow-hidden"
+                x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 scale-95"
                 x-transition:enter-end="opacity-100 scale-100">
 
-                {{-- Modal Header --}}
+                <!-- Modal Header -->
                 <div class="bg-gray-900 text-white px-6 py-4 flex items-center justify-between">
-                    <div class="flex items-center gap-3">
-                        <span class="text-2xl" x-text="getComponentIcon(currentComponentType)"></span>
-                        <div>
-                            <h2 class="text-xl font-bold" x-text="'Chọn ' + getComponentName(currentComponentType)"></h2>
-                            <p class="text-sm text-gray-400" x-show="getFilterInfo()" x-text="getFilterInfo()"></p>
-                        </div>
+                    <div>
+                        <h2 class="text-lg font-bold" x-text="'Chọn ' + getComponentName(currentComponentType)"></h2>
+                        <p class="text-sm text-gray-400" x-show="getModalFilterInfo()" x-text="getModalFilterInfo()"></p>
                     </div>
                     <button @click="closeModal()" class="p-2 hover:bg-white/20 rounded-lg transition">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
                             </path>
                         </svg>
                     </button>
                 </div>
 
-                {{-- Modal Body --}}
+                <!-- Modal Body -->
                 <div class="flex-1 flex overflow-hidden">
-                    {{-- Filters Sidebar --}}
-                    <div class="w-72 bg-gray-50 border-r border-gray-200 p-5 overflow-y-auto hidden md:block">
-                        <h3 class="font-bold text-gray-900 mb-4 flex items-center gap-2">
-                            🔍 Bộ lọc
-                        </h3>
+                    <!-- Filters Sidebar -->
+                    <div class="w-64 bg-gray-50 border-r border-gray-200 p-4 overflow-y-auto hidden md:block">
+                        <h3 class="font-semibold text-gray-900 mb-4">Bộ lọc</h3>
 
-                        {{-- Search --}}
-                        <div class="mb-6">
+                        <!-- Search -->
+                        <div class="mb-5">
                             <label class="block text-sm font-medium text-gray-700 mb-2">Tìm kiếm</label>
-                            <input type="text" x-model="filters.search" @input.debounce.300ms="fetchProducts()"
+                            <input type="text" x-model="filters.search" @input.debounce.400ms="fetchProducts()"
                                 placeholder="Nhập tên sản phẩm..."
-                                class="w-full border border-gray-200 rounded-lg px-4 py-2.5 text-sm focus:ring-2 focus:ring-gray-900 focus:border-gray-900">
+                                class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-gray-900 focus:border-gray-900">
                         </div>
 
-                        {{-- Price Range --}}
-                        <div class="mb-6">
+                        <!-- Price Range -->
+                        <div class="mb-5">
                             <label class="block text-sm font-medium text-gray-700 mb-2">Khoảng giá</label>
                             <div class="space-y-2">
-                                <label class="flex items-center gap-2 cursor-pointer p-2 rounded-lg hover:bg-gray-100">
+                                <label class="flex items-center gap-2 cursor-pointer">
                                     <input type="radio" name="price" value="" x-model="filters.priceRange"
                                         @change="fetchProducts()" class="text-gray-900 focus:ring-gray-900">
                                     <span class="text-sm text-gray-700">Tất cả</span>
                                 </label>
-                                <label class="flex items-center gap-2 cursor-pointer p-2 rounded-lg hover:bg-gray-100">
+                                <label class="flex items-center gap-2 cursor-pointer">
                                     <input type="radio" name="price" value="0-5000000" x-model="filters.priceRange"
                                         @change="fetchProducts()" class="text-gray-900 focus:ring-gray-900">
                                     <span class="text-sm text-gray-700">Dưới 5 triệu</span>
                                 </label>
-                                <label class="flex items-center gap-2 cursor-pointer p-2 rounded-lg hover:bg-gray-100">
+                                <label class="flex items-center gap-2 cursor-pointer">
                                     <input type="radio" name="price" value="5000000-10000000" x-model="filters.priceRange"
                                         @change="fetchProducts()" class="text-gray-900 focus:ring-gray-900">
                                     <span class="text-sm text-gray-700">5 - 10 triệu</span>
                                 </label>
-                                <label class="flex items-center gap-2 cursor-pointer p-2 rounded-lg hover:bg-gray-100">
+                                <label class="flex items-center gap-2 cursor-pointer">
                                     <input type="radio" name="price" value="10000000-20000000" x-model="filters.priceRange"
                                         @change="fetchProducts()" class="text-gray-900 focus:ring-gray-900">
                                     <span class="text-sm text-gray-700">10 - 20 triệu</span>
                                 </label>
-                                <label class="flex items-center gap-2 cursor-pointer p-2 rounded-lg hover:bg-gray-100">
+                                <label class="flex items-center gap-2 cursor-pointer">
                                     <input type="radio" name="price" value="20000000-" x-model="filters.priceRange"
                                         @change="fetchProducts()" class="text-gray-900 focus:ring-gray-900">
                                     <span class="text-sm text-gray-700">Trên 20 triệu</span>
@@ -293,11 +277,11 @@
                             </div>
                         </div>
 
-                        {{-- Sort --}}
-                        <div class="mb-6">
+                        <!-- Sort -->
+                        <div class="mb-5">
                             <label class="block text-sm font-medium text-gray-700 mb-2">Sắp xếp</label>
                             <select x-model="filters.sort" @change="fetchProducts()"
-                                class="w-full border border-gray-200 rounded-lg px-4 py-2.5 text-sm focus:ring-2 focus:ring-gray-900">
+                                class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-gray-900">
                                 <option value="">Mặc định</option>
                                 <option value="price_asc">Giá tăng dần</option>
                                 <option value="price_desc">Giá giảm dần</option>
@@ -305,107 +289,107 @@
                             </select>
                         </div>
 
-                        {{-- Clear Filters --}}
-                        <button @click="clearFilters()"
-                            class="w-full text-sm text-gray-600 hover:text-gray-900 font-medium py-2 border border-gray-200 rounded-lg hover:bg-gray-100 transition">
-                            ↺ Xóa bộ lọc
+                        <!-- Show all button if filtering -->
+                        <button x-show="isFiltering()" @click="clearCompatibilityFilter()"
+                            class="w-full text-sm text-blue-600 hover:text-blue-800 font-medium py-2 border border-blue-200 rounded-lg hover:bg-blue-50 transition">
+                            Xem tất cả (bỏ lọc tương thích)
                         </button>
                     </div>
 
-                    {{-- Products Grid --}}
-                    <div class="flex-1 p-5 overflow-y-auto bg-gray-50">
-                        {{-- Mobile Search --}}
+                    <!-- Products Grid -->
+                    <div class="flex-1 p-4 overflow-y-auto bg-gray-50">
+                        <!-- Mobile Search -->
                         <div class="md:hidden mb-4">
-                            <input type="text" x-model="filters.search" @input.debounce.300ms="fetchProducts()"
-                                placeholder="🔍 Tìm kiếm..."
-                                class="w-full border border-gray-200 rounded-lg px-4 py-3 focus:ring-2 focus:ring-gray-900">
+                            <input type="text" x-model="filters.search" @input.debounce.400ms="fetchProducts()"
+                                placeholder="Tìm kiếm..."
+                                class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-gray-900">
                         </div>
 
-                        {{-- Compatibility Filter Notice --}}
-                        <div x-show="getFilterInfo()"
-                            class="mb-4 bg-blue-50 border border-blue-200 rounded-xl p-3 flex items-center gap-2">
-                            <span class="text-blue-600">🎯</span>
-                            <span class="text-sm text-blue-800" x-text="getFilterInfo()"></span>
+                        <!-- Filter notice -->
+                        <div x-show="isFiltering() && !skipCompatibilityFilter"
+                            class="mb-4 bg-blue-50 border border-blue-200 rounded-lg p-3 flex items-center justify-between">
+                            <span class="text-sm text-blue-800" x-text="getModalFilterInfo()"></span>
                             <button @click="clearCompatibilityFilter()"
-                                class="ml-auto text-blue-600 hover:text-blue-800 text-sm font-medium">
+                                class="text-blue-600 hover:text-blue-800 text-sm font-medium">
                                 Xem tất cả
                             </button>
                         </div>
 
-                        {{-- Loading State --}}
-                        <div x-show="loading" class="flex items-center justify-center py-20">
-                            <div class="animate-spin rounded-full h-12 w-12 border-4 border-gray-900 border-t-transparent">
+                        <!-- Loading State -->
+                        <div x-show="loading" class="flex items-center justify-center py-16">
+                            <div class="animate-spin rounded-full h-10 w-10 border-4 border-gray-900 border-t-transparent">
                             </div>
                         </div>
 
-                        {{-- Products Grid --}}
-                        <div x-show="!loading" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                        <!-- Products Grid -->
+                        <div x-show="!loading" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
                             <template x-for="product in products" :key="product.id">
                                 <div @click="selectProduct(product)"
-                                    :class="{'ring-2 ring-gray-900': isProductSelected(product)}"
-                                    class="bg-white border border-gray-200 rounded-xl p-4 cursor-pointer hover:border-gray-400 hover:shadow-lg transition-all group">
-                                    <div class="aspect-square bg-gray-50 rounded-lg mb-3 overflow-hidden">
+                                    :class="{'ring-2 ring-gray-900 bg-gray-100': isProductSelected(product)}"
+                                    class="bg-white border border-gray-200 rounded-lg p-3 cursor-pointer hover:border-gray-400 hover:shadow-md transition group">
+                                    <div class="aspect-square bg-gray-50 rounded-lg mb-2 overflow-hidden">
                                         <img :src="product.image_url || '/images/no-image.png'" :alt="product.name"
                                             class="w-full h-full object-contain group-hover:scale-105 transition-transform p-2">
                                     </div>
-                                    <h4 class="font-medium text-gray-900 text-sm line-clamp-2 mb-2 min-h-[2.5rem]"
+                                    <h4 class="font-medium text-gray-900 text-sm line-clamp-2 mb-1 min-h-[2.5rem]"
                                         x-text="product.name"></h4>
 
-                                    {{-- Show relevant specs --}}
-                                    <div class="text-xs text-gray-500 mb-2 min-h-[1rem]">
-                                        <template x-if="currentComponentType === 'cpu' && product.specs?.socket">
-                                            <span x-text="'Socket: ' + product.specs.socket"></span>
+                                    <!-- Show relevant specs -->
+                                    <div class="text-xs text-gray-500 mb-2">
+                                        <template x-if="currentComponentType === 'cpu' && product.specs?.cpu_socket">
+                                            <span x-text="'Socket: ' + product.specs.cpu_socket"></span>
                                         </template>
-                                        <template x-if="currentComponentType === 'mainboard' && product.specs?.socket">
+                                        <template x-if="currentComponentType === 'mainboard' && product.specs?.mb_socket">
                                             <span
-                                                x-text="product.specs.socket + ' | ' + (product.specs.memory_type || '')"></span>
+                                                x-text="product.specs.mb_socket + (product.specs.mb_memory_type ? ' | ' + product.specs.mb_memory_type : '')"></span>
                                         </template>
-                                        <template x-if="currentComponentType === 'ram' && product.specs?.type">
+                                        <template x-if="currentComponentType === 'ram' && product.specs?.ram_type">
                                             <span
-                                                x-text="product.specs.type + ' ' + (product.specs.speed_mhz || '') + 'MHz'"></span>
+                                                x-text="product.specs.ram_type + (product.specs.ram_speed ? ' ' + product.specs.ram_speed : '')"></span>
                                         </template>
                                     </div>
 
                                     <div class="flex items-center justify-between">
-                                        <span class="font-bold text-gray-900"
+                                        <span class="font-bold text-gray-900 text-sm"
                                             x-text="formatPrice(product.sale_price || product.price) + '₫'"></span>
                                     </div>
-                                    <div x-show="product.sale_price" class="text-xs text-gray-400 line-through"
+                                    <div x-show="product.sale_price && product.sale_price < product.price"
+                                        class="text-xs text-gray-400 line-through"
                                         x-text="formatPrice(product.price) + '₫'"></div>
 
-                                    <div class="mt-2 text-xs"
+                                    <div class="mt-1 text-xs"
                                         :class="product.stock > 0 ? 'text-green-600' : 'text-red-500'">
-                                        <span
-                                            x-text="product.stock > 0 ? ('Còn ' + product.stock + ' sản phẩm') : 'Hết hàng'"></span>
+                                        <span x-text="product.stock > 0 ? 'Còn hàng' : 'Hết hàng'"></span>
                                     </div>
                                 </div>
                             </template>
                         </div>
 
-                        {{-- Empty State --}}
-                        <div x-show="!loading && products.length === 0" class="text-center py-20">
-                            <div class="text-6xl mb-4">📦</div>
-                            <h3 class="text-xl font-semibold text-gray-900 mb-2">Không tìm thấy sản phẩm</h3>
-                            <p class="text-gray-600 mb-4">Thử thay đổi bộ lọc hoặc xem tất cả sản phẩm</p>
-                            <button @click="clearCompatibilityFilter()" class="text-gray-900 font-medium hover:underline">
+                        <!-- Empty State -->
+                        <div x-show="!loading && products.length === 0" class="text-center py-16">
+                            <div class="text-4xl mb-3 text-gray-300">0</div>
+                            <h3 class="text-lg font-medium text-gray-900 mb-1">Không tìm thấy sản phẩm</h3>
+                            <p class="text-gray-600 text-sm mb-3">Thử thay đổi bộ lọc hoặc xem tất cả sản phẩm</p>
+                            <button @click="clearCompatibilityFilter()"
+                                class="text-gray-900 font-medium hover:underline text-sm">
                                 Xem tất cả sản phẩm
                             </button>
                         </div>
 
-                        {{-- Pagination --}}
-                        <div x-show="!loading && totalPages > 1" class="flex justify-center gap-2 mt-6">
+                        <!-- Pagination -->
+                        <div x-show="!loading && totalPages > 1" class="flex justify-center gap-2 mt-5">
                             <button @click="prevPage()" :disabled="currentPage === 1"
                                 :class="currentPage === 1 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-100'"
-                                class="px-4 py-2 border border-gray-200 rounded-lg text-sm font-medium bg-white">
-                                ← Trước
+                                class="px-3 py-2 border border-gray-200 rounded-lg text-sm font-medium bg-white">
+                                Trước
                             </button>
-                            <span class="px-4 py-2 text-sm text-gray-600">
-                                Trang <span x-text="currentPage"></span> / <span x-text="totalPages"></span>
+                            <span class="px-3 py-2 text-sm text-gray-600">
+                                <span x-text="currentPage"></span> / <span x-text="totalPages"></span>
                             </span>
                             <button @click="nextPage()" :disabled="currentPage === totalPages"
                                 :class="currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-100'"
-                                class="px-4 py-2 border border-gray-200 rounded-lg text-sm font-medium bg-white">
-                                Sau →
+                                class="px-3 py-2 border border-gray-200 rounded-lg text-sm font-medium bg-white">
+                                Sau
                             </button>
                         </div>
                     </div>
@@ -427,11 +411,12 @@
                     case: null,
                     cooler: null
                 },
-                compatibilityMessages: [],
+                compatibilityErrors: [],
 
                 // Modal state
                 modalOpen: false,
                 currentComponentType: '',
+                currentCategory: '',
                 products: [],
                 loading: false,
                 currentPage: 1,
@@ -445,92 +430,94 @@
                     sort: ''
                 },
 
-                // Category mapping
-                categoryMap: {
-                    'cpu': 'cpu',
-                    'gpu': 'vga',
-                    'mainboard': 'mainboard',
-                    'ram': 'ram',
-                    'ssd': 'ssd',
-                    'psu': 'psu',
-                    'case': 'case',
-                    'cooler': 'cooler'
-                },
-
-                async init() {
+                init() {
                     // Load from localStorage
                     const saved = localStorage.getItem('pcBuild');
                     if (saved) {
                         try {
                             const parsed = JSON.parse(saved);
-                            this.selectedComponents = { ...this.selectedComponents, ...parsed };
+                            // Only load if data is valid
+                            if (parsed && typeof parsed === 'object') {
+                                Object.keys(this.selectedComponents).forEach(key => {
+                                    if (parsed[key] && parsed[key].id) {
+                                        this.selectedComponents[key] = parsed[key];
+                                    }
+                                });
+                            }
                         } catch (e) {
                             console.error('Error loading saved build:', e);
+                            localStorage.removeItem('pcBuild');
                         }
                     }
                     this.checkCompatibility();
                 },
 
-                // Get compatibility filter for current component type
+                // Check if we should apply compatibility filter
+                isFiltering() {
+                    if (this.skipCompatibilityFilter) return false;
+                    return this.getCompatibilityFilter() !== null;
+                },
+
+                // Get compatibility filter based on current selection
                 getCompatibilityFilter() {
-                    if (this.skipCompatibilityFilter) return {};
-
-                    const filters = {};
-
                     // When selecting Mainboard, filter by CPU socket
-                    if (this.currentComponentType === 'mainboard' && this.selectedComponents.cpu?.specs?.socket) {
-                        filters.socket = this.selectedComponents.cpu.specs.socket;
+                    if (this.currentComponentType === 'mainboard' && this.selectedComponents.cpu?.specs?.cpu_socket) {
+                        return { type: 'socket', value: this.selectedComponents.cpu.specs.cpu_socket };
                     }
 
                     // When selecting RAM, filter by Mainboard memory type
-                    if (this.currentComponentType === 'ram' && this.selectedComponents.mainboard?.specs?.memory_type) {
-                        filters.ramType = this.selectedComponents.mainboard.specs.memory_type;
+                    if (this.currentComponentType === 'ram' && this.selectedComponents.mainboard?.specs?.mb_memory_type) {
+                        return { type: 'ram', value: this.selectedComponents.mainboard.specs.mb_memory_type };
                     }
 
-                    // When selecting CPU, if mainboard selected, filter by its socket
-                    if (this.currentComponentType === 'cpu' && this.selectedComponents.mainboard?.specs?.socket) {
-                        filters.socket = this.selectedComponents.mainboard.specs.socket;
+                    // When selecting CPU, if mainboard is already selected, filter by its socket
+                    if (this.currentComponentType === 'cpu' && this.selectedComponents.mainboard?.specs?.mb_socket) {
+                        return { type: 'socket', value: this.selectedComponents.mainboard.specs.mb_socket };
                     }
 
-                    return filters;
+                    return null;
                 },
 
-                getFilterInfo() {
-                    const compat = this.getCompatibilityFilter();
-                    if (compat.socket) {
-                        return `Lọc theo socket: ${compat.socket}`;
+                getModalFilterInfo() {
+                    const filter = this.getCompatibilityFilter();
+                    if (!filter || this.skipCompatibilityFilter) return null;
+
+                    if (filter.type === 'socket') {
+                        return `Đang lọc theo socket: ${filter.value}`;
                     }
-                    if (compat.ramType) {
-                        return `Lọc theo loại RAM: ${compat.ramType}`;
+                    if (filter.type === 'ram') {
+                        return `Đang lọc theo RAM: ${filter.value}`;
                     }
                     return null;
                 },
 
-                getActiveFilter() {
+                getFilterHint() {
                     const cpu = this.selectedComponents.cpu;
                     const mb = this.selectedComponents.mainboard;
 
-                    if (cpu?.specs?.socket && !mb) {
-                        return `CPU socket ${cpu.specs.socket} - Mainboard sẽ được lọc tự động`;
+                    if (cpu?.specs?.cpu_socket && !mb) {
+                        return `CPU socket ${cpu.specs.cpu_socket} đã chọn - Mainboard sẽ được lọc tự động theo socket này`;
                     }
-                    if (mb?.specs?.memory_type && !this.selectedComponents.ram) {
-                        return `Mainboard hỗ trợ ${mb.specs.memory_type} - RAM sẽ được lọc tự động`;
+                    if (mb?.specs?.mb_memory_type && !this.selectedComponents.ram) {
+                        return `Mainboard hỗ trợ ${mb.specs.mb_memory_type} - RAM sẽ được lọc tự động theo loại này`;
                     }
                     return null;
                 },
 
                 clearCompatibilityFilter() {
                     this.skipCompatibilityFilter = true;
+                    this.currentPage = 1;
                     this.fetchProducts();
                 },
 
-                openModal(type) {
+                openModal(type, category) {
                     this.currentComponentType = type;
+                    this.currentCategory = category;
                     this.modalOpen = true;
                     this.products = [];
                     this.currentPage = 1;
                     this.skipCompatibilityFilter = false;
-                    this.clearFilters();
+                    this.filters = { search: '', priceRange: '', sort: '' };
                     this.fetchProducts();
                     document.body.style.overflow = 'hidden';
                 },
@@ -541,19 +528,10 @@
                     document.body.style.overflow = '';
                 },
 
-                clearFilters() {
-                    this.filters = {
-                        search: '',
-                        priceRange: '',
-                        sort: ''
-                    };
-                },
-
                 async fetchProducts() {
                     this.loading = true;
 
-                    const category = this.categoryMap[this.currentComponentType] || this.currentComponentType;
-                    let url = `/products?category=${category}&ajax=1&page=${this.currentPage}`;
+                    let url = `/products?category=${this.currentCategory}&ajax=1&page=${this.currentPage}&per_page=16`;
 
                     if (this.filters.search) {
                         url += `&search=${encodeURIComponent(this.filters.search)}`;
@@ -569,14 +547,14 @@
                         url += `&sort=${this.filters.sort}`;
                     }
 
-                    // Apply compatibility filters
-                    const compatFilters = this.getCompatibilityFilter();
-                    if (compatFilters.socket) {
-                        // Filter by socket in search
-                        url += `&socket_filter=${encodeURIComponent(compatFilters.socket)}`;
-                    }
-                    if (compatFilters.ramType) {
-                        url += `&ram_type_filter=${encodeURIComponent(compatFilters.ramType)}`;
+                    // Apply compatibility filters on server side
+                    const compatFilter = this.getCompatibilityFilter();
+                    if (compatFilter && !this.skipCompatibilityFilter) {
+                        if (compatFilter.type === 'socket') {
+                            url += `&socket_filter=${encodeURIComponent(compatFilter.value)}`;
+                        } else if (compatFilter.type === 'ram') {
+                            url += `&ram_type_filter=${encodeURIComponent(compatFilter.value)}`;
+                        }
                     }
 
                     try {
@@ -590,18 +568,23 @@
                         if (!response.ok) throw new Error('Network error');
 
                         const data = await response.json();
-                        let products = data.data || data.products || data;
+                        let products = data.data || data.products || [];
 
-                        // Client-side filtering for compatibility
-                        if (compatFilters.socket && Array.isArray(products)) {
-                            products = products.filter(p =>
-                                p.specs?.socket === compatFilters.socket
-                            );
-                        }
-                        if (compatFilters.ramType && Array.isArray(products)) {
-                            products = products.filter(p =>
-                                p.specs?.type === compatFilters.ramType
-                            );
+                        // Client-side filtering as backup if server doesn't filter
+                        if (compatFilter && !this.skipCompatibilityFilter && Array.isArray(products)) {
+                            if (compatFilter.type === 'socket') {
+                                const socketValue = compatFilter.value;
+                                products = products.filter(p => {
+                                    const socket = p.specs?.cpu_socket || p.specs?.mb_socket;
+                                    return socket === socketValue;
+                                });
+                            } else if (compatFilter.type === 'ram') {
+                                const ramValue = compatFilter.value;
+                                products = products.filter(p => {
+                                    const ramType = p.specs?.ram_type || p.specs?.mb_memory_type;
+                                    return ramType && ramType.includes(ramValue);
+                                });
+                            }
                         }
 
                         this.products = products;
@@ -666,65 +649,30 @@
                     return names[type] || type;
                 },
 
-                getComponentIcon(type) {
-                    const icons = {
-                        'cpu': '🔲',
-                        'gpu': '🎮',
-                        'mainboard': '🔌',
-                        'ram': '💾',
-                        'ssd': '💿',
-                        'psu': '⚡',
-                        'case': '🖥️',
-                        'cooler': '❄️'
-                    };
-                    return icons[type] || '📦';
-                },
-
                 checkCompatibility() {
-                    this.compatibilityMessages = [];
+                    this.compatibilityErrors = [];
                     const cpu = this.selectedComponents.cpu;
                     const mainboard = this.selectedComponents.mainboard;
                     const ram = this.selectedComponents.ram;
 
                     // Check CPU vs Mainboard (Socket)
                     if (cpu && mainboard) {
-                        const cpuSocket = cpu.specs?.socket;
-                        const mbSocket = mainboard.specs?.socket;
+                        const cpuSocket = cpu.specs?.cpu_socket;
+                        const mbSocket = mainboard.specs?.mb_socket;
 
                         if (cpuSocket && mbSocket && cpuSocket !== mbSocket) {
-                            this.compatibilityMessages.push({
-                                type: 'error',
-                                text: `❌ CPU socket (${cpuSocket}) không khớp với Mainboard (${mbSocket}). Vui lòng chọn lại!`
-                            });
+                            this.compatibilityErrors.push(`CPU socket (${cpuSocket}) không khớp với Mainboard socket (${mbSocket})`);
                         }
                     }
 
                     // Check RAM vs Mainboard (RAM Type)
                     if (ram && mainboard) {
-                        const ramType = ram.specs?.type;
-                        const mbRamSupport = mainboard.specs?.memory_type;
+                        const ramType = ram.specs?.ram_type;
+                        const mbRamSupport = mainboard.specs?.mb_memory_type;
 
                         if (ramType && mbRamSupport && !mbRamSupport.includes(ramType) && ramType !== mbRamSupport) {
-                            this.compatibilityMessages.push({
-                                type: 'error',
-                                text: `❌ RAM (${ramType}) không tương thích với Mainboard (hỗ trợ ${mbRamSupport}). Vui lòng chọn lại!`
-                            });
+                            this.compatibilityErrors.push(`RAM (${ramType}) không tương thích với Mainboard (hỗ trợ ${mbRamSupport})`);
                         }
-                    }
-
-                    // Info messages
-                    if (cpu && !mainboard) {
-                        this.compatibilityMessages.push({
-                            type: 'info',
-                            text: `ℹ️ CPU socket ${cpu.specs?.socket || 'N/A'} - Khi chọn Mainboard sẽ tự động lọc theo socket này`
-                        });
-                    }
-
-                    if (mainboard && !ram) {
-                        this.compatibilityMessages.push({
-                            type: 'info',
-                            text: `ℹ️ Mainboard hỗ trợ ${mainboard.specs?.memory_type || 'N/A'} - Khi chọn RAM sẽ tự động lọc theo loại này`
-                        });
                     }
                 },
 
@@ -743,8 +691,17 @@
                         this.selectedComponents.gpu &&
                         this.selectedComponents.mainboard &&
                         this.selectedComponents.ram;
-                    const noErrors = this.compatibilityMessages.filter(m => m.type === 'error').length === 0;
+                    const noErrors = this.compatibilityErrors.length === 0;
                     return hasRequired && noErrors;
+                },
+
+                getMissingComponents() {
+                    const missing = [];
+                    if (!this.selectedComponents.cpu) missing.push('CPU');
+                    if (!this.selectedComponents.mainboard) missing.push('Mainboard');
+                    if (!this.selectedComponents.gpu) missing.push('VGA');
+                    if (!this.selectedComponents.ram) missing.push('RAM');
+                    return 'Cần chọn: ' + missing.join(', ');
                 },
 
                 removeComponent(type) {
@@ -772,11 +729,12 @@
 
                 async addAllToCart() {
                     if (!this.canAddToCart) {
-                        alert('Vui lòng giải quyết các vấn đề tương thích trước khi thêm vào giỏ hàng.');
+                        alert('Vui lòng chọn đủ linh kiện bắt buộc và giải quyết các vấn đề tương thích.');
                         return;
                     }
 
                     const components = Object.values(this.selectedComponents).filter(c => c !== null);
+                    let successCount = 0;
 
                     for (const component of components) {
                         try {
@@ -784,31 +742,44 @@
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json',
-                                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                                    'Accept': 'application/json',
+                                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || ''
                                 },
                                 body: JSON.stringify({ quantity: 1 })
                             });
 
-                            if (!response.ok) {
-                                throw new Error('Failed to add to cart');
+                            if (response.ok) {
+                                successCount++;
+                            } else if (response.status === 401) {
+                                // Not authenticated
+                                window.location.href = '{{ route("login") }}';
+                                return;
                             }
                         } catch (error) {
                             console.error('Error adding to cart:', error);
                         }
                     }
 
-                    // Clear build after adding to cart
-                    this.selectedComponents = {
-                        cpu: null, mainboard: null, gpu: null, ram: null,
-                        ssd: null, psu: null, case: null, cooler: null
-                    };
-                    this.save();
+                    if (successCount > 0) {
+                        // Clear build after adding to cart
+                        this.selectedComponents = {
+                            cpu: null, mainboard: null, gpu: null, ram: null,
+                            ssd: null, psu: null, case: null, cooler: null
+                        };
+                        this.save();
 
-                    window.location.href = '{{ route("cart.index") }}';
+                        window.location.href = '{{ route("cart.index") }}';
+                    } else {
+                        alert('Không thể thêm sản phẩm vào giỏ hàng. Vui lòng thử lại.');
+                    }
                 },
 
                 save() {
-                    localStorage.setItem('pcBuild', JSON.stringify(this.selectedComponents));
+                    try {
+                        localStorage.setItem('pcBuild', JSON.stringify(this.selectedComponents));
+                    } catch (e) {
+                        console.error('Error saving build:', e);
+                    }
                 },
 
                 formatPrice(price) {

@@ -70,7 +70,8 @@ class ProductController extends Controller
             $socketFilter = $request->input('socket_filter');
             $query->whereHas('specs', function ($q) use ($socketFilter) {
                 $q->whereHas('specDefinition', function ($q2) {
-                    $q2->where('code', 'socket');
+                    // Both CPU and Mainboard use different spec codes for socket
+                    $q2->whereIn('code', ['cpu_socket', 'mb_socket']);
                 })->where('value', $socketFilter);
             });
         }
@@ -80,8 +81,8 @@ class ProductController extends Controller
             $ramTypeFilter = $request->input('ram_type_filter');
             $query->whereHas('specs', function ($q) use ($ramTypeFilter) {
                 $q->whereHas('specDefinition', function ($q2) {
-                    // Check for both 'type' (RAM) and 'memory_type' (Mainboard) codes
-                    $q2->whereIn('code', ['type', 'memory_type']);
+                    // RAM uses 'ram_type', Mainboard uses 'mb_memory_type'
+                    $q2->whereIn('code', ['ram_type', 'mb_memory_type']);
                 })->where('value', 'like', "%{$ramTypeFilter}%");
             });
         }
