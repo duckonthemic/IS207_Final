@@ -218,6 +218,7 @@
                                 </div>
                             </form>
 
+                            @if(!in_array($product->category->slug, ['pc-gaming', 'pc-ai-workstation', 'pc-office', 'pc-design']))
                             <a href="{{ route('build-pc') }}"
                                 class="block w-full mt-4 border-2 border-gray-200 text-gray-700 font-bold py-3 rounded-xl hover:border-gray-900 hover:text-gray-900 transition-all text-center flex items-center justify-center gap-2 group">
                                 <svg class="w-5 h-5 text-gray-400 group-hover:text-gray-900 transition-colors" fill="none"
@@ -228,6 +229,7 @@
                                 </svg>
                                 Build PC với linh kiện này
                             </a>
+                            @endif
                         @else
                             <div class="bg-gray-100 rounded-xl p-4 text-center text-gray-500 font-medium">
                                 Sản phẩm hiện đang hết hàng
