@@ -43,8 +43,8 @@ Route::get('/privacy', function () {
 })->name('privacy');
 Route::get('/page/{slug}', [PageController::class, 'show'])->name('page.show');
 
-// Cart add - can be accessed by guests (will redirect to login)
-Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('cart.add')->middleware('auth');
+// Cart add - explicitly use ID for product binding (Build PC uses IDs)
+Route::post('/cart/add/{product:id}', [CartController::class, 'add'])->name('cart.add')->middleware('auth');
 
 // Auth routes
 Route::middleware('auth')->group(function () {
