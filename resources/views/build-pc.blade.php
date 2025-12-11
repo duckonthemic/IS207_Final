@@ -735,42 +735,63 @@
 
                     const components = Object.values(this.selectedComponents).filter(c => c !== null);
                     let successCount = 0;
+                    let errorMessages = [];
+
+                    const csrfToken = document.querySelector('meta[name="csrf-token"]')?.content;
+                    if (!csrfToken) {
+                        alert('Lỗi: Không tìm thấy CSRF token. Vui lòng tải lại trang.');
+                        return;
+                    }
 
                     for (const component of components) {
+                        if (!component.id) {
+                            errorMessages.push(`${component.name}: ID không hợp lệ`);
+                            continue;
+                        }
+
                         try {
+                            console.log('Adding to cart:', component.id, component.name);
                             const response = await fetch(`/cart/add/${component.id}`, {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json',
                                     'Accept': 'application/json',
-                                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || ''
+                                    'X-CSRF-TOKEN': csrfToken,
+                                    'X-Requested-With': 'XMLHttpRequest'
                                 },
                                 body: JSON.stringify({ quantity: 1 })
                             });
 
+                            console.log('Response status:', response.status);
+
                             if (response.ok) {
                                 successCount++;
                             } else if (response.status === 401) {
-                                // Not authenticated
                                 window.location.href = '{{ route("login") }}';
                                 return;
+                            } else if (response.status === 404) {
+                                errorMessages.push(`${component.name}: Sản phẩm không tồn tại (ID: ${component.id})`);
+                            } else {
+                                const data = await response.json().catch(() => ({}));
+                                errorMessages.push(`${component.name}: ${data.error || 'Lỗi ' + response.status}`);
                             }
                         } catch (error) {
-                            console.error('Error adding to cart:', error);
+                            console.error('Error adding to cart:', component.name, error);
+                            errorMessages.push(`${component.name}: Lỗi kết nối`);
                         }
                     }
 
+                    if (errorMessages.length > 0) {
+                        alert('Một số sản phẩm không thể thêm vào giỏ:\n' + errorMessages.join('\n'));
+                    }
+
                     if (successCount > 0) {
-                        // Clear build after adding to cart
                         this.selectedComponents = {
                             cpu: null, mainboard: null, gpu: null, ram: null,
                             ssd: null, psu: null, case: null, cooler: null
                         };
                         this.save();
-
                         window.location.href = '{{ route("cart.index") }}';
-                    } else {
-                        alert('Không thể thêm sản phẩm vào giỏ hàng. Vui lòng thử lại.');
                     }
                 },
 
