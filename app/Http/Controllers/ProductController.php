@@ -504,4 +504,45 @@ class ProductController extends Controller
             'brands' => $brands
         ]);
     }
+
+    /**
+     * Get products for comparison modal (AJAX)
+     */
+    public function getProductsForCompare(Request $request)
+    {
+        $categoryId = $request->input('category_id');
+        $excludeIds = $request->input('exclude_ids', []);
+        $search = $request->input('search', '');
+        
+        $query = Product::with(['category', 'images'])
+            ->where('is_active', true)
+            ->whereNotIn('id', (array) $excludeIds);
+        
+        if ($categoryId) {
+            $category = Category::find($categoryId);
+            if ($category) {
+                $categoryIds = $this->getCategoryAndChildrenIds($category);
+                $query->whereIn('category_id', $categoryIds);
+            }
+        }
+        
+        if ($search) {
+            $query->where('name', 'like', "%{$search}%");
+        }
+        
+        $products = $query->orderBy('name')->limit(20)->get();
+        
+        return response()->json([
+            'products' => $products->map(fn($p) => [
+                'id' => $p->id,
+                'name' => $p->name,
+                'slug' => $p->slug,
+                'price' => $p->sale_price ?? $p->price,
+                'formatted_price' => number_format($p->sale_price ?? $p->price, 0, ',', '.') . '₫',
+                'image' => $p->image_url ?? asset('images/no-image.png'),
+                'category' => $p->category?->name,
+                'category_id' => $p->category_id,
+            ])
+        ]);
+    }
 }

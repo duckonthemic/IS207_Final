@@ -150,10 +150,10 @@
                                                 </svg>
                                             </div>
                                             <p class="text-sm text-gray-400 mb-3">Thêm sản phẩm</p>
-                                            <a href="{{ route('products.index') }}" 
-                                                class="text-blue-600 hover:text-blue-800 text-sm font-medium hover:underline">
+                                            <button @click="openProductModal()" 
+                                                class="text-blue-600 hover:text-blue-800 text-sm font-medium hover:underline cursor-pointer">
                                                 Chọn sản phẩm
-                                            </a>
+                                            </button>
                                         </div>
                                     </td>
                                 @endfor
@@ -299,11 +299,161 @@
             @endif
         @endif
     </div>
+    
+    {{-- Product Selection Modal --}}
+    <div x-show="showModal" 
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0"
+         class="fixed inset-0 z-50 overflow-y-auto" 
+         style="display: none;">
+        <div class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:p-0">
+            {{-- Backdrop --}}
+            <div class="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity" @click="closeModal()"></div>
+            
+            {{-- Modal Content --}}
+            <div x-show="showModal"
+                 x-transition:enter="transition ease-out duration-300"
+                 x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                 x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                 class="relative inline-block w-full max-w-4xl my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+                
+                {{-- Modal Header --}}
+                <div class="px-6 py-4 border-b border-gray-200 bg-gray-50">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-xl font-bold text-gray-900">Chọn sản phẩm để so sánh</h3>
+                        <button @click="closeModal()" class="text-gray-400 hover:text-gray-600 transition-colors">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-1" x-show="currentCategoryId">Hiển thị sản phẩm cùng danh mục</p>
+                    
+                    {{-- Search --}}
+                    <div class="mt-4">
+                        <input type="text" 
+                               x-model.debounce.300ms="searchQuery"
+                               placeholder="Tìm kiếm sản phẩm..."
+                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+                </div>
+                
+                {{-- Modal Body --}}
+                <div class="px-6 py-4 max-h-[60vh] overflow-y-auto">
+                    {{-- Loading State --}}
+                    <div x-show="modalLoading" class="flex items-center justify-center py-12">
+                        <svg class="animate-spin h-8 w-8 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                    </div>
+                    
+                    {{-- Products Grid --}}
+                    <div x-show="!modalLoading" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                        <template x-for="product in modalProducts" :key="product.id">
+                            <div @click="selectProduct(product)" 
+                                 class="p-4 border border-gray-200 rounded-xl hover:border-blue-500 hover:shadow-lg cursor-pointer transition-all group">
+                                <div class="aspect-square bg-gray-100 rounded-lg mb-3 overflow-hidden">
+                                    <img :src="product.image" :alt="product.name" class="w-full h-full object-contain group-hover:scale-105 transition-transform">
+                                </div>
+                                <h4 class="font-medium text-gray-900 text-sm line-clamp-2 mb-1" x-text="product.name"></h4>
+                                <p class="text-xs text-gray-500 mb-2" x-text="product.category"></p>
+                                <p class="font-bold text-blue-600" x-text="product.formatted_price"></p>
+                            </div>
+                        </template>
+                    </div>
+                    
+                    {{-- Empty State --}}
+                    <div x-show="!modalLoading && modalProducts.length === 0" class="text-center py-12">
+                        <svg class="w-16 h-16 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <p class="text-gray-500">Không tìm thấy sản phẩm phù hợp</p>
+                    </div>
+                </div>
+                
+                {{-- Modal Footer --}}
+                <div class="px-6 py-4 border-t border-gray-200 bg-gray-50 flex justify-end">
+                    <button @click="closeModal()" 
+                            class="px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors font-medium">
+                        Đóng
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>
 function comparePage() {
     return {
+        showModal: false,
+        modalProducts: [],
+        modalLoading: false,
+        searchQuery: '',
+        currentCategoryId: {{ $products->first()?->category_id ?? 'null' }},
+        currentProductIds: [{{ $products->pluck('id')->join(',') }}],
+        
+        init() {
+            this.$watch('searchQuery', () => {
+                if (this.showModal) {
+                    this.fetchProducts();
+                }
+            });
+        },
+        
+        openProductModal() {
+            this.showModal = true;
+            this.fetchProducts();
+        },
+        
+        closeModal() {
+            this.showModal = false;
+            this.modalProducts = [];
+            this.searchQuery = '';
+        },
+        
+        async fetchProducts() {
+            this.modalLoading = true;
+            try {
+                const params = new URLSearchParams();
+                if (this.currentCategoryId) {
+                    params.append('category_id', this.currentCategoryId);
+                }
+                if (this.currentProductIds.length > 0) {
+                    this.currentProductIds.forEach(id => params.append('exclude_ids[]', id));
+                }
+                if (this.searchQuery) {
+                    params.append('search', this.searchQuery);
+                }
+                
+                const response = await fetch(`{{ route('products.for-compare') }}?${params.toString()}`);
+                const data = await response.json();
+                this.modalProducts = data.products;
+            } catch (error) {
+                console.error('Error fetching products:', error);
+            } finally {
+                this.modalLoading = false;
+            }
+        },
+        
+        selectProduct(product) {
+            // Add to compare list in localStorage
+            let compareList = JSON.parse(localStorage.getItem('compareList') || '[]');
+            if (!compareList.find(p => p.id === product.id)) {
+                compareList.push(product);
+                localStorage.setItem('compareList', JSON.stringify(compareList));
+            }
+            
+            // Reload page with new product
+            const ids = [...this.currentProductIds, product.id];
+            window.location.href = '{{ route("products.compare") }}?ids=' + ids.join(',');
+        },
+        
         removeProduct(id) {
             const saved = localStorage.getItem('compareList');
             if (saved) {

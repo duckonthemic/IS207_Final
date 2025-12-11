@@ -20,6 +20,7 @@ Route::get('/', function () {
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::get('/products/compare', [ProductController::class, 'compare'])->name('products.compare');
 Route::get('/api/search/suggestions', [ProductController::class, 'searchSuggestions'])->name('search.suggestions');
+Route::get('/api/products/for-compare', [ProductController::class, 'getProductsForCompare'])->name('products.for-compare');
 Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
 Route::get('/api/products/{product}', [ProductController::class, 'getJson'])->name('products.json');
 
