@@ -26,4 +26,9 @@ class Brand extends Model
     {
         return 'slug';
     }
+
+    public function scopeOrdered($query)
+    {
+        return $query->orderBy('name');
+    }
 }

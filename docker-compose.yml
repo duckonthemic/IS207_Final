@@ -26,6 +26,7 @@ services:
     volumes:
       - ./storage:/var/www/storage
       - ./public/images:/var/www/public/images
+      - ./.env:/var/www/.env
     depends_on:
       db:
         condition: service_healthy

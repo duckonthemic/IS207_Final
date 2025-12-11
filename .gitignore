@@ -38,3 +38,6 @@ _ide_helper_models.php
 # Docker
 docker-compose.override.yml
 .docker/
+docker-compose.yml
+Dockerfile
+.env.docker
