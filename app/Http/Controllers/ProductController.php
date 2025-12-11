@@ -15,11 +15,11 @@ class ProductController extends Controller
     /**
      * Display a listing of products with search, filter, and sort
      */
-    public function index(Request $request): View
+    public function index(Request $request)
     {
         $perPage = $request->input('per_page', 12);
 
-        $query = Product::with(['category', 'images'])
+        $query = Product::with(['category', 'images', 'specs.specDefinition'])
             ->withCount(['approvedReviews as approved_reviews_count']);
 
         // Search
@@ -64,6 +64,28 @@ class ProductController extends Controller
             }
         }
 
+        // Compatibility filters for Build PC feature
+        // Filter by socket (for CPU and Mainboard compatibility)
+        if ($request->filled('socket_filter')) {
+            $socketFilter = $request->input('socket_filter');
+            $query->whereHas('specs', function ($q) use ($socketFilter) {
+                $q->whereHas('specDefinition', function ($q2) {
+                    $q2->where('code', 'socket');
+                })->where('value', $socketFilter);
+            });
+        }
+
+        // Filter by RAM type (for Mainboard and RAM compatibility)
+        if ($request->filled('ram_type_filter')) {
+            $ramTypeFilter = $request->input('ram_type_filter');
+            $query->whereHas('specs', function ($q) use ($ramTypeFilter) {
+                $q->whereHas('specDefinition', function ($q2) {
+                    // Check for both 'type' (RAM) and 'memory_type' (Mainboard) codes
+                    $q2->whereIn('code', ['type', 'memory_type']);
+                })->where('value', 'like', "%{$ramTypeFilter}%");
+            });
+        }
+
         // Spec-based filtering using product_specs table
         $this->applySpecFilters($query, $request);
 
@@ -77,6 +99,7 @@ class ProductController extends Controller
                 $query->orderBy('price', 'desc');
                 break;
             case 'name':
+            case 'name_asc':
                 $query->orderBy('name', 'asc');
                 break;
             case 'latest':
@@ -86,6 +109,31 @@ class ProductController extends Controller
         }
 
         $products = $query->paginate($perPage)->withQueryString()->fragment('product-list');
+
+        // Return JSON for AJAX requests (used by Build PC modal)
+        if ($request->has('ajax') || $request->wantsJson() || $request->ajax()) {
+            return response()->json([
+                'data' => $products->map(function ($product) {
+                    return [
+                        'id' => $product->id,
+                        'name' => $product->name,
+                        'slug' => $product->slug,
+                        'price' => $product->price,
+                        'sale_price' => $product->sale_price,
+                        'stock' => $product->stock,
+                        'brand' => $product->brand,
+                        'image_url' => $product->image_url ?? asset('images/no-image.png'),
+                        'category' => $product->category?->name,
+                        'specs' => $product->specs?->mapWithKeys(fn($s) => [$s->specDefinition?->code => $s->value]) ?? [],
+                    ];
+                }),
+                'current_page' => $products->currentPage(),
+                'last_page' => $products->lastPage(),
+                'per_page' => $products->perPage(),
+                'total' => $products->total(),
+            ]);
+        }
+
         $categories = Category::root()->with('children')->orderBy('name')->get();
 
         // Get available filter options based on current category
@@ -513,11 +561,11 @@ class ProductController extends Controller
         $categoryId = $request->input('category_id');
         $excludeIds = $request->input('exclude_ids', []);
         $search = $request->input('search', '');
-        
+
         $query = Product::with(['category', 'images'])
             ->where('is_active', true)
             ->whereNotIn('id', (array) $excludeIds);
-        
+
         if ($categoryId) {
             $category = Category::find($categoryId);
             if ($category) {
@@ -525,13 +573,13 @@ class ProductController extends Controller
                 $query->whereIn('category_id', $categoryIds);
             }
         }
-        
+
         if ($search) {
             $query->where('name', 'like', "%{$search}%");
         }
-        
+
         $products = $query->orderBy('name')->limit(20)->get();
-        
+
         return response()->json([
             'products' => $products->map(fn($p) => [
                 'id' => $p->id,
