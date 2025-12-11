@@ -9,6 +9,7 @@ use App\Models\Brand;
 use App\Models\ComponentType;
 use App\Models\SpecDefinition;
 use App\Models\ProductSpec;
+use App\Services\AuditService;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -84,6 +85,9 @@ class ProductController extends Controller
                 $this->syncProductSpecs($product, $validated['specs']);
             }
 
+            // Log audit
+            AuditService::logCreate($product);
+
             DB::commit();
 
             return redirect()->route('admin.products.index')
@@ -151,12 +155,16 @@ class ProductController extends Controller
 
         DB::beginTransaction();
         try {
+            $oldValues = $product->toArray();
             $product->update($validated);
 
             // Sync specs nếu có
             if (isset($validated['specs'])) {
                 $this->syncProductSpecs($product, $validated['specs']);
             }
+
+            // Log audit
+            AuditService::logUpdate($product, $oldValues);
 
             DB::commit();
 
@@ -173,6 +181,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product): RedirectResponse
     {
+        AuditService::logDelete($product);
         $product->delete();
         return redirect()->route('admin.products.index')
             ->with('success', 'Sản phẩm đã được xóa');
