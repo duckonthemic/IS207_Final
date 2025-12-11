@@ -17,18 +17,36 @@ class OrderController extends Controller
         $perPage = $request->input('per_page', 20);
         $status = $request->input('status');
         $payment_status = $request->input('payment_status');
+        $search = $request->input('search');
+        $dateFrom = $request->input('date_from');
+        $dateTo = $request->input('date_to');
 
         $query = Order::with('user', 'items');
 
+        // Search by order code
+        if ($search) {
+            $query->where('order_code', 'like', "%{$search}%");
+        }
+
+        // Filter by status
         if ($status) {
             $query->where('status', $status);
         }
 
+        // Filter by payment status
         if ($payment_status) {
             $query->where('payment_status', $payment_status);
         }
 
-        $orders = $query->latest('placed_at')->paginate($perPage);
+        // Filter by date range
+        if ($dateFrom) {
+            $query->whereDate('placed_at', '>=', $dateFrom);
+        }
+        if ($dateTo) {
+            $query->whereDate('placed_at', '<=', $dateTo);
+        }
+
+        $orders = $query->latest('placed_at')->paginate($perPage)->withQueryString();
 
         return view('admin.orders.index', compact('orders'));
     }

@@ -10,8 +10,8 @@
 
 | Loại yêu cầu | Đã hoàn thành | Chưa hoàn thành | Cần cải thiện |
 |--------------|---------------|-----------------|---------------|
-| **Cơ bản bắt buộc** | 17/18 | 1 | 2 |
-| **Nâng cao** | 3/6 | 3 | 1 |
+| **Cơ bản bắt buộc** | 18/18 | 0 | 1 |
+| **Nâng cao** | 4/6 | 2 | 0 |
 | **Giao diện & UX** | 5/5 | 0 | 0 |
 
 ---
@@ -253,9 +253,13 @@
 ### ⚠️ Chưa hoàn thành / Cần cải thiện
 
 #### 2.7 Xem đơn hàng theo khoảng thời gian
-- **Trạng thái:** ⚠️ **CHƯA ĐẦY ĐỦ**
-- **Mô tả:** Hiện tại lọc theo status, chưa có date range picker
-- **Đề xuất:** Thêm filter `date_from`, `date_to`
+- **Trạng thái:** ✅ **HOÀN THÀNH** (Mới triển khai)
+- **Vị trí:** `Admin\OrderController::index()` ([file](file:///c:/Users/hoang/Downloads/pc-parts-e-store-boilerplate/app/Http/Controllers/Admin/OrderController.php))
+- **Tính năng:**
+  - Filter date_from và date_to với input type="date"
+  - Kết hợp với các filter status, payment_status
+  - Tìm kiếm theo mã đơn hàng
+  - Phân trang giữ lại query string
 
 #### 2.8 Xem đơn hàng theo thành tiền
 - **Trạng thái:** ⚠️ **CHƯA HOÀN THÀNH**
