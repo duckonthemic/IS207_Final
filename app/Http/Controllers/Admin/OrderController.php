@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Services\AuditService;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 
@@ -71,7 +72,34 @@ class OrderController extends Controller
             'payment_status' => 'required|in:pending,paid,failed,refunded',
         ]);
 
+        // Store old values for comparison
+        $oldStatus = $order->status;
+        $oldPaymentStatus = $order->payment_status;
+
+        // Check if status is changing to cancelled/refunded
+        $isBecomingCancelled = in_array($validated['status'], ['cancelled', 'refunded'])
+            && !in_array($oldStatus, ['cancelled', 'refunded']);
+
+        // Check if payment is being refunded
+        $isPaymentRefunded = $validated['payment_status'] === 'refunded'
+            && $oldPaymentStatus !== 'refunded';
+
+        // Restore stock if order is being cancelled/refunded
+        if ($isBecomingCancelled || $isPaymentRefunded) {
+            $this->restoreStock($order);
+        }
+
         $order->update($validated);
+
+        // Log status change
+        if ($oldStatus !== $validated['status']) {
+            AuditService::logOrderStatusChange($order, $oldStatus, $validated['status']);
+        }
+
+        // Log payment status change
+        if ($oldPaymentStatus !== $validated['payment_status']) {
+            AuditService::logPaymentStatusChange($order, $oldPaymentStatus, $validated['payment_status']);
+        }
 
         return back()->with('success', 'Trạng thái đơn hàng đã được cập nhật');
     }
@@ -86,7 +114,34 @@ class OrderController extends Controller
             'payment_status' => 'sometimes|in:pending,paid,failed,refunded',
         ]);
 
+        // Store old values
+        $oldStatus = $order->status;
+        $oldPaymentStatus = $order->payment_status;
+
+        // Check if status is changing to cancelled/refunded
+        $newStatus = $validated['status'] ?? $oldStatus;
+        $newPaymentStatus = $validated['payment_status'] ?? $oldPaymentStatus;
+
+        $isBecomingCancelled = in_array($newStatus, ['cancelled', 'refunded'])
+            && !in_array($oldStatus, ['cancelled', 'refunded']);
+
+        $isPaymentRefunded = $newPaymentStatus === 'refunded'
+            && $oldPaymentStatus !== 'refunded';
+
+        // Restore stock if being cancelled/refunded
+        if ($isBecomingCancelled || $isPaymentRefunded) {
+            $this->restoreStock($order);
+        }
+
         $order->update($validated);
+
+        // Log changes
+        if (isset($validated['status']) && $oldStatus !== $validated['status']) {
+            AuditService::logOrderStatusChange($order, $oldStatus, $validated['status']);
+        }
+        if (isset($validated['payment_status']) && $oldPaymentStatus !== $validated['payment_status']) {
+            AuditService::logPaymentStatusChange($order, $oldPaymentStatus, $validated['payment_status']);
+        }
 
         return response()->json([
             'success' => true,
@@ -96,5 +151,19 @@ class OrderController extends Controller
                 'payment_status' => $order->payment_status,
             ]
         ]);
+    }
+
+    /**
+     * Restore product stock when order is cancelled/refunded
+     */
+    private function restoreStock(Order $order): void
+    {
+        $order->load('items.product');
+
+        foreach ($order->items as $item) {
+            if ($item->product) {
+                $item->product->increment('stock', $item->qty);
+            }
+        }
     }
 }

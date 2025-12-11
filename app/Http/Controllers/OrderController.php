@@ -97,7 +97,20 @@ class OrderController extends Controller
             return back()->with('error', 'Không thể hủy đơn hàng này');
         }
 
+        $oldStatus = $order->status;
+
+        // Restore product stock
+        $order->load('items.product');
+        foreach ($order->items as $item) {
+            if ($item->product) {
+                $item->product->increment('stock', $item->qty);
+            }
+        }
+
         $order->update(['status' => 'cancelled']);
+
+        // Log the cancellation
+        \App\Services\AuditService::logOrderStatusChange($order, $oldStatus, 'cancelled');
 
         return back()->with('success', 'Đơn hàng đã bị hủy');
     }

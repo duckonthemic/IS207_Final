@@ -19,8 +19,10 @@ class DashboardController extends Controller
     {
         // Total stats
         $totalOrders = Order::count();
-        // Include 'delivered' status for revenue calculation
-        $totalRevenue = Order::whereIn('status', ['delivered', 'completed', 'shipped', 'processing'])->sum('total');
+        // Include 'delivered' status for revenue calculation, exclude refunded payments
+        $totalRevenue = Order::whereIn('status', ['delivered', 'completed', 'shipped', 'processing'])
+            ->where('payment_status', '!=', 'refunded')
+            ->sum('total');
         $totalUsers = User::where('role', 'user')->count();
         $totalProducts = Product::count();
 
@@ -34,6 +36,7 @@ class DashboardController extends Controller
         $pendingOrders = Order::where('status', 'pending')->count();
         $revenueToday = Order::whereDate('created_at', today())
             ->whereIn('status', ['delivered', 'completed', 'shipped', 'processing'])
+            ->where('payment_status', '!=', 'refunded')
             ->sum('total');
         $newUsersToday = User::whereDate('created_at', today())->count();
 
@@ -53,6 +56,7 @@ class DashboardController extends Controller
 
         $revenueByDate = Order::whereBetween('created_at', [$startDate->startOfDay(), $endDate->endOfDay()])
             ->whereIn('status', ['delivered', 'completed', 'shipped', 'processing'])
+            ->where('payment_status', '!=', 'refunded')
             ->selectRaw('DATE(created_at) as date, SUM(total) as revenue')
             ->groupBy('date')
             ->pluck('revenue', 'date');
