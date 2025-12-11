@@ -389,6 +389,67 @@
                 </div>
             </form>
         </div>
+
+        {{-- Payment Simulation Modal --}}
+        <div x-show="showPaymentModal" 
+             x-transition:enter="transition ease-out duration-200"
+             x-transition:enter-start="opacity-0"
+             x-transition:enter-end="opacity-100"
+             x-transition:leave="transition ease-in duration-150"
+             x-transition:leave-start="opacity-100"
+             x-transition:leave-end="opacity-0"
+             class="fixed inset-0 z-50 flex items-center justify-center p-4" 
+             style="display: none;">
+            
+            <div class="absolute inset-0 bg-black/60"></div>
+            
+            <div class="relative bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 text-center"
+                 x-transition:enter="transition ease-out duration-200"
+                 x-transition:enter-start="opacity-0 scale-95"
+                 x-transition:enter-end="opacity-100 scale-100">
+                
+                {{-- Processing State --}}
+                <div x-show="paymentState === 'processing'">
+                    <div class="w-20 h-20 mx-auto mb-6 relative">
+                        <div class="absolute inset-0 rounded-full border-4 border-gray-200"></div>
+                        <div class="absolute inset-0 rounded-full border-4 border-gray-900 border-t-transparent animate-spin"></div>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Đang xử lý thanh toán</h3>
+                    <p class="text-gray-500 mb-4">Vui lòng không đóng trang này...</p>
+                    <div class="text-sm text-gray-400">
+                        <span x-text="getPaymentMethodName()"></span> - 
+                        <span x-text="formattedTotal"></span>
+                    </div>
+                </div>
+
+                {{-- Success State --}}
+                <div x-show="paymentState === 'success'">
+                    <div class="w-20 h-20 mx-auto mb-6 bg-green-100 rounded-full flex items-center justify-center">
+                        <svg class="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Thanh toán thành công!</h3>
+                    <p class="text-gray-500 mb-4">Đang tạo đơn hàng của bạn...</p>
+                    <div class="text-2xl font-bold text-green-600" x-text="formattedTotal"></div>
+                </div>
+
+                {{-- Failed State (for demo purposes) --}}
+                <div x-show="paymentState === 'failed'">
+                    <div class="w-20 h-20 mx-auto mb-6 bg-red-100 rounded-full flex items-center justify-center">
+                        <svg class="w-10 h-10 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Thanh toán thất bại</h3>
+                    <p class="text-gray-500 mb-6">Vui lòng kiểm tra lại thông tin thẻ và thử lại.</p>
+                    <button @click="closePaymentModal()" 
+                            class="px-6 py-3 bg-gray-900 text-white font-medium rounded-xl hover:bg-gray-800 transition">
+                        Thử lại
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -412,6 +473,11 @@
 
                 cardNumber: '',
                 cardExpiry: '',
+
+                // Payment simulation
+                showPaymentModal: false,
+                paymentState: 'processing', // processing, success, failed
+                formReference: null,
 
                 get total() {
                     return Math.max(0, this.subtotal - this.discount + this.shippingFee);
@@ -441,6 +507,48 @@
                     let value = this.cardExpiry.replace(/\D/g, '');
                     if (value.length >= 2) value = value.substring(0, 2) + '/' + value.substring(2, 4);
                     this.cardExpiry = value.substring(0, 5);
+                },
+
+                getPaymentMethodName() {
+                    const names = {
+                        'cod': 'Thanh toán khi nhận hàng',
+                        'bank_transfer': 'Chuyển khoản ngân hàng',
+                        'atm': 'Thẻ ATM/Visa/Master',
+                        'fundiin': 'Trả sau Fundiin'
+                    };
+                    return names[this.selectedPayment] || this.selectedPayment;
+                },
+
+                isOnlinePayment() {
+                    return ['atm', 'bank_transfer', 'fundiin'].includes(this.selectedPayment);
+                },
+
+                async simulatePayment() {
+                    this.paymentState = 'processing';
+                    this.showPaymentModal = true;
+                    document.body.style.overflow = 'hidden';
+
+                    // Simulate payment processing (3 seconds)
+                    await new Promise(resolve => setTimeout(resolve, 3000));
+
+                    // Simulate success (you can add random failure for demo: Math.random() > 0.1)
+                    this.paymentState = 'success';
+
+                    // Wait 1.5 seconds then submit the real form
+                    await new Promise(resolve => setTimeout(resolve, 1500));
+                    
+                    // Submit the form
+                    if (this.formReference) {
+                        this.showPaymentModal = false;
+                        document.body.style.overflow = '';
+                        this.formReference.submit();
+                    }
+                },
+
+                closePaymentModal() {
+                    this.showPaymentModal = false;
+                    this.paymentState = 'processing';
+                    document.body.style.overflow = '';
                 },
 
                 async loadShippingMethods() {
@@ -512,7 +620,22 @@
                     if (!this.selectedCity || !this.selectedShipping) {
                         e.preventDefault();
                         alert('Vui lòng chọn tỉnh/thành và phương thức vận chuyển');
+                        return;
                     }
+
+                    if (!this.selectedPayment) {
+                        e.preventDefault();
+                        alert('Vui lòng chọn phương thức thanh toán');
+                        return;
+                    }
+
+                    // For online payment methods, show simulation modal
+                    if (this.isOnlinePayment()) {
+                        e.preventDefault();
+                        this.formReference = e.target;
+                        this.simulatePayment();
+                    }
+                    // For COD, submit form directly (no simulation needed)
                 }
             }
         }

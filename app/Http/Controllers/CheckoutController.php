@@ -325,13 +325,18 @@ class CheckoutController extends Controller
 
             $total = $subtotal - $discount + $shippingFee;
 
+            // Determine payment status based on method
+            // Online payments (atm, bank_transfer, fundiin) are simulated and marked as paid
+            $onlinePaymentMethods = ['atm', 'bank_transfer', 'fundiin'];
+            $paymentStatus = in_array($request->payment_method, $onlinePaymentMethods) ? 'paid' : 'pending';
+
             // Create order
             $order = Order::create([
                 'user_id' => Auth::id(),
                 'order_code' => $this->generateOrderCode(),
                 'status' => 'pending',
                 'payment_method' => $request->payment_method,
-                'payment_status' => 'pending',
+                'payment_status' => $paymentStatus,
                 'subtotal' => $subtotal,
                 'discount' => $discount,
                 'shipping_fee' => $shippingFee,
