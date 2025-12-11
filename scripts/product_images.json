@@ -1,0 +1,506 @@
+{
+  "CPU": [
+    {
+      "id": "cpu-intel-i5-14400f",
+      "name": "Intel Core i5-14400F",
+      "source_urls": [
+        "https://staticg.sportskeeda.com/editor/2023/01/22bdf-16748317642962-1920.jpg",
+        "https://www.thefpsreview.com/wp-content/uploads/2022/09/13th-gen-intel-core-processor-key-visual.jpg",
+        "https://www.intel.com/content/dam/www/central-libraries/us/en/images/2022-08/rpl-2022-dotcom-2col-nextlevel.png",
+        "https://cdn.wccftech.com/wp-content/uploads/2023/06/Intel-Core-Branding-New-For-Meteor-Lake-CPUs-_10.png",
+        "https://cdn.arstechnica.net/wp-content/uploads/2022/09/intel-13th-gen.jpeg",
+        "https://staticg.sportskeeda.com/editor/2022/09/d2a09-16642743325895-1920.jpg"
+      ],
+      "downloaded": [
+        "images/products/cpu-intel-i5-14400f/1.jpg",
+        "images/products/cpu-intel-i5-14400f/2.jpg",
+        "images/products/cpu-intel-i5-14400f/4.jpg",
+        "images/products/cpu-intel-i5-14400f/5.jpg",
+        "images/products/cpu-intel-i5-14400f/6.jpg"
+      ]
+    },
+    {
+      "id": "cpu-intel-i7-14700k",
+      "name": "Intel Core i7-14700K",
+      "source_urls": [
+        "https://staticg.sportskeeda.com/editor/2023/01/22bdf-16748317642962-1920.jpg",
+        "https://www.thefpsreview.com/wp-content/uploads/2022/09/13th-gen-intel-core-processor-key-visual.jpg",
+        "https://www.intel.com/content/dam/www/central-libraries/us/en/images/2022-08/rpl-2022-dotcom-2col-nextlevel.png",
+        "https://cdn.wccftech.com/wp-content/uploads/2023/06/Intel-Core-Branding-New-For-Meteor-Lake-CPUs-_10.png",
+        "https://cdn.arstechnica.net/wp-content/uploads/2022/09/intel-13th-gen.jpeg",
+        "https://staticg.sportskeeda.com/editor/2022/09/d2a09-16642743325895-1920.jpg"
+      ],
+      "downloaded": [
+        "images/products/cpu-intel-i7-14700k/1.jpg",
+        "images/products/cpu-intel-i7-14700k/2.jpg",
+        "images/products/cpu-intel-i7-14700k/5.jpg",
+        "images/products/cpu-intel-i7-14700k/6.jpg"
+      ]
+    },
+    {
+      "id": "cpu-amd-ryzen-5-7600",
+      "name": "AMD Ryzen 5 7600",
+      "source_urls": [
+        "https://gamers.ge/wp-content/uploads/2024/02/AMD-Ryzen-5-7600-768x768.jpg",
+        "https://cdn.shopify.com/s/files/1/0355/8296/7943/files/AMDRyzen_7000SeriesDesktopProcessors_AMD_1.png?v=1664594775",
+        "https://i.pcmag.com/imagery/reviews/07xYeBwX5h428WibwkG7CxD-4.jpg",
+        "https://i.pcmag.com/imagery/reviews/07xYeBwX5h428WibwkG7CxD-5.jpg",
+        "https://gamesncomps.com/wp-content/uploads/2023/05/7600-3-1.jpg",
+        "https://gamesncomps.com/wp-content/uploads/2023/05/7600-4-1.jpg"
+      ],
+      "downloaded": [
+        "images/products/cpu-amd-ryzen-5-7600/1.jpg",
+        "images/products/cpu-amd-ryzen-5-7600/2.jpg",
+        "images/products/cpu-amd-ryzen-5-7600/3.jpg",
+        "images/products/cpu-amd-ryzen-5-7600/4.jpg",
+        "images/products/cpu-amd-ryzen-5-7600/5.jpg",
+        "images/products/cpu-amd-ryzen-5-7600/6.jpg"
+      ]
+    },
+    {
+      "id": "cpu-amd-ryzen-7-7800x3d",
+      "name": "AMD Ryzen 7 7800X3D",
+      "source_urls": [
+        "https://cdn.wccftech.com/wp-content/uploads/2023/01/AMD-Ryzen-7000-3D-V-Cache-Ryzen-9-7900X3D-Ryzen-9-7900X3D-Ryzen-7-7700X3D-CPUs-_4.jpg",
+        "https://res.cloudinary.com/jawa/image/upload/f_auto,c_limit,w_1280,q_auto/production/listings/w3hu9uvqbsqeifoanms4",
+        "https://hardwaretimes.com/wp-content/uploads/2023/01/7000X3D-Render-1.png",
+        "https://cdn.pokde.net/wp-content/uploads/2023/04/7800x3dreviewcover.png",
+        "https://i.pcmag.com/imagery/reviews/06s9WVxlJKUEJyov4LkeED3-1.fit_scale.size_1028x578.v1680505245.jpg",
+        "https://i.pcmag.com/imagery/reviews/06s9WVxlJKUEJyov4LkeED3-5.jpg"
+      ],
+      "downloaded": [
+        "images/products/cpu-amd-ryzen-7-7800x3d/1.jpg",
+        "images/products/cpu-amd-ryzen-7-7800x3d/3.jpg",
+        "images/products/cpu-amd-ryzen-7-7800x3d/4.jpg",
+        "images/products/cpu-amd-ryzen-7-7800x3d/5.jpg",
+        "images/products/cpu-amd-ryzen-7-7800x3d/6.jpg"
+      ]
+    }
+  ],
+  "VGA": [
+    {
+      "id": "gpu-nvidia-rtx-4070-super",
+      "name": "NVIDIA GeForce RTX 4070 SUPER 12GB",
+      "source_urls": [
+        "https://blogs.nvidia.com/wp-content/uploads/2024/04/nvidiaheadquarters.jpg",
+        "https://blogs.nvidia.com/wp-content/uploads/2025/03/nvendeavor.jpg",
+        "https://facts.net/wp-content/uploads/2023/07/17-facts-about-nvidia-1689447088.jpg",
+        "https://wallstreetpit.com/wp-content/uploads/news/ai-cg/Nvidia01.jpg",
+        "https://s3.amazonaws.com/cms.ipressroom.com/219/files/20249/671fa47b3d6332e114401828_nvidia-xai-lockup-press-1920x1080/nvidia-xai-lockup-press-1920x1080_mid.jpg",
+        "https://cdn.britannica.com/39/137739-050-A4234066/Nvidia-graphics-processing-unit-GT-GeForce-6600.jpg"
+      ],
+      "downloaded": [
+        "images/products/gpu-nvidia-rtx-4070-super/1.jpg",
+        "images/products/gpu-nvidia-rtx-4070-super/2.jpg",
+        "images/products/gpu-nvidia-rtx-4070-super/3.jpg",
+        "images/products/gpu-nvidia-rtx-4070-super/4.jpg",
+        "images/products/gpu-nvidia-rtx-4070-super/5.jpg",
+        "images/products/gpu-nvidia-rtx-4070-super/6.jpg"
+      ]
+    },
+    {
+      "id": "gpu-nvidia-rtx-4060-ti-8g",
+      "name": "NVIDIA GeForce RTX 4060 Ti 8GB",
+      "source_urls": [
+        "https://blogs.nvidia.com/wp-content/uploads/2024/04/nvidiaheadquarters.jpg",
+        "https://blogs.nvidia.com/wp-content/uploads/2025/03/nvendeavor.jpg",
+        "https://facts.net/wp-content/uploads/2023/07/17-facts-about-nvidia-1689447088.jpg",
+        "https://wallstreetpit.com/wp-content/uploads/news/ai-cg/Nvidia01.jpg",
+        "https://s3.amazonaws.com/cms.ipressroom.com/219/files/20249/671fa47b3d6332e114401828_nvidia-xai-lockup-press-1920x1080/nvidia-xai-lockup-press-1920x1080_mid.jpg",
+        "https://cdn.britannica.com/39/137739-050-A4234066/Nvidia-graphics-processing-unit-GT-GeForce-6600.jpg"
+      ],
+      "downloaded": [
+        "images/products/gpu-nvidia-rtx-4060-ti-8g/1.jpg",
+        "images/products/gpu-nvidia-rtx-4060-ti-8g/2.jpg",
+        "images/products/gpu-nvidia-rtx-4060-ti-8g/3.jpg",
+        "images/products/gpu-nvidia-rtx-4060-ti-8g/4.jpg",
+        "images/products/gpu-nvidia-rtx-4060-ti-8g/5.jpg",
+        "images/products/gpu-nvidia-rtx-4060-ti-8g/6.jpg"
+      ]
+    },
+    {
+      "id": "gpu-amd-rx-7800-xt",
+      "name": "AMD Radeon RX 7800 XT 16GB",
+      "source_urls": [
+        "https://assets-prd.ignimgs.com/2023/09/05/rx-7800-xt-1-1693948453553.jpg",
+        "https://cdn.wccftech.com/wp-content/uploads/2022/08/AMD-Radeon-RX-7800-XT-RDNA-3-Navi-31-Graphics-Card-very_compressed-scale-2_00x-scaled.jpg",
+        "https://www.techpowerup.com/img/j1V3zPuqOMoBXO11.jpg",
+        "https://www.pcgamesn.com/wp-content/sites/pcgamesn/2023/08/amd-radeon-rx-7800-xt-review-featured.jpg",
+        "https://assets-prd.ignimgs.com/2023/09/05/rx-7800-xt-2-1693948608797.jpg",
+        "https://www.gpu-monkey.com/gpu/amd_radeon_rx_7800_xt.jpg"
+      ],
+      "downloaded": [
+        "images/products/gpu-amd-rx-7800-xt/1.jpg",
+        "images/products/gpu-amd-rx-7800-xt/2.jpg",
+        "images/products/gpu-amd-rx-7800-xt/3.jpg",
+        "images/products/gpu-amd-rx-7800-xt/4.jpg",
+        "images/products/gpu-amd-rx-7800-xt/5.jpg"
+      ]
+    }
+  ],
+  "RAM": [
+    {
+      "id": "ram-corsair-vengeance-ddr5-6000-32g",
+      "name": "Corsair Vengeance DDR5 32GB (2x16GB) 6000MT/s C36",
+      "source_urls": [
+        "https://tech4gamers.com/wp-content/uploads/2023/02/CORSAIR-VENGEANCE-RGB-DDR5-32GB-6000MHz-CAS36-kit-Installed-1.jpg",
+        "https://res.cloudinary.com/jawa/image/upload/f_auto,ar_1:1,c_fill,w_3840,q_auto/production/listings/cxfdnv4atpfd7lxdkiu6",
+        "https://itgadgetsonline.com/wp-content/uploads/2023/06/CORSAIR-VENGEANCE-32GB216GB-DDR5-6000-MHZ4.webp",
+        "https://anphat.com.vn/media/product/43650_ram_corsair_vengeance_rgb_32gb__2x16gb__ddr5_bus_5600mhz_white__cmh32gx5m2b5600c36wk___1_.jpg",
+        "https://uae.datcart.com/wp-content/uploads/2022/09/cors-w.jpg",
+        "https://m.media-amazon.com/images/I/61EVf-QxpvL._AC_.jpg"
+      ],
+      "downloaded": [
+        "images/products/ram-corsair-vengeance-ddr5-6000-32g/1.jpg",
+        "images/products/ram-corsair-vengeance-ddr5-6000-32g/3.jpg",
+        "images/products/ram-corsair-vengeance-ddr5-6000-32g/4.jpg",
+        "images/products/ram-corsair-vengeance-ddr5-6000-32g/5.jpg",
+        "images/products/ram-corsair-vengeance-ddr5-6000-32g/6.jpg"
+      ]
+    },
+    {
+      "id": "ram-gskill-trident-z5-6400-32g-rgb",
+      "name": "G.Skill Trident Z5 RGB 32GB (2x16GB) DDR5-6400 CL32",
+      "source_urls": [
+        "https://lh5.googleusercontent.com/proxy/BeAUkpGTQt4FCXGzG56Kf2gyEjxIRLYQg3ae68U-knQPOxd376K3J9sDEEXNjbe_iIBudfvX50hyVC6G8olm6wPRiT-a8_1bQQMwhwLJEDQMew=s0-d",
+        "https://2.bp.blogspot.com/-fsTXhXl10Gg/UTIs7Ll01AI/AAAAAAAABBA/QkWgWAAFG3g/s1600/spiteful.gif",
+        "https://3.bp.blogspot.com/-TpPB-9oDTe4/UrGMLbiOgLI/AAAAAAAAAH4/fRsbqmCfo_g/s1600/gif_1235.GIF",
+        "https://2.bp.blogspot.com/-3A-sdNxXtTY/Vx45YNSRtrI/AAAAAAAAB4g/yDldtLsqj5IIL1QpZ20Jtd3O1iy3sBhaQCK4B/s1600-r/ddddddddddddddddd.gif",
+        "https://3.bp.blogspot.com/-AetHfC_g8e8/UIR40NxWRoI/AAAAAAAAAAc/lQVxHSDA808/s1600/Banner.gif”"
+      ],
+      "downloaded": [
+        "images/products/ram-gskill-trident-z5-6400-32g-rgb/1.jpg",
+        "images/products/ram-gskill-trident-z5-6400-32g-rgb/4.jpg",
+        "images/products/ram-gskill-trident-z5-6400-32g-rgb/5.jpg"
+      ]
+    },
+    {
+      "id": "ram-kingston-fury-beast-ddr4-3200-16g",
+      "name": "Kingston Fury Beast 16GB (2x8GB) DDR4-3200 CL16",
+      "source_urls": [
+        "https://static.tweaktown.com/content/1/0/10089_08_kingston-fury-beast-rgb-ddr4-3200-16gb-dual-channel-memory-kit-review_full.jpg",
+        "https://taipeicomputer.jo/image/cache/catalog/Products/Ram/BEAST_16GB-1200x1200.jpg",
+        "https://images-na.ssl-images-amazon.com/images/I/61PGj6v9nsL.jpg",
+        "https://compuoriginal.com/wp-content/uploads/2024/05/Kingston-FURY-Beast-16GB-3200MHz-DDR4-Desktop-RAM-1-800x800.jpg",
+        "https://media.e-valy.com/cms/products/images/0847a904-3619-42d4-8fe9-6d26273fca76?h=1000&amp;w=1000",
+        "https://pcx.com.ph/cdn/shop/files/3.RAM-KINGSTON16GBDDR43200MHZFURYBEAST.png?v=1692151381"
+      ],
+      "downloaded": [
+        "images/products/ram-kingston-fury-beast-ddr4-3200-16g/1.jpg",
+        "images/products/ram-kingston-fury-beast-ddr4-3200-16g/2.jpg",
+        "images/products/ram-kingston-fury-beast-ddr4-3200-16g/3.jpg",
+        "images/products/ram-kingston-fury-beast-ddr4-3200-16g/5.jpg",
+        "images/products/ram-kingston-fury-beast-ddr4-3200-16g/6.jpg"
+      ]
+    }
+  ],
+  "SSD": [
+    {
+      "id": "ssd-samsung-990-pro-1tb",
+      "name": "Samsung 990 PRO 1TB NVMe M.2",
+      "source_urls": [
+        "http://media.gadgetsin.com/2013/01/samsung_galaxy_s4_flagship_android_phone_announced_3.jpg",
+        "http://www.madboxpc.com/wp-content/uploads/2012/05/Samsung_NP900X4C_Ultrabook_02.jpg",
+        "http://media.gadgetsin.com/2014/06/samsung_z_tizen_smartphone_announced_1.jpg",
+        "http://media.gadgetsin.com/2014/10/samsung_galaxy_a5_and_a3_android_phones_announced_1.jpg",
+        "http://media.gadgetsin.com/2015/02/samsung_galaxy_s6_android_phone_announced_1.jpg",
+        "http://gadgetsin.com/uploads/2018/02/samsung_galaxy_s9_and_s9_plus_smartphones_2.jpg"
+      ],
+      "downloaded": [
+        "images/products/ssd-samsung-990-pro-1tb/1.jpg",
+        "images/products/ssd-samsung-990-pro-1tb/2.jpg",
+        "images/products/ssd-samsung-990-pro-1tb/3.jpg",
+        "images/products/ssd-samsung-990-pro-1tb/4.jpg",
+        "images/products/ssd-samsung-990-pro-1tb/5.jpg",
+        "images/products/ssd-samsung-990-pro-1tb/6.jpg"
+      ]
+    },
+    {
+      "id": "ssd-wd-black-sn850x-1tb",
+      "name": "WD_BLACK SN850X 1TB NVMe",
+      "source_urls": [
+        "https://versus-dot-com.imgix.net/imgixback.jpeg?blend=https://images.versus.io/objects/western-digital-wd-black-sn850x-1tb.front.variety.1669805709090.jpg&amp;blend-mode=multiply&amp;blend-h=0.85&amp;blend-x=350&amp;mark64=aHR0cHM6Ly9hc3NldHMuaW1naXgubmV0L350ZXh0P3R4dDY0PVYyVnpkR1Z5YmlCRWFXZHBkR0ZzSUZkRUlFSnNZV05ySUZOT09EVXdXQ0F4VkVJPSZ0eHQtY29sb3I9ZmZmZmZmZmYmdHh0LWZvbnQ9SGVsdmV0aWNhLGJvbGQmdHh0LXNpemU9MzImdz0zMDA=&amp;mark-align=middle,left&amp;mark-pad=30",
+        "https://techvorm.com/wp-content/uploads/2022/10/WD_BLACK-SN850X.jpg",
+        "https://www.wootware.co.za/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/w/d/wd-black-sn850x_2_.jpg",
+        "https://media.karousell.com/media/photos/products/2023/8/14/western_digital_wd_black_sn850_1691991308_ad77cb6e_progressive.jpg",
+        "https://www.westerndigital.com/content/dam/store/en-us/assets/products/internal-storage/wd-black-sn850x-nvme-ssd/gallery/wd-black-sn850x-nvme-ssd-heatsink-4tb-8tb-angled.png.thumb.1280.1280.png",
+        "https://www.pcgamesn.com/wp-content/sites/pcgamesn/2024/04/wd-black-sn850x-review.jpg"
+      ],
+      "downloaded": [
+        "images/products/ssd-wd-black-sn850x-1tb/2.jpg",
+        "images/products/ssd-wd-black-sn850x-1tb/4.jpg",
+        "images/products/ssd-wd-black-sn850x-1tb/5.jpg",
+        "images/products/ssd-wd-black-sn850x-1tb/6.jpg"
+      ]
+    },
+    {
+      "id": "ssd-crucial-t500-1tb",
+      "name": "Crucial T500 1TB NVMe",
+      "source_urls": [
+        "https://content.crucial.com/content/dam/crucial/ssd-products/t500/photography/isolated/crucial-ssd-t500-topdown.psd.transform/medium-png/image.png",
+        "https://content.crucial.com/content/dam/crucial/ssd-products/x9-pro/photography/isolated/crucial-x9-pro-portable-ssd-left-angle.psd.transform/large-png/image.png",
+        "https://content.crucial.com/content/dam/crucial/ssd-products/x10-pro/photography/isolated/crucial-x10-pro-portable-ssd-left-angle.psd.transform/large-png/image.png"
+      ],
+      "downloaded": [
+        "images/products/ssd-crucial-t500-1tb/1.jpg",
+        "images/products/ssd-crucial-t500-1tb/2.jpg",
+        "images/products/ssd-crucial-t500-1tb/3.jpg"
+      ]
+    }
+  ],
+  "Mainboard": [
+    {
+      "id": "mb-asus-rog-strix-b650e-f",
+      "name": "ASUS ROG Strix B650E-F Gaming WiFi",
+      "source_urls": [
+        "https://dlcdnwebimgs.asus.com/gain/F6EF450B-93A5-4155-9743-1D9199BBCE7D/w1000/h732",
+        "https://dlcdnwebimgs.asus.com/gain/2F2923E8-615A-4F37-B381-4D36CDC7172C/w1000/h732",
+        "https://dlcdnwebimgs.asus.com/files/media/398D9060-E4B9-4A5E-B3AC-53FE4DC9144E/v1/img/spec/performance-m.png",
+        "https://dlcdnwebimgs.asus.com/files/media/398D9060-E4B9-4A5E-B3AC-53FE4DC9144E/v1/img/spec/connectivity-m.png",
+        "https://dlcdnwebimgs.asus.com/files/media/398D9060-E4B9-4A5E-B3AC-53FE4DC9144E/v1/img/connectivity/networking.png",
+        "https://dlcdnwebimgs.asus.com/files/media/398D9060-E4B9-4A5E-B3AC-53FE4DC9144E/v1/img/style/rgbheader.png"
+      ],
+      "downloaded": [
+        "images/products/mb-asus-rog-strix-b650e-f/1.jpg",
+        "images/products/mb-asus-rog-strix-b650e-f/2.jpg",
+        "images/products/mb-asus-rog-strix-b650e-f/3.jpg",
+        "images/products/mb-asus-rog-strix-b650e-f/4.jpg",
+        "images/products/mb-asus-rog-strix-b650e-f/5.jpg",
+        "images/products/mb-asus-rog-strix-b650e-f/6.jpg"
+      ]
+    },
+    {
+      "id": "mb-msi-mag-b760-tomahawk-wifi",
+      "name": "MSI MAG B760 Tomahawk WiFi",
+      "source_urls": [
+        "https://cdn.mos.cms.futurecdn.net/dVKvd3YTVJuSVWNYYkPpYm.jpg",
+        "https://laptopmedia.com/wp-content/uploads/2023/01/1-26-e1672930662262.jpg",
+        "https://www.notebookcheck.net/fileadmin/Notebooks/MSI/special/13th_Gen/MSI_NB_Raider_GE78_photo02_6.png",
+        "https://m.media-amazon.com/images/I/81-3FfpcwML._AC_.jpg",
+        "https://www.windowscentral.com/sites/wpcentral.com/files/styles/larger/public/field/image/2016/05/msi-thinner-gaming-laptop.jpg?itok=WnOKI12c",
+        "https://www.notebookcheck.net/fileadmin/Notebooks/News/_nc4/MSI_NB_Titan_18_A14V_photo02.jpg"
+      ],
+      "downloaded": [
+        "images/products/mb-msi-mag-b760-tomahawk-wifi/1.jpg",
+        "images/products/mb-msi-mag-b760-tomahawk-wifi/2.jpg",
+        "images/products/mb-msi-mag-b760-tomahawk-wifi/3.jpg",
+        "images/products/mb-msi-mag-b760-tomahawk-wifi/4.jpg",
+        "images/products/mb-msi-mag-b760-tomahawk-wifi/5.jpg",
+        "images/products/mb-msi-mag-b760-tomahawk-wifi/6.jpg"
+      ]
+    },
+    {
+      "id": "mb-gigabyte-z790-aorus-elite-x",
+      "name": "Gigabyte Z790 AORUS ELITE X WIFI7",
+      "source_urls": [
+        "https://static.gigabyte.com/StaticFile/Image/Global/21d9a483a8e6899fa2767ef8c7727711/Product/36673",
+        "https://static.gigabyte.com/StaticFile/Image/Global/0c9388d805fe46f3d9b537f5408764b1/Product/36674/png/1000",
+        "https://www.gigabyte.com/FileUpload/Global/KeyFeature/2499/innergigabyte/images/product/vrm.jpg",
+        "https://static.gigabyte.com/StaticFile/Image/Global/8a0365065ff4beff1b105daebc273e3d/Product/36676",
+        "https://www.gigabyte.com/FileUpload/Global/KeyFeature/2499/innergigabyte/images/product/connectivity.jpg",
+        "https://media.pangoly.com/img/9/4/3/a/943a2784-b61e-49be-b366-46ebe0726ad8.jpg"
+      ],
+      "downloaded": [
+        "images/products/mb-gigabyte-z790-aorus-elite-x/1.jpg",
+        "images/products/mb-gigabyte-z790-aorus-elite-x/2.jpg",
+        "images/products/mb-gigabyte-z790-aorus-elite-x/4.jpg"
+      ]
+    }
+  ],
+  "Case": [
+    {
+      "id": "case-nzxt-h5-flow",
+      "name": "NZXT H5 Flow White",
+      "source_urls": [
+        "https://nzxt.com/cdn/shop/files/player-1-ww-09-04-24-hero-black-badge_100x100.png?v=1764232909",
+        "https://nzxt.com/cdn/shop/files/Player-Two-WW-03.20.25-HERO-Black-BADGE_7f346043-bd6b-40cf-aa65-8d08ba79a356_100x100.png?v=1746657645",
+        "https://nzxt.com/cdn/shop/files/Player-Three-WW-03.27.25-HERO-Black-BADGE-AMD_100x100.png?v=1746142712",
+        "https://nzxt.com/cdn/shop/files/Player-One-Base-H3-WW-10.13.25-HERO-Black-BADGE_d6c88b2b-9d1e-4db0-a0ac-226bca4e7f89.png?v=1764311419&width=800",
+        "https://nzxt.com/cdn/shop/files/Player-One-PRIME_WW-10.31.25-HERO-WHITE-BADGE.png?v=1763363803&width=800",
+        "https://nzxt.com/cdn/shop/files/h7-flow-hero-white.png?v=1762528078&width=800"
+      ],
+      "downloaded": [
+        "images/products/case-nzxt-h5-flow/4.jpg",
+        "images/products/case-nzxt-h5-flow/5.jpg",
+        "images/products/case-nzxt-h5-flow/6.jpg"
+      ]
+    },
+    {
+      "id": "case-lianli-lancool-216",
+      "name": "Lian Li Lancool 216",
+      "source_urls": [
+        "https://lian-li.com/wp-content/uploads/2022/11/1007_20-Edit.jpg",
+        "https://lian-li.com/wp-content/uploads/2022/11/1007_93-a.jpg",
+        "https://d2po40yubr0dlz.cloudfront.net/images/products/vuugo-lianli-LANCOOL_216X-6.jpg",
+        "https://www.robeytech.com/uploads/1/3/9/4/139444474/0a012159-fa57-4837-b114-ed7ae616c219_orig.png",
+        "https://us.v-cdn.net/6031942/uploads/P36QHTJNBR1X/bzf0bub9nqyb1.jpg",
+        "http://pinklehub.com/cdn/shop/files/WEBSITE_216.jpg?v=1739000600"
+      ],
+      "downloaded": [
+        "images/products/case-lianli-lancool-216/1.jpg",
+        "images/products/case-lianli-lancool-216/2.jpg",
+        "images/products/case-lianli-lancool-216/3.jpg",
+        "images/products/case-lianli-lancool-216/4.jpg",
+        "images/products/case-lianli-lancool-216/5.jpg",
+        "images/products/case-lianli-lancool-216/6.jpg"
+      ]
+    },
+    {
+      "id": "case-coolermaster-td500-mesh-v2",
+      "name": "Cooler Master MasterBox TD500 Mesh V2",
+      "source_urls": [
+        "https://a.storyblok.com/f/281110/1920x960/5a542b89aa/0-hero-image.jpg/m/32x0/filters:blur(10)",
+        "https://a.storyblok.com/f/281110/1920x960/5a542b89aa/0-hero-image.jpg/m/600x0/smart"
+      ],
+      "downloaded": [
+        "images/products/case-coolermaster-td500-mesh-v2/2.jpg"
+      ]
+    }
+  ],
+  "PSU": [
+    {
+      "id": "psu-corsair-rm750x-shift",
+      "name": "Corsair RM750x SHIFT 750W 80+ Gold",
+      "source_urls": [
+        "https://www.techpowerup.com/review/corsair-rm750x-shift-750-w/images/title.jpg",
+        "https://www.techpowerup.com/review/corsair-rm750x-shift-750-w/images/psu3.jpg",
+        "https://cdn.cgmagonline.com/wp-content/uploads/2024/07/corsair-rm750x-shift-power-supply-review-2024-07-01-822751.jpg",
+        "https://cdn.cs.1worldsync.com/4d/2d/4d2d1378-ea23-460a-9cbe-c508b9f13225.jpg",
+        "https://c1.neweggimages.com/ProductImage/17-139-326-11.png",
+        "https://c1.neweggimages.com/ProductImage/17-139-326-05.png"
+      ],
+      "downloaded": [
+        "images/products/psu-corsair-rm750x-shift/1.jpg",
+        "images/products/psu-corsair-rm750x-shift/2.jpg",
+        "images/products/psu-corsair-rm750x-shift/3.jpg",
+        "images/products/psu-corsair-rm750x-shift/4.jpg"
+      ]
+    },
+    {
+      "id": "psu-seasonic-focus-gx-850",
+      "name": "Seasonic FOCUS GX-850 850W 80+ Gold",
+      "source_urls": [
+        "https://www.wepc.com/wp-content/uploads/2024/07/Seasonic-Focus-GX-850-PSU-review.jpg",
+        "https://www.wepc.com/wp-content/uploads/2024/07/Seasonic-Focus-GX-850-PSU-7.jpg",
+        "https://www.wepc.com/wp-content/uploads/2024/07/Seasonic-Focus-GX-850-PSU-8.jpg",
+        "https://www.wepc.com/wp-content/uploads/2024/07/DSC00861.jpg",
+        "https://www.wepc.com/wp-content/uploads/2024/07/DSC00855.jpg",
+        "https://www.wepc.com/wp-content/uploads/2024/07/Seasonic-Focus-GX-850-PSU-2.jpg"
+      ],
+      "downloaded": [
+        "images/products/psu-seasonic-focus-gx-850/1.jpg",
+        "images/products/psu-seasonic-focus-gx-850/2.jpg",
+        "images/products/psu-seasonic-focus-gx-850/3.jpg",
+        "images/products/psu-seasonic-focus-gx-850/4.jpg",
+        "images/products/psu-seasonic-focus-gx-850/5.jpg",
+        "images/products/psu-seasonic-focus-gx-850/6.jpg"
+      ]
+    },
+    {
+      "id": "psu-coolermaster-mwe-gold-650-v2",
+      "name": "Cooler Master MWE Gold 650 V2 80+ Gold",
+      "source_urls": [
+        "https://a.storyblok.com/f/281110/1920x960/5a542b89aa/0-hero-image.jpg/m/32x0/filters:blur(10)",
+        "https://a.storyblok.com/f/281110/1920x960/5a542b89aa/0-hero-image.jpg/m/600x0/smart"
+      ],
+      "downloaded": [
+        "images/products/psu-coolermaster-mwe-gold-650-v2/2.jpg"
+      ]
+    }
+  ],
+  "Cooler": [
+    {
+      "id": "cooler-noctua-nh-d15",
+      "name": "Noctua NH-D15",
+      "source_urls": [
+        "https://cdn.gaminggorilla.com/wp-content/uploads/2022/06/Noctua-NH-D15-Review-1000x600.jpg",
+        "https://preview.redd.it/newly-installed-noctua-nh-d15-thank-you-noctua-sub-for-your-v0-9opr1wys4i4b1.jpg?width=1080&amp;crop=smart&amp;auto=webp&amp;s=e5e05ca6fa29cca487d4525f1f5eeced3eb67cc4",
+        "https://www.custompc.com/wp-content/sites/custompc/2023/07/Noctua-NH-D15-review-001.jpg",
+        "https://www.techpowerup.com/review/noctua-nh-d15/images/intro.jpg",
+        "https://preview.redd.it/newly-installed-noctua-nh-d15-thank-you-noctua-sub-for-your-v0-b36shykt4i4b1.jpg?width=640&amp;crop=smart&amp;auto=webp&amp;s=19d7e0a27f2b3ca064d45934814cc48a17515661",
+        "https://nasilemaktech.com/wp-content/uploads/2017/01/Noctua-NH-D15-Review-10.jpg"
+      ],
+      "downloaded": [
+        "images/products/cooler-noctua-nh-d15/1.jpg",
+        "images/products/cooler-noctua-nh-d15/3.jpg",
+        "images/products/cooler-noctua-nh-d15/6.jpg"
+      ]
+    },
+    {
+      "id": "cooler-coolermaster-hyper-212-black",
+      "name": "Cooler Master Hyper 212 Black Edition",
+      "source_urls": [
+        "https://a.storyblok.com/f/281110/1920x960/5a542b89aa/0-hero-image.jpg/m/32x0/filters:blur(10)",
+        "https://a.storyblok.com/f/281110/1920x960/5a542b89aa/0-hero-image.jpg/m/600x0/smart"
+      ],
+      "downloaded": [
+        "images/products/cooler-coolermaster-hyper-212-black/2.jpg"
+      ]
+    },
+    {
+      "id": "cooler-corsair-icue-h150i-elite",
+      "name": "Corsair iCUE H150i ELITE Capellix XT",
+      "source_urls": [
+        "https://pcanalytics.s3.amazonaws.com/CoolerProductImages/5/43/20230917132300_7358_m.jpg",
+        "https://cdn.cs.1worldsync.com/41/ee/41eec4c7-e2f3-46c3-8022-d79bc084ccb2.jpg",
+        "https://alfrensia.com/wp-content/uploads/2023/08/2-19.jpg",
+        "https://alfrensia.com/wp-content/uploads/2023/08/1-21.jpg",
+        "https://alfrensia.com/wp-content/uploads/2023/08/4-20.jpg",
+        "https://alfrensia.com/wp-content/uploads/2024/01/1-139-800x800.jpg"
+      ],
+      "downloaded": [
+        "images/products/cooler-corsair-icue-h150i-elite/1.jpg",
+        "images/products/cooler-corsair-icue-h150i-elite/2.jpg",
+        "images/products/cooler-corsair-icue-h150i-elite/3.jpg",
+        "images/products/cooler-corsair-icue-h150i-elite/4.jpg",
+        "images/products/cooler-corsair-icue-h150i-elite/5.jpg",
+        "images/products/cooler-corsair-icue-h150i-elite/6.jpg"
+      ]
+    }
+  ],
+  "Monitor": [
+    {
+      "id": "monitor-lg-27gp850-b",
+      "name": "LG 27GP850-B 27\" QHD 165Hz",
+      "source_urls": [],
+      "downloaded": []
+    },
+    {
+      "id": "monitor-dell-s2721dgf",
+      "name": "Dell S2721DGF 27\" QHD 165Hz",
+      "source_urls": [
+        "https://tech.co.za/wp-content/uploads/2023/05/Latitude-5540e.png",
+        "https://laptopmedia.com/wp-content/uploads/2023/05/2-61-e1685529757110.jpg",
+        "https://laptopmedia.com/wp-content/uploads/2022/11/3-18.jpg",
+        "https://i5.walmartimages.com/asr/43d4f92c-bb73-4300-9247-fc1b3f14053c.eb72ee7f3188e9713769a572f2e9a4d8.jpeg",
+        "https://laptopmedia.com/wp-content/uploads/2023/05/5-scaled-e1683020891438.jpg",
+        "https://tech.co.za/wp-content/uploads/2022/06/Dell-XSP-15-9520-v2.png"
+      ],
+      "downloaded": [
+        "images/products/monitor-dell-s2721dgf/2.jpg",
+        "images/products/monitor-dell-s2721dgf/3.jpg",
+        "images/products/monitor-dell-s2721dgf/4.jpg"
+      ]
+    },
+    {
+      "id": "monitor-asus-vg279qm",
+      "name": "ASUS TUF Gaming VG279QM 27\" FHD 280Hz",
+      "source_urls": [
+        "https://www.asus.com/media/global/products/ixmmljdbmnjhxmh8/P_setting_xxx_0_90_end_500.png",
+        "https://dlcdnwebimgs.asus.com/gain/ad676bab-64a7-4500-8be8-cca340097f3b/w328",
+        "https://dlcdnimgs.asus.com/websites/global/products/ixmmljdbmnjhxmh8/images/bg-header-m.jpg",
+        "http://oyster.ignimgs.com/wordpress/stg.ign.com/2020/04/iUsv96Ay-720x478.jpeg",
+        "http://oyster.ignimgs.com/wordpress/stg.ign.com/2020/04/D60YbTof-720x478.jpeg",
+        "http://ecommerce.datablitz.com.ph/cdn/shop/products/1_3_6caa2709-38f3-42d1-af56-1ed9dac2cec1_1024x.jpg?v=1676782710"
+      ],
+      "downloaded": [
+        "images/products/monitor-asus-vg279qm/1.jpg",
+        "images/products/monitor-asus-vg279qm/2.jpg",
+        "images/products/monitor-asus-vg279qm/3.jpg",
+        "images/products/monitor-asus-vg279qm/4.jpg",
+        "images/products/monitor-asus-vg279qm/5.jpg",
+        "images/products/monitor-asus-vg279qm/6.jpg"
+      ]
+    }
+  ]
+}

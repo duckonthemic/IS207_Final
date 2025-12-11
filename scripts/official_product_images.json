@@ -1,0 +1,272 @@
+{
+    "CPU": [
+        {
+            "id": "cpu-intel-i5-14400f",
+            "name": "Intel Core i5-14400F",
+            "images": [
+                "https://m.media-amazon.com/images/I/51IqYxKDyVL._AC_SL1280_.jpg",
+                "https://m.media-amazon.com/images/I/51oE0VxMsRL._AC_SL1280_.jpg",
+                "https://m.media-amazon.com/images/I/51kqxL0ljkL._AC_SL1280_.jpg"
+            ]
+        },
+        {
+            "id": "cpu-intel-i7-14700k",
+            "name": "Intel Core i7-14700K",
+            "images": [
+                "https://m.media-amazon.com/images/I/51lDVSM5dVL._AC_SL1280_.jpg",
+                "https://m.media-amazon.com/images/I/51+kqxL0ljkL._AC_SL1280_.jpg",
+                "https://m.media-amazon.com/images/I/51oE0VxMsRL._AC_SL1280_.jpg"
+            ]
+        },
+        {
+            "id": "cpu-amd-ryzen-5-7600",
+            "name": "AMD Ryzen 5 7600",
+            "images": [
+                "https://m.media-amazon.com/images/I/51f2hkGLvZL._AC_SL1200_.jpg",
+                "https://m.media-amazon.com/images/I/51XZ5TvFMSL._AC_SL1200_.jpg",
+                "https://m.media-amazon.com/images/I/51bqL5IZXFL._AC_SL1200_.jpg"
+            ]
+        },
+        {
+            "id": "cpu-amd-ryzen-7-7800x3d",
+            "name": "AMD Ryzen 7 7800X3D",
+            "images": [
+                "https://m.media-amazon.com/images/I/51XZ5TvFMSL._AC_SL1200_.jpg",
+                "https://m.media-amazon.com/images/I/51f2hkGLvZL._AC_SL1200_.jpg",
+                "https://m.media-amazon.com/images/I/61CMgXKQalL._AC_SL1500_.jpg"
+            ]
+        }
+    ],
+    "VGA": [
+        {
+            "id": "gpu-nvidia-rtx-4070-super",
+            "name": "NVIDIA GeForce RTX 4070 SUPER 12GB",
+            "images": [
+                "https://m.media-amazon.com/images/I/81SzWF1OKZL._AC_SL1500_.jpg",
+                "https://m.media-amazon.com/images/I/71n+P7wz6dL._AC_SL1500_.jpg",
+                "https://m.media-amazon.com/images/I/81tLNAuQYnL._AC_SL1500_.jpg"
+            ]
+        },
+        {
+            "id": "gpu-nvidia-rtx-4060-ti-8g",
+            "name": "NVIDIA GeForce RTX 4060 Ti 8GB",
+            "images": [
+                "https://m.media-amazon.com/images/I/81zFBQ-XL3L._AC_SL1500_.jpg",
+                "https://m.media-amazon.com/images/I/71U-25u5HsL._AC_SL1500_.jpg",
+                "https://m.media-amazon.com/images/I/71CJmLwWdHL._AC_SL1500_.jpg"
+            ]
+        },
+        {
+            "id": "gpu-amd-rx-7800-xt",
+            "name": "AMD Radeon RX 7800 XT 16GB",
+            "images": [
+                "https://m.media-amazon.com/images/I/81GNxdKfxeL._AC_SL1500_.jpg",
+                "https://m.media-amazon.com/images/I/71vLCGCo8QL._AC_SL1500_.jpg",
+                "https://m.media-amazon.com/images/I/71EsZ6VeURL._AC_SL1500_.jpg"
+            ]
+        }
+    ],
+    "RAM": [
+        {
+            "id": "ram-corsair-vengeance-ddr5-6000-32g",
+            "name": "Corsair Vengeance DDR5 32GB (2x16GB) 6000MT/s C36",
+            "images": [
+                "https://m.media-amazon.com/images/I/71mh-IzZeSL._AC_SL1500_.jpg",
+                "https://m.media-amazon.com/images/I/61Oqw-PG6zL._AC_SL1500_.jpg",
+                "https://m.media-amazon.com/images/I/71pPjZDvxKL._AC_SL1500_.jpg"
+            ]
+        },
+        {
+            "id": "ram-gskill-trident-z5-6400-32g-rgb",
+            "name": "G.Skill Trident Z5 RGB 32GB (2x16GB) DDR5-6400 CL32",
+            "images": [
+                "https://m.media-amazon.com/images/I/71rT+9G1V9L._AC_SL1500_.jpg",
+                "https://m.media-amazon.com/images/I/71HdK5xNXPL._AC_SL1500_.jpg",
+                "https://m.media-amazon.com/images/I/71ybnLhQNUL._AC_SL1500_.jpg"
+            ]
+        },
+        {
+            "id": "ram-kingston-fury-beast-ddr4-3200-16g",
+            "name": "Kingston Fury Beast 16GB (2x8GB) DDR4-3200 CL16",
+            "images": [
+                "https://m.media-amazon.com/images/I/61VFG4s9HGL._AC_SL1476_.jpg",
+                "https://m.media-amazon.com/images/I/61mZHBhQeNL._AC_SL1500_.jpg",
+                "https://m.media-amazon.com/images/I/61bqON1bqGL._AC_SL1500_.jpg"
+            ]
+        }
+    ],
+    "SSD": [
+        {
+            "id": "ssd-samsung-990-pro-1tb",
+            "name": "Samsung 990 PRO 1TB NVMe M.2",
+            "images": [
+                "https://m.media-amazon.com/images/I/71xyJBQNtxL._AC_SL1500_.jpg",
+                "https://m.media-amazon.com/images/I/71iNKZlIqXL._AC_SL1500_.jpg",
+                "https://m.media-amazon.com/images/I/71pJq1JSCFL._AC_SL1500_.jpg"
+            ]
+        },
+        {
+            "id": "ssd-wd-black-sn850x-1tb",
+            "name": "WD_BLACK SN850X 1TB NVMe",
+            "images": [
+                "https://m.media-amazon.com/images/I/71BUQaKxbEL._AC_SL1500_.jpg",
+                "https://m.media-amazon.com/images/I/71+UhYQV0aL._AC_SL1500_.jpg",
+                "https://m.media-amazon.com/images/I/81qNKjALZ2L._AC_SL1500_.jpg"
+            ]
+        },
+        {
+            "id": "ssd-crucial-t500-1tb",
+            "name": "Crucial T500 1TB NVMe",
+            "images": [
+                "https://m.media-amazon.com/images/I/71UrEmrUQBL._AC_SL1500_.jpg",
+                "https://m.media-amazon.com/images/I/71g5eZd7ZpL._AC_SL1500_.jpg",
+                "https://m.media-amazon.com/images/I/61X3L3iJf3L._AC_SL1500_.jpg"
+            ]
+        }
+    ],
+    "Mainboard": [
+        {
+            "id": "mb-asus-rog-strix-b650e-f",
+            "name": "ASUS ROG Strix B650E-F Gaming WiFi",
+            "images": [
+                "https://m.media-amazon.com/images/I/81c+yxJwOtL._AC_SL1500_.jpg",
+                "https://m.media-amazon.com/images/I/81FqqfdYgBL._AC_SL1500_.jpg",
+                "https://m.media-amazon.com/images/I/81LYA2gQ1TL._AC_SL1500_.jpg"
+            ]
+        },
+        {
+            "id": "mb-msi-mag-b760-tomahawk-wifi",
+            "name": "MSI MAG B760 Tomahawk WiFi",
+            "images": [
+                "https://m.media-amazon.com/images/I/81PsLdLCy-L._AC_SL1500_.jpg",
+                "https://m.media-amazon.com/images/I/81xr5VDthIL._AC_SL1500_.jpg",
+                "https://m.media-amazon.com/images/I/81WEEEobJzL._AC_SL1500_.jpg"
+            ]
+        },
+        {
+            "id": "mb-gigabyte-z790-aorus-elite-x",
+            "name": "Gigabyte Z790 AORUS ELITE X WIFI7",
+            "images": [
+                "https://m.media-amazon.com/images/I/81dpQxvlBWL._AC_SL1500_.jpg",
+                "https://m.media-amazon.com/images/I/81vdqrVQlnL._AC_SL1500_.jpg",
+                "https://m.media-amazon.com/images/I/81Jgd-FCYXL._AC_SL1500_.jpg"
+            ]
+        }
+    ],
+    "Case": [
+        {
+            "id": "case-nzxt-h5-flow",
+            "name": "NZXT H5 Flow White",
+            "images": [
+                "https://m.media-amazon.com/images/I/71XPZS3TfvL._AC_SL1500_.jpg",
+                "https://m.media-amazon.com/images/I/81dC4hkMTDL._AC_SL1500_.jpg",
+                "https://m.media-amazon.com/images/I/71UAXM-W+TL._AC_SL1500_.jpg"
+            ]
+        },
+        {
+            "id": "case-lianli-lancool-216",
+            "name": "Lian Li Lancool 216",
+            "images": [
+                "https://m.media-amazon.com/images/I/71K+tpDEwXL._AC_SL1500_.jpg",
+                "https://m.media-amazon.com/images/I/81q3bE2B1sL._AC_SL1500_.jpg",
+                "https://m.media-amazon.com/images/I/71sRFIgQSHL._AC_SL1500_.jpg"
+            ]
+        },
+        {
+            "id": "case-coolermaster-td500-mesh-v2",
+            "name": "Cooler Master MasterBox TD500 Mesh V2",
+            "images": [
+                "https://m.media-amazon.com/images/I/71DGvZHLl1L._AC_SL1500_.jpg",
+                "https://m.media-amazon.com/images/I/81lXFHbPVML._AC_SL1500_.jpg",
+                "https://m.media-amazon.com/images/I/71wG8K9k7dL._AC_SL1500_.jpg"
+            ]
+        }
+    ],
+    "PSU": [
+        {
+            "id": "psu-corsair-rm750x-shift",
+            "name": "Corsair RM750x SHIFT 750W 80+ Gold",
+            "images": [
+                "https://m.media-amazon.com/images/I/71WU+dnedOL._AC_SL1500_.jpg",
+                "https://m.media-amazon.com/images/I/71wN+tWUGVL._AC_SL1500_.jpg",
+                "https://m.media-amazon.com/images/I/71HnGW0MZiL._AC_SL1500_.jpg"
+            ]
+        },
+        {
+            "id": "psu-seasonic-focus-gx-850",
+            "name": "Seasonic FOCUS GX-850 850W 80+ Gold",
+            "images": [
+                "https://m.media-amazon.com/images/I/81nwRVy8DPL._AC_SL1500_.jpg",
+                "https://m.media-amazon.com/images/I/71W8CbOyXeL._AC_SL1500_.jpg",
+                "https://m.media-amazon.com/images/I/71E1tNYKMEL._AC_SL1500_.jpg"
+            ]
+        },
+        {
+            "id": "psu-coolermaster-mwe-gold-650-v2",
+            "name": "Cooler Master MWE Gold 650 V2 80+ Gold",
+            "images": [
+                "https://m.media-amazon.com/images/I/71Fq3ksHdPL._AC_SL1500_.jpg",
+                "https://m.media-amazon.com/images/I/71NpD5hPaRL._AC_SL1500_.jpg",
+                "https://m.media-amazon.com/images/I/71eQv+QpIoL._AC_SL1500_.jpg"
+            ]
+        }
+    ],
+    "Cooler": [
+        {
+            "id": "cooler-noctua-nh-d15",
+            "name": "Noctua NH-D15",
+            "images": [
+                "https://m.media-amazon.com/images/I/91WgkpgPuRL._AC_SL1500_.jpg",
+                "https://m.media-amazon.com/images/I/91y72YWTYpL._AC_SL1500_.jpg",
+                "https://m.media-amazon.com/images/I/71+EhJM5VFL._AC_SL1500_.jpg"
+            ]
+        },
+        {
+            "id": "cooler-coolermaster-hyper-212-black",
+            "name": "Cooler Master Hyper 212 Black Edition",
+            "images": [
+                "https://m.media-amazon.com/images/I/71hKuQoJYPL._AC_SL1500_.jpg",
+                "https://m.media-amazon.com/images/I/71aJKuDXqJL._AC_SL1500_.jpg",
+                "https://m.media-amazon.com/images/I/71D9bWE9bLL._AC_SL1500_.jpg"
+            ]
+        },
+        {
+            "id": "cooler-corsair-icue-h150i-elite",
+            "name": "Corsair iCUE H150i ELITE Capellix XT",
+            "images": [
+                "https://m.media-amazon.com/images/I/71bpT+cLx4L._AC_SL1500_.jpg",
+                "https://m.media-amazon.com/images/I/61kf2j5SXbL._AC_SL1500_.jpg",
+                "https://m.media-amazon.com/images/I/71NdFLIE8SL._AC_SL1500_.jpg"
+            ]
+        }
+    ],
+    "Monitor": [
+        {
+            "id": "monitor-lg-27gp850-b",
+            "name": "LG 27GP850-B 27\" QHD 165Hz",
+            "images": [
+                "https://m.media-amazon.com/images/I/81jXWXayA5L._AC_SL1500_.jpg",
+                "https://m.media-amazon.com/images/I/71+7pVYhvCL._AC_SL1500_.jpg",
+                "https://m.media-amazon.com/images/I/71+f6VwF0ML._AC_SL1500_.jpg"
+            ]
+        },
+        {
+            "id": "monitor-dell-s2721dgf",
+            "name": "Dell S2721DGF 27\" QHD 165Hz",
+            "images": [
+                "https://m.media-amazon.com/images/I/81gf2CaPGNL._AC_SL1500_.jpg",
+                "https://m.media-amazon.com/images/I/81jAz-X6zqL._AC_SL1500_.jpg",
+                "https://m.media-amazon.com/images/I/81lWL2PjVvL._AC_SL1500_.jpg"
+            ]
+        },
+        {
+            "id": "monitor-asus-vg279qm",
+            "name": "ASUS TUF Gaming VG279QM 27\" FHD 280Hz",
+            "images": [
+                "https://m.media-amazon.com/images/I/81G-7DY9N0L._AC_SL1500_.jpg",
+                "https://m.media-amazon.com/images/I/81YkZdPRJVL._AC_SL1500_.jpg",
+                "https://m.media-amazon.com/images/I/71sCw7fH1QL._AC_SL1500_.jpg"
+            ]
+        }
+    ]
+}

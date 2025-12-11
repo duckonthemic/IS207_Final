@@ -145,6 +145,33 @@ class Product extends Model
         return 0;
     }
 
+    /**
+     * Get the primary image URL for the product
+     */
+    public function getImageUrlAttribute(): ?string
+    {
+        // Try to get from images relation first
+        if ($this->relationLoaded('images') && $this->images->isNotEmpty()) {
+            $primary = $this->images->firstWhere('is_primary', true) ?? $this->images->first();
+            return asset($primary->url);
+        }
+        
+        // Query if not loaded
+        $image = $this->images()->where('is_primary', true)->first() 
+            ?? $this->images()->first();
+        
+        if ($image) {
+            return asset($image->url);
+        }
+        
+        // Fallback to legacy image field
+        if ($this->image) {
+            return asset('storage/' . $this->image);
+        }
+        
+        return null;
+    }
+
     public function getRouteKeyName(): string
     {
         return 'slug';
