@@ -46,13 +46,13 @@
                     @error('category_id') <p class="text-cyber-error text-sm mt-1">{{ $message }}</p> @enderror
                 </div>
 
-                {{-- Manufacturer --}}
+                {{-- Brand --}}
                 <div>
-                    <label class="block text-cyber-accent text-sm font-medium mb-2">Manufacturer</label>
-                    <select name="manufacturer_id" class="w-full bg-cyber-dark border border-cyber-accent border-opacity-30 text-white rounded-lg px-4 py-2 focus:border-cyber-accent focus:outline-none transition">
-                        <option value="">Select Manufacturer</option>
-                        @foreach($manufacturers as $mfr)
-                            <option value="{{ $mfr->id }}" {{ old('manufacturer_id') == $mfr->id ? 'selected' : '' }}>{{ $mfr->name }}</option>
+                    <label class="block text-cyber-accent text-sm font-medium mb-2">Brand</label>
+                    <select name="brand_id" class="w-full bg-cyber-dark border border-cyber-accent border-opacity-30 text-white rounded-lg px-4 py-2 focus:border-cyber-accent focus:outline-none transition">
+                        <option value="">Select Brand</option>
+                        @foreach($brands as $brand)
+                            <option value="{{ $brand->id }}" {{ old('brand_id') == $brand->id ? 'selected' : '' }}>{{ $brand->name }}</option>
                         @endforeach
                     </select>
                 </div>
