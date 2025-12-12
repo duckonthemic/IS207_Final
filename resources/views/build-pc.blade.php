@@ -18,13 +18,68 @@
                 <p class="text-gray-600">Chọn từng linh kiện để tạo nên bộ PC hoàn hảo của bạn</p>
             </div>
 
-            <!-- Compatibility Alerts -->
+            <!-- Compatibility Alerts - 3 Levels -->
+            <!-- Level 1: Errors (Red) - Cannot build -->
             <template x-if="compatibilityErrors.length > 0">
-                <div class="mb-6 bg-red-50 border border-red-200 rounded-lg p-4">
-                    <div class="font-semibold text-red-800 mb-2">Cảnh báo tương thích</div>
+                <div class="mb-4 bg-red-50 border border-red-200 rounded-lg p-4">
+                    <div class="flex items-center gap-2 font-semibold text-red-800 mb-2">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        Lỗi tương thích (Không thể lắp ráp)
+                    </div>
                     <ul class="text-sm text-red-700 space-y-1">
                         <template x-for="error in compatibilityErrors" :key="error">
-                            <li x-text="error"></li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-red-500 mt-0.5">✕</span>
+                                <span x-text="error"></span>
+                            </li>
+                        </template>
+                    </ul>
+                </div>
+            </template>
+
+            <!-- Level 2: Warnings (Yellow) - Can build but not optimal -->
+            <template x-if="compatibilityWarnings.length > 0">
+                <div class="mb-4 bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                    <div class="flex items-center gap-2 font-semibold text-yellow-800 mb-2">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                                d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        Cảnh báo hiệu năng (Có thể lắp nhưng không tối ưu)
+                    </div>
+                    <ul class="text-sm text-yellow-700 space-y-1">
+                        <template x-for="warn in compatibilityWarnings" :key="warn">
+                            <li class="flex items-start gap-2">
+                                <span class="text-yellow-500 mt-0.5">⚠</span>
+                                <span x-text="warn"></span>
+                            </li>
+                        </template>
+                    </ul>
+                </div>
+            </template>
+
+            <!-- Level 3: Info (Blue) - Suggestions -->
+            <template x-if="compatibilityInfo.length > 0">
+                <div class="mb-4 bg-blue-50 border border-blue-200 rounded-lg p-4">
+                    <div class="flex items-center gap-2 font-semibold text-blue-800 mb-2">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        Gợi ý tối ưu
+                    </div>
+                    <ul class="text-sm text-blue-700 space-y-1">
+                        <template x-for="tip in compatibilityInfo" :key="tip">
+                            <li class="flex items-start gap-2">
+                                <span class="text-blue-500 mt-0.5">ℹ</span>
+                                <span x-text="tip"></span>
+                            </li>
                         </template>
                     </ul>
                 </div>
@@ -32,7 +87,7 @@
 
             <!-- Info about auto-filtering -->
             <template x-if="getFilterHint()">
-                <div class="mb-6 bg-blue-50 border border-blue-200 rounded-lg p-4 text-sm text-blue-800">
+                <div class="mb-6 bg-gray-50 border border-gray-200 rounded-lg p-4 text-sm text-gray-700">
                     <span x-text="getFilterHint()"></span>
                 </div>
             </template>
@@ -412,6 +467,35 @@
                     cooler: null
                 },
                 compatibilityErrors: [],
+                compatibilityWarnings: [],
+                compatibilityInfo: [],
+
+                // Chipset to Tier mapping (VN Market 2024-2025)
+                // Tier 1: Entry, Tier 2: Mid-Range, Tier 3: High-End, Tier 4: Enthusiast
+                chipsetTiers: {
+                    // Intel Entry
+                    'H610': 1, 'H510': 1, 'H410': 1,
+                    // AMD Entry
+                    'A520': 1, 'A320': 1, 'A620': 1,
+                    // Intel Mid-Range
+                    'B760': 2, 'B660': 2, 'B560': 2, 'B460': 2,
+                    // AMD Mid-Range
+                    'B650': 2, 'B650E': 2, 'B550': 2, 'B450': 2,
+                    // Intel High-End
+                    'Z790': 3, 'Z690': 3, 'H770': 3, 'Z590': 3,
+                    // AMD High-End
+                    'X670': 3, 'X570': 3, 'X470': 3,
+                    // Enthusiast
+                    'X670E': 4,
+                },
+
+                // Case form factor compatibility
+                caseMbCompatibility: {
+                    'Full Tower': ['E-ATX', 'ATX', 'mATX', 'Mini-ITX'],
+                    'Mid Tower': ['E-ATX', 'ATX', 'mATX', 'Mini-ITX'],
+                    'Mini Tower': ['mATX', 'Mini-ITX'],
+                    'SFF': ['Mini-ITX'],
+                },
 
                 // Modal state
                 modalOpen: false,
@@ -650,30 +734,190 @@
                 },
 
                 checkCompatibility() {
+                    // Reset all alerts
                     this.compatibilityErrors = [];
+                    this.compatibilityWarnings = [];
+                    this.compatibilityInfo = [];
+
                     const cpu = this.selectedComponents.cpu;
                     const mainboard = this.selectedComponents.mainboard;
                     const ram = this.selectedComponents.ram;
+                    const gpu = this.selectedComponents.gpu;
+                    const psu = this.selectedComponents.psu;
+                    const pcCase = this.selectedComponents.case;
+                    const cooler = this.selectedComponents.cooler;
 
-                    // Check CPU vs Mainboard (Socket)
+                    // ============================================
+                    // LAYER 1: PHYSICAL COMPATIBILITY (ERRORS)
+                    // ============================================
+
+                    // 1.1 CPU Socket vs Mainboard Socket
                     if (cpu && mainboard) {
                         const cpuSocket = cpu.specs?.cpu_socket;
                         const mbSocket = mainboard.specs?.mb_socket;
-
                         if (cpuSocket && mbSocket && cpuSocket !== mbSocket) {
                             this.compatibilityErrors.push(`CPU socket (${cpuSocket}) không khớp với Mainboard socket (${mbSocket})`);
                         }
                     }
 
-                    // Check RAM vs Mainboard (RAM Type)
+                    // 1.2 RAM Type vs Mainboard (CHECK BEFORE TIER!)
                     if (ram && mainboard) {
                         const ramType = ram.specs?.ram_type;
                         const mbRamSupport = mainboard.specs?.mb_memory_type;
-
                         if (ramType && mbRamSupport && !mbRamSupport.includes(ramType) && ramType !== mbRamSupport) {
                             this.compatibilityErrors.push(`RAM (${ramType}) không tương thích với Mainboard (hỗ trợ ${mbRamSupport})`);
                         }
                     }
+
+                    // 1.3 Mainboard Form Factor vs Case
+                    if (mainboard && pcCase) {
+                        const mbFormFactor = mainboard.specs?.mb_form_factor;
+                        let caseMbSupport = pcCase.specs?.case_motherboard_support;
+                        const caseType = pcCase.specs?.case_type;
+
+                        if (mbFormFactor) {
+                            // Try case specs first
+                            if (caseMbSupport) {
+                                if (!Array.isArray(caseMbSupport)) caseMbSupport = [caseMbSupport];
+                                if (!caseMbSupport.includes(mbFormFactor)) {
+                                    this.compatibilityErrors.push(`Mainboard ${mbFormFactor} không lắp vừa Case (hỗ trợ: ${caseMbSupport.join(', ')})`);
+                                }
+                            } else if (caseType && this.caseMbCompatibility[caseType]) {
+                                // Fallback to case type mapping
+                                if (!this.caseMbCompatibility[caseType].includes(mbFormFactor)) {
+                                    this.compatibilityErrors.push(`Mainboard ${mbFormFactor} không lắp vừa Case ${caseType}`);
+                                }
+                            }
+                        }
+                    }
+
+                    // 1.4 GPU Length vs Case
+                    if (gpu && pcCase) {
+                        const gpuLength = parseInt(gpu.specs?.gpu_length_mm) || 0;
+                        const caseMaxGpu = parseInt(pcCase.specs?.case_gpu_length) || 0;
+                        if (gpuLength > 0 && caseMaxGpu > 0 && gpuLength > caseMaxGpu) {
+                            this.compatibilityErrors.push(`GPU dài ${gpuLength}mm, Case chỉ hỗ trợ tối đa ${caseMaxGpu}mm`);
+                        }
+                    }
+
+                    // 1.5 Cooler Height vs Case (Air cooler)
+                    if (cooler && pcCase) {
+                        const coolerType = cooler.specs?.cooler_type;
+                        if (coolerType === 'Air') {
+                            const coolerHeight = parseInt(cooler.specs?.cooler_height) || 0;
+                            const caseMaxCooler = parseInt(pcCase.specs?.case_cooler_height) || 0;
+                            if (coolerHeight > 0 && caseMaxCooler > 0 && coolerHeight > caseMaxCooler) {
+                                this.compatibilityErrors.push(`Tản nhiệt cao ${coolerHeight}mm, Case chỉ hỗ trợ tối đa ${caseMaxCooler}mm`);
+                            }
+                        }
+                        // 1.6 AIO Radiator vs Case
+                        if (coolerType === 'Liquid') {
+                            const radiatorSize = parseInt(cooler.specs?.cooler_radiator) || 0;
+                            const caseRadiatorSupport = pcCase.specs?.case_radiator_support || '';
+                            if (radiatorSize > 0 && caseRadiatorSupport) {
+                                const matches = caseRadiatorSupport.match(/(\d+)mm/g);
+                                const supportedSizes = matches ? matches.map(m => parseInt(m)) : [];
+                                const maxSupported = supportedSizes.length > 0 ? Math.max(...supportedSizes) : 0;
+                                if (maxSupported > 0 && radiatorSize > maxSupported) {
+                                    this.compatibilityErrors.push(`Radiator ${radiatorSize}mm không hỗ trợ, Case chỉ lắp tối đa ${maxSupported}mm`);
+                                }
+                            }
+                        }
+                    }
+
+                    // ============================================
+                    // LAYER 2: PERFORMANCE/BOTTLENECK (WARNINGS)
+                    // ============================================
+                    if (cpu && mainboard) {
+                        const cpuTier = cpu.tier || this.inferCpuTier(cpu.name);
+                        const mbTier = mainboard.tier || this.inferMainboardTier(mainboard.specs?.mb_chipset);
+
+                        if (cpuTier && mbTier) {
+                            if (cpuTier > mbTier) {
+                                this.compatibilityWarnings.push(`CPU cao cấp (Tier ${cpuTier}) ghép với Mainboard entry-level (Tier ${mbTier}) có thể gây nghẽn cổ chai do VRM yếu`);
+                            }
+                            if (mbTier > cpuTier + 1) {
+                                this.compatibilityInfo.push(`Mainboard (Tier ${mbTier}) cao cấp hơn nhiều so với CPU (Tier ${cpuTier}) - có thể tối ưu chi phí`);
+                            }
+                        }
+                    }
+
+                    // ============================================
+                    // LAYER 3: POWER CONSUMPTION (ERRORS + INFO)
+                    // ============================================
+                    if (psu) {
+                        const psuWattage = parseInt(psu.specs?.psu_wattage) || 0;
+                        if (psuWattage > 0) {
+                            const totalTdp = this.calculateTotalTdp();
+                            const requiredWattage = Math.ceil(totalTdp * 1.2);
+                            const recommendedWattage = Math.ceil(totalTdp * 1.3);
+
+                            if (psuWattage < requiredWattage) {
+                                this.compatibilityErrors.push(`Nguồn ${psuWattage}W không đủ! Cần tối thiểu ${requiredWattage}W (TDP: ${totalTdp}W + 20% headroom)`);
+                            } else if (psuWattage < recommendedWattage) {
+                                this.compatibilityInfo.push(`Nguồn ${psuWattage}W đủ dùng nhưng gần giới hạn. Khuyến nghị ${recommendedWattage}W+`);
+                            }
+
+                            // Check GPU recommended PSU
+                            if (gpu) {
+                                const gpuRecommendedPsu = parseInt(gpu.specs?.gpu_recommended_psu) || 0;
+                                if (gpuRecommendedPsu > 0 && psuWattage < gpuRecommendedPsu) {
+                                    this.compatibilityInfo.push(`GPU khuyến nghị nguồn ${gpuRecommendedPsu}W, bạn đang dùng ${psuWattage}W`);
+                                }
+
+                                // Check PCIe connectors
+                                const gpuPowerConnectors = gpu.specs?.gpu_power_connectors || '';
+                                const psuPcie8pin = parseInt(psu.specs?.psu_pcie_8pin) || 0;
+                                const psu12vhpwr = parseInt(psu.specs?.psu_12vhpwr) || 0;
+
+                                if (gpuPowerConnectors) {
+                                    const match8pin = gpuPowerConnectors.match(/(\d+)x\s*8-pin/i);
+                                    if (match8pin) {
+                                        const required8pin = parseInt(match8pin[1]);
+                                        if (psuPcie8pin > 0 && psuPcie8pin < required8pin) {
+                                            this.compatibilityErrors.push(`GPU cần ${required8pin}x cổng 8-pin PCIe, nguồn chỉ có ${psuPcie8pin}x`);
+                                        }
+                                    }
+                                    if (/12VHPWR|16-pin/i.test(gpuPowerConnectors) && psu12vhpwr < 1) {
+                                        this.compatibilityInfo.push(`GPU cần cổng 12VHPWR (16-pin), cần kiểm tra nguồn có adapter không`);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+
+                // Helper: Infer CPU tier from name
+                inferCpuTier(cpuName) {
+                    if (!cpuName) return null;
+                    if (/i9|Ryzen\s*9/i.test(cpuName)) return 4;
+                    if (/i7|Ryzen\s*7/i.test(cpuName)) return 3;
+                    if (/i5|Ryzen\s*5/i.test(cpuName)) return 2;
+                    if (/i3|Ryzen\s*3|Pentium|Athlon/i.test(cpuName)) return 1;
+                    return null;
+                },
+
+                // Helper: Infer Mainboard tier from chipset
+                inferMainboardTier(chipset) {
+                    if (!chipset) return null;
+                    for (const [key, tier] of Object.entries(this.chipsetTiers)) {
+                        if (chipset.includes(key)) return tier;
+                    }
+                    return null;
+                },
+
+                // Helper: Calculate total TDP
+                calculateTotalTdp() {
+                    let total = 0;
+                    const cpu = this.selectedComponents.cpu;
+                    const gpu = this.selectedComponents.gpu;
+
+                    if (cpu?.specs?.cpu_tdp) total += parseInt(cpu.specs.cpu_tdp) || 0;
+                    if (gpu?.specs?.gpu_tdp) total += parseInt(gpu.specs.gpu_tdp) || 0;
+
+                    // Estimated other components (RAM, SSD, Fans, etc.)
+                    total += 50;
+                    return total;
                 },
 
                 get componentCount() {

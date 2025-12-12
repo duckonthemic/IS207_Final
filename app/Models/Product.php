@@ -16,6 +16,7 @@ class Product extends Model
         'category_id',
         'brand_id',
         'component_type_id',
+        'tier', // Performance tier: 1=Entry, 2=Mid, 3=High, 4=Enthusiast
         'name',
         'slug',
         'description',
@@ -35,6 +36,7 @@ class Product extends Model
         'price' => 'decimal:2',
         'sale_price' => 'decimal:2',
         'stock' => 'integer',
+        'tier' => 'integer',
         'specifications' => 'array',
         'is_featured' => 'boolean',
         'is_active' => 'boolean',
@@ -155,20 +157,20 @@ class Product extends Model
             $primary = $this->images->firstWhere('is_primary', true) ?? $this->images->first();
             return asset($primary->url);
         }
-        
+
         // Query if not loaded
-        $image = $this->images()->where('is_primary', true)->first() 
+        $image = $this->images()->where('is_primary', true)->first()
             ?? $this->images()->first();
-        
+
         if ($image) {
             return asset($image->url);
         }
-        
+
         // Fallback to legacy image field
         if ($this->image) {
             return asset('storage/' . $this->image);
         }
-        
+
         return null;
     }
 
