@@ -123,7 +123,7 @@ class ProductController extends Controller
                 foreach ($request->file('images') as $index => $image) {
                     $path = $image->store('products', 'public');
                     $product->images()->create([
-                        'image_path' => $path,
+                        'url' => 'storage/' . $path,
                         'is_primary' => $index === 0,
                     ]);
                 }

@@ -19,7 +19,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // Force HTTPS for Cloudflare Tunnel
-        \Illuminate\Support\Facades\URL::forceScheme('https');
+        // Force HTTPS only when behind a proxy (Cloudflare Tunnel)
+        // This allows localhost to work without HTTPS
+        if (
+            request()->header('X-Forwarded-Proto') === 'https' ||
+            str_contains(request()->getHost(), 'trycloudflare.com')
+        ) {
+            \Illuminate\Support\Facades\URL::forceScheme('https');
+        }
     }
 }
