@@ -312,7 +312,8 @@
                         </a>
                     @else
                         <div class="hidden lg:flex items-center gap-4 text-sm font-medium">
-                            <a href="{{ route('login') }}" class="text-gray-600 hover:text-blue-600 transition-colors">{{ __('messages.login') }}</a>
+                            <a href="{{ route('login') }}"
+                                class="text-gray-600 hover:text-blue-600 transition-colors">{{ __('messages.login') }}</a>
                             <a href="{{ route('register') }}"
                                 class="px-4 py-2 bg-black text-white rounded-full hover:bg-gray-800 transition-colors shadow-sm hover:shadow">{{ __('messages.register') }}</a>
                         </div>
@@ -1117,6 +1118,24 @@
                             </div>
                         </div>
                     </div>
+
+                    {{-- About Link --}}
+                    <a href="{{ route('about') }}"
+                        class="text-sm font-medium text-gray-300 hover:text-white transition-colors">
+                        Giới thiệu
+                    </a>
+
+                    {{-- FAQ Link --}}
+                    <a href="{{ route('page.show', 'faq') }}"
+                        class="text-sm font-medium text-gray-300 hover:text-white transition-colors">
+                        FAQ
+                    </a>
+
+                    {{-- Warranty Policy Link --}}
+                    <a href="{{ route('page.show', 'chinh-sach-bao-hanh') }}"
+                        class="text-sm font-medium text-gray-300 hover:text-white transition-colors">
+                        Bảo hành
+                    </a>
                 </div>
             </div>
         </div>

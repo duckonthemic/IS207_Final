@@ -13,7 +13,8 @@ class PageController extends Controller
     {
         // Map of slugs to view files
         $pages = [
-            'bao-hanh' => 'pages.warranty',
+            'bao-hanh' => 'pages.chinh-sach-bao-hanh',
+            'chinh-sach-bao-hanh' => 'pages.chinh-sach-bao-hanh',
             'doi-tra' => 'pages.return-policy',
             'dieu-khoan' => 'pages.terms',
             'faq' => 'pages.faq',

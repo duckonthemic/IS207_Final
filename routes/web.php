@@ -41,6 +41,9 @@ Route::get('/terms', function () {
 Route::get('/privacy', function () {
     return view('pages.privacy');
 })->name('privacy');
+Route::get('/about', function () {
+    return view('about');
+})->name('about');
 Route::get('/page/{slug}', [PageController::class, 'show'])->name('page.show');
 
 // Cart add - explicitly use ID for product binding (Build PC uses IDs)
