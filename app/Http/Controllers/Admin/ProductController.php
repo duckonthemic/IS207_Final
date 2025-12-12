@@ -24,6 +24,8 @@ class ProductController extends Controller
     {
         $perPage = $request->input('per_page', 20);
         $search = $request->input('search');
+        $category = $request->input('category');
+        $status = $request->input('status');
 
         $query = Product::with(['category', 'images']);
 
@@ -32,6 +34,18 @@ class ProductController extends Controller
                 $q->where('name', 'like', "%{$search}%")
                     ->orWhere('sku', 'like', "%{$search}%");
             });
+        }
+
+        if ($category) {
+            $query->where('category_id', $category);
+        }
+
+        if ($status) {
+            if ($status === 'active') {
+                $query->where('is_active', true);
+            } elseif ($status === 'inactive') {
+                $query->where('is_active', false);
+            }
         }
 
         $products = $query->latest('id')->paginate($perPage);
@@ -63,26 +77,56 @@ class ProductController extends Controller
             'description' => 'nullable|string',
             'category_id' => 'required|exists:categories,id',
             'brand_id' => 'nullable|exists:brands,id',
-            'component_type_id' => 'nullable|exists:component_types,id',
             'price' => 'required|numeric|min:0',
             'sale_price' => 'nullable|numeric|min:0',
             'sku' => 'required|string|unique:products|max:255',
             'stock' => 'required|integer|min:0',
-            'warranty_months' => 'nullable|integer|min:0',
-            'is_featured' => 'boolean',
-            'is_active' => 'boolean',
-            'brand' => 'nullable|string|max:255',
-            'image' => 'nullable|string',
             'specs' => 'nullable|array',
+            'specs.*.key' => 'nullable|string|max:255',
+            'specs.*.value' => 'nullable|string|max:500',
+            'images' => 'nullable|array',
+            'images.*' => 'image|mimes:jpeg,png,jpg,webp|max:2048',
         ]);
 
         DB::beginTransaction();
         try {
-            $product = Product::create($validated);
-
-            // Lưu specs nếu có
+            // Convert specs array to JSON format for specifications column
+            $specifications = [];
             if (!empty($validated['specs'])) {
-                $this->syncProductSpecs($product, $validated['specs']);
+                foreach ($validated['specs'] as $spec) {
+                    if (!empty($spec['key']) && !empty($spec['value'])) {
+                        $specifications[$spec['key']] = $spec['value'];
+                    }
+                }
+            }
+
+            // Prepare product data
+            $productData = [
+                'name' => $validated['name'],
+                'slug' => $validated['slug'],
+                'description' => $validated['description'] ?? null,
+                'category_id' => $validated['category_id'],
+                'brand_id' => $validated['brand_id'] ?? null,
+                'price' => $validated['price'],
+                'sale_price' => $validated['sale_price'] ?? null,
+                'sku' => $validated['sku'],
+                'stock' => $validated['stock'],
+                'specifications' => $specifications,
+                'is_active' => $request->has('status'),
+                'is_featured' => $request->has('is_featured'),
+            ];
+
+            $product = Product::create($productData);
+
+            // Handle image uploads
+            if ($request->hasFile('images')) {
+                foreach ($request->file('images') as $index => $image) {
+                    $path = $image->store('products', 'public');
+                    $product->images()->create([
+                        'image_path' => $path,
+                        'is_primary' => $index === 0,
+                    ]);
+                }
             }
 
             // Log audit

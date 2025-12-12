@@ -87,6 +87,14 @@
                             class="w-full bg-white border border-gray-300 text-gray-900 rounded-lg px-4 py-2.5 focus:border-gray-900 focus:ring-1 focus:ring-gray-900 focus:outline-none transition @error('sku') border-red-500 @enderror">
                         @error('sku') <p class="text-red-500 text-sm mt-1">{{ $message }}</p> @enderror
                     </div>
+
+                    {{-- Stock --}}
+                    <div>
+                        <label class="block text-gray-700 text-sm font-medium mb-2">Số lượng tồn kho *</label>
+                        <input type="number" name="stock" value="{{ old('stock', 0) }}" required min="0"
+                            class="w-full bg-white border border-gray-300 text-gray-900 rounded-lg px-4 py-2.5 focus:border-gray-900 focus:ring-1 focus:ring-gray-900 focus:outline-none transition @error('stock') border-red-500 @enderror">
+                        @error('stock') <p class="text-red-500 text-sm mt-1">{{ $message }}</p> @enderror
+                    </div>
                 </div>
 
                 {{-- Description --}}
@@ -117,6 +125,46 @@
                     <input type="file" name="images[]" id="images" multiple accept="image/*" class="hidden">
                 </div>
                 @error('images') <p class="text-red-500 text-sm mt-2">{{ $message }}</p> @enderror
+            </div>
+
+            {{-- Specifications --}}
+            <div class="bg-white border border-gray-200 rounded-lg p-6">
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <h2 class="text-lg font-semibold text-gray-900">Thông số kỹ thuật</h2>
+                        <p class="text-gray-500 text-sm mt-1">Thêm các thông số chi tiết cho sản phẩm</p>
+                    </div>
+                    <button type="button" id="add-spec"
+                        class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition text-sm font-medium flex items-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                        </svg>
+                        Thêm thông số
+                    </button>
+                </div>
+                
+                <div id="specs-container" class="space-y-3">
+                    <p id="no-specs-message" class="text-gray-400 text-sm py-4 text-center border border-dashed border-gray-200 rounded-lg">
+                        Chưa có thông số nào. Nhấn "Thêm thông số" để bắt đầu.
+                    </p>
+                </div>
+
+                <div class="mt-4 p-4 bg-gray-50 rounded-lg">
+                    <p class="text-gray-600 text-sm font-medium mb-2">Gợi ý thông số phổ biến:</p>
+                    <div class="flex flex-wrap gap-2">
+                        <button type="button" class="quick-spec px-3 py-1 bg-white border border-gray-200 rounded-full text-xs text-gray-600 hover:bg-gray-100 transition" data-key="CPU" data-value="">CPU</button>
+                        <button type="button" class="quick-spec px-3 py-1 bg-white border border-gray-200 rounded-full text-xs text-gray-600 hover:bg-gray-100 transition" data-key="RAM" data-value="">RAM</button>
+                        <button type="button" class="quick-spec px-3 py-1 bg-white border border-gray-200 rounded-full text-xs text-gray-600 hover:bg-gray-100 transition" data-key="VGA" data-value="">VGA</button>
+                        <button type="button" class="quick-spec px-3 py-1 bg-white border border-gray-200 rounded-full text-xs text-gray-600 hover:bg-gray-100 transition" data-key="SSD" data-value="">SSD</button>
+                        <button type="button" class="quick-spec px-3 py-1 bg-white border border-gray-200 rounded-full text-xs text-gray-600 hover:bg-gray-100 transition" data-key="HDD" data-value="">HDD</button>
+                        <button type="button" class="quick-spec px-3 py-1 bg-white border border-gray-200 rounded-full text-xs text-gray-600 hover:bg-gray-100 transition" data-key="PSU" data-value="">PSU</button>
+                        <button type="button" class="quick-spec px-3 py-1 bg-white border border-gray-200 rounded-full text-xs text-gray-600 hover:bg-gray-100 transition" data-key="Mainboard" data-value="">Mainboard</button>
+                        <button type="button" class="quick-spec px-3 py-1 bg-white border border-gray-200 rounded-full text-xs text-gray-600 hover:bg-gray-100 transition" data-key="Case" data-value="">Case</button>
+                        <button type="button" class="quick-spec px-3 py-1 bg-white border border-gray-200 rounded-full text-xs text-gray-600 hover:bg-gray-100 transition" data-key="Tản nhiệt" data-value="">Tản nhiệt</button>
+                        <button type="button" class="quick-spec px-3 py-1 bg-white border border-gray-200 rounded-full text-xs text-gray-600 hover:bg-gray-100 transition" data-key="Màn hình" data-value="">Màn hình</button>
+                        <button type="button" class="quick-spec px-3 py-1 bg-white border border-gray-200 rounded-full text-xs text-gray-600 hover:bg-gray-100 transition" data-key="Bảo hành" data-value="">Bảo hành</button>
+                    </div>
+                </div>
             </div>
 
             {{-- Buttons --}}
@@ -150,6 +198,66 @@
             e.preventDefault();
             imageInput.files = e.dataTransfer.files;
             imageDropZone.classList.remove('border-gray-400');
+        });
+
+        // Specifications management
+        let specCount = 0;
+        const specsContainer = document.getElementById('specs-container');
+        const noSpecsMessage = document.getElementById('no-specs-message');
+
+        function addSpec(key = '', value = '') {
+            // Hide no specs message
+            if (noSpecsMessage) {
+                noSpecsMessage.style.display = 'none';
+            }
+
+            const specDiv = document.createElement('div');
+            specDiv.className = 'spec-row flex gap-3 items-center';
+            specDiv.innerHTML = `
+                <div class="flex-1">
+                    <input type="text" name="specs[${specCount}][key]" value="${key}" placeholder="Tên thông số (VD: CPU, RAM...)"
+                        class="w-full bg-white border border-gray-300 text-gray-900 rounded-lg px-4 py-2.5 focus:border-gray-900 focus:ring-1 focus:ring-gray-900 focus:outline-none transition text-sm">
+                </div>
+                <div class="flex-1">
+                    <input type="text" name="specs[${specCount}][value]" value="${value}" placeholder="Giá trị (VD: Intel Core i7-13700K)"
+                        class="w-full bg-white border border-gray-300 text-gray-900 rounded-lg px-4 py-2.5 focus:border-gray-900 focus:ring-1 focus:ring-gray-900 focus:outline-none transition text-sm">
+                </div>
+                <button type="button" class="remove-spec p-2.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                    </svg>
+                </button>
+            `;
+            specsContainer.appendChild(specDiv);
+            specCount++;
+            attachRemoveListeners();
+        }
+
+        function attachRemoveListeners() {
+            document.querySelectorAll('.remove-spec').forEach(btn => {
+                btn.onclick = function() {
+                    this.closest('.spec-row').remove();
+                    // Show no specs message if empty
+                    if (specsContainer.querySelectorAll('.spec-row').length === 0 && noSpecsMessage) {
+                        noSpecsMessage.style.display = 'block';
+                    }
+                };
+            });
+        }
+
+        // Add spec button
+        document.getElementById('add-spec').addEventListener('click', () => addSpec());
+
+        // Quick spec buttons
+        document.querySelectorAll('.quick-spec').forEach(btn => {
+            btn.addEventListener('click', () => {
+                addSpec(btn.dataset.key, btn.dataset.value);
+                // Focus on the value input
+                const lastSpec = specsContainer.querySelector('.spec-row:last-child');
+                if (lastSpec) {
+                    lastSpec.querySelector('input[name*="[value]"]').focus();
+                }
+            });
         });
     </script>
 @endsection
