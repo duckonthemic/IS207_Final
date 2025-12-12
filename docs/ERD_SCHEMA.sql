@@ -97,6 +97,7 @@ CREATE TABLE products (
     category_id BIGINT UNSIGNED NOT NULL,
     brand_id BIGINT UNSIGNED NULL,
     component_type_id BIGINT UNSIGNED NULL,
+    tier TINYINT UNSIGNED NULL, -- 1=Entry, 2=Mid, 3=High, 4=Enthusiast
     name VARCHAR(255) NOT NULL,
     slug VARCHAR(255) NOT NULL UNIQUE,
     description TEXT NULL,
