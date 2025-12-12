@@ -270,7 +270,9 @@ class CompatibilityTestDataSeeder extends Seeder
                     'case_motherboard_support' => 'Mini-ITX',
                     'case_gpu_length' => '305',
                     'case_cooler_height' => '72',
-                    'case_radiator_support' => 'Rear 140mm'
+                    'case_radiator_support' => 'Rear 140mm',
+                    'case_max_fans' => '2',
+                    'case_fan_sizes' => '140mm'
                 ]
             ],
             [
@@ -282,7 +284,9 @@ class CompatibilityTestDataSeeder extends Seeder
                     'case_motherboard_support' => 'ATX,mATX,Mini-ITX',
                     'case_gpu_length' => '392',
                     'case_cooler_height' => '180',
-                    'case_radiator_support' => 'Front 360mm, Top 280mm'
+                    'case_radiator_support' => 'Front 360mm, Top 280mm',
+                    'case_max_fans' => '10',
+                    'case_fan_sizes' => '120mm,140mm'
                 ]
             ],
             [
@@ -294,7 +298,9 @@ class CompatibilityTestDataSeeder extends Seeder
                     'case_motherboard_support' => 'E-ATX,ATX,mATX,Mini-ITX',
                     'case_gpu_length' => '450',
                     'case_cooler_height' => '190',
-                    'case_radiator_support' => 'Front 420mm, Top 420mm, Side 360mm'
+                    'case_radiator_support' => 'Front 420mm, Top 420mm, Side 360mm',
+                    'case_max_fans' => '12',
+                    'case_fan_sizes' => '120mm,140mm'
                 ]
             ],
         ];
@@ -359,6 +365,136 @@ class CompatibilityTestDataSeeder extends Seeder
         }
         $this->command->info('  Created ' . count($coolers) . ' test Coolers');
 
+        // ==========================================
+        // Fan Case - Different sizes and quantities
+        // ==========================================
+        $fancaseType = ComponentType::where('code', 'fan-case')->first();
+        $fancaseCategory = Category::where('slug', 'fan-case')->first();
+
+        // Create fan-case component type if not exists
+        if (!$fancaseType) {
+            $fancaseType = ComponentType::create([
+                'name' => 'Fan Case',
+                'code' => 'fan-case',
+                'is_required' => false,
+                'sort_order' => 9
+            ]);
+        }
+
+        // Create fan-case category if not exists
+        if (!$fancaseCategory) {
+            $fancaseCategory = Category::create([
+                'name' => 'Fan Case',
+                'slug' => 'fan-case',
+                'is_active' => true
+            ]);
+        }
+
+        // Create spec definitions for fan-case
+        $fanSpecDefs = [
+            ['code' => 'fan_size', 'name' => 'Kích thước', 'unit' => 'mm'],
+            ['code' => 'fan_quantity', 'name' => 'Số lượng', 'unit' => ''],
+            ['code' => 'fan_rpm', 'name' => 'Tốc độ', 'unit' => 'RPM'],
+            ['code' => 'fan_airflow', 'name' => 'Luồng gió', 'unit' => 'CFM'],
+        ];
+
+        foreach ($fanSpecDefs as $def) {
+            SpecDefinition::firstOrCreate(
+                ['code' => $def['code'], 'component_type_id' => $fancaseType->id],
+                [
+                    'name' => $def['name'],
+                    'unit' => $def['unit'],
+                    'input_type' => 'text',
+                    'is_required' => false,
+                    'is_filterable' => true,
+                    'sort_order' => 1
+                ]
+            );
+        }
+
+        // Create case spec definitions for max_fans and fan_sizes
+        $caseSpecDefs = [
+            ['code' => 'case_max_fans', 'name' => 'Số fan tối đa', 'unit' => ''],
+            ['code' => 'case_fan_sizes', 'name' => 'Kích thước fan hỗ trợ', 'unit' => ''],
+        ];
+
+        foreach ($caseSpecDefs as $def) {
+            SpecDefinition::firstOrCreate(
+                ['code' => $def['code'], 'component_type_id' => $caseType->id],
+                [
+                    'name' => $def['name'],
+                    'unit' => $def['unit'],
+                    'input_type' => 'text',
+                    'is_required' => false,
+                    'is_filterable' => true,
+                    'sort_order' => 10
+                ]
+            );
+        }
+
+        $fancases = [
+            [
+                'name' => 'Corsair LL120 RGB 3-Pack',
+                'price' => 2990000,
+                'tier' => 3,
+                'specs' => [
+                    'fan_size' => '120',
+                    'fan_quantity' => '3',
+                    'fan_rpm' => '1500',
+                    'fan_airflow' => '43'
+                ]
+            ],
+            [
+                'name' => 'Noctua NF-A12x25 PWM',
+                'price' => 890000,
+                'tier' => 3,
+                'specs' => [
+                    'fan_size' => '120',
+                    'fan_quantity' => '1',
+                    'fan_rpm' => '2000',
+                    'fan_airflow' => '60'
+                ]
+            ],
+            [
+                'name' => 'Lian Li UNI FAN SL120 5-Pack',
+                'price' => 4990000,
+                'tier' => 4,
+                'specs' => [
+                    'fan_size' => '120',
+                    'fan_quantity' => '5',
+                    'fan_rpm' => '1900',
+                    'fan_airflow' => '58'
+                ]
+            ],
+            [
+                'name' => 'be quiet! Silent Wings 4 140mm',
+                'price' => 790000,
+                'tier' => 3,
+                'specs' => [
+                    'fan_size' => '140',
+                    'fan_quantity' => '1',
+                    'fan_rpm' => '1100',
+                    'fan_airflow' => '78'
+                ]
+            ],
+            [
+                'name' => 'Arctic P12 PWM 5-Pack Value',
+                'price' => 590000,
+                'tier' => 1,
+                'specs' => [
+                    'fan_size' => '120',
+                    'fan_quantity' => '5',
+                    'fan_rpm' => '1800',
+                    'fan_airflow' => '56'
+                ]
+            ],
+        ];
+
+        foreach ($fancases as $data) {
+            $this->createProduct($data, $fancaseType, $fancaseCategory);
+        }
+        $this->command->info('  Created ' . count($fancases) . ' test Fan Cases');
+
         // Run tier seeder to update existing products
         $this->call(ProductTierSeeder::class);
 
@@ -370,6 +506,7 @@ class CompatibilityTestDataSeeder extends Seeder
         $this->command->info('  🔴 PSU Weak: RTX 4090 + 450W PSU');
         $this->command->info('  🔴 GPU Too Long: RTX 4090 (336mm) + H1 V2 Case (305mm)');
         $this->command->info('  🔴 Cooler Too Tall: NH-D15 (165mm) + H1 V2 Case (72mm)');
+        $this->command->info('  🔴 Too Many Fans: 5-Pack Fans + H1 V2 Case (max 2 fans)');
         $this->command->info('  🟡 Bottleneck: i9-14900K (Tier 4) + H610 Main (Tier 1)');
         $this->command->info('  🔵 Overkill: i3-12100F (Tier 1) + Z790 Hero (Tier 4)');
     }

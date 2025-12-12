@@ -106,6 +106,7 @@
                             ['key' => 'psu', 'name' => 'PSU - Nguồn', 'required' => false, 'category' => 'psu'],
                             ['key' => 'case', 'name' => 'Case - Vỏ máy', 'required' => false, 'category' => 'case'],
                             ['key' => 'cooler', 'name' => 'Cooler - Tản nhiệt', 'required' => false, 'category' => 'cooler'],
+                            ['key' => 'fancase', 'name' => 'Fan Case - Quạt tản nhiệt', 'required' => false, 'category' => 'fan-case'],
                         ];
                     @endphp
 
@@ -344,6 +345,225 @@
                             </select>
                         </div>
 
+                        <!-- ============================================ -->
+                        <!-- COMPONENT-SPECIFIC FILTERS -->
+                        <!-- ============================================ -->
+
+                        <!-- CPU Filters -->
+                        <template x-if="currentComponentType === 'cpu'">
+                            <div class="mb-5 border-t border-gray-200 pt-4">
+                                <h4 class="text-sm font-semibold text-gray-800 mb-3">🔧 Thông số CPU</h4>
+                                <div class="mb-3">
+                                    <label class="block text-xs font-medium text-gray-600 mb-1">Socket</label>
+                                    <select x-model="filters.spec_cpu_socket" @change="fetchProducts()"
+                                        class="w-full border border-gray-300 rounded px-2 py-1.5 text-sm">
+                                        <option value="">Tất cả</option>
+                                        <option value="LGA1700">Intel LGA1700 (12th-14th Gen)</option>
+                                        <option value="AM5">AMD AM5 (Ryzen 7000+)</option>
+                                        <option value="AM4">AMD AM4 (Ryzen 1000-5000)</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="block text-xs font-medium text-gray-600 mb-1">Dòng CPU</label>
+                                    <select x-model="filters.spec_cpu_tier" @change="fetchProducts()"
+                                        class="w-full border border-gray-300 rounded px-2 py-1.5 text-sm">
+                                        <option value="">Tất cả</option>
+                                        <option value="1">Entry (i3/Ryzen 3)</option>
+                                        <option value="2">Mid-Range (i5/Ryzen 5)</option>
+                                        <option value="3">High-End (i7/Ryzen 7)</option>
+                                        <option value="4">Enthusiast (i9/Ryzen 9)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </template>
+
+                        <!-- Mainboard Filters -->
+                        <template x-if="currentComponentType === 'mainboard'">
+                            <div class="mb-5 border-t border-gray-200 pt-4">
+                                <h4 class="text-sm font-semibold text-gray-800 mb-3">🔧 Thông số Mainboard</h4>
+                                <div class="mb-3">
+                                    <label class="block text-xs font-medium text-gray-600 mb-1">Socket</label>
+                                    <select x-model="filters.spec_mb_socket" @change="fetchProducts()"
+                                        class="w-full border border-gray-300 rounded px-2 py-1.5 text-sm">
+                                        <option value="">Tất cả</option>
+                                        <option value="LGA1700">Intel LGA1700</option>
+                                        <option value="AM5">AMD AM5</option>
+                                        <option value="AM4">AMD AM4</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="block text-xs font-medium text-gray-600 mb-1">Loại RAM</label>
+                                    <select x-model="filters.spec_mb_memory_type" @change="fetchProducts()"
+                                        class="w-full border border-gray-300 rounded px-2 py-1.5 text-sm">
+                                        <option value="">Tất cả</option>
+                                        <option value="DDR5">DDR5</option>
+                                        <option value="DDR4">DDR4</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="block text-xs font-medium text-gray-600 mb-1">Chipset</label>
+                                    <select x-model="filters.spec_mb_chipset" @change="fetchProducts()"
+                                        class="w-full border border-gray-300 rounded px-2 py-1.5 text-sm">
+                                        <option value="">Tất cả</option>
+                                        <optgroup label="Intel">
+                                            <option value="Z790">Z790 (High-End)</option>
+                                            <option value="B760">B760 (Mid-Range)</option>
+                                            <option value="H610">H610 (Entry)</option>
+                                        </optgroup>
+                                        <optgroup label="AMD">
+                                            <option value="X670E">X670E (Enthusiast)</option>
+                                            <option value="X670">X670 (High-End)</option>
+                                            <option value="B650">B650/B650E (Mid-Range)</option>
+                                            <option value="B550">B550 (AM4 Mid)</option>
+                                            <option value="A520">A520 (AM4 Entry)</option>
+                                        </optgroup>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="block text-xs font-medium text-gray-600 mb-1">Form Factor</label>
+                                    <select x-model="filters.spec_mb_form_factor" @change="fetchProducts()"
+                                        class="w-full border border-gray-300 rounded px-2 py-1.5 text-sm">
+                                        <option value="">Tất cả</option>
+                                        <option value="ATX">ATX</option>
+                                        <option value="mATX">Micro-ATX</option>
+                                        <option value="Mini-ITX">Mini-ITX</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </template>
+
+                        <!-- RAM Filters -->
+                        <template x-if="currentComponentType === 'ram'">
+                            <div class="mb-5 border-t border-gray-200 pt-4">
+                                <h4 class="text-sm font-semibold text-gray-800 mb-3">🔧 Thông số RAM</h4>
+                                <div class="mb-3">
+                                    <label class="block text-xs font-medium text-gray-600 mb-1">Loại RAM</label>
+                                    <select x-model="filters.spec_ram_type" @change="fetchProducts()"
+                                        class="w-full border border-gray-300 rounded px-2 py-1.5 text-sm">
+                                        <option value="">Tất cả</option>
+                                        <option value="DDR5">DDR5</option>
+                                        <option value="DDR4">DDR4</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </template>
+
+                        <!-- GPU Filters -->
+                        <template x-if="currentComponentType === 'gpu'">
+                            <div class="mb-5 border-t border-gray-200 pt-4">
+                                <h4 class="text-sm font-semibold text-gray-800 mb-3">🔧 Thông số GPU</h4>
+                                <div class="mb-3">
+                                    <label class="block text-xs font-medium text-gray-600 mb-1">Hãng</label>
+                                    <select x-model="filters.spec_gpu_brand" @change="fetchProducts()"
+                                        class="w-full border border-gray-300 rounded px-2 py-1.5 text-sm">
+                                        <option value="">Tất cả</option>
+                                        <option value="NVIDIA">NVIDIA</option>
+                                        <option value="AMD">AMD</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="block text-xs font-medium text-gray-600 mb-1">TDP (Watt)</label>
+                                    <select x-model="filters.spec_gpu_tdp_range" @change="fetchProducts()"
+                                        class="w-full border border-gray-300 rounded px-2 py-1.5 text-sm">
+                                        <option value="">Tất cả</option>
+                                        <option value="0-100">Dưới 100W (Low Power)</option>
+                                        <option value="100-200">100-200W (Mid-Range)</option>
+                                        <option value="200-300">200-300W (High-End)</option>
+                                        <option value="300-">Trên 300W (Enthusiast)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </template>
+
+                        <!-- PSU Filters -->
+                        <template x-if="currentComponentType === 'psu'">
+                            <div class="mb-5 border-t border-gray-200 pt-4">
+                                <h4 class="text-sm font-semibold text-gray-800 mb-3">🔧 Thông số PSU</h4>
+                                <div class="mb-3">
+                                    <label class="block text-xs font-medium text-gray-600 mb-1">Công suất</label>
+                                    <select x-model="filters.spec_psu_wattage_range" @change="fetchProducts()"
+                                        class="w-full border border-gray-300 rounded px-2 py-1.5 text-sm">
+                                        <option value="">Tất cả</option>
+                                        <option value="0-550">Dưới 550W</option>
+                                        <option value="550-750">550W - 750W</option>
+                                        <option value="750-1000">750W - 1000W</option>
+                                        <option value="1000-">Trên 1000W</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </template>
+
+                        <!-- Case Filters -->
+                        <template x-if="currentComponentType === 'case'">
+                            <div class="mb-5 border-t border-gray-200 pt-4">
+                                <h4 class="text-sm font-semibold text-gray-800 mb-3">🔧 Thông số Case</h4>
+                                <div class="mb-3">
+                                    <label class="block text-xs font-medium text-gray-600 mb-1">Kích thước</label>
+                                    <select x-model="filters.spec_case_type" @change="fetchProducts()"
+                                        class="w-full border border-gray-300 rounded px-2 py-1.5 text-sm">
+                                        <option value="">Tất cả</option>
+                                        <option value="Full Tower">Full Tower</option>
+                                        <option value="Mid Tower">Mid Tower</option>
+                                        <option value="Mini Tower">Mini Tower</option>
+                                        <option value="SFF">SFF (Small Form Factor)</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="block text-xs font-medium text-gray-600 mb-1">Mainboard hỗ trợ</label>
+                                    <select x-model="filters.spec_case_mb_support" @change="fetchProducts()"
+                                        class="w-full border border-gray-300 rounded px-2 py-1.5 text-sm">
+                                        <option value="">Tất cả</option>
+                                        <option value="E-ATX">E-ATX & lớn hơn</option>
+                                        <option value="ATX">ATX & nhỏ hơn</option>
+                                        <option value="mATX">Micro-ATX & nhỏ hơn</option>
+                                        <option value="Mini-ITX">Chỉ Mini-ITX</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </template>
+
+                        <!-- Cooler Filters -->
+                        <template x-if="currentComponentType === 'cooler'">
+                            <div class="mb-5 border-t border-gray-200 pt-4">
+                                <h4 class="text-sm font-semibold text-gray-800 mb-3">🔧 Thông số Cooler</h4>
+                                <div class="mb-3">
+                                    <label class="block text-xs font-medium text-gray-600 mb-1">Loại tản nhiệt</label>
+                                    <select x-model="filters.spec_cooler_type" @change="fetchProducts()"
+                                        class="w-full border border-gray-300 rounded px-2 py-1.5 text-sm">
+                                        <option value="">Tất cả</option>
+                                        <option value="Air">Tản khí (Air Cooler)</option>
+                                        <option value="Liquid">Tản nước AIO</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </template>
+
+                        <!-- Fan Case Filters -->
+                        <template x-if="currentComponentType === 'fancase'">
+                            <div class="mb-5 border-t border-gray-200 pt-4">
+                                <h4 class="text-sm font-semibold text-gray-800 mb-3">🔧 Thông số Fan</h4>
+                                <div class="mb-3">
+                                    <label class="block text-xs font-medium text-gray-600 mb-1">Kích thước</label>
+                                    <select x-model="filters.spec_fan_size" @change="fetchProducts()"
+                                        class="w-full border border-gray-300 rounded px-2 py-1.5 text-sm">
+                                        <option value="">Tất cả</option>
+                                        <option value="120">120mm</option>
+                                        <option value="140">140mm</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="block text-xs font-medium text-gray-600 mb-1">Số lượng</label>
+                                    <select x-model="filters.spec_fan_quantity" @change="fetchProducts()"
+                                        class="w-full border border-gray-300 rounded px-2 py-1.5 text-sm">
+                                        <option value="">Tất cả</option>
+                                        <option value="1">1 Fan</option>
+                                        <option value="3">3 Fan Pack</option>
+                                        <option value="5">5 Fan Pack</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </template>
+
                         <!-- Show all button if filtering -->
                         <button x-show="isFiltering()" @click="clearCompatibilityFilter()"
                             class="w-full text-sm text-blue-600 hover:text-blue-800 font-medium py-2 border border-blue-200 rounded-lg hover:bg-blue-50 transition">
@@ -464,7 +684,8 @@
                     ssd: null,
                     psu: null,
                     case: null,
-                    cooler: null
+                    cooler: null,
+                    fancase: null
                 },
                 compatibilityErrors: [],
                 compatibilityWarnings: [],
@@ -511,7 +732,30 @@
                 filters: {
                     search: '',
                     priceRange: '',
-                    sort: ''
+                    sort: '',
+                    // CPU specs
+                    spec_cpu_socket: '',
+                    spec_cpu_tier: '',
+                    // Mainboard specs
+                    spec_mb_socket: '',
+                    spec_mb_memory_type: '',
+                    spec_mb_chipset: '',
+                    spec_mb_form_factor: '',
+                    // RAM specs
+                    spec_ram_type: '',
+                    // GPU specs
+                    spec_gpu_brand: '',
+                    spec_gpu_tdp_range: '',
+                    // PSU specs
+                    spec_psu_wattage_range: '',
+                    // Case specs
+                    spec_case_type: '',
+                    spec_case_mb_support: '',
+                    // Cooler specs
+                    spec_cooler_type: '',
+                    // Fan specs
+                    spec_fan_size: '',
+                    spec_fan_quantity: ''
                 },
 
                 init() {
@@ -601,7 +845,27 @@
                     this.products = [];
                     this.currentPage = 1;
                     this.skipCompatibilityFilter = false;
-                    this.filters = { search: '', priceRange: '', sort: '' };
+                    // Reset all filters including spec filters
+                    this.filters = {
+                        search: '',
+                        priceRange: '',
+                        sort: '',
+                        spec_cpu_socket: '',
+                        spec_cpu_tier: '',
+                        spec_mb_socket: '',
+                        spec_mb_memory_type: '',
+                        spec_mb_chipset: '',
+                        spec_mb_form_factor: '',
+                        spec_ram_type: '',
+                        spec_gpu_brand: '',
+                        spec_gpu_tdp_range: '',
+                        spec_psu_wattage_range: '',
+                        spec_case_type: '',
+                        spec_case_mb_support: '',
+                        spec_cooler_type: '',
+                        spec_fan_size: '',
+                        spec_fan_quantity: ''
+                    };
                     this.fetchProducts();
                     document.body.style.overflow = 'hidden';
                 },
@@ -668,6 +932,92 @@
                                     const ramType = p.specs?.ram_type || p.specs?.mb_memory_type;
                                     return ramType && ramType.includes(ramValue);
                                 });
+                            }
+                        }
+
+                        // ============================================
+                        // CLIENT-SIDE SPEC FILTERING
+                        // ============================================
+                        if (Array.isArray(products)) {
+                            // CPU filters
+                            if (this.filters.spec_cpu_socket) {
+                                products = products.filter(p => p.specs?.cpu_socket === this.filters.spec_cpu_socket);
+                            }
+                            if (this.filters.spec_cpu_tier) {
+                                products = products.filter(p => String(p.tier) === this.filters.spec_cpu_tier);
+                            }
+
+                            // Mainboard filters
+                            if (this.filters.spec_mb_socket) {
+                                products = products.filter(p => p.specs?.mb_socket === this.filters.spec_mb_socket);
+                            }
+                            if (this.filters.spec_mb_memory_type) {
+                                products = products.filter(p => p.specs?.mb_memory_type === this.filters.spec_mb_memory_type);
+                            }
+                            if (this.filters.spec_mb_chipset) {
+                                products = products.filter(p => {
+                                    const chipset = p.specs?.mb_chipset || '';
+                                    return chipset.includes(this.filters.spec_mb_chipset);
+                                });
+                            }
+                            if (this.filters.spec_mb_form_factor) {
+                                products = products.filter(p => p.specs?.mb_form_factor === this.filters.spec_mb_form_factor);
+                            }
+
+                            // RAM filters
+                            if (this.filters.spec_ram_type) {
+                                products = products.filter(p => p.specs?.ram_type === this.filters.spec_ram_type);
+                            }
+
+                            // GPU filters
+                            if (this.filters.spec_gpu_brand) {
+                                products = products.filter(p => p.name.includes(this.filters.spec_gpu_brand));
+                            }
+                            if (this.filters.spec_gpu_tdp_range) {
+                                const [min, max] = this.filters.spec_gpu_tdp_range.split('-');
+                                products = products.filter(p => {
+                                    const tdp = parseInt(p.specs?.gpu_tdp) || 0;
+                                    if (min && max) return tdp >= parseInt(min) && tdp <= parseInt(max);
+                                    if (min && !max) return tdp >= parseInt(min);
+                                    if (!min && max) return tdp <= parseInt(max);
+                                    return true;
+                                });
+                            }
+
+                            // PSU filters
+                            if (this.filters.spec_psu_wattage_range) {
+                                const [min, max] = this.filters.spec_psu_wattage_range.split('-');
+                                products = products.filter(p => {
+                                    const wattage = parseInt(p.specs?.psu_wattage) || 0;
+                                    if (min && max) return wattage >= parseInt(min) && wattage <= parseInt(max);
+                                    if (min && !max) return wattage >= parseInt(min);
+                                    if (!min && max) return wattage <= parseInt(max);
+                                    return true;
+                                });
+                            }
+
+                            // Case filters
+                            if (this.filters.spec_case_type) {
+                                products = products.filter(p => p.specs?.case_type === this.filters.spec_case_type);
+                            }
+                            if (this.filters.spec_case_mb_support) {
+                                products = products.filter(p => {
+                                    const support = p.specs?.case_motherboard_support || '';
+                                    return support.includes(this.filters.spec_case_mb_support);
+                                });
+                            }
+
+                            // Cooler filters
+                            if (this.filters.spec_cooler_type) {
+                                products = products.filter(p => p.specs?.cooler_type === this.filters.spec_cooler_type);
+                            }
+
+                            // Fan filters
+                            if (this.filters.spec_fan_size) {
+                                products = products.filter(p => p.specs?.fan_size === this.filters.spec_fan_size);
+                            }
+                            if (this.filters.spec_fan_quantity) {
+                                products = products.filter(p => p.specs?.fan_quantity === this.filters.spec_fan_quantity);
                             }
                         }
 
@@ -885,6 +1235,30 @@
                             }
                         }
                     }
+
+                    // ============================================
+                    // LAYER 4: FAN CASE CHECK
+                    // ============================================
+                    const fancase = this.selectedComponents.fancase;
+                    if (fancase && pcCase) {
+                        const fanQuantity = parseInt(fancase.specs?.fan_quantity) || 1;
+                        const caseMaxFans = parseInt(pcCase.specs?.case_max_fans) || 0;
+
+                        if (caseMaxFans > 0 && fanQuantity > caseMaxFans) {
+                            this.compatibilityErrors.push(`Fan case (${fanQuantity} fan) vượt quá số lượng hỗ trợ của Case (tối đa ${caseMaxFans} fan)`);
+                        }
+
+                        // Check fan size vs case supported fan sizes
+                        const fanSize = parseInt(fancase.specs?.fan_size) || 0;
+                        const caseFanSizes = pcCase.specs?.case_fan_sizes || '';
+                        if (fanSize > 0 && caseFanSizes) {
+                            const matches = caseFanSizes.match(/(\d+)mm/g);
+                            const supportedSizes = matches ? matches.map(m => parseInt(m)) : [];
+                            if (supportedSizes.length > 0 && !supportedSizes.includes(fanSize)) {
+                                this.compatibilityWarnings.push(`Case hỗ trợ fan ${supportedSizes.join('/')}mm, bạn chọn fan ${fanSize}mm`);
+                            }
+                        }
+                    }
                 },
 
                 // Helper: Infer CPU tier from name
@@ -964,7 +1338,8 @@
                             ssd: null,
                             psu: null,
                             case: null,
-                            cooler: null
+                            cooler: null,
+                            fancase: null
                         };
                         this.save();
                         this.checkCompatibility();

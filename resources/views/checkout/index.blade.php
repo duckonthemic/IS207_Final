@@ -67,7 +67,7 @@
                                 required>
 
                             <div class="grid grid-cols-3 gap-4">
-                                <select name="city" x-model="selectedCity" @change="loadShippingMethods()"
+                                <select name="city" x-model="selectedCity" @change="loadShippingMethods(); updateDistricts()"
                                     class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-gray-900/10 focus:border-gray-900 transition-all text-sm bg-white"
                                     required>
                                     <option value="">Tỉnh/Thành *</option>
@@ -81,25 +81,21 @@
                                     <option value="Khác">Tỉnh khác</option>
                                 </select>
 
-                                <select name="district"
+                                <select name="district" x-model="selectedDistrict" @change="updateWards()"
                                     class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-gray-900/10 focus:border-gray-900 transition-all text-sm bg-white"
                                     required>
                                     <option value="">Quận/Huyện *</option>
-                                    <option value="Quận 1">Quận 1</option>
-                                    <option value="Quận 3">Quận 3</option>
-                                    <option value="Quận 7">Quận 7</option>
-                                    <option value="Thủ Đức">Thủ Đức</option>
-                                    <option value="Bình Thạnh">Bình Thạnh</option>
-                                    <option value="Tân Bình">Tân Bình</option>
-                                    <option value="Gò Vấp">Gò Vấp</option>
+                                    <template x-for="district in districts" :key="district">
+                                        <option :value="district" x-text="district"></option>
+                                    </template>
                                 </select>
 
-                                <select name="ward"
+                                <select name="ward" x-model="selectedWard"
                                     class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-gray-900/10 focus:border-gray-900 transition-all text-sm bg-white">
                                     <option value="">Phường/Xã</option>
-                                    <option value="Linh Trung">Linh Trung</option>
-                                    <option value="Linh Chiểu">Linh Chiểu</option>
-                                    <option value="Hiệp Bình Chánh">Hiệp Bình Chánh</option>
+                                    <template x-for="ward in wards" :key="ward">
+                                        <option :value="ward" x-text="ward"></option>
+                                    </template>
                                 </select>
                             </div>
                         </div>
@@ -461,10 +457,81 @@
                 freeShipping: {{ $freeShipping ? 'true' : 'false' }},
 
                 selectedCity: '{{ session("shipping_city", "") }}',
+                selectedDistrict: '',
+                selectedWard: '',
                 selectedShipping: '{{ $selectedShipping ?? "standard" }}',
                 selectedPayment: 'cod',
                 shippingMethods: @json($shippingMethods ?? []),
                 shippingLoading: false,
+                
+                // Address data by city
+                districts: [],
+                wards: [],
+                addressData: {
+                    'Hồ Chí Minh': {
+                        'Quận 1': ['Bến Nghé', 'Bến Thành', 'Cầu Kho', 'Cầu Ông Lãnh', 'Cô Giang', 'Đa Kao', 'Nguyễn Cư Trinh', 'Nguyễn Thái Bình', 'Phạm Ngũ Lão', 'Tân Định'],
+                        'Quận 3': ['Phường 1', 'Phường 2', 'Phường 3', 'Phường 4', 'Phường 5', 'Phường 9', 'Phường 10', 'Phường 11', 'Phường 12', 'Phường 13', 'Phường 14', 'Võ Thị Sáu'],
+                        'Quận 7': ['Bình Thuận', 'Phú Mỹ', 'Phú Thuận', 'Tân Hưng', 'Tân Kiểng', 'Tân Phong', 'Tân Phú', 'Tân Quy'],
+                        'Thủ Đức': ['Linh Trung', 'Linh Chiểu', 'Linh Tây', 'Linh Xuân', 'Hiệp Bình Chánh', 'Hiệp Bình Phước', 'Tam Bình', 'Tam Phú', 'Trường Thọ', 'Bình Chiểu', 'Bình Thọ', 'An Phú', 'Thảo Điền', 'An Khánh', 'Bình Trưng Đông', 'Bình Trưng Tây', 'Cát Lái', 'Long Bình', 'Long Phước', 'Long Thạnh Mỹ', 'Long Trường', 'Phú Hữu', 'Phước Bình', 'Phước Long A', 'Phước Long B', 'Tân Phú', 'Tăng Nhơn Phú A', 'Tăng Nhơn Phú B', 'Thạnh Mỹ Lợi', 'Thủ Thiêm', 'Trường Thạnh', 'An Lợi Đông'],
+                        'Bình Thạnh': ['Phường 1', 'Phường 2', 'Phường 3', 'Phường 5', 'Phường 6', 'Phường 7', 'Phường 11', 'Phường 12', 'Phường 13', 'Phường 14', 'Phường 15', 'Phường 17', 'Phường 19', 'Phường 21', 'Phường 22', 'Phường 24', 'Phường 25', 'Phường 26', 'Phường 27', 'Phường 28'],
+                        'Tân Bình': ['Phường 1', 'Phường 2', 'Phường 3', 'Phường 4', 'Phường 5', 'Phường 6', 'Phường 7', 'Phường 8', 'Phường 9', 'Phường 10', 'Phường 11', 'Phường 12', 'Phường 13', 'Phường 14', 'Phường 15'],
+                        'Gò Vấp': ['Phường 1', 'Phường 3', 'Phường 4', 'Phường 5', 'Phường 6', 'Phường 7', 'Phường 8', 'Phường 9', 'Phường 10', 'Phường 11', 'Phường 12', 'Phường 13', 'Phường 14', 'Phường 15', 'Phường 16', 'Phường 17'],
+                        'Phú Nhuận': ['Phường 1', 'Phường 2', 'Phường 3', 'Phường 4', 'Phường 5', 'Phường 7', 'Phường 8', 'Phường 9', 'Phường 10', 'Phường 11', 'Phường 13', 'Phường 15', 'Phường 17'],
+                        'Tân Phú': ['Hiệp Tân', 'Hòa Thạnh', 'Phú Thạnh', 'Phú Thọ Hòa', 'Phú Trung', 'Sơn Kỳ', 'Tân Quý', 'Tân Sơn Nhì', 'Tân Thành', 'Tân Thới Hòa', 'Tây Thạnh'],
+                        'Quận 5': ['Phường 1', 'Phường 2', 'Phường 3', 'Phường 4', 'Phường 5', 'Phường 6', 'Phường 7', 'Phường 8', 'Phường 9', 'Phường 10', 'Phường 11', 'Phường 12', 'Phường 13', 'Phường 14'],
+                        'Quận 10': ['Phường 1', 'Phường 2', 'Phường 3', 'Phường 4', 'Phường 5', 'Phường 6', 'Phường 7', 'Phường 8', 'Phường 9', 'Phường 10', 'Phường 11', 'Phường 12', 'Phường 13', 'Phường 14', 'Phường 15'],
+                        'Quận 11': ['Phường 1', 'Phường 2', 'Phường 3', 'Phường 4', 'Phường 5', 'Phường 6', 'Phường 7', 'Phường 8', 'Phường 9', 'Phường 10', 'Phường 11', 'Phường 12', 'Phường 13', 'Phường 14', 'Phường 15', 'Phường 16'],
+                        'Quận 12': ['An Phú Đông', 'Đông Hưng Thuận', 'Hiệp Thành', 'Tân Chánh Hiệp', 'Tân Hưng Thuận', 'Tân Thới Hiệp', 'Tân Thới Nhất', 'Thạnh Lộc', 'Thạnh Xuân', 'Thới An', 'Trung Mỹ Tây'],
+                        'Bình Tân': ['An Lạc', 'An Lạc A', 'Bình Hưng Hòa', 'Bình Hưng Hòa A', 'Bình Hưng Hòa B', 'Bình Trị Đông', 'Bình Trị Đông A', 'Bình Trị Đông B', 'Tân Tạo', 'Tân Tạo A'],
+                    },
+                    'Hà Nội': {
+                        'Ba Đình': ['Cống Vị', 'Điện Biên', 'Đội Cấn', 'Giảng Võ', 'Kim Mã', 'Liễu Giai', 'Ngọc Hà', 'Ngọc Khánh', 'Nguyễn Trung Trực', 'Phúc Xá', 'Quán Thánh', 'Thành Công', 'Trúc Bạch', 'Vĩnh Phúc'],
+                        'Hoàn Kiếm': ['Chương Dương', 'Cửa Đông', 'Cửa Nam', 'Đồng Xuân', 'Hàng Bạc', 'Hàng Bài', 'Hàng Bồ', 'Hàng Bông', 'Hàng Buồm', 'Hàng Đào', 'Hàng Gai', 'Hàng Mã', 'Hàng Trống', 'Lý Thái Tổ', 'Phan Chu Trinh', 'Phúc Tân', 'Tràng Tiền', 'Trần Hưng Đạo'],
+                        'Đống Đa': ['Cát Linh', 'Hàng Bột', 'Khâm Thiên', 'Khương Thượng', 'Kim Liên', 'Láng Hạ', 'Láng Thượng', 'Nam Đồng', 'Ngã Tư Sở', 'Ô Chợ Dừa', 'Phương Liên', 'Phương Mai', 'Quang Trung', 'Quốc Tử Giám', 'Thịnh Quang', 'Thổ Quan', 'Trung Liệt', 'Trung Phụng', 'Trung Tự', 'Văn Chương', 'Văn Miếu'],
+                        'Hai Bà Trưng': ['Bạch Đằng', 'Bạch Mai', 'Bách Khoa', 'Cầu Dền', 'Đống Mác', 'Đồng Nhân', 'Đồng Tâm', 'Lê Đại Hành', 'Minh Khai', 'Ngô Thì Nhậm', 'Nguyễn Du', 'Phạm Đình Hổ', 'Phố Huế', 'Quỳnh Lôi', 'Quỳnh Mai', 'Thanh Lương', 'Thanh Nhàn', 'Trương Định', 'Vĩnh Tuy'],
+                        'Thanh Xuân': ['Hạ Đình', 'Khương Đình', 'Khương Mai', 'Khương Trung', 'Kim Giang', 'Nhân Chính', 'Phương Liệt', 'Thanh Xuân Bắc', 'Thanh Xuân Nam', 'Thanh Xuân Trung', 'Thượng Đình'],
+                        'Cầu Giấy': ['Dịch Vọng', 'Dịch Vọng Hậu', 'Mai Dịch', 'Nghĩa Đô', 'Nghĩa Tân', 'Quan Hoa', 'Trung Hòa', 'Yên Hòa'],
+                        'Long Biên': ['Bồ Đề', 'Cự Khối', 'Đức Giang', 'Gia Thụy', 'Giang Biên', 'Long Biên', 'Ngọc Lâm', 'Ngọc Thụy', 'Phúc Đồng', 'Phúc Lợi', 'Sài Đồng', 'Thạch Bàn', 'Thượng Thanh', 'Việt Hưng'],
+                        'Hoàng Mai': ['Đại Kim', 'Định Công', 'Giáp Bát', 'Hoàng Liệt', 'Hoàng Văn Thụ', 'Lĩnh Nam', 'Mai Động', 'Tân Mai', 'Thanh Trì', 'Thịnh Liệt', 'Trần Phú', 'Tương Mai', 'Vĩnh Hưng', 'Yên Sở'],
+                        'Nam Từ Liêm': ['Cầu Diễn', 'Đại Mỗ', 'Mễ Trì', 'Mỹ Đình 1', 'Mỹ Đình 2', 'Phú Đô', 'Phương Canh', 'Tây Mỗ', 'Trung Văn', 'Xuân Phương'],
+                        'Bắc Từ Liêm': ['Cổ Nhuế 1', 'Cổ Nhuế 2', 'Đông Ngạc', 'Đức Thắng', 'Liên Mạc', 'Minh Khai', 'Phú Diễn', 'Phúc Diễn', 'Tây Tựu', 'Thượng Cát', 'Thụy Phương', 'Xuân Đỉnh', 'Xuân Tảo'],
+                    },
+                    'Đà Nẵng': {
+                        'Hải Châu': ['Bình Hiên', 'Bình Thuận', 'Hải Châu 1', 'Hải Châu 2', 'Hòa Cường Bắc', 'Hòa Cường Nam', 'Hòa Thuận Đông', 'Hòa Thuận Tây', 'Nam Dương', 'Phước Ninh', 'Thạch Thang', 'Thanh Bình', 'Thuận Phước'],
+                        'Thanh Khê': ['An Khê', 'Chính Gián', 'Hòa Khê', 'Tam Thuận', 'Tân Chính', 'Thạc Gián', 'Thanh Khê Đông', 'Thanh Khê Tây', 'Vĩnh Trung', 'Xuân Hà'],
+                        'Sơn Trà': ['An Hải Bắc', 'An Hải Đông', 'An Hải Tây', 'Mân Thái', 'Nại Hiên Đông', 'Phước Mỹ', 'Thọ Quang'],
+                        'Ngũ Hành Sơn': ['Hòa Hải', 'Hòa Quý', 'Khuê Mỹ', 'Mỹ An'],
+                        'Cẩm Lệ': ['Hòa An', 'Hòa Phát', 'Hòa Thọ Đông', 'Hòa Thọ Tây', 'Hòa Xuân', 'Khuê Trung'],
+                        'Liên Chiểu': ['Hòa Hiệp Bắc', 'Hòa Hiệp Nam', 'Hòa Khánh Bắc', 'Hòa Khánh Nam', 'Hòa Minh'],
+                    },
+                    'Cần Thơ': {
+                        'Ninh Kiều': ['An Bình', 'An Cư', 'An Hòa', 'An Khánh', 'An Lạc', 'An Nghiệp', 'An Phú', 'Cái Khế', 'Hưng Lợi', 'Tân An', 'Thới Bình', 'Xuân Khánh'],
+                        'Bình Thủy': ['An Thới', 'Bình Thủy', 'Bùi Hữu Nghĩa', 'Long Hòa', 'Long Tuyền', 'Thới An Đông', 'Trà An', 'Trà Nóc'],
+                        'Cái Răng': ['Ba Láng', 'Hưng Phú', 'Hưng Thạnh', 'Lê Bình', 'Phú Thứ', 'Tân Phú', 'Thường Thạnh'],
+                        'Ô Môn': ['Châu Văn Liêm', 'Long Hưng', 'Phước Thới', 'Thới An', 'Thới Hòa', 'Thới Long', 'Trường Lạc'],
+                    },
+                    'Hải Phòng': {
+                        'Hồng Bàng': ['Hoàng Văn Thụ', 'Minh Khai', 'Phan Bội Châu', 'Quán Toan', 'Sở Dầu', 'Thượng Lý', 'Trại Chuối'],
+                        'Lê Chân': ['An Biên', 'An Dương', 'Cát Dài', 'Dư Hàng', 'Dư Hàng Kênh', 'Hàng Kênh', 'Hồ Nam', 'Kênh Dương', 'Lam Sơn', 'Nghĩa Xá', 'Niệm Nghĩa', 'Trại Cau', 'Trần Nguyên Hãn', 'Vĩnh Niệm'],
+                        'Ngô Quyền': ['Cầu Đất', 'Cầu Tre', 'Đằng Giang', 'Đằng Hải', 'Đằng Lâm', 'Đông Khê', 'Gia Viên', 'Lạc Viên', 'Lạch Tray', 'Lê Lợi', 'Máy Chai', 'Máy Tơ', 'Vạn Mỹ'],
+                        'Hải An': ['Cát Bi', 'Đằng Hải', 'Đằng Lâm', 'Đông Hải 1', 'Đông Hải 2', 'Nam Hải', 'Tràng Cát'],
+                    },
+                    'Bình Dương': {
+                        'Thủ Dầu Một': ['Chánh Mỹ', 'Chánh Nghĩa', 'Định Hòa', 'Hiệp An', 'Hiệp Thành', 'Hòa Phú', 'Phú Cường', 'Phú Hòa', 'Phú Lợi', 'Phú Mỹ', 'Phú Tân', 'Phú Thọ', 'Tân An', 'Tương Bình Hiệp'],
+                        'Dĩ An': ['An Bình', 'Bình An', 'Bình Thắng', 'Đông Hòa', 'Tân Bình', 'Tân Đông Hiệp'],
+                        'Thuận An': ['An Phú', 'An Thạnh', 'Bình Chuẩn', 'Bình Hòa', 'Bình Nhâm', 'Hưng Định', 'Lái Thiêu', 'Thuận Giao', 'Vĩnh Phú'],
+                        'Bến Cát': ['Chánh Phú Hòa', 'Hòa Lợi', 'Mỹ Phước', 'Tân Định', 'Thới Hòa'],
+                    },
+                    'Đồng Nai': {
+                        'Biên Hòa': ['An Bình', 'Bình Đa', 'Bửu Hòa', 'Bửu Long', 'Hố Nai', 'Hòa Bình', 'Long Bình', 'Long Bình Tân', 'Phước Tân', 'Quyết Thắng', 'Tân Biên', 'Tân Hiệp', 'Tân Hòa', 'Tân Mai', 'Tân Phong', 'Tân Tiến', 'Tân Vạn', 'Tam Hòa', 'Tam Hiệp', 'Tam Phước', 'Thống Nhất', 'Trảng Dài', 'Trung Dũng'],
+                        'Long Khánh': ['Bảo Vinh', 'Xuân An', 'Xuân Bình', 'Xuân Hòa', 'Xuân Lập', 'Xuân Trung'],
+                        'Long Thành': ['An Phước', 'Bình An', 'Bình Sơn', 'Long An', 'Long Đức', 'Long Phước', 'Long Thành', 'Phước Bình', 'Tam An', 'Tân Hiệp'],
+                        'Nhơn Trạch': ['Long Tân', 'Long Thọ', 'Phú Đông', 'Phú Hội', 'Phú Hữu', 'Phú Thạnh', 'Phước An', 'Phước Khánh', 'Phước Thiền', 'Vĩnh Thanh'],
+                    },
+                    'Khác': {
+                        'Khác': ['Khác']
+                    }
+                },
 
                 couponCode: '',
                 appliedCoupon: @json($coupon ? ['code' => $coupon->code, 'name' => $coupon->name] : null),
@@ -478,6 +545,22 @@
                 showPaymentModal: false,
                 paymentState: 'processing', // processing, success, failed
                 formReference: null,
+
+                updateDistricts() {
+                    this.districts = this.selectedCity ? Object.keys(this.addressData[this.selectedCity] || {}) : [];
+                    this.selectedDistrict = '';
+                    this.wards = [];
+                    this.selectedWard = '';
+                },
+
+                updateWards() {
+                    if (this.selectedCity && this.selectedDistrict) {
+                        this.wards = this.addressData[this.selectedCity]?.[this.selectedDistrict] || [];
+                    } else {
+                        this.wards = [];
+                    }
+                    this.selectedWard = '';
+                },
 
                 get total() {
                     return Math.max(0, this.subtotal - this.discount + this.shippingFee);

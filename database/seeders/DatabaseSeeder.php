@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
             PrebuiltPcSeeder::class, // Temporarily disable or update if needed
             ProductLocalImageSeeder::class, // Map local images to products
             PromotionSeeder::class,
+            CompatibilityTestDataSeeder::class, // PC Compatibility System test data
         ]);
     }
 }

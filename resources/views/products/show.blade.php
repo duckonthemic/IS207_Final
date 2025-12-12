@@ -219,7 +219,7 @@
                             </form>
 
                             @if(!in_array($product->category->slug, ['pc-gaming', 'pc-ai-workstation', 'pc-office', 'pc-design']))
-                            <a href="{{ route('build-pc') }}"
+                            <button type="button" onclick="addToBuildPC()"
                                 class="block w-full mt-4 border-2 border-gray-200 text-gray-700 font-bold py-3 rounded-xl hover:border-gray-900 hover:text-gray-900 transition-all text-center flex items-center justify-center gap-2 group">
                                 <svg class="w-5 h-5 text-gray-400 group-hover:text-gray-900 transition-colors" fill="none"
                                     stroke="currentColor" viewBox="0 0 24 24">
@@ -228,7 +228,7 @@
                                     </path>
                                 </svg>
                                 Build PC với linh kiện này
-                            </a>
+                            </button>
                             @endif
                         @else
                             <div class="bg-gray-100 rounded-xl p-4 text-center text-gray-500 font-medium">
@@ -482,6 +482,113 @@
             if (current > min) {
                 input.value = current - 1;
             }
+        }
+
+        function addToBuildPC() {
+            // Product data from server
+            const product = {
+                id: {{ $product->id }},
+                name: "{{ addslashes($product->name) }}",
+                price: {{ $product->sale_price ?? $product->price }},
+                image: "{{ $product->images->first() ? asset($product->images->first()->url) : '' }}",
+                tier: {{ $product->tier ?? 'null' }},
+                specs: @json($product->specs->mapWithKeys(fn($s) => [$s->specDefinition->code => $s->value]))
+            };
+
+            // Map category slug to component type
+            const categoryToComponent = {
+                'cpu': 'cpu',
+                'mainboard': 'mainboard',
+                'vga': 'gpu',
+                'ram': 'ram',
+                'ssd': 'ssd',
+                'psu': 'psu',
+                'case': 'case',
+                'cooler': 'cooler',
+                'fan-case': 'fancase'
+            };
+
+            const categorySlug = "{{ $product->category->slug }}";
+            const componentType = categoryToComponent[categorySlug];
+
+            if (!componentType) {
+                alert('Loại sản phẩm này không hỗ trợ Build PC');
+                return;
+            }
+
+            // Load existing build from localStorage
+            let savedBuild = localStorage.getItem('pcBuild');
+            let build = savedBuild ? JSON.parse(savedBuild) : {
+                cpu: null,
+                mainboard: null,
+                gpu: null,
+                ram: null,
+                ssd: null,
+                psu: null,
+                case: null,
+                cooler: null,
+                fancase: null
+            };
+
+            // Case/Mainboard form factor compatibility check
+            const caseMbCompatibility = {
+                'Full Tower': ['E-ATX', 'ATX', 'mATX', 'Mini-ITX'],
+                'Mid Tower': ['ATX', 'mATX', 'Mini-ITX'],
+                'Mini Tower': ['mATX', 'Mini-ITX'],
+                'SFF': ['Mini-ITX']
+            };
+
+            // If adding Case, check if Mainboard is compatible
+            if (componentType === 'case' && build.mainboard) {
+                const caseType = product.specs.case_type || '';
+                const mbFormFactor = build.mainboard.specs?.mb_form_factor || '';
+                
+                if (caseType && mbFormFactor) {
+                    const supportedFormFactors = caseMbCompatibility[caseType] || [];
+                    if (!supportedFormFactors.includes(mbFormFactor)) {
+                        if (!confirm(`⚠️ Case ${product.name} (${caseType}) không tương thích với Mainboard ${build.mainboard.name} (${mbFormFactor}).\n\nBạn có muốn tiếp tục không?`)) {
+                            return;
+                        }
+                    }
+                }
+            }
+
+            // If adding Mainboard, check if Case is compatible
+            if (componentType === 'mainboard' && build.case) {
+                const mbFormFactor = product.specs.mb_form_factor || '';
+                const caseType = build.case.specs?.case_type || '';
+                const caseMbSupport = build.case.specs?.case_motherboard_support || '';
+                
+                if (mbFormFactor && caseMbSupport) {
+                    if (!caseMbSupport.includes(mbFormFactor)) {
+                        if (!confirm(`⚠️ Mainboard ${product.name} (${mbFormFactor}) không tương thích với Case ${build.case.name}.\nCase hỗ trợ: ${caseMbSupport}\n\nBạn có muốn tiếp tục không?`)) {
+                            return;
+                        }
+                    }
+                }
+            }
+
+            // Add the product to build
+            build[componentType] = product;
+
+            // Save to localStorage
+            localStorage.setItem('pcBuild', JSON.stringify(build));
+
+            // Show success message and redirect
+            const componentNames = {
+                'cpu': 'CPU',
+                'mainboard': 'Mainboard',
+                'gpu': 'GPU',
+                'ram': 'RAM',
+                'ssd': 'SSD',
+                'psu': 'PSU',
+                'case': 'Case',
+                'cooler': 'Tản nhiệt',
+                'fancase': 'Fan Case'
+            };
+
+            alert(`✅ Đã thêm ${componentNames[componentType]}: ${product.name} vào Build PC của bạn!`);
+            window.location.href = "{{ route('build-pc') }}";
         }
     </script>
 @endsection
