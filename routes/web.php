@@ -139,12 +139,12 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::post('/audit-logs/clear', [\App\Http\Controllers\Admin\AuditLogController::class, 'clear'])->name('audit-logs.clear');
 });
 
-Route::get('/logout', function () {
+Route::post('/logout', function () {
     Auth::logout();
     Session()->invalidate();
     Session()->regenerateToken();
     return redirect('/login');
-});
+})->name('logout');
 
 // Language Switching
 Route::get('/language/{locale}', [\App\Http\Controllers\LanguageController::class, 'switch'])->name('language.switch');

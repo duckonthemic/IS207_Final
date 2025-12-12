@@ -23,7 +23,7 @@ class User extends Authenticatable
         'birthday',
         'gender',
         'password',
-        'role',
+        // 'role' removed for security - use setRole() method instead
     ];
 
     protected $hidden = [
