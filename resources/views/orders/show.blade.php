@@ -102,6 +102,109 @@
                     </div>
                 </div>
 
+                {{-- Review Section - Show only for delivered orders --}}
+                @if($order->status === 'delivered')
+                    @php
+                        $userReviews = Auth::user()->reviews()->whereIn('product_id', $order->items->pluck('product_id'))->pluck('product_id')->toArray();
+                        $unreviewedItems = $order->items->filter(fn($item) => !in_array($item->product_id, $userReviews) && $item->product);
+                    @endphp
+                    
+                    @if($unreviewedItems->count() > 0)
+                        <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+                            <div class="p-5 border-b border-gray-100 bg-green-50">
+                                <h2 class="font-bold text-gray-900 flex items-center gap-2">
+                                    <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>
+                                    </svg>
+                                    Đánh giá sản phẩm
+                                </h2>
+                                <p class="text-sm text-gray-600 mt-1">Đơn hàng đã hoàn thành! Hãy chia sẻ đánh giá của bạn về sản phẩm.</p>
+                            </div>
+                            
+                            <div class="divide-y divide-gray-100">
+                                @foreach($unreviewedItems as $item)
+                                    <div class="p-5" x-data="{ rating: 0, hoverRating: 0, showForm: false }">
+                                        <div class="flex gap-4 items-start">
+                                            <div class="w-14 h-14 bg-gray-50 rounded-lg border border-gray-100 flex-shrink-0 overflow-hidden p-1">
+                                                @if($item->product->images->first())
+                                                    <img src="{{ asset($item->product->images->first()->url) }}" alt="{{ $item->product->name }}" class="w-full h-full object-contain">
+                                                @endif
+                                            </div>
+                                            <div class="flex-1">
+                                                <h3 class="font-medium text-gray-900 text-sm">{{ $item->product->name }}</h3>
+                                                
+                                                <button @click="showForm = !showForm" 
+                                                        class="mt-2 text-sm text-blue-600 hover:text-blue-800 font-medium flex items-center gap-1">
+                                                    <span x-text="showForm ? 'Ẩn form' : 'Viết đánh giá'"></span>
+                                                    <svg class="w-4 h-4 transition-transform" :class="showForm && 'rotate-180'" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        
+                                        <div x-show="showForm" x-collapse class="mt-4">
+                                            <form action="{{ route('reviews.store', $item->product) }}" method="POST" class="space-y-4">
+                                                @csrf
+                                                <input type="hidden" name="order_id" value="{{ $order->id }}">
+                                                
+                                                {{-- Star Rating --}}
+                                                <div>
+                                                    <label class="block text-sm font-medium text-gray-700 mb-2">Đánh giá của bạn</label>
+                                                    <div class="flex gap-1">
+                                                        @for($i = 1; $i <= 5; $i++)
+                                                            <button type="button" 
+                                                                    @click="rating = {{ $i }}"
+                                                                    @mouseenter="hoverRating = {{ $i }}"
+                                                                    @mouseleave="hoverRating = 0"
+                                                                    class="text-2xl focus:outline-none transition-colors"
+                                                                    :class="(hoverRating || rating) >= {{ $i }} ? 'text-yellow-400' : 'text-gray-300'">
+                                                                ★
+                                                            </button>
+                                                        @endfor
+                                                        <input type="hidden" name="rating" :value="rating" required>
+                                                    </div>
+                                                    <p class="text-xs text-gray-500 mt-1" x-show="rating > 0">
+                                                        <span x-text="['', 'Rất tệ', 'Tệ', 'Bình thường', 'Tốt', 'Rất tốt'][rating]"></span>
+                                                    </p>
+                                                </div>
+                                                
+                                                {{-- Comment --}}
+                                                <div>
+                                                    <label class="block text-sm font-medium text-gray-700 mb-2">Nhận xét (tùy chọn)</label>
+                                                    <textarea name="comment" rows="3" 
+                                                              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+                                                              placeholder="Chia sẻ trải nghiệm của bạn về sản phẩm này..."></textarea>
+                                                </div>
+                                                
+                                                <button type="submit" 
+                                                        :disabled="rating === 0"
+                                                        class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-sm font-medium transition-colors">
+                                                    Gửi đánh giá
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    @else
+                        <div class="bg-green-50 border border-green-200 rounded-2xl p-5">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                                    <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-green-800">Đã đánh giá tất cả sản phẩm</p>
+                                    <p class="text-sm text-green-600">Cảm ơn bạn đã chia sẻ đánh giá!</p>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                @endif
+
                 {{-- Shipping Address --}}
                 <div class="bg-white rounded-2xl border border-gray-200 p-6">
                     <h2 class="font-bold text-gray-900 mb-4">Địa chỉ giao hàng</h2>
